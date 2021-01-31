@@ -1,7 +1,7 @@
 # academic-notes
 Misc. notes from courses I have taken / read up on. Part of a project to type up the notes I have made by hand throughout the years.
 
-These are my interpretations of the material. Mistakes are entirely my own (please do contact me at julian.mak@physics.ox.ac.uk about it) 
+These are my interpretations of the material. Typos, and worst, think-o's, are entirely my own (please do contact me at jclmak@ust.hk about it) 
 
 Principal acknowledgements:
 
