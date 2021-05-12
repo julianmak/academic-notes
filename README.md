@@ -3,9 +3,9 @@ Misc. notes from courses I have taken / read up on. Part of a project to type up
 
 These are my interpretations of the material. Typos, and worst, think-o's, are entirely my own (please do contact me at jclmak@ust.hk about it)
 
-If there are comments or evne pull requests, please open an issue or a pull request accordingly.
+If there are comments or even pull requests, please open an issue or a pull request accordingly.
 
-I have tried to use material that is either self-made, open source, or those that are explicitly ok for fair use. If however there is copyright material (particularly with images) that copyright holders want taken down, please let me know either by e-mail, GitHub message or open an issue.
+I have tried to use material that are either self-made, open source, or those that are explicitly ok for fair use. If however there is copyright material (particularly with images) that copyright holders want taken down, please let me know either by e-mail, GitHub message or open an issue.
 
 Principal acknowledgements:
 
