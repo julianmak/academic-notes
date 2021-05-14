@@ -1,0 +1,1904 @@
+%% ****** Start of file aiptemplate.tex ****** %
+%%
+%%   This file is part of the files in the distribution of AIP substyles for REVTeX4.
+%%   Version 4.1 of 9 October 2009.
+%%
+
+%
+% This is a template for producing documents for use with 
+% % the REVTEX 4.1 document class and the AIP substyles.
+% 
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+
+%\documentclass[aip,pof,graphicx,11pt]{revtex4-1}
+\documentclass[10pt,notitlepage]{revtex4-1}
+\usepackage{amssymb,amsbsy,times,fancyhdr,color}
+\usepackage{amsmath}
+\usepackage{mathrsfs,amsfonts}
+%\usepackage[dvips]{epsfig,graphics,lscape}
+%\usepackage{natbib}
+\usepackage{latexsym,afterpage}
+\usepackage{graphicx,subfigure,multirow}
+\usepackage{color}
+\newcommand{\dfd}{\mathrm{d}}
+\newcommand{\imi}{\mathrm{i}}
+
+%\draft % marks overfull lines with a black rule on the right
+
+% extra macros; disable accordingly
+\linespread{1}
+%\setlength{\parindent}{0pt}
+
+% ===========================================================================
+
+\usepackage{psfrag}
+%\usepackage{showlabels}
+\usepackage{color}
+
+% ===========================================================================
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+% ===========================================================================
+
+% For multiletter symbols
+\newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
+\newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
+\newcommand\Rey{\mbox{\textit{Re}}}  % Reynolds number
+\newcommand\Pran{\mbox{\textit{Pr}}} % Prandtl number, cf TeX's \Pr product
+\newcommand\Pen{\mbox{\textit{Pe}}}  % Peclet number
+\newcommand\Ai{\mbox{Ai}}            % Airy function
+\newcommand\Bi{\mbox{Bi}}            % Airy function
+
+% Our general macros:
+
+\newcommand{\dy}{\partial}
+\newcommand{\ddy}[2]{\frac{\dy#1}{\dy#2}}
+
+\newcommand{\ex}{\mathrm{e}}
+
+\newcommand{\zi}{{\rm i}}
+
+\newcommand{\grad}{\nabla}
+
+\newcommand{\sech}{\mathrm{sech}}
+
+% Notational macros for this ms only: ---------------------------------------
+
+\newcommand{\eb}{\boldsymbol{e}}
+\newcommand{\xb}{\boldsymbol{x}}
+\newcommand{\ub}{\boldsymbol{u}}
+\newcommand{\vb}{\boldsymbol{v}}
+\newcommand{\wb}{\boldsymbol{w}}
+
+\newcommand{\Ab}{{\boldsymbol{A}}}
+\newcommand{\ab}{{\boldsymbol{a}}}
+\newcommand{\Bb}{{\boldsymbol{B}}}
+\newcommand{\bb}{{\boldsymbol{b}}}
+\newcommand{\cb}{{\boldsymbol{c}}}
+\newcommand{\Db}{{\boldsymbol{D}}}
+\newcommand{\db}{{\boldsymbol{d}}}
+\newcommand{\Fb}{{\boldsymbol{F}}}
+\newcommand{\Ib}{{\boldsymbol{I}}}
+\newcommand{\jb}{{\boldsymbol{j}}}
+\newcommand{\Jb}{{\boldsymbol{J}}}
+\newcommand{\kb}{{\boldsymbol{k}}}
+\newcommand{\Lb}{{\boldsymbol{L}}}
+\newcommand{\lb}{{\boldsymbol{l}}}
+\newcommand{\mb}{{\boldsymbol{m}}}
+\newcommand{\nb}{{\boldsymbol{n}}}
+\newcommand{\pb}{{\boldsymbol{p}}}
+\newcommand{\Sb}{{\boldsymbol{S}}}
+\newcommand{\Vb}{{\boldsymbol{V}}}
+\newcommand{\Ub}{{\boldsymbol{U}}}
+\newcommand{\tb}{{\boldsymbol{t}}}
+\newcommand{\Xb}{{\boldsymbol{X}}}
+\newcommand{\yb}{\boldsymbol{y}}
+
+\newcommand{\Ubar}{{\overline{U}}}
+\newcommand{\ubar}{{\overline{u}}}
+\newcommand{\Bbar}{{\overline{B}}}
+\newcommand{\psibar}{{\overline{\psi}}}
+\newcommand{\qbar}{{\overline{q}}}
+\newcommand{\zbar}{{\overline{z}}}
+
+\newcommand{\Ri}{R}
+\newcommand{\Fr}{F}
+
+\newcommand{\qhat}{{\hat{q}}}
+\newcommand{\jhat}{{\hat{j}}}
+
+\newcommand\comment[1]{{\color{red}#1}}
+
+% ===========================================================================
+
+\begin{document}
+
+% Use the \preprint command to place your local institutional report number 
+% on the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+%\preprint{}
+
+\title{Academic notes: 1A Geometry} %Title of paper
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current author.
+% Explanatory text should go in the []'s, 
+% actual e-mail address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro for the type of information
+% \affiliation command applies to all authors since the last \affiliation command. 
+% The \affiliation command should follow the other information.
+
+\author{J. Mak (\today) [From notes of R. Gregory, Durham]}
+\email[]{julian.c.l.mak@googlemail.com}
+
+%\author{D. W. Hughes}
+
+%\author{S. D. Griffiths}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+
+%\affiliation{}
+
+% Collaboration name, if desired (requires use of superscriptaddress option in \documentclass). 
+% \noaffiliation is required (may also be used with the \author command).
+%\collaboration{}
+%\noaffiliation
+%\date{\today}
+
+%\begin{abstract}
+%Notes on the vorticity wave mechanism in 2d non-Boussinesq setting.
+%\end{abstract}
+
+%\pacs{}% insert suggested PACS numbers in braces on next line
+
+\maketitle %\maketitle must follow title, authors, abstract and \pacs
+
+% Body of paper goes here. Use proper sectioning commands. 
+% References should be done using the \cite, \ref, and \label commands
+
+%===============================================================================
+
+\section*{Misc. notes}
+
+\begin{itemize}
+  \item This was part of the Durham Core A module given in the first year. This
+  is standard Euclidean geometry involving some manipulations with matrices, as
+  a precursor of linear algebra.
+  \item The original course has geometry of complex numbers here, but for
+  consistency reasons this has been moved to Complex Analaysis 2H in this
+  organisation of notes.
+  \item[]
+  \item \comment{(to be fixed?)} I seem to have managed to do the notes with
+  absolutely no diagrams, probably should be fixed
+\end{itemize}
+
+%===============================================================================
+
+\section{Geometry on the plane}
+
+Vectors in 2-dimensional space $\mathbb{R}^{2}$ may be written as $(x,y)$, $x$
+and $y$ being co-ordinates for vector $\vb$, encoding how far along the axis
+they are. Elementary vector operations are \underline{addition} and
+\underline{multiplication by a scalar}, given respectively by
+\begin{equation}
+	\ub+\vb=(u_1 + v_1, u_2 + v_2),\qquad 
+	\lambda\vb=(\lambda v_1, \lambda v_2),
+\end{equation}
+with $\lambda\in\mathbb{R}$. These operations satisfy the axioms of vector
+space. For $\ub,\vb,\wb\in\mathbb{R}^2$ and $\lambda,\mu\in\mathbb{R}$
+\begin{itemize}
+	\item \underline{closure}
+	\begin{enumerate}
+		\item $(\ub+\vb)\in\mathbb{R}^2$.
+		\item $\lambda\vb\in\mathbb{R}^2$.
+	\end{enumerate}
+	\item \underline{Addition}
+	\begin{enumerate}
+		\item \underline{Associativity}: $(\ub+\vb)+\wb=\ub+(\vb+\wb)$.
+		\item \underline{Identity}: There exists a $\mathbf{0}\in\mathbb{R}^2$
+		where $\vb+\mathbf{0}=\mathbf{0}+\vb=\vb$.
+		\item \underline{Inverse}: There exists a $-\vb\in\mathbb{R}^2$ where
+		$\vb+(-\vb)=\mathbf{0}$.
+		\item \underline{Commutativity}: $\vb+\wb=\wb+\vb$.
+	\end{enumerate}
+	\item \underline{Multiplication},
+	\begin{enumerate}
+		\item \underline{Associativity}: $(\lambda\mu)\vb=\lambda(\mu\vb)$.
+		\item \underline{Zero}: $0\vb=\mathbf{0}$.
+		\item \underline{One}: $1\vb=\vb$.
+		\item \underline{Distributive}: $(\lambda+\mu)\vb=\lambda\vb+\mu\vb$.
+	\end{enumerate}
+\end{itemize}
+
+It is convenient to write $(x,y)=x(1,0)+y(0,1)=x\eb_1 + y\eb_2$. Then the set
+$\{\eb_1,\eb_2\}$ form a \underline{basis} of $\mathbb{R}^2$, known as the
+\underline{Cartesian basis}.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Scalar product, lengths and angles}
+
+Given $\vb_1,\vb_2\in\mathbb{R}^2$, the \underline{scalar product} is defines as
+\begin{equation}
+	\ub\dot\vb=(u_1 v_1 + u_2 v_2)\in\mathbb{R}.
+\end{equation}
+We note that $\vb\cdot\vb=v_1^2 + v_2^2\geq0$. The \underline{modulus} of the
+vector $\vb$ is defined as
+\begin{equation}
+	|\vb|=\sqrt{v_1^2 + v_2^2}.
+\end{equation}
+The modulus coincides with the \underline{length} of the vector in this case,
+under the Euclidean norm (defined by the dot product here).
+
+%-------------------------------------------------------------------------------
+
+\subsection{Polar co-ordinates}
+
+If we let $r=|\vb|$, then by considering the angle $\vb$ makes with respect to
+the base line (e.g., $x$-axis), we can write a vector $\vb$ in polar
+co-ordinates $(r,\theta$), where $r\in\mathbb{R}^+$ and $\theta\in[0,2\pi)$, so
+that
+\begin{equation}
+	v_1 = r\cos\theta,\qquad v_2 = r\sin\theta.
+\end{equation}
+(The zero vector is not well-defined since any choice of $\theta$ will do for
+$r=0$).
+
+\begin{lemma}
+	Suppose $\ub,\vb\in\mathbb{R}^2$ and $\theta\in[0.\pi]$ is the angle between
+	the two vectors. Then $\ub\dot\vb=|\ub||\vb|\cos\theta$.
+\end{lemma}
+\begin{proof}
+	For $\ub=(|\ub|,\phi)$, $\vb=(|\vb|,\psi)$, $\theta=|\phi-\psi|$. So
+	\begin{equation}
+		\ub\dot\vb=|\ub||\vb|(\cos\phi\cos\psi+\sin\phi\sin\psi)
+		=|\ub||\vb|\cos(\phi-\psi)=|\ub||\vb|\cos\theta.
+	\end{equation}
+\end{proof}
+
+$\ub$ and $\vb$ are \underline{orthogonal} iff $\ub\cdot\vb=0$. (This is a more
+general way for saying two vectors are perpendicular, as we do not necessarily
+have to restrict ourselves to the Euclidean inner product).
+
+%-------------------------------------------------------------------------------
+
+\subsection{Simultaneous equations}
+
+Suppose we have the system of equations
+\begin{equation}
+	ax+by=e,\qquad cx+dy=f,\qquad a\cdots f\in\mathbb{R}.
+\end{equation}
+Then multiplying and eliminating accordingly gives
+\begin{equation}
+	x=\frac{de-bf}{ad-bc},\qquad y=\frac{ce-af}{ad-bc},
+\end{equation}
+so unique solution exists if $(ad-bc)\neq0$. If $(ad-bc)=0$, then there can be
+two scenarios:
+\begin{enumerate}
+	\item Solution is under-determined. e.g., $2x+6y=4$ and $3x+9y=6$, and the
+	two equations differ by a constant factor, so all solutions lie on the same
+	line.
+	\item There is no solution (lines do not intersect in the plane). e.g.,
+	$2x+6y=6$ and $3x+9y=4$.
+\end{enumerate}
+
+If we instead write the system of equations in terms of a matrix, for example,
+\begin{equation}
+	\begin{cases}2x+6y=6\\ 3x+9y=4\end{cases}\qquad\equiv\qquad
+	\begin{pmatrix}2 & 6\\ 3 & 9\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}
+	=\begin{pmatrix}6\\ 4\end{pmatrix},
+\end{equation}
+by using matrix multiplication rules and inverses of matrices, an alternative
+method can be used to solve simultaneous equations, not necessarily of two
+variables. In the general case in $\mathbb{R}^2$,
+\begin{equation}
+	\mathsf{A}\xb=\bb\rightarrow \xb=\mathsf{A}^{-1}\bb,
+\end{equation}
+where
+\begin{equation}
+	\mathsf{A}^{-1}=\frac{1}{ad-bc}\begin{pmatrix}d & -b\\ -c & a\end{pmatrix},
+	\qquad \mathsf{A}=\begin{pmatrix}a & b\\ c & d\end{pmatrix}.
+\end{equation}
+$\mathsf{A}^{-1}$ is the \underline{inverse} of $\mathsf{A}$, and
+$|\mathsf{A}|=(ad-bc)$ is known as the \underline{determinant} of a $2\times2$
+matrix. The \underline{adjoint} $\mbox{adj}\mathsf{A}$ is the inverse without
+division by the determinant. The geometric interpretation is then, if
+$|\mathsf{A}|\neq0$, two lines intersect uniquely, otherwise there is no
+intersection, or the lines lie on top of each other.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Lines on a plane}
+
+We know that $ax+by=c$ is the equation of a straight line. There are several
+ways to describe lines:
+\begin{itemize}
+	\item \underline{Parametric form}. If $\vb$ passes through the origin, we
+	can write the line as a collection of all scalar multiples of a direction
+	vector along the line, i.e., $\xb=\lambda\vb$. More generally, if $\ab$ is
+	any point on the line, then $\xb=\ab+\lambda\vb$.
+	\item \underline{Normal vector}. Let $\nb$ be a vector orthogonal to $\vb$,
+	then $\nb\cdot\vb=0$. Thus
+	\begin{equation}
+		\nb\cdot\xb=\nb\cdot\ab+\lambda\nb\cdot\vb = \nb\cdot\ab.
+	\end{equation}
+	A line may therefore be written in terms of $\ab$ and $\nb$ as
+	$\nb\cdot\xb=n_1 x + n_2 y = \nb\cdot\ab$. It is often convenient to have
+	$|\nb|=1$, and denote it $\hat{\nb}$.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Determinants and area}
+
+\begin{lemma}
+	Let $\ub=(a,c)^{T}$ and $\vb=(b,d)^{T}$. Then $\ub$ and $\vb$ are parallel
+	iff $|\mathsf{A}|=0$.
+\end{lemma}
+\begin{proof}
+	If $\ub$ is parallel to $\vb$ then $\ub=\lambda\vb$. Then $a=\lambda b$ and
+	$c=\lambda=d$. Then $ad-bc=\lambda(bd-bd)=0$. If $|\mathsf{A}|=0$, then
+	$ad=bc$, and so $a/b=c/d=\lambda$, and so we arrive at $\ub=\lambda\vb$.
+\end{proof}
+
+Now consider the parallelogram formed from $\ub$ and $\vb$, with one vertex on
+the origin wlog. The claim is that the area of this parallelogram is equal to
+$|\mathsf{A}|$. The argument goes that the area is base multiplied by the
+height. Taking $|\ub|$ to be the case, the height is given by $|\vb|\sin\theta$,
+and so the area is $|\ub||\vb|\sin\theta$. On the other hand,
+$\ub\cdot\vb=ab+cd=|\ub||\vb|\cos\theta$, so squaring both sides gives
+\begin{equation}
+	|\ub|^2 |\vb|^2 \cos^2\theta = (ab+cd)^2,
+\end{equation}
+and
+\begin{equation}
+	\mbox{Area}=|\ub|^2 |\vb|^2 \sin^2\theta = -(ab+cd)^2 + |\ub|^2 |\vb|^2
+	=\cdots=(ad-bc)^2=|\mathsf{A}|^2,
+\end{equation}
+from which result follows.
+
+\begin{example}
+	Take a parallelogram with vertices
+	\begin{equation}
+		\ab=(1,3),\qquad\bb=(4,4),\qquad,\cb=(5,6),\qquad\db=(2,5).
+	\end{equation}
+	Then, noticing that $\bb-\ab$ is parallel to $\cb-\bb$, we take the spanning
+	vectors as $\bb-\ab=(3,1)$ and $\cb-\db=(1,2)$, so
+	\begin{equation}
+		|\mathsf{A}|=\left|\begin{matrix}3 & 1\\ 1 & 2\end{matrix}\right|=6-1=5.
+	\end{equation}
+\end{example}
+
+From the above, we deduce that the area of a triangle is half of the
+determinant of the matrix with the spanning vectors of the parallelogram as the
+entries.
+
+\begin{example}
+	For a triangle with vertices
+	\begin{equation}
+		\ab=(-1,2),\qquad\bb=(1,1),\qquad\cb=(3,4),
+	\end{equation}
+	we have $\bb-\ab=(2,-1)$ and $\cb-\db=(4,2)$, so
+	\begin{equation}
+		\mbox{Area}=\frac{1}{2}|\mathsf{A}|
+		=\frac{1}{2}\left|\begin{matrix}2 & 4\\ -1 & 2\end{matrix}\right|
+		=(4+4)/2=4.
+	\end{equation}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Curves in the plane}
+
+The most familiar curves are graphs of functions. Let $f(x)$ be a real valued
+function of $x\in\mathbb{R}$, $x\in(a,b)$. The graph $y=f(x)$ is a curve in
+$\mathbb{R}^2$. The curve is differentiable if we can find a tangent to the
+graph of $f$ for each $x\in(a,b)$. This is done by taking the limit of chords
+with
+\begin{equation}
+	y=f(x+\delta x)-f(x),\qquad x=x+\delta x - x,
+\end{equation}
+so that the line has gradient $[f(x+\delta x)-f(x)]/\delta x$. By re-scaling and
+taking the limit as $\delta x\rightarrow0$, this gives the direction vector of
+the tangent line, or, as a vector,
+\begin{equation}
+	\tb=\lim_{\delta x\rightarrow0}\left(\begin{matrix}
+	1\\ [f(x+\delta x)-f(x)]/\delta x\end{matrix}\right)=\left(\begin{matrix}
+	1\\ f'(x)\end{matrix}\right).
+\end{equation}
+For fixed $x_0$, the tangent line is
+\begin{equation}
+	\begin{pmatrix}x\\ y\end{pmatrix}=\begin{pmatrix}x_0 \\ f(x_0)\end{pmatrix}
+	+\tb\begin{pmatrix}1\\ f'(x_0)\end{pmatrix},
+\end{equation}
+with $\tb=x-x_0$, $y=f(x_0)+\tb f'(x_0)=f(x_0)+(x-x_0)f'(x_0)$. This is of
+course the first Taylor expansion approximation of $y=f(x)$ at $x=x_0$.
+
+\begin{example}
+	Let $f(x)=x^3-6x^2 + 9x$.
+	\begin{enumerate}
+		\item Find tangent of $y=f(x)$ at $x=0,1,2,3,4$.
+		\item Use this to sketch $y=f(x)$ for $x\in[-1,5]$.
+		\item Find the area below the curve and above the $x$-axis between their
+		two pairs of intersection.
+	\end{enumerate}
+	
+	We have $f'(x)=3x^2-12x+9$. So
+	
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$x$ & $0$ & $1$ & $2$ & $3$ & $4$\\
+		\hline
+		$y=f(x)$ & $0$ & $4$ & $2$ & $0$ & $4$\\
+		\hline
+		$f'(x)$ & $9$ & $0$ & $-3$ & $0$ & $9$\\
+		\hline
+		tangent & $y=9x$ & $y=4$ & $y=3x+8$ & $y=0$ & $y=9x-32$\\
+		\hline
+	\end{tabular}
+	
+	A sketch of the graph shows a single crossing at $x=0$ and double crossing
+	at $x=3$ (can show this by factorising the cubic). So the area under the
+	curve is
+	\begin{equation}
+		\int_0^3 (x^3-6x^2+9x)\ \mathrm{d}x=27/4.
+	\end{equation}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Parametric curve}
+
+These can deal with places where the gradient becomes infinity, or where there
+is more than one value of $y$ for a particular $x$. For example,
+$(x,y)=(r\cos\theta,r\sin\theta)$ describes a circle centred at the origin,
+since $x^2 + y^2 = r^2$. A \underline{parametric curve} in $\mathbb{R}^2$ is a
+differentiable map
+\begin{equation}
+	\alpha(a,b)\rightarrow\mathbb{R}^2,\qquad \alpha(t)=(x(t),y(t)),\qquad
+	t\in(a,b).
+\end{equation}
+
+The curve is differentiable if, for all $t\in(a,b)$, there exists
+$\alpha'(t)=(x'(t),y'(t))$. Geometrically, $\alpha'(t)$ is the vector tangent to
+the curve at $t$. This definition captures the essence of a vector and
+generalises even to curved spaces. This may be seen via the definition of
+chords, taking $\delta t\rightarrow0$ for each component.
+
+\begin{example}
+	For a circle, $\alpha(t)=(r\cos t,r\sin t)$, and $\alpha'(t)=(-r\sin t,r\cos
+	t)$. More generally, the circle of radius $r$ centred at $\vb$ is
+	parametrised as $\alpha(t)=(r\cos t + v_1, r\sin t + v_2)$.
+	
+	For an ellipse centred at the origin, the parametrisation is
+	$\alpha(t)=(a\cos t, b\cos t)$, and $\alpha'(t)=(-a\sin t, b\cos t)$. In
+	Cartesian co-ordinates, this yields
+	\begin{equation}
+		\frac{x^2}{a^2} + \frac{y^2}{b^2} = c^2,\qquad a,b>0.
+	\end{equation}
+	The general parametrise form is similar to the circle case.
+\end{example}
+
+A parametrised curve is \underline{regular} is $\alpha'(t)$ exists for
+$t\in(a,b)$. This means that the parameter is constantly moving along the curve,
+which allows us to measure distances along the curve. The \underline{arc length}
+of a regular smooth parametrised curve, measured from a reference point $t_0$,
+is given by
+\begin{equation}
+	s(t)=\int_{t_0}^t |\alpha'(t)|\ \mathrm{d}t = \int_{t_0}^{t}
+	\sqrt{[x'(t)]^2+[y'(t)]^2}\ \mathrm{d}t.
+\end{equation}
+This is because, for an arc length element,
+\begin{equation}
+	\delta s=\sqrt{\left(\frac{\delta x}{\delta t}\right)^2 +
+	\left(\frac{\delta y}{\delta t}\right)^2},\qquad\Rightarrow\qquad
+	\sum\delta s=\int_a^b\sqrt{\left(\frac{\mathrm{d} x}{\mathrm{d} t}\right)^2 
+	+\left(\frac{\mathrm{d} y}{\mathrm{d} t}\right)^2}\ \mathrm{d}t.
+\end{equation}
+The curve is said to be \underline{parametrised by arc length} if
+$|\alpha'(t)|=1$. The is equivalent to saying $\delta s\approx\delta t$.
+
+\begin{lemma}
+	Let $\alpha(t)$ be a regular curve parametrised by arc length. Then
+	$\alpha''(t)=(x''(t), y''(t))$ is normal to $\alpha(t)$.
+\end{lemma}
+\begin{proof}
+	We need to show that $\alpha'(t)\cdot\alpha''(t)=0$. For $t$ the arc length,
+	$|\alpha'(t)|^2=\alpha'(t)\cdot\alpha'(t)=1$. So
+	$(\alpha'\cdot\alpha')'=2\alpha'\cdot\alpha''=0$, as required.
+\end{proof}
+
+\begin{example}
+	For a circle with $\alpha(t)=(r\cos t, r\sin t)$, $|\alpha'(t)|=r$, so
+	\begin{equation}
+		s(t)=\int_{t_0}^t r\ \mathrm{d}t = r(t-t_0),\qquad
+		\sum s = 2\pi r
+	\end{equation}
+	since $t\in[0,2\pi)$. To parametrise the curve by arc length, we take
+	$t=s/r$, so $\alpha(s)=(r\cos (s/r), r\sin(s/r))$, $\alpha'(s)=(-\sin (s/r),
+	\cos(s/r))$, and $\alpha''(s)=(-1/r)(\cos(s/r),
+	\sin(s/r))=-(1/r^2)\alpha(s)$. It is easy to see that
+	$\alpha'(s)\cdot\alpha''(s)=0$. Geometrically, $\alpha$ points away from the
+	circle centre, $\alpha'(s)$ is tangent to the circle, and $\alpha''(s)$
+	points towards the circle centre. From circular motion, $\alpha=\xb$, the
+	position vector, $\alpha'=\vb$ the velocity vector, and $\alpha''=\ab$ is
+	the acceleration vector.
+\end{example}
+
+\begin{example}
+	The \underline{cardinod} is given by the parametrisation
+	\begin{equation}
+		\alpha(t)=2a(1-\cos t)(\cos t, \sin t),
+	\end{equation}
+	and looks like a heart shape lying on its side. At $t=0$, there is a cusp,
+	which will need separate consideration since it is an end point for the
+	cardinod, and the curve is not necessarily smooth there. We have
+	\begin{equation}
+		\alpha'(t)=2a(-\sin t+2\cos t\sin t, \cos t-\cos^2 t + \sin^2),
+	\end{equation}
+	and, after some algebra (do it yourself), $|\alpha'(t)|=4a\sin (t/2)$ after
+	using some double angle formulas. The arc length is then
+	\begin{equation}
+		s(t)=\int_0^t 4a\sin(t/2)\ \mathrm{d}t=8a(1-\cos(t/2)).
+	\end{equation}
+	The total length of a cardinoid is then	$s(2\pi)=16a$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Central conics}
+
+Consider a curve $C\in\mathbb{R}^2$, given by the constraint
+\begin{equation}
+	ax^2=2bxy+cy^2 = \begin{pmatrix}x & y\end{pmatrix}
+	\begin{pmatrix}a & b\\ b & c\end{pmatrix}
+	\begin{pmatrix}x\\ y\end{pmatrix}=1.
+\end{equation}
+Writing this in polar co-ordinates gives
+\begin{equation}
+	r^2 f(\theta)=1,\qquad f(\theta)=a\cos^2\theta + 2b\cos\theta\sin\theta
+	+ c\sin^2\theta.
+\end{equation}
+Since the origin is not within the curve, $r>0$, so $r=1/\sqrt{f(\theta)}$.
+Curve then only exists if $f(\theta)>0$. Now,
+\begin{equation}
+	\frac{f(\theta)}{\sin^2 \theta}=a\cot^2 \theta + 2b\cot\theta + c.
+\end{equation}
+If $f(\theta)=0$, $\cot\theta=(-b/a)\pm(\sqrt{b^2-ac}/a)$, and $\theta$ is real
+only if $b^2-ac\geq0$. Now, $b^2-ac=-|\mathsf{A}|$, so if $|\mathsf{A}|>0$,
+$f(\theta)$ does not exist. If $ac-b^2>0$, then if:
+\begin{itemize}
+	\item $a,c>0\qquad\Rightarrow\qquad f(\theta)>0$.
+	\item $a,c<0\qquad\Rightarrow\qquad f(\theta)<0$.
+\end{itemize}
+If instead $|\mathsf{A}|=0$, $ac=b^2$, so multiplying both sides by $c$, it
+maybe shown that $c=(bx+cy)^2$, thus $bx+cy=\pm c$, i.e., two parallel straight
+lines with gradient $-b/c=-a/b$.
+
+In summary:
+\begin{enumerate}
+	\item If $|\mathsf{A}|>0$ and $a,c>0$, we have a circle, and there are
+	solutions for all $\theta$.
+	\item If $|\mathsf{A}|>0$ and $a,c<0$, there are no solutions since
+	$f(\theta)<0$ and $r=1/\sqrt{f(\theta)}$.
+	\item If $|\mathsf{A}|=0$, the curve are two parallel straight lines.
+	\item If $|\mathsf{A}|<0$, we have hyperbola. There is a solution of $F$ for
+	$\theta$ in two open intervals, each of length less than $\pi$.
+\end{enumerate}
+
+\begin{example}
+	For $a=c=1$, $b=0$, $|\mathsf{A}|=1$, and this describes the unit circle
+	centred at the origin. There is a solution for all $\theta$.
+	
+	for $a=c=1$, $b=-1/2$, $|\mathsf{A}|=3/4$, we have the ellipse $x^2 + y^2
+	-xy = 1$, and may be factorised into
+	\begin{equation}
+		\frac{3}{4}(x-y)^2 + \frac{1}{4}(x+y)^2 = 1.
+	\end{equation}
+	There is a solution for all $\theta$.
+	
+	For $a=b=c=1$, $|\mathsf{A}|=0$, and $x+y=\pm1$, two parallel straight
+	lines.
+	
+	For $a=1$, $c=-1$, $b=0$, $|\mathsf{A}|=-1$, we have $x^2 - y^2 = 1$, and
+	describes hyperbola for $\theta\in[0,\pi/4)\cup(7\pi/4,2\pi)$ and
+	$\theta\in(3\pi/4,5\pi/4)$.
+\end{example}
+
+It is often useful to find the points of $C$ closest/furthest to/from the
+origin. These are given by the turning points of $C$, i.e.,
+$f'(\theta)=(c-a)\sin2\theta+2b\cos2\theta=0$. An observation we first make is
+that, for $f'(\theta_0)=0$, then $f'(\theta_0+\pi/2)=0$ also (via
+straightforward substitution). Then $f'(\theta_0)$ and $f'(\theta_0 + \pi/2)$
+are the extremum values of $f(\theta)$. Thus turning points occur at orthogonal
+lines. The lines $\theta=\theta_0$ and $\theta_0+\pi/2$ are the
+\underline{principal axes} of the conic $C$.
+\begin{example}
+	For which values of $\theta$ do there exist
+	\begin{equation}
+		1=\begin{pmatrix}x & y\end{pmatrix}
+		\begin{pmatrix}-1 & 2 \\ 2 & -1\end{pmatrix}
+		\begin{pmatrix}x\\y\end{pmatrix},
+	\end{equation}
+	and what is the smallest value of $r=\sqrt{x^2+y^2}(=1/\sqrt{f(\theta)})$
+	for which solutions exist?
+	
+	$|\mathsf{A}|=-3$, so solution forms a hyperbola.
+	$f(\theta)=-\cos^2\theta+4\cos\theta\sin\theta-\sin^2\theta
+	=4\cos\theta\sin\theta-1$, and solution exists for $f(\theta)>0$. Thus we
+	require $\sin\theta>1/2$, and so $\theta\in(\pi/12,5\pi/12)$ and
+	$\theta\in(13\pi/12,17\pi/12)$.
+	
+	Now, $f'(\theta)=4(\cos^2\theta-\sin^2\theta)$, so $f'=0$ if
+	$\cos\theta=|\sin\theta|$. This occurs at $\cos\theta=1/\sqrt{2}$, and so
+	$\theta=\pi/4,3\pi/4,5\pi/4,17\pi/4$. Taking into account the domain of
+	relevance, $\theta=\pi/4$ and $\theta=5\pi/4$ are the relevant turning
+	points. It is easy to see the extremum in this case is at $\pi/4$, with
+	$r_{\min}=1$; since this is a hyperbola, there is no maximum.
+\end{example}
+
+Sometimes $\theta_0$ is an extremum point for $f$, then going back to the
+relation for $f(\theta_0)$, we notice that
+\begin{equation}\begin{aligned}
+	f(\theta_0)\cos\theta_0 &= a\cos^3\theta_0 + 2b\cos^2\theta_0 \sin\theta_0
+	+c\sin^2\theta_0 \cos\theta_0\\
+	&= a\cos^3\theta_0 + 2b\cos^2\theta_0
+	+\sin\theta_0[a\cos\theta_0 \sin\theta_0 +b(\sin^2\theta_0 -\cos^2\theta_0)]
+	\\ &=a\cos\theta_0 + b\sin\theta_0
+\end{aligned}\end{equation}
+up on substituting the value of $c\sin2\theta$ when $f'(\theta_0)=0$. Similarly,
+we have
+\begin{equation}
+	f(\theta_0)\sin\theta_0 = b\cos\theta_0 + c\sin\theta_0,
+\end{equation}
+so
+\begin{equation}
+	f(\theta_0)\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix}
+	=\begin{pmatrix}a & b\\ b & c\end{pmatrix}
+	\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix}.
+\end{equation}
+For $\hat{\mathbf{r}}=(\cos\theta_0, \sin\theta_0)^T$ (this is a unit vector),
+we have $\mathsf{A}\hat{\mathbf{r}}=f(\theta_0)\hat{\mathbf{r}}$, and so
+$\hat{\mathbf{r}}$ is the \underline{eigenvector} with associated
+\underline{eigenvalue} $f(\theta_0)$.
+
+As we will see, matrices are associated with linear mappings, and the
+eigen-equation says the action of a map on a position vector is to leave it
+unchanged up to a scale factor $\lambda$.
+\begin{example}
+	The matrix
+	\begin{equation}
+		\mathsf{A}=\begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix}
+	\end{equation}
+	represents a reflection in the $y$-axis. In this case, the eigenvalues and
+	eigenvectors are
+	\begin{equation}
+		\eb_1=\begin{pmatrix}1\\0\end{pmatrix},\qquad \lambda_1=-1,\qquad
+		\eb_2=\begin{pmatrix}0\\1\end{pmatrix},\qquad \lambda_1=1.
+	\end{equation}
+\end{example}
+
+Going back to conics, $\theta_0$ and $\theta_0+\pi/2$ gives the extremum values
+of $r$, which also corresponds to the direction of the eigenvectors. The
+eigenvalues gives the distance to the origin via $r=1/\sqrt{f(\theta)}$, with
+\begin{equation}
+	f(\theta_0)\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix}
+	=\mathsf{A}\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix},\quad
+	f(\theta_0+\pi/2)
+	\begin{pmatrix}\cos\theta_0+\pi/2 \\ \sin\theta_0+\pi/2\end{pmatrix}
+	=\mathsf{A}
+	\begin{pmatrix}\cos\theta_0+\pi/2 \\ \sin\theta_0+\pi/2\end{pmatrix}.
+\end{equation}
+For general $\theta$, we observe that
+\begin{equation}
+	\begin{pmatrix}\cos\theta \\ \sin\theta\end{pmatrix}=
+	\begin{pmatrix}\cos(\theta-\theta_0+\theta_0)
+	 \\ \sin(\theta-\theta_0+\theta_0)\end{pmatrix}=
+	 \begin{pmatrix}\cos(\theta-\theta_0)\cos\theta_0
+	 +\sin\theta_0 \sin(\theta-\theta_0)
+	 \\ \sin(\theta-\theta_0)\cos\theta_0 + \sin\theta_0 \cos(\theta-\theta_0)
+	 \end{pmatrix},
+\end{equation}
+so then
+\begin{equation}\begin{aligned}
+	\mathsf{A}\begin{pmatrix}\cos\theta \\ \sin\theta\end{pmatrix}
+	&=\cos(\theta-\theta_0)\mathsf{A}
+	\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix}
+	+\sin(\theta-\theta_0)\mathsf{A}
+	\begin{pmatrix}-\sin\theta_0 \\ \cos\theta\end{pmatrix}\\
+	&=\cos(\theta-\theta_0)f(\theta_0)
+	\begin{pmatrix}\cos\theta_0 \\ \sin\theta_0\end{pmatrix}
+	+\sin(\theta-\theta_0)f(\theta_0+\pi/2)
+	\begin{pmatrix}-\sin\theta_0 \\ \cos\theta\end{pmatrix}.
+\end{aligned}\end{equation}
+Now, we recall that we have
+\begin{equation}
+	1=r^2(\cos\theta,\sin\theta)\mathsf{A}
+	\begin{pmatrix}\cos\theta \\ \sin\theta\end{pmatrix}.
+\end{equation}
+Using the above identity, the RHS is
+\begin{equation}\begin{aligned}
+	\mbox{RHS}=&r^2 f(\theta_0)\cos(\theta-\theta_0)
+	[\cos\theta\cos\theta_0 + \sin\theta\sin\theta_0]\\
+	&\qquad+ r^2 f(\theta_0+\pi/2)\sin(\theta-\theta_0)
+	[-\cos\theta\sin\theta_0 + \sin\theta\cos\theta_0].
+\end{aligned}\end{equation}
+Using double angle formulae, we arrive at
+\begin{equation}
+	1=r^2 f(\theta_0)\cos^2(\theta-\theta_0) 
+	+r^2 f(\theta_0+\pi/2)\sin^2(\theta-\theta_0).
+\end{equation}
+So we see that if we have (i) an ellipse if both eigenvalues are positive, (ii)
+a hyperbola if only one of the eigenvalues is positive, (iii) no solution if
+both eigenvalues are negative.
+
+\begin{example}
+	Characterise the conic $1=5x^2 + 2\sqrt{3} xy + 3y^2$, an find its largest
+	and smallest distance from the origin.
+	
+	Now,
+	\begin{equation}
+		\mathsf{A}=\begin{pmatrix}5 & \sqrt{3}\\ \sqrt{3} & 3\end{pmatrix},
+	\end{equation}
+	with $|\mathsf{A}|=12$, $a,c>0$, therefore solutions exists for all
+	$\theta$, so we have an ellipse (alternative we could find the eigenvalues).
+	We also have
+	\begin{equation}
+	 	f(\theta)=5\cos^2\theta+2\sqrt{3}\cos\theta\sin\theta+3\sin^2\theta,
+	 	\qquad
+	 	f'(\theta)=2\sqrt{3}\cos2\theta-2\sin2\theta,
+	 \end{equation}
+	 so extremum values occur where $\tan2\theta=\sqrt{3}$, and so the principal
+	 axes occurs at $\theta=(\pi/6,2\pi/3,7\pi/6,5\pi/3)$. It is seen that
+	 $r_{\min}=1/\sqrt{f(\pi/6)}=1/\sqrt{6}$ and
+	 $r_{\max}=1/\sqrt{f(2\pi/3)}=\sqrt{2}$ (and similarly with the values
+	 another $\pi$ radians along).
+\end{example}
+
+%===============================================================================
+
+\section{Geometry of $\mathbb{R}^3$}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Vectors and their products}
+
+We assume vectors $\vb\in\mathbb{R}^3$ satisfy the same axioms of addition and
+multiplication as for $\mathbb{R}^2$. Taking the usual basis, we take the dot
+product to be
+\begin{equation}
+	\ub\cdot\vb=u_1 v_1 + u_2 v_2 + u_3 v_3,
+\end{equation}
+so that
+\begin{equation}
+	|\vb|=\sqrt{\vb\cdot\vb}=\sqrt{v_1^2 + v_2^2 + v_3^2},\qquad
+	\ub\cdot\vb=|\ub||\vb|\cos\theta.
+\end{equation}
+Again, $\ub$ and $\vb$ are orthogonal if $\ub\cdot\vb=0$.
+
+In $\mathbb{R}^3$, we define the \underline{vector (cross) product} as
+\begin{equation}
+	\ub\times\vb=\begin{pmatrix}u_2 v_3 -u_3 v_2\\ u_3 v_1 - u_1 v_3\\
+	u_1 v_2 - u_2 v_1\end{pmatrix}.
+\end{equation}
+It may be seen that $\eb_1\times\eb_2=\eb_3$, and the sign is kept if the
+indices are permuted in a cyclic fashion. We also notice that
+$\vb\cdot\ub=-\ub\cdot\vb$. In general, $\ub\times\vb$ generates a vector
+orthogonal to both of the vectors, such that $\ub\times\vb$ points according to
+the clockwise/right-hand screw convention.
+
+\begin{lemma}
+	For non-trivial $\ub,\vb\in\mathbb{R}^3$ and $\theta\in[0,\pi]$ be the angle
+	between them, then $|\ub\times\vb|=|\ub||\vb|\sin\theta$.
+\end{lemma}
+\begin{proof}
+	It may be shown that $|\ub\times\vb|^2=
+	\cdots=|\ub|^2|\vb|^2-(\ub\cdot\vb)^2$. Then, using the identity for
+	$\ub\cdot\vb$, we obtain the identity.
+\end{proof}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Simultaneous equations in $\mathbb{R}^3$}
+
+Suppose we want to solve the simultaneous system of equations
+\begin{equation}
+	\begin{cases}ax+by+cz&=l,\\ dx+ey+fz&=m,\\ gx+hy+jz&=n.\end{cases}
+\end{equation}
+A similar approach using matrices results in
+\begin{equation}
+	\mathsf{A}=\begin{pmatrix}a & b & c\\ d & e & f &\\ g & h & j \end{pmatrix},
+	\qquad \mathsf{A}\xb=\bb.
+\end{equation}
+Supposing the inverse $\mathsf{A}^{-1}$ exists, then we may solve the system
+uniquely; the existence of an unique solution again depends on the determinant
+of the matrix. By brute force or otherwise,
+\begin{equation}
+	|\mathsf{A}|=\left|\begin{matrix}a & b & c\\ d & e & f \\ g & h & j
+	\end{matrix}\right|=
+	a\left|\begin{matrix}e & f \\ h & j\end{matrix}\right|
+	-b\left|\begin{matrix} d & f \\ g & j \end{matrix}\right|
+	+c\left|\begin{matrix} d & e \\ g & h \end{matrix}\right|.
+\end{equation}
+(This is the expression of the determinant by expanding the first row; it may be
+done by expanding any column or row, although one needs to take into account of
+extra minus signs in entries where $i+j=2n$, with $\mathsf{A}=(A_{ij})$,
+$A_{ij}$ the entry at the $i$-th row and $j$-th column.) With the determinant,
+$\mathsf{A}^{-1}$ may be found by the following steps:
+\begin{enumerate}
+	\item \underline{Matrix of minors}. We find the determinant of each
+	$2\times2$ matrix, where the element corresponding to that row and column is
+	covered, i.e.,
+	\begin{equation}
+		\begin{pmatrix}ej-fh & dj-fg & dh-eg\\ bj-ch & aj-cg & ah-bg\\
+		bf-ce & af-cd & ae-bd
+		\end{pmatrix}.
+	\end{equation}
+	\item \underline{Matrix of co-factors}. Change the sign of the places where
+	$i+j=2n$, where $i$ and $j$ are the row and column number (starting the
+	count from one), i.e.,
+	\begin{equation}
+		\begin{pmatrix}ej-fh & -(dj-fg) & dh-eg\\ -(bj-ch) & aj-cg & -(ah-bg)\\
+		bf-ce & -(af-cd) & ae-bd
+		\end{pmatrix}=
+		\begin{pmatrix}ej-fh & fg-dj & dh-eg\\ ch-bj & aj-cg & bg-ah\\
+		bf-ce & cd-af & ae-bd
+		\end{pmatrix}.
+	\end{equation}
+	\item \underline{Adjoint}. Take a transpose of the matrix of co-factors,
+	i.e.,
+	\begin{equation}
+		\mbox{adj}(\mathsf{A})=\begin{pmatrix}ej-fh & ch-bj & bf-ce \\ 
+		fg-dj & aj-cg & cd-af\\ dh-eg & bg-ah & ae-bd
+		\end{pmatrix}.
+	\end{equation}
+	(Think of the transpose as reflecting everything about the main diagonal.)
+	\item \underline{Inverse}. Divide the adjoint by the determinant, i.e.,
+	$\mathsf{A}^{-1}=\mbox{adj}(\mathsf{A})/|\mathsf{A}|$.
+\end{enumerate}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Planes in $\mathbb{R}^3$}
+
+Consider the constraint $ax+by+cz=l$, which describes a plane in $\mathbb{R}^3$.
+This is the case because, assuming $c\neq0$ wlog, we have
+\begin{equation}
+	z=\frac{l-ax-by}{c},\qquad\Rightarrow\qquad
+	\frac{\dfd z}{\dfd x}=-\frac{a}{c},\qquad\frac{\dfd z}{\dfd y}=-\frac{b}{c},
+\end{equation}
+and there exists a unique $z$ for every $x$ and $y$. The derivatives are
+constant which implies that $z(x,y)$ traces out a two-dimensional plane in
+$\mathbb{R}^3$.
+
+An alternative description of the plane can be given in terms of vectors, again
+as $\nb\cdot\boldsymbol{r}=\ab\cdot\nb$, where $\nb$ is a normal vector to the
+plane, $\boldsymbol{r}=(x,y,z)$, and $\ab$ is a position vector in the plane. As
+a trivial example, the $(x,y)$ plane is described by the equation with $a,b,l=0$
+and $c=1$. We have $\nb=\eb_z$, $\ab=\boldsymbol{0}$.
+\begin{example}
+	For $3x+4y-2z=12$, we have $\nb=(3,4,-2)$, and one possibility for $\ab$ is
+	$(4,0,0)$.
+\end{example}
+
+The description is as in $\mathbb{R}^2$, except now we require two direction
+vectors. The equation of the plane is given as $\boldsymbol{r}=\ab+\lambda\db_1
++ \mu\db_2$. Eliminating $\lambda$ and $\mu$, it may be shown that
+$\boldsymbol{r}\cdot(\db_1\times\db_2) =\ab\cdot(\db_1\times\db_2)$, i.e.,
+$\db_1\times\db_2$ serves as a normal vector to describe the plane.
+\begin{example}
+	Find the equation of the plane that goes includes the points
+	\begin{equation}
+		\ab=\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad
+		\bb=\begin{pmatrix}1\\-1\\2\end{pmatrix},\qquad
+		\cb=\begin{pmatrix}3\\1\\-1\end{pmatrix}.
+	\end{equation}
+	
+	We have
+	\begin{equation}
+		\db_1=\bb-\ab=\begin{pmatrix}0\\-2\\1\end{pmatrix},\qquad
+		\db_2=\cb-\ab=\begin{pmatrix}1\\0\\-2\end{pmatrix},\qquad\Rightarrow
+		\qquad \nb=\db_1\times\db_2=\begin{pmatrix}4\\1\\2\end{pmatrix},
+	\end{equation}
+	with $\nb\cdot\ab=7$. So one possibility is $4x+y+2z=7$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Lines in $\mathbb{R}^3$}
+
+A line is given by a point and a direction vector as
+$\boldsymbol{r}=\ab+\lambda\db$. It is then given by two constraints:
+\begin{equation}
+	\frac{x-a_1}{d_1}=\frac{y-a_2}{d_2}=\frac{z-a_3}{d_3}=\lambda.
+\end{equation}
+This line also has two normal vectors. Since only one of these can ever be
+eliminated, there are two independent solutions. Both
+\begin{equation}
+	\nb=(d_2, -d_1, 0),\qquad\textnormal{and}\qquad
+	\nb\times\db=(-d_1 d_3, -d_2 d_3, d_1^2 + d_2^2)
+\end{equation}
+may serve as normal vectors.
+
+Two planes in $\mathbb{R}^3$ are either parallel or intersect in a line. Suppose
+the two normal vectors are $\nb_1$ and $\nb_2$, then if they are parallel,
+$\nb_1=\lambda \nb_2$, otherwise they intersect in a line
+$\boldsymbol{r}=\ab+\lambda\db$, with $\db=\nb_1\times\nb_2$. To find a point on
+the line, we may take one of the variables to be zero, and solve for the
+remaining linear system.
+\begin{example}
+	Find the intersection of the planes $x-2y+z=3$ and $y+2z=1$.
+	
+	For $\nb_1=(1,-2,1)$ and $\nb_2=(0,1,2)$, $\db=(-5,-2,1)$. Taking $z=0$,
+	$y=1$ from the second equation, so $x=5$, thus
+	$\boldsymbol{r}=(5,1,0)=\lambda(-5,-2,1)$, or, in equation form,
+	\begin{equation}
+		\frac{x-2}{-5}=\frac{y-1}{-2}=z.
+	\end{equation}
+\end{example}
+\begin{example}
+	Find the parametric form of the line $(x-2)/3=(y-4)/-1=(z+5)/-2$.
+	
+	$\boldsymbol{r}=(2,4,-5)+\lambda(3,-1,-2)$.
+\end{example}
+
+If $\boldsymbol{r}=(a,b,c)+\lambda(d,e,0)$, then the constraints are
+\begin{equation}
+	\frac{x-a}{d}=\frac{y-b}{e}\qquad\textnormal{and}\qquad z=c.
+\end{equation}
+
+Two lines in $\mathbb{R}^3$ do not necessarily intersect even if they are
+non-parallel. We now try to find the shortest distance between two lines that do
+not intersect (if they do, this is of course zero). Suppose
+$\boldsymbol{r}_1=\ab_1+\lambda\db_1$ and $\boldsymbol{r}_2=\ab_2+\lambda\db_2$.
+Then we may have
+\begin{itemize}
+	\item Two lines are \underline{parallel}, with $\db_1=k\db_2$. Then the
+	distance is $D=|\ab_1-\ab_2|\sin\theta$, since $\ab_1$ and $\ab_2$ are just
+	position vectors on the line. Using the cross product corollary, we have
+	\begin{equation}
+		D=\frac{|\ab_1-\ab_2|\times\db_1|}{|\db_1|}.
+	\end{equation}
+	\item If the two lines are \underline{skewed}, then
+	$\nb=\db_1\times\db_2\neq\boldsymbol{0}$ is a normal to the lines. The
+	minimum distance between two points on the line corresponds to the
+	difference vector between the pairs parallel to $\nb$, i.e.,
+	\begin{equation}
+		D\frac{\nb}{|\nb|}=\pm(\ab_1+\lambda\db_1-\ab_2-\mu\db_2).
+	\end{equation}
+	Taking a dot product of the above with $\nb/|\nb|$ and noting that
+	$\nb\cdot\db_1=\nb\cdot\db_2=0$, we have
+	\begin{equation}
+		D=|\ab_1-\ab_2|\cdot\frac{\nb}{|\nb|}=
+		\frac{|(\ab_1-\ab_2)\cdot(\db_1\times\db_2)|}{|\db_1 \times \db_2|}.
+	\end{equation}
+\end{itemize}
+
+\begin{example}
+	Find the distance between the lines described by
+	\begin{equation}
+		\frac{x-2}{-3}=\frac{y-2}{6}=\frac{z+1}{9}\qquad\textnormal{and}\qquad
+		\frac{x+1}{2}=\frac{y}{-4}=\frac{z-2}{-6}.
+	\end{equation}
+	
+	$\nb=(-3,6,9)\times(2,-4,-6)=\boldsymbol{0}$ so two lines are parallel, and
+	using the appropriate formula, we have $D=\sqrt{122/7}$.
+\end{example}
+\begin{example}
+	Find the distance between the two lines described by
+	\begin{equation}
+		\boldsymbol{r}_1=\begin{pmatrix}2\\2\\-1\end{pmatrix}
+		+\lambda\begin{pmatrix}-3\\6\\9\end{pmatrix}\qquad\textnormal{and}\qquad
+		\boldsymbol{r}_2=\begin{pmatrix}-1\\0\\2\end{pmatrix}
+		+\mu\begin{pmatrix}2\\4\\6\end{pmatrix}.
+	\end{equation}
+	
+	$\db_1\times\db_2=(-72,0,-24)$, and $\ab_1-\ab_2=(3,2,-3)$, so
+	$D=144/(24\sqrt{10})=3\sqrt{10}/5$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Vector products and volumes of polyhedra}
+
+Given three vectors $\ab,\bb,\cb\in\mathbb{R}^3$, we define the
+\underline{scalar triple product} as $[\ab,\bb,\cb]=\ab\cdot(\bb\times\cb)$.
+\begin{lemma}
+	The scalar triple product is invariant under cyclic permutations, i.e.,
+	$[\ab,\bb,\cb]=[\cb,\ab,\cb]=[\bb,\cb,\ab]$. (May beshown via brute force
+	calculation.)
+\end{lemma}
+\begin{lemma}
+	The scalar triple product is the determinant of the matrix with
+	$\ab,\bb,\cb$ as its columns. (Thus $|\mathsf{A}|$ is unchanged if we
+	cyclically permute its columns.)
+\end{lemma}
+
+\begin{example}
+	The three vectors $(\ab,\bb,\cb)=(\eb_1,\eb_2,\eb_3)$ describes three edges
+	of the unit cube. The scalar triple product of these three vectors is of
+	course $1$, since $(\ab|\bb|\cb)=\mathsf{I}$, which coincidentally is the
+	volume of the unit cube.
+	
+	For a sheared cubed described by
+	$(\ab,\bb,\cb)=(\eb_1,\eb_2,\eb_1+\eb_2+\eb3)$, which has the same volume as
+	the cube, the scalar triple product is also $1$.
+\end{example}
+
+The latter object is a \underline{parallelpiped}, which is a three-dimensional
+polyhedron with six quadrilateral faces where opposite faces are parallel. Its
+relation to the cube is like that of a parallelogram to a square. The volume of
+the parallelpiped is give by the base area multiplied by the height; these are
+respectively given by $|\ab||\bb|\sin\theta=|\ab\times\bb|$ and
+$|\cb|\cos\phi=\cb\cdot\hat{\nb}=|\cb\cdot(\ab\times\bb)/|\ab\times\bb||$. Thus
+\begin{equation}
+	V=(|\ab||\bb|\sin\theta)(|\cb|\cos\phi)=|\cb\cdot(\ab\times\bb)|,
+\end{equation}
+and the volume of a parallelpiped spanned by three vectors is given by the
+determinant of a matrix formed by the three vectors.
+
+\begin{example}
+	Find the volume of the parallelpiped with vertices
+	\begin{equation}
+		\begin{pmatrix}-1\\-1\\-1\end{pmatrix},\
+		\begin{pmatrix}0\\1\\-1\end{pmatrix},\
+		\begin{pmatrix}2\\1\\0\end{pmatrix},\
+		\begin{pmatrix}1\\-1\\0\end{pmatrix},\
+		\begin{pmatrix}-1\\0\\1\end{pmatrix},\
+		\begin{pmatrix}0\\2\\1\end{pmatrix},\
+		\begin{pmatrix}2\\2\\2\end{pmatrix},\
+		\begin{pmatrix}1\\0\\2\end{pmatrix}.
+	\end{equation}
+	
+	The first vector has the lowest value of $x,y,z$ so we take it as the origin
+	of the spanning vectors. We see that three of the vectors are invariant in
+	$x,y,z$ in respect to the first vector, given by the fifth, fourth and
+	second vector respectively. Then the spanning vectors are $(0,1,2)$,
+	$(2.0.1)$ and $(1,2,0)$ which gives a volume of $9$.
+\end{example}
+
+For a \underline{tetrahedron} (triangular bottom pyramid), the volume is a third
+of the base area multiplied by height; for triangles, this is
+\begin{equation}
+	V=\frac{1}{3}\frac{1}{2}|\ab||\bb|\sin\theta|\cb\cos\phi|=
+	\frac{1}{6}|\cb\cdot(\ab\times\bb)|.
+\end{equation}
+\begin{example}
+	Find the volume of a tetrahedron with vertex
+	\begin{equation}
+		\ab=\begin{pmatrix}1\\0\\-1\end{pmatrix},\
+		\bb=\begin{pmatrix}2\\0\\1\end{pmatrix},\
+		\cb=\begin{pmatrix}3\\1\\2\end{pmatrix},\
+		\db=\begin{pmatrix}1\\-1\\1\end{pmatrix}.
+	\end{equation}
+	
+	Taking $\ab$ to be the origin, the vectors are $\bb-\ab=(1,0,2)$,
+	$\cb-\ab=(2,1,3)$, $\db-\ab=(0,1,2)$, and the resulting determinant of the
+	matrix is $1$, so the volume is $1/6$.
+\end{example}
+
+As a final topic, the \underline{triple vector product} is
+$\ab\times(\bb\times\cb) = (\ab\cdot\cb)\bb-(\ab\cdot\bb)\cb$. This may be
+checked by brute force, and analogous results exists for any number of vectors.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Intersection of planes and simultaneous equations}
+
+Two non-parallel planes intersect in a line. Suppose two planes $\pi_1$ and
+$\pi_2$ are described by $ax+by+cz=l$ and $dx+ey+fz=m$, then the intersection
+$\mathcal{C}=\ab+\lambda(\nb_1\times\nb_2)$, where $\nb_1$ and $\nb_2$ are the
+respective normal vectors to the planes. Suppose we now have a third plane
+$\pi_3$ described by $gx+hy+jz=n$, then this plane $\pi_3$ will intersect
+$\mathcal{C}$ at a point if it is no parallel to $\pi_1$ or $\pi_2$. In equation
+form, there is intersection if
+\begin{equation}
+	\boldsymbol{r}\cdot\nb_3=\ab\cdot\nb_3+\lambda[\nb_1,\nb_2,\nb_3]=n,
+\end{equation}
+so that
+\begin{equation}
+	\lambda=\frac{n-\ab\cdot\nb_3}{[\nb_1,\nb_2,\nb_3]},
+\end{equation}
+and a solution is well-defined if $[\nb_1,\nb_2,\nb_3]\neq0$, i.e., the
+determinant of the matrix formed by the normal vectors is non-zero.
+
+\begin{lemma}[Cramer's rule]
+	It may be shown that, from algebraic manipulation, if
+	$\mathsf{A}\boldsymbol{r}=\bb$, then
+	\begin{equation}
+		x=|\mathsf{A}_{1}|/|\mathsf{A}|,\qquad
+		y=|\mathsf{A}_{2}|/|\mathsf{A}|,\qquad
+		z=|\mathsf{A}_{3}|/|\mathsf{A}|,
+	\end{equation}
+	where $\mathsf{A}_{j}$ has the $j^{\textnormal{th}}$ column replaced by
+	$\bb$.
+\end{lemma}
+
+Further rules for evaluating the determinant of matrices:
+\begin{itemize}
+	\item $|\mathsf{A}|=|\mathsf{A}^{T}|$.
+	\item If $\mathsf{B}$ is formed by multiply a row or column of $\mathsf{A}$
+	by $\lambda$, then $|\mathsf{B}|=\lambda|\mathsf{A}|$.
+	\item If $\mathsf{B}$ is formed by interchanging two rows/columns of
+	$\mathsf{A}$, then $|\mathsf{B}|=-|\mathsf{A}|$. A cyclic permutation
+	involves two such operation, so the determinant is unchanged in this case.
+	\item If $\mathsf{B}$ is formed by adding an arbitrary multiple of a single
+	row/column of $\mathsf{A}$ to another row/column, then
+	$\mathsf{B}=\mathsf{A}$. e.g.,
+	\begin{equation}
+		\left|\begin{matrix}a & b & c\\ d & e & f\\ g & h & j\end{matrix}\right|
+		=\left|\begin{matrix}a-\lambda d & b-\lambda e & c-\lambda f
+		\\ d & e & f\\ g & h & j\end{matrix}\right|.
+	\end{equation}
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Method of row reduction}
+
+Using the last rule above, a matrix may be manipulated into an
+\underline{upper-triangular/echelon} form, i.e.,
+\begin{equation}
+	\mathsf{A}'=\begin{pmatrix}a' & b' & c'\\ 0 & e' & f'\\
+	0 & 0 & j'\end{pmatrix},\qquad |\mathsf{A}'|=a'e'j'.
+\end{equation}
+
+\begin{example}
+	Solve the simultaneous equations
+	\begin{equation}\begin{aligned}
+		2x + 3y + z &= 23,\\
+		x + 7y + z &= 36,\\
+		5x + 4y - 3z &= 16.
+	\end{aligned}\end{equation}
+	
+	\begin{equation}\begin{aligned}
+		\left(\begin{matrix}2&3&1\\ 1&7&1\\ 5&4&-3\end{matrix}\right|
+		\left.\begin{matrix}23\\ 36\\ 10\end{matrix}\right)=
+		\left(\begin{matrix}2&3&1\\ 1&7&1\\ 0&-7/2&-11/2\end{matrix}\right|
+		\left.\begin{matrix}23\\ 36\\ -83/2\end{matrix}\right)&=
+		\left(\begin{matrix}2&3&1\\ 0&11/2&1/2\\ 0&-7/2&-11/\end{matrix}\right|
+		\left.\begin{matrix}23\\ 49/2\\ -83/2\end{matrix}\right)\\
+		&=\left(\begin{matrix}2&3&1\\ 0&11/2&1/2\\ 0&0&-57/2/\end{matrix}\right|
+		\left.\begin{matrix}23\\ 49/2\\ -285/11\end{matrix}\right).
+	\end{aligned}\end{equation}
+	From this, we can back substitute and see that $z=5$, $y=4$ and $x=3$.
+\end{example}
+
+%===============================================================================
+
+\section{Curves and surfaces in $\mathbb{R}^3$}
+%-------------------------------------------------------------------------------
+
+\subsection{Parametric curves and surfaces}
+
+We are used to functions that go from $\mathbb{R}$ to $\mathbb{R}$. A parametric
+curve is simple the generalisation of this to the case where a function takes
+$\mathbb{R}$ to $\mathbb{R}^3$,
+\begin{equation}
+	\gamma:\ \mathbb{R}\rightarrow\mathbb{R}^3,\quad
+	t\mapsto(x(t),y(t),z(t)).
+\end{equation}
+\begin{example}
+	$\lambda\mapsto\ab+\lambda\db$ is the parameteric mapping for a line.
+\end{example}
+\begin{example}
+	$t\mapsto(\cos t,\sin t, t)$ represents a helix gyrating in the $xy$-plane.
+\end{example}
+
+Just as we can differentiate real functions, we can differentiate vector
+functions as
+\begin{equation}
+	\frac{\mathrm{d}\gamma}{\mathrm{d}t}=\left(
+	\frac{\mathrm{d}x}{\mathrm{d}t}, \frac{\mathrm{d}y}{\mathrm{d}t},
+	\frac{\mathrm{d}z}{\mathrm{d}t}\right)=\boldsymbol{\tau}.
+\end{equation}
+\begin{example}
+	In the above two examples, the tangent vectors are respectively $\db$ and
+	$(-\sin t, \cos t,1)$.
+\end{example}
+
+The same set of points may be parametrised in different ways. For example, the
+parabola on the $x=1$ plane may be parametrised by $\gamma=(1,t,t^2)$ or
+$\beta=(1,\ex^\lambda,\ex^{2\lambda})$. However, $\gamma$ and $\beta$ are
+strictly different because they are parametrised using a different variable.
+
+As in $\mathbb{R}^2$, for $\boldsymbol{r}(t)=(x(t),y(t),z(t))$, the arc length
+$s$ is given by
+\begin{equation}
+	s(t)=\int_{t_0}^{t}\sqrt{\dot{x}^2+\dot{y}^2+\dot{z}^2}\ \mathrm{d}t.
+\end{equation}
+We have $\mathrm{d}s/\mathrm{d}t=|\mathrm{d}\boldsymbol{r}/\mathrm{d}t|$, and,
+at infinitesimal ranges, this is often written as
+\begin{equation}
+	\mathrm{d}s^2=\left|\frac{\mathrm{d}r}{\mathrm{d}t}\right|^2 \mathrm{d}t^2
+	=(\dot{x}^2+\dot{y}^2+\dot{z}^2)\mathrm{d}t^2
+	=(\mathrm{d}x)^2+(\mathrm{d}y)^2+(\mathrm{d}z)^2.
+\end{equation}
+(cf. 3D version of Pythagoras' theorem.) A curve is said to be parametrised by
+arc length if $|\mathrm{d}\boldsymbol{r}/\mathrm{d}t|=1$, and in this case we
+use $s$ instead of $t$ are the parameter. Note that a curve is a collection of
+points, whilst the tangent is a vector, with a definite direction and length.
+
+\begin{lemma}
+	If $\gamma(s)$ is parametrised by arc length with tangent vector
+	$\boldsymbol{\tau}(s)$, then $\mathrm{d}/\mathrm{d}t(\boldsymbol{\tau}(s))$
+	is normal to the curve $\gamma$.
+\end{lemma}
+\begin{proof}
+	Since $\gamma$ is parametrised by arc length,
+	$\boldsymbol{\tau}\cdot\boldsymbol{\tau}=1$. So then
+	\begin{equation}
+		\frac{\mathrm{d}}{\mathrm{d}s}(\boldsymbol{\tau}\cdot\boldsymbol{\tau})
+		=2\boldsymbol{\tau}\cdot\frac{\mathrm{d}\boldsymbol{\tau}}{\mathrm{d}s}
+		=0.
+	\end{equation}
+\end{proof}
+
+We can define a surface parametrically, as
+\begin{equation}
+	S:\mathbb{R}^2\rightarrow \mathbb{R}^3,\qquad
+	(\mu,\lambda)\mapsto(x(\mu,\lambda),y(\mu,\lambda),z(\mu,\lambda))
+	=\Xb(\mu,\lambda).
+\end{equation}
+$S$ then is a function of two variables.
+\begin{example}
+	$S^2=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)$ with
+	$\theta\in[0,\pi]$ and $\phi\in[0,2\pi]$ is the unit 2-sphere.
+\end{example}
+\begin{example}
+	$S=(\sinh\chi,\cos\phi,\sinh\chi\sin\phi,\cosh\chi)$ with
+	$\chi\in\mathbb{R}$ and $\phi\in[0,2\pi]$ gives a hyperboloid.
+\end{example}
+
+If $\Xb(\mu,\lambda)$ traces a smooth surface $S$ in $\mathbb{R}^3$, then its
+tangent vectors at some $(\mu_0,\lambda_0)$ are
+\begin{equation}
+	\boldsymbol{\tau}_1 (\mu_0,\lambda_0)
+	=\left.\ddy{\Xb}{\mu}\right|_{(\mu_0,\lambda_0)},\qquad
+	\boldsymbol{\tau}_2 (\mu_0,\lambda_0)
+	=\left.\ddy{\Xb}{\lambda}\right|_{(\mu_0,\lambda_0)}.
+\end{equation}
+The \underline{tangent plane} of $S$ at $(\mu_0,\lambda_0)$ is then given by
+\begin{equation}
+	\Pi=\{\boldsymbol{r}\in\mathbb{R}^3\ |\ \boldsymbol{r}=\Xb_0 
+	+ \alpha \boldsymbol{\tau}_1 + \beta \boldsymbol{\tau}_2,\
+	\alpha,\beta\in\mathbb{R}\}
+\end{equation}
+\begin{example}
+	Find the tangent plane of the unit 2-sphere at
+	$(\theta_0,\phi_0)=(\pi/2,0)$. [at the equator]
+	
+	We have
+	\begin{equation}
+		\ddy{\Xb}{\theta}=(\cos\theta\cos\phi,\cos\theta\sin\phi,-\sin\theta),
+		\qquad
+		\ddy{\Xb}{\phi}=(-\sin\theta\sin\phi,\sin\theta\cos\phi,0),
+	\end{equation}
+	and, at the location of interest, $\Xb_0=\eb_1$,
+	$\boldsymbol{\tau}_1=-\eb_3$, and $\boldsymbol{\tau}_2=\eb_2$, so
+	$\pi=\eb_1-\alpha\eb_3+\beta\eb_2$, i.e., the $yz$-plane translated to
+	$x=1$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Functions, surfaces and gradients}
+
+Like planes, surfaces and tangent planes may be written in Cartesian form or
+using a function $f$, i.e., as
+\begin{equation}
+	ax+by+cz=d\qquad\textnormal{or}\qquad f(x,y,z)=d.
+\end{equation}
+A \underline{scalar function} (or \underline{scalar field}) on $\mathbb{R}^3$ is
+a map
+\begin{equation}
+	f:\mathbb{R}^3\rightarrow\mathbb{R},\ (x,y,z)\mapsto f(x,y,z).
+\end{equation}
+$f$ is \underline{continuous} at $\ab$ if
+$|f(\boldsymbol{r})-f(\ab)|\rightarrow0$ as $|\boldsymbol{r}-\ab|\rightarrow0$
+along any path, and is differentiable is the partial derivatives exists.
+\begin{example}
+	For $f=x^4+x^2y^2+xyz$,
+	\begin{equation}
+		\ddy{f}{x}=4x^3+2xy^2+yz,\qquad \ddy{f}{y}=2x^2y+xz,\qquad
+		\ddy{f}{z}=xy,
+	\end{equation}
+	and
+	\begin{equation}
+		\grad f=\left(\ddy{f}{x},\ddy{f}{y},\ddy{f}{z}\right)
+	\end{equation}
+	is the gradient of the function $f$ at $\xb_0$.
+\end{example}
+$\grad f$ gives us the steepest rate of change of $f$, with the length of the
+vector representing the rate of change.
+\begin{example}
+	$f(x,y)=1-(x^2+y^2)$ is a cone of height 1 with apex at the origin. $\grad
+	f=-2(x,y)$, and points inwards and uphill.
+\end{example}
+The intuition is that $\grad f$ points orthogonally from contours of constraints
+in $f$.
+\begin{example}
+	$f=\sqrt{x^2+y^2+z^2}=r$ is the distance from origin. $\grad
+	f=(x,y,z)/r=\hat{\boldsymbol{r}}$, and $\grad f$ describes a sphere.
+\end{example}
+\begin{example}
+	The hyperboloid $f=x^2+y^2-z^2$ has $\grad f=2(x,y,-z)$, and $|\grad
+	f|=2\sqrt{x^2+y^2+z^2}$. This points radially outwards on the $xy$-plane but
+	down/up in the upper/lower half of $\mathbb{R}^3$.
+\end{example}
+$\grad f$ defines a normal $\nb$ to the surface $f=\textnormal{const}$, and
+hence defines the tangent plane via $\boldsymbol{r}\cdot\nb=\ab\cdot\nb$.
+\begin{example}
+	Find the tangent plane to $x^2-y^2-z^2=1$ at $(-1,0,0)$. [This is a rotated
+	paraboloid with the bottom at $(-1,0,0)$.]
+	
+	$\grad f=2(x,-y,-z)$, and so $\nb\cdot\boldsymbol{r}=-2x$ whilst
+	$\ab\cdot\nb=-2$. Thus $x=-1$ is the tangent plane.
+\end{example}
+\begin{example}
+	Find the tangent plane to $x^2+yz=1$ at $(0,1,1)$. [An inclined
+	hyperboloid.]
+	
+	$\nb=\grad f=(2x,z,y)$, $\boldsymbol{r}=(0,1,1)$, so we have
+	$\nb\cdot\boldsymbol{r}=z+y$, $\ab\cdot\nb=2$, so the tangent at that
+	location satisfies the relation $z+y=2$.
+\end{example}
+If $\dy f/\dy x=0$ at a location, then $f$ has a turning point in the
+$x$-direction. In the second example, the turning point in the $x$-direction is
+a minimum. Looking at $f$ for fixed $y$ and $z$ shows this also.
+
+A point $P=\xb_0$ is a \underline{critical point} of $f$ if $\grad
+f=\boldsymbol{0}$ there.
+\begin{example}
+	$f(x,y,z)=x^2+yz$, $\grad f=\boldsymbol{0}$ at $\xb_0=\boldsymbol{0}$. If
+	$y$ and $z$ are of the same sign, it is a minimum, whilst if they are of
+	different sign, it is a maximum. This an example of a \underline{saddle
+	point}; it is a minimum when it is coming down the spine of the hyperboloid,
+	but a maximum when coming up perpendicular to the spine.
+\end{example}
+
+We classify extrema by using the second order derivative, which is a matrix
+called the \underline{Hessian}, with
+\begin{equation}
+	\mathsf{H}_{ij}=\ddy{^2 f}{x^i x^j}.
+\end{equation}
+\begin{example}
+	Again, with $f=x^2+yz$, we have
+	\begin{equation}
+		\mathsf{H}=\begin{pmatrix}2&0&0\\0&0&1\\0&1&0\end{pmatrix}.
+	\end{equation}
+\end{example}
+Note that $\mathsf{H}$ is symmetric assuming $f$ is sufficiently smooth so that
+derivative order may be interchanged. The eigenvalue of $\mathsf{H}$ then give
+us information about the nature of the extrema.
+\begin{example}
+	$\mathsf{H}\boldsymbol{r}=\lambda\boldsymbol{r}$ gives $\lambda=\pm1,2$.
+	Positive eigenvalues means a local minimum along the direction of the
+	eigenvector, and the opposite is true for negative eigenvalues. If
+	\begin{itemize}
+		\item All eigenvalues positive, we have an absolute minimum of $f$.
+		\item All eigenvalues negative, we have an absolute maximum of $f$.
+		\item A saddle point if two eigenvalues are positive and one is
+		negative.
+		\item Hyperboloid of two sheets if two eigenvalues are negative and one
+		is positive.
+	\end{itemize}
+	So again we confirm that we have a saddle point at the relevant location.
+\end{example}
+%-------------------------------------------------------------------------------
+
+\subsection{Eigenvalue and eigenvectors of $3\times3$ matrix}
+
+Recall that $\vb$ is an eigenvector of $\mathsf{A}$ if
+$\mathsf{A}\vb=\lambda=\vb$, and $\lambda$ is the eigenvalue associated with the
+eigenvector.
+\begin{lemma}
+	If $\lambda$ is an eigenvalue of $\mathsf{A}$, then
+	$|\mathsf{A}-\lambda\mathsf{I}|=0$.
+\end{lemma}
+\begin{proof}
+	Assuming that we have an eigenvector $\vb$ associated with $\lambda$,
+	suppose that $|\mathsf{A}-\lambda\mathsf{I}|\neq0$. Then there exists
+	$\mathsf{B}$ that is the inverse of $(\mathsf{A}-\lambda\mathsf{I})$.
+	However,
+	\begin{equation}
+		\vb=\mathsf{I}\vb=\mathsf{B}(\mathsf{A}-\lambda\mathsf{I})\vb=
+		\mathsf{B}(\mathsf{A}\vb-\lambda\mathsf{I}),
+	\end{equation}
+	and since $\mathsf{A}\vb=\lambda\mathsf{I}$, for $\vb\neq\boldsymbol{0}$, we
+	have a contradiction.
+\end{proof}
+$|\mathsf{A}-\lambda\mathsf{I}|$ gives a polynomial in $\lambda$, which is a
+cubic in when we are concerned with vectors in $\mathbb{R}^3$. This polynomial
+is called the \underline{characteristic polynomial}, and
+$|\mathsf{A}-\lambda\mathsf{I}|=0$ is the \underline{characteristic equation} of
+$\mathsf{A}$.
+\begin{example}
+	For $\mathsf{H}$ above,
+	\begin{equation}
+		|\mathsf{H}-\lambda\mathsf{I}|=\left|\begin{matrix}
+		2-\lambda & 0 & 0\\ 0 & -\lambda & 1 \\ 0 & 1 & -\lambda\end{matrix}
+		\right|= (2-\lambda)(\lambda^2-1)=0,
+	\end{equation}
+	so $\lambda=2,\pm1$. It may be shown that the associated eigenvectors are
+	\begin{equation}
+		\vb_2 = \eb_1,\qquad \vb_1 = \eb_2 + \eb_3,\qquad
+		\vb_{-1} = \eb_2-\eb_3.
+	\end{equation}
+	We notice that the eigenvectors are mutually orthogonal.
+\end{example}
+
+\begin{theorem}
+	Let $\mathsf{A}$ be a real symmetric $3\times3$ matrix with eigenvalues
+	$\lambda_i\in\mathbb{R}$ and associated eigenvectors $\vb_i
+	\in\mathbb{R}^3$. Then:
+	\begin{enumerate}
+		\item if $\lambda_i \neq \lambda_j$, then $\vb_i \cdot \vb_j = 0$;
+		\item if $\lambda_i = \lambda_j$, we may choose $\vb_i \cdot \vb_j = 0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	By writing $\vb_i \cdot \vb_j$ as $\vb_i^T \vb_j = \vb_i \vb_j^T$, then we
+	have $\lambda_i \vb_i\cdot\vb_j = \lambda_i \vb_j^T \vb_i = \vb_j^T
+	\lambda_i \vb_i = \vb_j^T \mathsf{A}\vb_i$. Taking the transpose does
+	nothing to this because it is a scalar, so $\lambda_i \vb_i \cdot \vb_j =
+	(\vb_j^T \mathsf{A} \vb_i)^T = \vb_i^T \mathsf{A}^T \vb_j$. Now,
+	$\mathsf{A}$ is symmetric, so $\lambda_i \vb_i \cdot \vb_j = \vb_i^T
+	\mathsf{A} \vb_j = \lambda_j \vb_i^T \vb_j = \lambda_j \vb_i\cdot \vb_j$.
+	Thus we have $(\lambda_j-\lambda_i)\vb_i \cdot\vb_j =0$, and the first
+	result follows.
+	
+	Suppose now that $\lambda_i = \lambda_j$. Then $\vb_i$ and $\vb_j$ span a 2D
+	subspace/plane in which all vectors of $\mathsf{A}$ have the same
+	eigenvalue. If $\vb_i\cdot\vb_j \neq=0$, then we may redefine $\vb_i$ as
+	\begin{equation}
+		\vb_i' = \vb_j-\frac{(\vb_i \cdot \vb_j)\vb_j}{|\vb_j|^2},
+	\end{equation}
+	which is the projection of $\vb_i$ onto the space/plane that is orthogonal
+	to $\vb_j$.
+\end{proof}
+(The latter process of using projections to generate an orthogonal basis is know
+as \underline{Gram--Schmidt orthogonalisation}.)
+
+%-------------------------------------------------------------------------------
+
+\subsection{Quadric surfaces}
+
+A quadric is the generalisation of the conic to surfaces in $\mathbb{R}^3$. This
+has the form $\boldsymbol{r}^T\mathsf{A}\boldsymbol{r}+\bb\cdot\boldsymbol{r} +
+c=0$. $\mathsf{A}$ here is symmetric and of the form
+\begin{equation}
+	\mathsf{A}=\begin{pmatrix}a&b&c\\b&d&e\\c&e&f\end{pmatrix}.
+\end{equation}
+\begin{example}
+	Suppose all cross terms are zero except for the leading diagonal in
+	$\mathsf{A}$, i.e., $ax^2+dy^2+fz^2=1$. Then we have the following cases:
+	\begin{enumerate}
+		\item An ellipsoid when $a,d,f>0$. This may be parametrised as
+		\begin{equation}
+			x=\frac{1}{\sqrt{a}}\sin\theta\cos\phi,\qquad
+			y=\frac{1}{\sqrt{d}}\sin\theta\sin\phi,\qquad
+			z=\frac{1}{\sqrt{f}}\cos\phi.
+		\end{equation}
+		\item A hyperboloid of one sheet when $a,d>0$, $f<0$. For fixed $z$, $x$
+		and $y$ are constrained to be on an ellipse (a circle if $a=d$). This
+		may be parametrised as
+		\begin{equation}
+			x=\frac{1}{\sqrt{a}}\cosh\chi\cos\phi,\qquad
+			y=\frac{1}{\sqrt{d}}\sinh\chi\sin\phi,\qquad
+			z=\frac{1}{\sqrt{f}}\sinh\chi.
+		\end{equation}
+		\item A hyperboloid of two sheets when $a,d<0$, $f>0$. There is no
+		solution for a limited range of $z$. This may be parametrised as
+		\begin{equation}
+			x=\frac{1}{\sqrt{a}}\sinh\chi\cos\phi,\qquad
+			y=\frac{1}{\sqrt{d}}\sinh\chi\sin\phi,\qquad
+			z=\frac{1}{\sqrt{f}}\cosh\chi.
+		\end{equation}
+		\item No solutions when $a,d,f<0$.
+	\end{enumerate}
+\end{example}
+
+Note that, generally, we have
+\begin{equation}
+	f(x,y,z)=ax^2+2bxy+2cxz+dy^2+2eyz+fz^2 = \textnormal{constant}.
+\end{equation}
+As with conics, it is useful to identify the nearest/furthest points from the
+origin. This will occur when the normal is pointing directly from the origin,
+i.e., $\nb=\grad f\propto\boldsymbol{r}$, or $\grad f=2\lambda\boldsymbol{r}$.
+Since $\grad f=2\mathsf{A}\boldsymbol{r}$, we have $\mathsf{A}\boldsymbol{r} =
+\lambda\boldsymbol{r}$. Thus eigenvectors of $\mathsf{A}$ gives the direction of
+extrema of the quadric surface from the origin, and these principal axes are
+orthogonal by the previous theorem (since $\mathsf{A}$ is symmetric).
+
+Since any vector in $\mathbb{R}^3$ may be written as a sum of three orthogonal
+eigenvectors $\vb_1$, $\vb_2$, $\vb_3$, we have $\boldsymbol{r}=r_1 \vb_1 + r_2
+\vb_2 + r_3 \vb_3$, so
+\begin{equation}
+	\boldsymbol{r}^T \mathsf{A}\boldsymbol{r}=
+	(r_1 \vb_1^T + r_2\vb_2^T + r_3 \vb_3^T)\mathsf{A}(r_1 \vb_1 + r_2 \vb_2 +
+	r_3 \vb_3)=r_1^2 \lambda_1|\vb_1|^2 + r_2^2 \lambda_2|\vb_2|^2 +
+	r_3^2 \lambda_3|\vb_3|^2.
+\end{equation}
+Choosing $\vb_1$ to be unit vectors, we have $\boldsymbol{r}^T
+\mathsf{A}\boldsymbol{r}=r_1^2 \lambda_1 + r_2^2 \lambda_2 + r_3^2 \lambda_3$.
+Since $\vb_i$ are orthonormal, we can think of them as the new $xyz$-axis.
+\begin{example}
+	Classify the quadric $5x^2-6xy+5y^2+9z^2=1$.
+	
+	\begin{equation}
+		\mathsf{A}=\begin{pmatrix}5&-3&0\\-3&5&0\\0&0&9\end{pmatrix},\qquad
+		|\mathsf{A}-\lambda\mathsf{I}|=(9-\lambda)(8-\lambda)(2-\lambda)=0.
+	\end{equation}
+	All eigenvalues are positive, so we have an ellipsoid. It may be shown the
+	principal axes are
+	\begin{equation}
+		\vb_9 = \eb_3,\qquad \vb_8=(\eb_1-\eb_2)/\sqrt{2},\qquad
+		\vb_2=(\eb_1+\eb_2)/\sqrt{2}.
+	\end{equation}
+\end{example}
+
+%===============================================================================
+
+\section{Linear maps}
+
+A set of vectors $\{\vb_1,\vb_2,\vb_3\}\in\mathbb{R}^3$ is a \underline{basis}
+for $\mathbb{R}^3$ if any vector $\ub\in\mathbb{R}^3$ may be written uniquely as
+$\ub=u_1 \vb_1 + u_2 \vb_2 + u_3 \vb_3$. $u_i$ here are the components of the
+vector $\ub$ with respect to the basis $\{\vb_i\}$.
+
+Suppose $\boldsymbol{r}$ has co-ordinates $x_1, x_2, x_3$ with respect to
+$\{\vb_i\}$. Let $\mathsf{P}=(\vb_1|\vb_2|\vb_3)$, the matrix with $\vb_i$ as
+columns. Then, by inspection, $\vb_i=\mathsf{P}\eb_i$, where $\eb_i$ is the
+standard Cartesian basis; $\mathsf{P}$ is the linear map that takes us from the
+standard basis to the basis $\{\vb_i\}$.
+
+\begin{theorem}
+	Let $S=\{\vb_1,\vb_2,\vb_3\}$ be a set of three vectors in $\mathbb{R}^3$,
+	and $\mathsf{P}=(\vb_1|\vb_2|\vb_3)$. $S$ is a basis of $\mathbb{R}^3$ if
+	$|\mathsf{P}|\neq0$.
+\end{theorem}
+\begin{proof}
+	Suppose that $|\mathsf{P}|\neq0$. Then there exists $\mathsf{P}^{-1}$. For
+	an arbitrary vector $\xb\in\mathbb{R}^3$,
+	$\xb=\mathsf{P}\mathsf{P}^{-1}\xb=\yb$ is unique, with
+	$y=\mathsf{P}^{-1}\xb$. Now,
+	\begin{equation}
+		\xb=\mathsf{P}\yb=y_1 \mathsf{P}\eb_1 + y_2 \mathsf{P}\eb_2 +
+		y_3 \mathsf{P}\eb_3 = y_1 \vb_1 + y_2 \vb_2 + y_3 \vb_3,
+	\end{equation}
+	so $S$ is a basis.
+	
+	Suppose now that $S$ is a basis. Then, in particular, the standard basis has
+	the representation
+	\begin{equation}
+		\eb_i = \sum_{j=1}^3 e_i^j \vb_j.
+	\end{equation}
+	The scalar triple product of the standard basis is 1, so
+	\begin{equation}
+		1=[\eb_1,\eb_2,\eb_3]=\sum_{i,j,k,=1}^3 e_1^i e_2^j e_3^k
+		[\vb_i,\vb_j,\vb_k]\quad\Rightarrow\quad
+		[\vb_i,\vb_j,\vb_k]=|\mathsf{P}|=1.
+	\end{equation}
+	Thus $|\mathsf{P}\neq0$ if $i\neq j\neq k$.
+\end{proof}
+\begin{example}
+	Which of
+	\begin{equation}
+		B_1=\{(4,1,2),(2,5,1),(0,1,0)\},\qquad B_2=\{(4,1,2),(2,5,1),(0,0,1)\}
+	\end{equation}
+	forms a basis in $\mathbb{R}^3$?
+	
+	$\mathsf{P}_1=0$ whilst $\mathsf{P}_2=18$, so only $B_2$ is a basis.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Axioms}
+
+A linear map $L:\mathbb{R}^3\rightarrow\mathbb{R}^3$ is a function such that,
+for all $\ub,\vb\in\mathbb{R}^3$ and $\lambda,\mu\in\mathbb{R}$,
+$L(\lambda\ub+\mu\vb)=\lambda L(\ub)+\mu L(\vb)$. Note then
+$L(\boldsymbol{0})=\boldsymbol{0}$.
+\begin{example}
+	$L(\ub)=(3u_1 -u_2 +u_3, u_3, 0)$ is linear.
+	
+	$L(\xb)=(xy,x,z)$ is not linear since the first component is not a linear
+	function.
+	
+	$L(\xb)=(x+1,y,z)$ is not linear since it is not a homogeneous function of
+	degree $1$.
+	
+	$\mathsf{P}=(\vb_1 |\vb_2 |\vb_3)$ induces a linear map by definition.
+\end{example}
+
+\begin{theorem}
+	A map $L:\mathbb{R}^3\rightarrow\mathbb{R}^3$ is linear iff there exists a
+	$3\times3$ matrix $\mathsf{A}$ where $L(\vb)=\mathsf{A}\vb$ for all
+	$\vb\in\mathbb{R}^3$. Moreover, $\mathsf{A}=(L(\eb_1)|L(\eb_2)|L(\eb_3))$.
+\end{theorem}
+\begin{proof}
+	Assuming $L$ is a linear map, then by the linearity property, $L(\vb)=v_1
+	L(\eb_1)+ v_2 L(\eb_2) + v_3 L(\eb_3) = (L(\eb_1)|L(\eb_2)|L(\eb_3))\vb$ as
+	required. Assuming we have $L(\vb)=\mathsf{A}\vb$, by properties of
+	matrices, $\mathsf{A}$ automatically induces a linear map.
+\end{proof}
+\begin{example}
+	\begin{equation}
+		L\xb=\begin{pmatrix}2x-y+z\\ z\\ 0\end{pmatrix},\qquad
+		\mathsf{A}=\begin{pmatrix}3&-1&1\\0&0&1\\0&0&0\end{pmatrix}
+	\end{equation}
+	\begin{equation}
+		L\xb=\begin{pmatrix}6x-2y+5z\\2x+3y-z\\x+5y+2z\end{pmatrix},\qquad
+		\mathsf{A}=\begin{pmatrix}6&-2&5\\2&3&-1\\1&5&2\end{pmatrix}
+	\end{equation}
+\end{example}
+
+Suppose $L_1$ and $L_2$ are linear maps associated with $\mathsf{A}_1$ and
+$\mathsf{A}_2$ respectively. Then a combined linear map $L_1\circ L_2(\vb)$ may
+be represented by $\mathsf{B}=\mathsf{A}_1 \mathsf{A}_2$.
+\begin{lemma}
+	Suppose $L:\mathbb{R}^3\rightarrow\mathbb{R}^3$ is a linear map represented
+	by $\mathsf{A}$. If $|\mathsf{A}|\neq0$, then there exists a map $L^{-1}$
+	such that $L^{-1}\circ L(\vb)=L\circ L^{-1}(\vb)=\vb$.
+\end{lemma}
+\begin{proof}
+	This follows immediately from the fact that $\mathsf{A}^{-1}$ exists when
+	$|\mathsf{A}|\neq0$.
+\end{proof}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Geometry of linear maps}
+
+There are various linear maps with geometric interpretations. For example, a
+reflection in the $yz$-plane is represented by
+\begin{equation}
+	\begin{pmatrix}x\\y\\z\end{pmatrix}\rightarrow
+	\begin{pmatrix}-x\\y\\z\end{pmatrix},\qquad
+	\mathsf{A}=\begin{pmatrix}-1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+\end{equation}
+A projection onto the $xy$ plane is represented by
+\begin{equation}
+	\begin{pmatrix}x\\y\\z\end{pmatrix}\rightarrow
+	\begin{pmatrix}x\\y\\0\end{pmatrix},\qquad
+	\mathsf{A}=\begin{pmatrix}1&0&0\\0&1&0\\0&0&0\end{pmatrix}.
+\end{equation}
+A rotation of $\theta$ radians in the $xy$-plane is
+\begin{equation}
+	\mathsf{A}=\begin{pmatrix}\cos\theta&-\sin\theta&0\\
+	\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}.
+\end{equation}
+
+\subsubsection{Projection}
+
+Let $\Pi$ be a plane through $\boldsymbol{0}$ with normal vector $\nb$. For
+$\xb\in\mathbb{R}^3$,
+\begin{equation}
+	\xb=\frac{\xb\cdot\nb}{|\nb|^2}\nb
+	+\left(\xb-\frac{\xb\cdot\nb}{|\nb|^2}\nb\right).
+\end{equation}
+We note that the first portion is normal to $\Pi$, whilst the second part is
+orthogonal to $\nb$. Since the equation of $\Pi$ is $\boldsymbol{r}\cdot\nb=0$,
+the projection of $\xb$ onto $\Pi$ is given by
+\begin{equation}
+	P(\xb)=\xb-\frac{\xb\cdot\nb}{|\nb|^2}\nb=\xb-\xb\cdot\hat{\nb}\hat{\nb}.
+\end{equation}
+This is a linear map because
+\begin{equation}
+	P(\lambda\ub+\vb)=\lambda\ub+\vb-(\lambda\ub+\vb)\cdot\hat{\nb}\hat{\nb}
+	=\lambda(\ub-\ub\cdot\hat{\nb}\hat{\nb})+\vb-\vb\cdot\hat{\nb}\hat{\nb}.
+\end{equation}
+
+\subsubsection{Reflection}
+
+Similarly, if $\xb$ is the sum of $P(\xb)$ and normal to $\Pi$, then to reflect
+$\xb$ in $\Pi$, we subtract twice, so
+\begin{equation}
+	R(\xb)=\xb-2\xb\cdot\hat{\nb}\hat{\nb}.
+\end{equation}
+
+\subsubsection{Rotation}
+
+In $\mathbb{R}^3$, a rotation always leaves a line/axis invariant. Let $\lb$ be
+a line through $\boldsymbol{0}$ with direction vector $\db$, then
+$\lb=\lambda\db$, so
+\begin{equation}
+	\xb=(\xb-\xb\cdot\hat{\db}\hat{\db})+\xb\cdot\hat{\db}\hat{\db}.
+\end{equation}
+The first part is normal to $\lb$ by construction, so a vector orthogonal to
+$\lb$ would be $(\xb\cdot\hat{\db}\hat{\db})\times\hat{\db}=\xb\times\hat{\db}$.
+By analogy with rotation around a basis vector, we have
+\begin{equation}
+	R(\xb)=\xb\cdot\hat{\db}\hat{\db}+(\xb-\xb\cdot\hat{\db}\hat{\db})\cos\theta
+	-(\xb\times\hat{\db})\sin\theta.
+\end{equation}
+
+\begin{example}
+	Let $\Pi$ be a plane through $\boldsymbol{0}$ and $\nb=(1,1,2)$ Find the
+	matrix of projection onto $\Pi$ with respect to the standard basis.
+	
+	$\nb\cdot\xb=x+y+2z$, $|\nb|^2=6$, so
+	\begin{equation}
+		P(\xb)=\begin{pmatrix}x-(x+y+2z)/6\\y-(x+y+2z)/6\\
+		z-(x+y+2z)/6\end{pmatrix},\qquad \mathsf{A}=\frac{1}{6}\begin{pmatrix}
+		5 & -1 & -2 \\ -1 & 5 & -2 \\ -2 & -2 & 2\end{pmatrix}.
+	\end{equation}
+\end{example}
+
+\begin{example}
+	Let $\Pi$ be a plane through $\boldsymbol{0}$ with $\nb=(1,-1,1)$. Find the
+	matrix of reflection in $\Pi$ with respect to the standard basis.
+	
+	$\nb\cdot\xb=x-y+z$, $|\nb|^2=3$, so
+	\begin{equation}
+		R(\xb)=\begin{pmatrix}x-(x-y+z)(2/3)\\y+(x-y+z)(2/3)\\
+		z-(x-y+z)(2/3)\end{pmatrix},\qquad \mathsf{A}=\frac{1}{3}\begin{pmatrix}
+		1 & -2 & -2 \\ 2 & 1 & 2 \\ -2 & 2 & 1\end{pmatrix}.
+	\end{equation}
+\end{example}
+
+\begin{example}
+	Find the matrix of rotation representing a $-\pi/3$ rotation about
+	$\lb=\lambda(1,1,1)$.
+	
+	$\xb\cdot\db=x+y+z$, $|\db|^2=3$, and
+	\begin{equation}
+		\xb-\xb\cdot\hat{\db}\hat{\db}
+		=\frac{1}{3}\begin{pmatrix}2x-y-z\\-x+2y-z\\-x-y+2z\end{pmatrix},\qquad
+		\xb\times\hat{\db}
+		=\frac{1}{\sqrt{3}}\begin{pmatrix}y-z\\z-x\\x-y\end{pmatrix}.
+	\end{equation}
+	Collecting this,
+	\begin{equation}
+		R_{-\pi/3}(\xb)
+		=\frac{1}{3}\begin{pmatrix}x+y+z\\x+y+z\\x+y+z\end{pmatrix}+
+		\frac{1}{2}\frac{1}{3}
+		\begin{pmatrix}2x-y-z\\-x+2y-z\\-x-y+2z\end{pmatrix}
+		+\frac{\sqrt{3}}{2}\frac{1}{\sqrt{3}}
+		\begin{pmatrix}y-z\\z-x\\x-y\end{pmatrix},
+	\end{equation}
+	and
+	\begin{equation}
+		\mathsf{A}=\frac{1}{6}\begin{pmatrix}1 & 2 & -1\\
+		-1 & 1 & 2\\2 & -1 & 1\end{pmatrix}.
+	\end{equation}
+\end{example}
+
+\begin{example}
+	\begin{equation}
+		R(R(\xb))=R(\xb-2\xb\cdot\hat{\nb}\hat{\nb})
+		=R(\xb)-2R(\xb)\cdot\hat{\nb}\hat{\nb}
+		=\xb-2\xb\cdot\hat{\nb}\hat{\nb}
+		-2(\xb-2\xb\cdot\hat{\nb}\hat{\nb})\cdot\hat{\nb}\hat{\nb}
+		=\xb.
+	\end{equation}
+\end{example}
+%-------------------------------------------------------------------------------
+
+\subsection{Change of basis}
+
+\begin{theorem}
+	Let $L$ be a linear map given by $\mathsf{A}$ with respect to $\{\eb_i\}$.
+	Let $S=\{\vb_i\}$ be another basis of $\mathbb{R}^3$, and $\mathsf{P}=(\vb_1
+	|\vb_2| \vb_3)$. Then, with respect to $S$,
+	$L=\mathsf{P}^{-1}\mathsf{A}\mathsf{P}$.
+\end{theorem}
+\begin{proof}
+	From a previous theorem, we have $\xb=\mathsf{P}\yb$, where $\yb$ is
+	expanded in terms of $S$. Then $L\yb=L(\mathsf{P}^{-1}\xb)$ for
+	$|\mathsf{P}|\neq0$. Since $L$ is linear,
+	$L\yb=\mathsf{P}^{-1}L(\xb)=\mathsf{P}^{-1}\mathsf{A}\mathsf{P}
+	\mathsf{P}^{-1}\xb=\mathsf{P}^{-1}\mathsf{A}\mathsf{P}(\yb)$,
+	as required.
+\end{proof}
+
+\begin{example}
+	Suppose $L$ is represented by
+	\begin{equation}
+		\mathsf{A}=\begin{pmatrix}1&3&3\\-2&3&-2\\3&2&1\end{pmatrix}
+	\end{equation}
+	with respect to the standard basis. Find $\mathsf{A}$ with respect to
+	$S=\{(1,0,0),(-1,1,0),(0,-1,1)\}$.
+	
+	\begin{equation}
+		\mathsf{P}=\begin{pmatrix}1&-1&0\\0&1&-1\\0&0&1\end{pmatrix},
+		\mathsf{P}^{-1}=\begin{pmatrix}1&1&1\\0&1&1\\0&0&1\end{pmatrix},\qquad
+		\mathsf{P}^{-1}\mathsf{A}\mathsf{P}=
+		\begin{pmatrix}2&5&-5\\1&4&-6\\3&-1&-1\end{pmatrix}.
+	\end{equation}
+\end{example}
+
+\begin{example}
+	Find the matrix of linear map $L$ with respect to the basis $S$, where
+	\begin{equation}
+		L\xb=\begin{pmatrix}4x-z\\2x+3y-2z\\2x+2y-z\end{pmatrix},\qquad
+		S=\left\{\begin{pmatrix}1\\1\\1\end{pmatrix},
+		\begin{pmatrix}1\\2\\2\end{pmatrix},\begin{pmatrix}1\\2\\2\end{pmatrix},
+		\begin{pmatrix}1\\2\\3\end{pmatrix}\right\}.
+	\end{equation}	
+	
+	\begin{equation}
+		\mathsf{A}=\begin{pmatrix}4&0&-1\\2&3&-2\\2&2&-1\end{pmatrix},\qquad
+		\mathsf{P}=\begin{pmatrix}1&1&1\\1&2&2\\1&2&3\end{pmatrix},\qquad
+		\mathsf{P}^{-1}\begin{pmatrix}2&-1&0\\-1&2&-1\\0&-1&1\end{pmatrix},
+	\end{equation}
+	so
+	\begin{equation}
+		\mathsf{P}^{-1}\mathsf{A}\mathsf{P}=
+		\begin{pmatrix}3&0&0\\0&2&1\\0&0&1\end{pmatrix}.
+	\end{equation}
+\end{example}
+
+Finally, we return to rotations. Since $(R_\theta)^{-1}=R_{-\theta}$, we have
+\begin{equation}
+	\mathsf{A}=\begin{pmatrix}\cos\theta&\sin\theta&0\\
+	-\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix},\qquad
+	\mathsf{A}^{-1}=\begin{pmatrix}\cos\theta&-\sin\theta&0\\
+	\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}=\mathsf{A}^{T}.
+\end{equation}
+Now, the scalar product is preserved under rotation (since we are rotating
+something that only cares about the magnitude). Any transformation that has the
+property that $\mathsf{A}^{T}=\mathsf{A}^{-1}$ is called \underline{orthogonal},
+and the set of orthogonal transformations form the \underline{group} $O(3)$,
+which includes rotations and reflections. It we restrict $O(3)$ to linear maps
+where the associated matrix has $|\mathsf{A}|>0$, then we only have rotations,
+and the subset is in fact a subgroup called the \underline{special orthogonal}
+group, denoted $SO(3)$.
+
+%===============================================================================
+
+\bibliography{/home/julian/Documents/Tex_Files/master_ref/refs}
+
+%\begin{thebibliography}{48}
+%\providecommand{\natexlab}[1]{#1}
+%\providecommand{\url}[1]{\texttt{#1}}
+%\expandafter\ifx\csname urlstyle\endcsname\relax
+%  \providecommand{\doi}[1]{doi: #1}\else
+%  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+%\bibitem[Limaye(1986)]{lim86}
+%S.S. Limaye.
+%\newblock {J}upiter: new estimates of the mean zonal flow at the cloud level.
+%\newblock \emph{Icarus}, 65:\penalty0 335--352, 1986.
+
+%\end{thebibliography}
+
+\end{document}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendices:
+% \newpage
+% 
+% \appendix
+% \ifnum\hylinks=1 \phantomsection \fi
+% \addcontentsline{toc}{section}{Appendices}
+% 
+% \section{Sample Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

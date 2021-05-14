@@ -1,0 +1,595 @@
+%% ****** Start of file aiptemplate.tex ****** %
+%%
+%%   This file is part of the files in the distribution of AIP substyles for REVTeX4.
+%%   Version 4.1 of 9 October 2009.
+%%
+
+%
+% This is a template for producing documents for use with 
+% % the REVTEX 4.1 document class and the AIP substyles.
+% 
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+
+%\documentclass[aip,pof,graphicx,11pt]{revtex4-1}
+\documentclass[10pt,notitlepage]{revtex4-1}
+\usepackage{amssymb,amsbsy,times,fancyhdr,color}
+\usepackage{amsmath}
+\usepackage{mathrsfs,amsfonts}
+%\usepackage[dvips]{epsfig,graphics,lscape}
+%\usepackage{natbib}
+\usepackage{latexsym,afterpage}
+\usepackage{graphicx,subfigure,multirow}
+\usepackage{color}
+\newcommand{\dfd}{\mathrm{d}}
+\newcommand{\imi}{\mathrm{i}}
+
+%\draft % marks overfull lines with a black rule on the right
+
+% extra macros; disable accordingly
+\linespread{1}
+%\setlength{\parindent}{0pt}
+
+% ===========================================================================
+
+\usepackage{psfrag}
+%\usepackage{showlabels}
+\usepackage{color}
+\usepackage{xcolor}
+
+% more pastel ones
+\xdefinecolor{pastel-red}{rgb}{0.77,0.31,0.32}
+\xdefinecolor{pastel-green}{rgb}{0.33,0.66,0.41}
+\definecolor{pastel-blue}{rgb}{0.30,0.45,0.69} % crayola blue
+\definecolor{gray}{rgb}{0.2,0.2,0.2} % dark gray
+
+\xdefinecolor{orange}{rgb}{1,0.45,0}
+\xdefinecolor{green}{rgb}{0,0.35,0}
+\definecolor{blue}{rgb}{0.12,0.46,0.99} % crayola blue
+\definecolor{gray}{rgb}{0.2,0.2,0.2} % dark gray
+
+\xdefinecolor{cerulean}{rgb}{0.01,0.48,0.65}
+\xdefinecolor{ust-blue}{rgb}{0,0.20,0.47}
+\xdefinecolor{ust-mustard}{rgb}{0.67,0.52,0.13}
+
+% ===========================================================================
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+% ===========================================================================
+
+% For multiletter symbols
+
+\newcommand\Def[1]{{\color{green}#1}} % cf plain TeX's \Re and Reynolds number
+
+\newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
+\newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
+\newcommand\Rey{\mbox{\textit{Re}}}  % Reynolds number
+\newcommand\Pran{\mbox{\textit{Pr}}} % Prandtl number, cf TeX's \Pr product
+\newcommand\Pen{\mbox{\textit{Pe}}}  % Peclet number
+\newcommand\Ai{\mbox{Ai}}            % Airy function
+\newcommand\Bi{\mbox{Bi}}            % Airy function
+
+% Our general macros:
+
+\newcommand{\dy}{\partial}
+\newcommand{\ddy}[2]{\frac{\dy#1}{\dy#2}}
+
+\newcommand{\ex}{\mathrm{e}}
+
+\newcommand{\zi}{{\rm i}}
+
+\newcommand{\grad}{\nabla}
+
+\newcommand{\sech}{\mathrm{sech}}
+
+% Notational macros for this ms only: ---------------------------------------
+
+\newcommand{\eb}{\boldsymbol{e}}
+\newcommand{\xb}{\boldsymbol{x}}
+\newcommand{\ub}{\boldsymbol{u}}
+\newcommand{\vb}{\boldsymbol{v}}
+\newcommand{\wb}{\boldsymbol{w}}
+
+\newcommand{\Ab}{{\boldsymbol{A}}}
+\newcommand{\ab}{{\boldsymbol{a}}}
+\newcommand{\Bb}{{\boldsymbol{B}}}
+\newcommand{\bb}{{\boldsymbol{b}}}
+\newcommand{\cb}{{\boldsymbol{c}}}
+\newcommand{\Db}{{\boldsymbol{D}}}
+\newcommand{\db}{{\boldsymbol{d}}}
+\newcommand{\Fb}{{\boldsymbol{F}}}
+\newcommand{\Ib}{{\boldsymbol{I}}}
+\newcommand{\jb}{{\boldsymbol{j}}}
+\newcommand{\Jb}{{\boldsymbol{J}}}
+\newcommand{\kb}{{\boldsymbol{k}}}
+\newcommand{\Lb}{{\boldsymbol{L}}}
+\newcommand{\lb}{{\boldsymbol{l}}}
+\newcommand{\mb}{{\boldsymbol{m}}}
+\newcommand{\nb}{{\boldsymbol{n}}}
+\newcommand{\pb}{{\boldsymbol{p}}}
+\newcommand{\Sb}{{\boldsymbol{S}}}
+\newcommand{\Vb}{{\boldsymbol{V}}}
+\newcommand{\Ub}{{\boldsymbol{U}}}
+\newcommand{\tb}{{\boldsymbol{t}}}
+\newcommand{\Xb}{{\boldsymbol{X}}}
+\newcommand{\yb}{\boldsymbol{y}}
+
+\newcommand{\Ubar}{{\overline{U}}}
+\newcommand{\ubar}{{\overline{u}}}
+\newcommand{\Bbar}{{\overline{B}}}
+\newcommand{\psibar}{{\overline{\psi}}}
+\newcommand{\qbar}{{\overline{q}}}
+\newcommand{\zbar}{{\overline{z}}}
+
+\newcommand{\Ri}{R}
+\newcommand{\Fr}{F}
+
+\newcommand{\qhat}{{\hat{q}}}
+\newcommand{\jhat}{{\hat{j}}}
+
+\newcommand\comment[1]{{\color{red}#1}}
+
+% ===========================================================================
+
+\begin{document}
+
+% Use the \preprint command to place your local institutional report number 
+% on the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+%\preprint{}
+
+\title{Academic notes: 2H Complex Analysis} %Title of paper
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current author.
+% Explanatory text should go in the []'s, 
+% actual e-mail address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro for the type of information
+% \affiliation command applies to all authors since the last \affiliation command. 
+% The \affiliation command should follow the other information.
+
+\author{J. Mak (\today) [Blended from notes of R. Gregory and J. Bolton, Durham]}
+\email[]{julian.c.l.mak@googlemail.com}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+
+%\affiliation{}
+
+% Collaboration name, if desired (requires use of superscriptaddress option in \documentclass). 
+% \noaffiliation is required (may also be used with the \author command).
+%\collaboration{}
+%\noaffiliation
+%\date{\today}
+
+%\begin{abstract}
+%Notes on the vorticity wave mechanism in 2d non-Boussinesq setting.
+%\end{abstract}
+
+%\pacs{}% insert suggested PACS numbers in braces on next line
+
+\maketitle %\maketitle must follow title, authors, abstract and \pacs
+
+% Body of paper goes here. Use proper sectioning commands. 
+% References should be done using the \cite, \ref, and \label commands
+
+%===============================================================================
+
+\section*{Misc. notes}
+
+\begin{itemize}
+  \item This was part of the Durham core second year modules. Involves more
+  things to do with analysis in the complex plane, involving holomorphic
+  functions, contour integrals, residue theorems, conform mappings, etc.
+  \item The original course does not have geometry of complex numbers since that
+  was covered in Core A (Geometry 1A), but for consistency reasons this has been
+  moved here.
+  \item[]
+  \item \comment{(to be fixed?)} Diagrams to do
+\end{itemize}
+
+%===============================================================================
+
+\section{Geometry of complex numbers}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Complex numbers and the Argand diagram}
+
+We define $\sqrt{-1}=\zi$, which is the basic unit imaginary number. A
+\Def{complex number} is then a combination of real and imaginary parts
+$z=a+b\zi$, with $a,b\in\mathbb{R}$. The complex numbers $\mathbb{C}$ then obeys
+the same axioms for addition and multiplication as $\mathbb{R}$ (both are
+\Def{fields}).
+
+Consider instead $\mathbb{C}$ as a vector space $z=(x,y)$, where multiplication
+is defined on $\mathbb{R}^2$ as
+\begin{equation*}
+	z_1\times z_2 = (x_1 x_2 - y_1 y_2, x_1 y_2 - x_2 y_1),
+\end{equation*}
+and this is commutative. $1=(1,0)$ is the identity. So we see that
+$\mathbb{R}^2$ with this multiplication is a concrete visualisation of
+$\mathbb{C}$, and is called the \Def{Argand diagram}.
+
+Given $z=x+\zi y$, the \Def{conjugate} of $z$ is defined to be
+$\zbar=x-\zi y$. Geometrically, this represents a reflection of $z$ in the
+`real' axis. The \Def{real} and \Def{imaginary} part of $z$ is
+given respectively by
+\begin{equation*}
+	\Real(z)=\frac{z+\zbar}{2},\qquad \Imag(z)=\frac{z-\zbar}{2}.
+\end{equation*}
+
+In polar form, $z=r(\cos\theta+\zi\sin\theta)$. $r$ is called the
+\Def{modulus} of $z$ and is denoted $|z|$, whilst $\theta$ is called the
+\Def{argument} of $z$, denoted $\mbox{arg}(z)$.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Geometry of addition and multiplication in $\mathbb{C}$}
+
+Addition is as in $\mathbb{R}^2$. From this, we can deduce the \Def{triangle
+inequality}.
+\begin{lemma}
+	For $z_1,z_2\in\mathbb{C}$, $|z_1 +z_2|\leq|z_1|+|z_2|$, and we have an
+	equality iff $\mbox{arg}(z_1)=\mbox{arg}(z_2)$. By corollary, we have $|z_2
+	+z_2|\geq||z_1|-|z_2||$.
+\end{lemma}
+\begin{proof}
+	Wlog, let $|z_1|>|z_2|$, then $|z_1|=|z_1 + z_2 +
+	(-z_2)|\leq|z_1+z_2|+|z_2|$ by the triangle inequality for real numbers. So
+	$|z_1|-|z_2|\leq|z_1+z_2|$, and since $|z_1|>|z_2|$, we have the corollary
+	of the result as required.
+\end{proof}
+
+For multiplication, we observe that $|z_1 z_2|=|z_1||z_2|$ and $\mbox{arg}(z_1
+z_2)=\mbox{arg}(z_1)+\mbox{arg}(z_2)$. Geometrically, this is a spiral scaling.
+
+We can use the $\mathbb{C}$-plane to describe various geometrical objects.
+\begin{example}
+	A circle may be described by $|z-z_0|=a$, where $z_0$ is the centre of the
+	circle and $a$ is the radius; expanding this accordingly, we see that $a^2 =
+	(x-x_0)^2 + (y-y_0)^2$.
+\end{example}
+\begin{example}
+	The equation $|z-x_0|+|z+x_0|=2r$ describes an ellipse, where $r>|x_0|$.
+	This may be done via expansion in $(x,y)$. Alternatively, in polar form, we
+	observe that, for $z=a+\zi b$, $|z\pm x_0|^2 = (a^2-b^2)\cos^2\theta\pm
+	2ax_0\cos\theta + (x_0^2+b^2)$. If $x_0^2=(a^2-b^2)$, then this may be
+	simplified to $|z\pm x_0|=a\pm x_0\cos\theta$ since $a>x_0$. With this, we
+	obtain $|z-x_0|+|z+x_0|=2a$, thus, with $x=a\cos\theta$ and $y=b\sin\theta$,
+	this describes an ellipse.
+\end{example}
+\begin{example}
+	The locus of $|z-z_1|=|z-z_2|$ describes the line that is equidistant to the
+	points $z_1$ and $z_2$. To see this, expanding everything in $x$ and $y$ and
+	we obtain the equality
+	\begin{equation*}
+		x(x_2-x_1) + y(y_2-y_1) 
+		= \frac{y_2^2-y_1^2}{2} + \frac{x_2^2 - x_1^2}{2},
+	\end{equation*}
+	and the normal to the line is $z_2-z_1$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{de Moivre's theorem}
+
+\begin{theorem}[de Moivre's theorem]
+	For all $n\in\mathbb{Z}^+$ and angle $\theta$, $\cos n\theta+\zi \sin
+	n\theta = (\cos\theta+\zi\sin\theta)^n$.
+\end{theorem}
+\begin{proof}
+	We do this by induction. The $n=1$ case is trivial, so, assuming it is true
+	for $n$, then we observe that
+	\begin{align*}
+		\cos(n+1)\theta+\zi\sin(n+1)\theta &=
+		\cos n\theta\cos\theta + \zi^2 \sin\theta\sin n\theta
+		+\zi\sin n\theta\cos\theta + \zi\sin\theta\cos n\theta\\
+		&= (\cos n\theta+\zi\sin n\theta)(\cos\theta+\zi\sin\theta)\\
+		&=(\cos\theta+\zi\sin\theta)^{n+1}.
+	\end{align*}
+\end{proof}
+
+\begin{example}
+	\begin{equation*}
+		\cos2\theta+\zi\sin2\theta=(\cos\theta+\zi\sin\theta)^2
+		=(\cos^2\theta-\sin^2\theta)+\zi(2\sin\theta\cos\theta),
+	\end{equation*}
+	and remembering the double angle formulae, the equality agrees. From de
+	Moivre's theorem, we see that
+	\begin{equation*}
+		\cos n\theta=\Real(\cos\theta+\zi\sin\theta)^n,\qquad
+		\sin n\theta=\Imag(\cos\theta+\zi\sin\theta)^n.
+	\end{equation*}
+\end{example}
+
+We can also use the theorem to find $\sin$ or $\cos$ of rational multiples of
+$\pi$.
+\begin{example}
+	Express $\sin4\theta/\cos\theta$ as a polynomial in $\sin\theta$, and hence
+	find $\sin(\pi/4)$.
+	
+	\begin{equation*}
+		\sin4\theta = \Imag(\cos\theta+\zi\sin\theta)^4
+		= 4\cos^3\theta\sin\theta-4\cos\theta\sin^3\theta
+		= 4\cos\theta(\sin\theta-2\sin^3\theta),
+	\end{equation*}
+	so $\sin4\theta/\cos\theta=4\sin\theta(1-2\sin^\theta)$. Evaluating this
+	$\pi/4$, we see that the LHS is zero. Now, $4\sin(\pi/4)>0$, so we conclude
+	that $\sin(\pi/4)=1/\sqrt{2}$, as expected.
+\end{example}
+\begin{example}
+	Find $\cos(k\pi/6)$ for $k=1,2,3,4,5$.
+	
+	Letting $c=\cos\theta$ and $s=\sin\theta$, observe that
+	\begin{equation*}
+		\sin6\theta=sc(6c^4+6s^4-20s^2c^2)=sc(32c^4-32c^2+6)
+		=2sc(4c^3-3)(4c^2-1).
+	\end{equation*}
+	Now, $\sin(k\pi)=0$, so LHS is zero, and since $\sin(k\pi/6)\neq0$, we have
+	\begin{equation*}
+		\cos^2(k\pi/6)=3/4,\quad \cos^2(k\pi/6)=1/4,\quad \cos\theta=0\quad
+		\Rightarrow\qquad \cos(k\pi/6)=\pm\sqrt{3}/2,\ \pm1/2,\ 0.
+	\end{equation*}
+	Since $\cos\theta$ is a decreasing function in $[0,\pi]$, we have
+	\begin{equation*}
+		\cos(\pi/6)=\sqrt{3}/2,\quad \cos(2\pi/6)=1/2,\quad \cos(\pi/2)=0,\quad
+		\cos(2\pi/3)=-1/2,\quad \cos(5\pi/6)=-\sqrt{3}/2.
+	\end{equation*}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Imaginary exponentials}
+
+de Moivre's theorem hints at a deeper geometric significance of cosine and sine
+functions and a way of encoding multiplication by imaginary numbers. Suppose
+$f(\theta)=\cos\theta+\zi\sin\theta$, then we notice that $f'(\theta)=\zi
+f(\theta)$, and, more generally, $f^{(n)}(\theta)=\zi^n f(\theta)$. We know that
+also that the $n$-th derivative of $\ex^{\lambda x}$ is $\lambda^n\ex^{\lambda
+x}$, so this suggests a link with exponential functions; indeed, we have
+\Def{Euler's formula}
+\begin{equation}
+	\cos\theta+\zi\sin\theta=\ex^{\zi\theta}.
+\end{equation}
+By de Moivre's theroem then,
+\begin{equation*}
+	r(\cos n\theta+\zi\sin n\theta)=r(\cos\theta+\zi\sin\theta)^n
+	=r\ex^{\zi n\theta}.
+\end{equation*}
+\begin{lemma}[Euler identity]
+	$\ex^{\zi\pi}+1=0$.
+\end{lemma}
+\begin{example}
+	Find all the roots of $z^6+4z^3+8=0$.
+	
+	Factorising the above gives $z^3=-2\pm2\zi$. So since $|z^3|=2\sqrt{2}$, we
+	have $|z|=\sqrt{2}$. Now,
+	\begin{equation*}
+		\mbox{arg}(-2+2\zi)=\frac{3\pi}{4},\qquad
+		\mbox{arg}(-2-2\zi)=\frac{5\pi/4},
+	\end{equation*}
+	and the argument of the roots $z$ satisfies
+	\begin{equation*}
+		\mbox{arg}(z)=\frac{3\pi/4 + 2n\pi}{3},\qquad
+		\mbox{arg}(z)=\frac{5\pi/4 + 2n\pi}{3},
+	\end{equation*}
+	where the division by $3$ is to take into account the cube root, and the
+	$2n\pi$ factors is to account for all the roots. This eventually yields
+	\begin{equation*}
+		z=\sqrt{2}(\ex^{\zi\pi/4}, \ex^{5\zi\pi/4}, \ex^{11\zi\pi/12},
+		\ex^{13\zi\pi/12}, \ex^{19\zi\pi/12}, \ex^{21\zi\pi/21}).
+	\end{equation*}
+\end{example}
+
+%===============================================================================
+
+\section{Basics of complex functions}
+
+A real function can for example be once differentiable, but not
+twice. One example is $f(x) = x|x|$, where $f'(x)$ is not differentiable at
+$x=0$.
+
+\begin{theorem}
+  If a complex function is once differentiable, it is differentiable as many
+  times as you like.
+\end{theorem}
+
+It is possible for two real functions to agree on an interval but not
+everywhere, assuming they are differentiable. One example is $f(x) = x|x|$ and
+$g(x) = x^2$ for $x>0$.
+
+\begin{theorem}
+  If two complex differentiable functions agree on any disc in the complex
+  plane, then they agree everywhere (subject to certain conditions...)
+\end{theorem}
+
+Recall that a real function assigns any real number $x$ to at most one real
+number (i.e. it is injective). A \Def{complex function} therefore assigns any
+complex number $z$ to at most one complex number. These include standard
+polynomials, rational functions, transcendental functions, trigonometric
+functions, hyperbolic functions, where the argument is in $z$. Some examples
+have already been given above.
+
+\begin{example}
+  Solve $\ex^z = 1$.
+  
+  Writing $z = x + \zi y$ and using Euler's formula,
+  \begin{equation*}
+    \ex^x (\cos y + \zi \sin y) = 1,
+  \end{equation*}
+  and equating real and imaginary parts lead to
+  \begin{equation*}
+    \ex^x \cos y = 1, \qquad \ex^x \sin y = 0.
+  \end{equation*}
+  Considering the imaginary part, since $\ex^x \neq 0$, $y = n\pi$ for $n \in
+  \mathbb{Z}$, but from the real part, since $\ex^x > 0$ and $\cos n\pi = \pm
+  1$, we should only have $y = 2n\pi$ for $n \in \mathbb{Z}$. The real part then
+  additionally implies that $x=0$ since $\cos 2n\pi = 1$, so $z = 2\zi n \pi$
+  for $n \in \mathbb{Z}$.
+\end{example}
+Note that $|\ex^{\zi z}| \geq 0$ for all $z \in \mathbb{C}$.
+
+\begin{example}
+  Solve $\sin z = 0$.
+  
+  With the standard identity for sine with complex arguments, we have
+  \begin{equation*}
+    \frac{\ex^{\zi z} - \ex^{-\zi z}}{2\zi} = 0.
+  \end{equation*}
+  Equating real and imaginary parts lead to $z = m\pi$, $m \in \mathbb{Z}$.
+\end{example}
+
+The (natural) \Def{logarithm} we define by
+\begin{equation}
+  \log z = \log|z| + \zi \mbox{arg}z
+\end{equation}
+to give a complex version of the log function that satisfies the usual rules of
+\begin{equation*}
+  \log z = \log r\ex^{\zi\theta} = \log r + \zi \theta = \log|z| + \zi \mbox{arg}z.
+\end{equation*}
+Here we need to choose a \Def{branch}, and we take $\theta\in(-\pi, \pi)$ (the
+\Def{principal branch}) to preserve the continuity property, so that $\log z$ is
+undefined on the negative real axis, coinciding with the real case.
+
+\begin{example}
+  $\log(1-i) = \log\sqrt{2} - \zi(\pi / 4)$
+\end{example}
+
+We use $\log z$ to define powers of complex numbers. Recall that for real
+numbers we have $x^a = \ex^{a \log a}$ for $a>0$, so for $z,w \in \mathbb{C}$,
+we analogously define 
+\begin{equation}
+  z^w = \ex^{w \log z},
+\end{equation}
+choosing the principal branch unless otherwise stated.
+
+\begin{example}
+  \begin{align*}
+    (1 + \zi \sqrt{3})^{1/2} = \exp\left[\frac{1}{2} \log(1 + \zi \sqrt{3})\right] = \exp\left[\frac{1}{2} \left(\log 2 + \zi\frac{\pi}{3}\right)\right] = \ex^{\log \sqrt{2}} \ex^{\zi(\pi/6)} = \sqrt{2}\ex^{\zi(\pi/6)},
+  \end{align*}
+  which in this case is could have been gotten from $(1 + \zi \sqrt{3}) = 2\ex^{\zi(\pi/3)}$.
+\end{example}
+
+\begin{example}
+  \begin{align*}
+    (1 - \zi)^{\zi} = \ex^{\zi \log(1-\zi)} = \ex^{\zi (\log \sqrt{2} - \zi \pi/4)} = \ex^{\pi/4} \ex^{\zi \log\sqrt{2}}.
+  \end{align*}
+\end{example}
+
+We say a complex function $f(z)$ is \Def{complex differentiable at $z = z_0$} if
+\begin{equation*}
+  \lim_{z\to z_0} \frac{f(z) - f(z_0)}{z - z_0}
+\end{equation*}
+exists, or that
+\begin{equation*}
+  \lim_{h\to 0} \frac{f(z + h) - f(z)}{h}
+\end{equation*}
+exists at $z = z_0$. The derivative is denoted $f'(z)$ as usual.
+
+\begin{example}
+  For $f(z) = z^2$,
+  \begin{equation*}
+    \lim_{h \to 0} \frac{f(z + h) - f(z)}{h} = \lim_{h \to 0} \frac{z^2 + 2hz + h^2 - z^2}{h} = \lim_{h \to 0} 2z + h = 2z.
+  \end{equation*}
+  $f(z)$ is differentiable everywhere.
+\end{example}
+The usual rules for differentiation hold (linearity, product rule, chain rule
+etc.)
+
+Note that $f(x) = x|x|$ is real differentiable everywhere. $f(z) = z|z|$ on the
+other hand is differentiable on the real axis, and complex differentiable at the
+origin.
+
+Complex differentiation is a much stronger condition. Recall that for the limit
+to exist in the real case, the limit only needs to be equal when approached from
+above or below on the real line. In the complex plane however there are an
+infinite numbers of cases the limit can be approach, and thus a infinite number
+of cases to check. We see that a necessary condition for complex
+differentiability is that the limit needs to exist when $z_0$ is approached in
+the lines parallel to the real and imaginary axis. If we set $f(z)$ to be
+\begin{equation*}
+  f(z) = u(x,y) + \zi v(x,y)
+\end{equation*}
+for some real functions $u$ and $v$, then it turns out that
+\begin{align*}
+  \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} = \ddy{u}{x} + \zi \ddy{v}{x} = \ddy{v}{y} - \zi \ddy{u}{y},
+\end{align*}
+when we take the limit in the direction parallel to the real and imaginary axis
+respectively. It follows that a \emph{necessary} conditions for a function to be
+complex differentiable is that
+\begin{equation}
+  \ddy{u}{x} = \ddy{v}{y} \qquad \textnormal{and} \qquad \ddy{u}{y} = -\ddy{v}{x}.
+\end{equation}
+These are known as the \Def{Cauchy--Riemann equations}, and we actually have the
+following theorem.
+\begin{theorem}
+  If $f(z)$ is complex differentiable at $z = z_0$, then the Cauchy--Riemann
+  equations hold at $(x_0, y_0)$ for $z_0 = x_0 + \zi y_0$, and that
+  \begin{equation*}
+    f'(z_0) = \left.\left(\ddy{u}{x} + \zi \ddy{v}{x}\right)\right|_{(x_0, y_0)} = \left.\left(\ddy{v}{y} - \zi \ddy{u}{y}\right)\right|_{(x_0, y_0)}.
+  \end{equation*}
+\end{theorem}
+
+%===============================================================================
+
+\section{Integration in the complex plane}
+
+%===============================================================================
+
+\section{Conform mapping}
+
+%===============================================================================
+
+\bibliography{/home/jclmak/Documents/tex-files/master_ref/refs}
+
+%\begin{thebibliography}{48}
+%\providecommand{\natexlab}[1]{#1}
+%\providecommand{\url}[1]{\texttt{#1}}
+%\expandafter\ifx\csname urlstyle\endcsname\relax
+%  \providecommand{\doi}[1]{doi: #1}\else
+%  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+%\bibitem[Limaye(1986)]{lim86}
+%S.S. Limaye.
+%\newblock {J}upiter: new estimates of the mean zonal flow at the cloud level.
+%\newblock \emph{Icarus}, 65:\penalty0 335--352, 1986.
+
+%\end{thebibliography}
+
+\end{document}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendices:
+% \newpage
+% 
+% \appendix
+% \ifnum\hylinks=1 \phantomsection \fi
+% \addcontentsline{toc}{section}{Appendices}
+% 
+% \section{Sample Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
