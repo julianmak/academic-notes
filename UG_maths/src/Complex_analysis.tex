@@ -77,7 +77,10 @@
 
 % For multiletter symbols
 
-\newcommand\Def[1]{{\color{green}#1}} % cf plain TeX's \Re and Reynolds number
+\newcommand\Def[1]{{\color{green}#1}}
+
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
 
 \newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
 \newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
@@ -255,10 +258,10 @@ inequality}.
 	+z_2|\geq||z_1|-|z_2||$.
 \end{lemma}
 \begin{proof}
-	Wlog, let $|z_1|>|z_2|$, then $|z_1|=|z_1 + z_2 +
+	Without loss of generalisation, let $|z_1|>|z_2|$, then $|z_1|=|z_1 + z_2 +
 	(-z_2)|\leq|z_1+z_2|+|z_2|$ by the triangle inequality for real numbers. So
 	$|z_1|-|z_2|\leq|z_1+z_2|$, and since $|z_1|>|z_2|$, we have the corollary
-	of the result as required.
+	of the result as required. \qed
 \end{proof}
 
 For multiplication, we observe that $|z_1 z_2|=|z_1||z_2|$ and $\mbox{arg}(z_1
@@ -308,6 +311,7 @@ We can use the $\mathbb{C}$-plane to describe various geometrical objects.
 		&= (\cos n\theta+\zi\sin n\theta)(\cos\theta+\zi\sin\theta)\\
 		&=(\cos\theta+\zi\sin\theta)^{n+1}.
 	\end{align*}
+	\qed
 \end{proof}
 
 \begin{example}
@@ -328,7 +332,6 @@ $\pi$.
 \begin{example}
 	Express $\sin4\theta/\cos\theta$ as a polynomial in $\sin\theta$, and hence
 	find $\sin(\pi/4)$.
-	
 	\begin{equation*}
 		\sin4\theta = \Imag(\cos\theta+\zi\sin\theta)^4
 		= 4\cos^3\theta\sin\theta-4\cos\theta\sin^3\theta
@@ -339,7 +342,7 @@ $\pi$.
 	that $\sin(\pi/4)=1/\sqrt{2}$, as expected.
 \end{example}
 \begin{example}
-	Find $\cos(k\pi/6)$ for $k=1,2,3,4,5$.
+	Find $\cos(k\pi/6)$ for $k=1,2,3,4,5$.\\
 	
 	Letting $c=\cos\theta$ and $s=\sin\theta$, observe that
 	\begin{equation*}
@@ -378,10 +381,10 @@ By de Moivre's theroem then,
 	=r\ex^{\zi n\theta}.
 \end{equation*}
 \begin{lemma}[Euler identity]
-	$\ex^{\zi\pi}+1=0$.
+	$\ex^{\zi\pi}+1=0$. \qedwhite
 \end{lemma}
 \begin{example}
-	Find all the roots of $z^6+4z^3+8=0$.
+	Find all the roots of $z^6+4z^3+8=0$.\\
 	
 	Factorising the above gives $z^3=-2\pm2\zi$. So since $|z^3|=2\sqrt{2}$, we
 	have $|z|=\sqrt{2}$. Now,
@@ -432,7 +435,7 @@ functions, hyperbolic functions, where the argument is in $z$. Some examples
 have already been given above.
 
 \begin{example}
-  Solve $\ex^z = 1$.
+  Solve $\ex^z = 1$.\\
   
   Writing $z = x + \zi y$ and using Euler's formula,
   \begin{equation*}
@@ -451,7 +454,7 @@ have already been given above.
 Note that $|\ex^{\zi z}| \geq 0$ for all $z \in \mathbb{C}$.
 
 \begin{example}
-  Solve $\sin z = 0$.
+  Solve $\sin z = 0$.\\
   
   With the standard identity for sine with complex arguments, we have
   \begin{equation*}
@@ -550,6 +553,129 @@ following theorem.
     f'(z_0) = \left.\left(\ddy{u}{x} + \zi \ddy{v}{x}\right)\right|_{(x_0, y_0)} = \left.\left(\ddy{v}{y} - \zi \ddy{u}{y}\right)\right|_{(x_0, y_0)}.
   \end{equation*}
 \end{theorem}
+\begin{proof}
+  If we approach $z_0$ in a line parallel to the real axis, we have
+  \begin{align*}
+    f'(z_0) 
+      &= \lim_{x \to x_0} \frac{u(x, y_0) + \zi v(x, y_0) - u(x_0, y_0) - \zi v(x_0, y_0)}{x - x_0}\\
+      &= \lim_{x \to x_0} \left(\frac{u(x, y_0) - u(x_0, y_0)}{x - x_0} + \zi \frac{v(x, y_0) - v(x_0, y_0)}{x - x_0}\right)\\
+      &= \left.\ddy{u}{x}\right|_{(x_0, y_0)} + \zi \left.\ddy{v}{x}\right|_{(x_0, y_0)}.
+  \end{align*}
+  We have the analogous result when approaching $z_0$ in a line parallel to the
+  imaginary axis. \qed
+\end{proof}
+
+In actual fact, the Cauchy--Riemann equation holding is a necessary \emph{and}
+sufficient condition for complex differentiability.
+
+\begin{theorem}
+  Let $f(z) = u(x,y) + \zi v(x,y)$. If the partial derivatives of $u$ and $v$
+  exist in some disk centered on $(x_0, y_0)$ and are continuous at $z_0 = x_0 +
+  \zi y_0$, and $u$ and $v$ satisfy the Cauchy--Riemann equation, then $f(z)$ is
+  complex differentiable at $z_0$. \qedwhite
+\end{theorem}
+
+A function is said to be \Def{holomorphic} (or \Def{analytic}) at $z_0$ if it is
+complex differentiable on some disk centred at $z_0$. A function is holomorphic
+if it is analytic at all points where it is defined.
+
+\begin{example}
+  If $f(z) = y^3 - 3\zi x y^2$, fine where $f(z)$ is complex differentiable, and
+  compute $f'(z)$.\\
+  
+  Note that for $u = y^3$ and $v = -3xy^2$,
+  \begin{equation*}
+    \ddy{u}{x} = 0, \quad \ddy{v}{x} = -3y^2, \quad \ddy{u}{y} = -3y^2, \quad \ddy{v}{y} = -6xy,
+  \end{equation*}
+  so it is differentiable if $-6xy = 0$ and $3y^2 = 3y^2$, which is only
+  satisfied at $x=0$ or $y=0$, i.e. at the co-ordinate axes. In this case $f'(z)
+  = -\zi 3y^2$, and that $f(z)$ is nowhere holomorphic.
+\end{example}
+
+\begin{theorem}
+  Let $f(z)$ be holomorphic and $f(z) = u(x,y) + \zi v(x,y)$. Then $u$ and $v$
+  are solutions to Laplace's equation in two dimensions.
+\end{theorem}
+\begin{proof}
+  By Cauchy--Riemann equations and the holomorphic property,
+  \begin{equation*}
+    \ddy{^2 y}{x^2} = \ddy{}{x}\ddy{u}{x} = \ddy{v}{x\partial y} = \ddy{v}{y\partial x} = \ddy{}{y}\ddy{v}{x} = \ddy{}{y}\left(-\ddy{u}{y}\right) = -\ddy{^2 u}{y^2},
+  \end{equation*}
+  so that $\partial^2 u / \partial x^2 + \partial^2 u / \partial y^2 = 0$.
+  Similarly for $v$. \qed
+\end{proof}
+
+Recall that if $f(x)$ is an infinitely differentiable real function, that its
+Taylor series about $x = x_0$ is given by
+\begin{equation*}
+  \sum^\infty_{k=0} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k.
+\end{equation*}
+The complex counterpart is then if $f(z)$ is an infinitely complex
+differentiable complex function, its Taylor series about $z = z_0$ is
+\begin{equation*}
+  \sum^\infty_{k=0} \frac{f^{(k)}(z_0)}{k!}(z - z_0)^k.
+\end{equation*}
+Since derivatives of standard functions are the same in the complex case, their
+Taylor series are the same too.
+
+\begin{theorem}
+  Let $f(z)$ be complex differentiable. Then its Taylor series converges to
+  $f(z)$ for all $z$ where it converges. \qedwhite
+\end{theorem}
+This implies any complex differentiable function is just a power series.
+
+If we let $\sum^\infty_{n=0} b_n (z - z_0)^n$ be a power series centred on $z =
+z_0$, then there exists some $R \in [0, \infty]$ where the power series
+\begin{itemize}
+  \item converges for $|z - z_0| < R$,
+  \item diverges for $|z - z_0| > R$,
+  \item inconclusive for $|z - z_0| = R$.
+\end{itemize}
+$R$ is called the \Def{radius of convergence}, and $\{z : |z - z_0| < R\}$ is
+the \Def{disk of convergence}.
+
+To find the disk of convergence we can often use the ratio test.
+
+\begin{example}
+  Find the radius of convergence for $f(z) = (1 - z)^{-1}$ around $z_0 = 0$.\\
+  
+  Recall that $f(z) = \sim^\infty_{n=0} z^n$, then we note that $\lim_{n \to
+  \infty} |z^{n+1} / z^n| = |z|$, hence we have convergence if $|z| < 1$ by the
+  ratio test, and the radius of convergence is $R = 1$.
+\end{example}
+
+\begin{example}
+  For $f(z) = \sum^\infty_{n=0} n^2 (z - \zi)^{2n} / 2^n$ as a power series around
+  $z_0 = \zi$, by the ratio test,
+  \begin{equation*}
+    \lim_{n \to \infty} \left|\frac{(n+1)^2 (z - \zi)^{2n+2}}{2^{n+1}}\frac{2^n}{n^2 (z-\zi)^{2n}}\right| = \frac{|z - \zi|^2}{2},
+  \end{equation*}
+  so we have convergence if $|z - \zi| < \sqrt{2}$, and the radius of
+  convergence is $R = \sqrt{2}$.
+\end{example}
+
+\begin{theorem}
+  If $\sum^\infty_{n=0} a_n (z - z_0)^n$ has radius of convergence $R$ and
+  converges to $f(z)$ of its disk of convergence $D$, then $f(z)$ is complex
+  differentiable, and $\sum^\infty_{n=0} a_n n (z - z_0)^{n-1}$ converges to
+  $f'(z)$ in $D$. \qedwhite
+\end{theorem}
+
+\begin{theorem}
+  If $\sum^\infty_{n=0} a_n (z - z_0)^n \to f(z)$ in its disk of convergence,
+  then $f(z)$ is complex differentiable an infinite number of times, and
+  $f^{(n)}(z_0) = n! a_n$.
+\end{theorem}
+\begin{proof}
+  By previous theorem, we have
+  \begin{align*}
+    f(z)   &= a_0 + a_1 (z - z_0) +   a_2 (z - z_0)^2 + \ldots\\
+    f'(z)  &=       a_1           + 2 a_2 (z - z_0)   + \ldots\\
+    f''(z) &=                       2\cdot 1 a_2      + \ldots
+  \end{align*}
+  and so on. Hence the function is infinitely complex differentiable, and
+  $f^{(n)}(z_0)$ is as required. \qed
+\end{proof}
 
 %===============================================================================
 
