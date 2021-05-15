@@ -677,13 +677,223 @@ To find the disk of convergence we can often use the ratio test.
   $f^{(n)}(z_0)$ is as required. \qed
 \end{proof}
 
+\begin{example}
+  Find the Taylor series of $(1 - z)^{-2}$ about $z = 0$.\\
+  
+  We see that since $\mathrm{d}/\mathrm{d}z (1 - z)^{-1} = (1 - z)^{-2}$,
+  \begin{equation*}
+    \frac{1}{(1 - z)^2} = \sum^\infty_{n=1} n z^{n-1}, \qquad |z| < 1.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the Taylor series for $\cosh(4z^3)$ about $z = 0$.\\
+  
+  Recall that
+  \begin{equation*}
+    \cosh y = 1 + \frac{y^2}{2!} + \ldots = \sum^\infty_{n=0} \frac{y^{2n}}{(2n)!},
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \cosh(4z^3) = \sum^\infty_{n=0} \frac{(4z^3)^{2n}}{(2n)!} = \sum^\infty_{n=0} \frac{16^n z^{6n}}{(2n)!}, \qquad \forall z \in \mathbb{C}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the Taylor series of $z^3 / (1-5z)^2$ about $z = 0$.\\
+  
+  Using the identity from two examples ago,
+  \begin{equation*}
+    \frac{1}{(1-5z)^2} = \sum^\infty_{n=1} n (5z)^{n-1},
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \frac{z^3}{(1-5z)^2} = \sum^\infty_{n=1} n 5^{n-1} z^{n+2}, \qquad |z| < \frac{1}{5}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the Taylor series for $3z(z+1)^{-1}(z-2)^{-1}$ about $z = 0$.\\
+  
+  First note that the radius of convergence cannot be greater than 1. By partial
+  fractions,
+  \begin{equation*}
+    \frac{3z}{(z+1)(z-2)} = \frac{1}{z+1} + \frac{2}{z-2},
+  \end{equation*}
+  so that the Taylor series is
+  \begin{equation*}
+    \sum^\infty_{n=0} (-z)^n - \sum^\infty_{n=0} \left(\frac{z}{2}\right)^n = \sum^\infty_{n=0} \left[(-1)^n - \frac{1}{2^n}\right] z^n, \qquad |z| < 1.
+  \end{equation*}
+\end{example}
+
 %===============================================================================
 
 \section{Integration in the complex plane}
 
+Recall that in the real case we have the \Def{indefinite integral} with
+\begin{equation*}
+  \int f(x)\; \mathrm{d}x = F(x),
+\end{equation*}
+where $F(x)$ is the primitive of $f$. We also have the \Def{definite integral}
+where, by the fundamental theorem of calculus, gives
+\begin{equation*}
+  \int^a_b f(x)\; \mathrm{d}x = F(b) - F(a).
+\end{equation*}
+Although we can generalise the indefinite integral to the complex case, the
+definite integral doesn't generalise directly, because we are essentially trying
+to talk about a 2-dimensional surface in 4-space. So instead we integrate
+complex functions along curves, or contours, in the complex plane.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Curves in $\mathbb{C}$}
+
+A differentiable curve in $\mathbb{C}$ is a function $\gamma : [a, b] \to
+\mathbb{C}$ such that $\gamma(t) = \gamma_1(t) + \zi \gamma_2 (t)$, where
+$\gamma_1$ and $\gamma_2$ are real differentiable functions in $t$.
+
+\begin{example}
+  One way to generate the unit circle is with
+  \begin{equation*}
+    \gamma : [0, 1] \to \mathbb{C}, \qquad \gamma(t) = \ex^{2\pi \zi t}.
+  \end{equation*}
+  Notice here that $\gamma$ is closed, and has a direction characterised by how
+  $t$ is parameterised (in this case it is in the positive sense, or in the
+  anti-clockwise). In general, a circle centred at $z_0$ with radius $r$ has the
+  associated curve
+  \begin{equation*}
+    \gamma : [0, 1] \to \mathbb{C}, \qquad \gamma(t) = z_0 + r \ex^{2\pi \zi t}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Consider two curves
+  \begin{equation*}
+    \gamma(t) = t + \zi t, \quad 0 \leq t \leq 1, \qquad \beta(t) = \begin{cases}t, & 0 \leq t \leq 1, \\ 1 + (t-1)\zi & 1 \leq t \leq 2. \end{cases}
+  \end{equation*}
+  \comment{diagram}
+  
+  Both curves connect the origin to $z = 1 + \zi$, but the path is difference.
+  $\beta(t)$ here is piecewise differentiable. One question of course is whether
+  the path matters (see later). In general, a vector from $z_0$ to $z_1$ may be
+  parameterised as $\gamma(t) = z_0 + t (z_1 - z_0)$, for $t \in [0, 1]$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Contour integrals}
+
+To integrate along the curve $z = \gamma(t)$ with $t\in[a, b]$, we have from
+chain rule that $\mathrm{d}z = \gamma'(t)\; \mathrm{d}t$, so that
+\begin{equation*}
+  \int_{\gamma} f(z)\; \mathrm{d}z = \int^b_a f(\gamma(t)) \gamma'(t)\; \mathrm{d}t,
+\end{equation*}
+where the latter is as before since we are dealing with a function of a real
+variable.
+
+\begin{example}
+  Compute the contour integrals of the following:
+  \begin{enumerate}
+    \item $f(z) = z^2$, $\gamma(t) = \ex^{\zi \pi t}$, $t \in [0, 1]$\\
+    
+    The path is the upper unit semi-circle, and we have
+    \begin{equation*}
+      \int_\gamma f(z)\; \mathrm{d}z = \zi \pi \int^1_0 \ex^{3\zi\pi t}\; \mathrm{d}t = -\frac{2}{3}.
+    \end{equation*}
+    
+    \item $f(z) = z^2$, $\gamma(t) = \ex^{-\zi \pi t}$, $t \in [0, 1]$\\
+    
+    The path is the lower unit semi-circle, and we have
+    \begin{equation*}
+      \int_\gamma f(z)\; \mathrm{d}z = -\zi \pi \int^1_0 \ex^{-3\zi\pi t}\; \mathrm{d}t = -\frac{2}{3}.
+    \end{equation*}
+    
+    Notice here the integral has the same value as the previous part, which in
+    this case is not a coincidence.
+    
+    \item $f(z) = \overline{z}$, $\gamma(t) = 1 + \zi t$, $t \in [0, 2]$\\
+    
+    We have
+    \begin{equation*}
+      \int_\gamma f(z)\; \mathrm{d}z = \zi \int^2_0 (1 - \zi t)\; \mathrm{d}t = 2 + 2\zi.
+    \end{equation*}
+  \end{enumerate}
+\end{example}
+
+A \Def{contour} is a continuous curve made up a finite number of differentiable
+curves. The contour itself does not need to be differentiable although the
+individual pieces should. The integral of $f(z)$ along a contour is then the sum
+of integrals along each individual differentiable curve.
+
+\begin{proposition}
+  We have the following properties for contour integrals:
+  \begin{enumerate}
+    \item Linearity, where
+    \begin{equation*}
+      \int_\gamma (\alpha f(z) + \beta g(z))\; \mathrm{d}z = \alpha \int_\gamma f(z)\; \mathrm{d}z + \beta \int_\gamma g(z))\; \mathrm{d}z.
+    \end{equation*}
+    
+    \item If contours $\gamma_1$ and $\gamma_2$ have the same track in
+    $\mathbb{C}$ and transverse it in the same direction, then
+    \begin{equation*}
+      \int_{\gamma_1} f(z)\; \mathrm{d}z = \int_{\gamma_2} f(z)\; \mathrm{d}z.
+    \end{equation*}
+    
+    \item If $\gamma : [a,b] \to \mathbb{C}$ and $\mu : [-b, -a] \to \mathbb{C}$
+    where $\mu(t) = \gamma(-t)$, i.e. $\mu$ is the `reverse' of $\gamma$, then
+    \begin{equation*}
+      \int_{\mu} f(z)\; \mathrm{d}z = -\int_{\gamma} f(z)\; \mathrm{d}z.
+    \end{equation*}
+    
+    \item We have the inequality
+    \begin{equation*}
+      \left|\int_\gamma f(z)\; \mathrm{d}z\right| \leq \int_\gamma |f(\gamma(t))| \cdot |\gamma'(t)|\; \mathrm{d}t \leq \textnormal{length}(\gamma) \cdot \max_{\gamma} |f(\gamma(t))|.
+    \end{equation*}
+    
+    \item (Fundamental Theorem of Calculus) Let $F(z)$ be holomorphic on an open
+    set $D \subset \mathbb{C}$, and $F'(z) = f(z)$. Then for any contour $\gamma
+    : [a,b] \to D$ with end points $z_0 = \gamma(a)$ and $z_1 = \gamma(b)$, we
+    have
+    \begin{equation*}
+      \int_\gamma f(z)\; \mathrm{d}z = F(z_1) - F(z_0).
+    \end{equation*}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since we have linearity when the integrals are real, this one is just
+    by definition:
+    \begin{align*}
+      \int_\gamma (\alpha f(z) + \beta g(z))\; \mathrm{d}z 
+        &= \int^b_a [\alpha f(\gamma(t)) + \beta g(\gamma(t))]\gamma'(t)\; \mathrm{d}t\\
+        &= \alpha \int^b_a f(\gamma(t)) \gamma'(t)\; \mathrm{d}t + \beta \int^b_a g(\gamma(t)) \gamma'(t)\; \mathrm{d}t\\
+        & =\alpha \int_\gamma f(z)\; \mathrm{d}z + \beta \int_\gamma g(z))\; \mathrm{d}z.
+    \end{align*}
+    
+    \item Let $\gamma_k : [a_k, b_k] \to \mathbb{C}$ with $k=1,2$, and assume
+    that $\gamma_2(h(t)) = \gamma_1(t)$. Then taking a substitution $u = h(t)$
+    and judicious use of chain rule gives
+    \begin{align*}
+      \int_{\gamma_2} f(z)\; \mathrm{d}z = \int^{b_2}_{a_2} f(\gamma_2(u)) \gamma_2'(u)\; \mathrm{d}u = \int^{b_1}_{a_1} f(\gamma_2(h(t))) \gamma_2'(h(t)) h'(t)\; \mathrm{d}t = \int^{b_1}_{a_1} f(\gamma_1(t)) \gamma_1'(t)\; \mathrm{d}t = \int_{\gamma_1} f(z)\; \mathrm{d}z.
+    \end{align*}
+    
+    \item As in previous case but use different limits.
+    
+    \item Let $\theta = \mbox{arg} \int_\gamma f(z)\; \mathrm{d}z$, then
+    \begin{align*}
+      \left|\int_\gamma f(z)\; \mathrm{d}z\right| &= \ex^{-\zi \theta} \int_\gamma f(z)\; \mathrm{d}z = \int_\gamma \ex^{-\zi \theta} f(z)\; \mathrm{d}z = \mbox{Re} \left(\int_\gamma \ex^{-\zi \theta} f(z)\; \mathrm{d}z\right) = \mbox{Re} \left(\int^b_a \ex^{-\zi \theta} f(\gamma(t)) \gamma'(t)\; \mathrm{d}t\right)\\
+        &\leq \int^b_a \left|\ex^{-\zi \theta} f(\gamma(t)) \gamma'(t)\right|\; \mathrm{d}t = \int^b_a |f(\gamma(t))| \cdot |\gamma'(t)|\; \mathrm{d}t\\
+        &\leq \textnormal{length}(\gamma) \cdot \max_{\gamma} |f(\gamma(t))|.
+    \end{align*}
+    
+    \item 
+  \end{enumerate}
+\end{proof}
+
 %===============================================================================
 
-\section{Conform mapping}
+\section{Conformal mapping}
 
 %===============================================================================
 
