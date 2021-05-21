@@ -1,0 +1,1683 @@
+\documentclass[letter-paper]{tufte-book}
+
+%%
+% Book metadata
+\title{Dynamics 1H}
+\author[]{Inusuke Shibemoto}
+%\publisher{Research Institute of Valinor}
+
+%%
+% If they're installed, use Bergamo and Chantilly from www.fontsite.com.
+% They're clones of Bembo and Gill Sans, respectively.
+\IfFileExists{bergamo.sty}{\usepackage[osf]{bergamo}}{}% Bembo
+\IfFileExists{chantill.sty}{\usepackage{chantill}}{}% Gill Sans
+
+%\usepackage{microtype}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%%
+% For nicely typeset tabular material
+\usepackage{booktabs}
+
+%% overunder braces
+\usepackage{oubraces}
+
+%% 
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\newtcolorbox[auto counter,number within=section]{derivbox}[2][]{colback=TealBlue!5!white,colframe=TealBlue,title=Box \thetcbcounter:\ #2,#1}                                                          
+
+\makeatletter
+\@openrightfalse
+\makeatother
+
+%%
+% For graphics / images
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{figs/}}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+\usepackage[plain]{fancyref}
+\newcommand*{\fancyrefboxlabelprefix}{box}
+\fancyrefaddcaptions{english}{%
+  \providecommand*{\frefboxname}{Box}%
+  \providecommand*{\Frefboxname}{Box}%
+}
+\frefformat{plain}{\fancyrefboxlabelprefix}{\frefboxname\fancyrefdefaultspacing#1}
+\Frefformat{plain}{\fancyrefboxlabelprefix}{\Frefboxname\fancyrefdefaultspacing#1}
+
+%%
+% Prints argument within hanging parentheses (i.e., parentheses that take
+% up no horizontal space).  Useful in tabular environments.
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}}
+
+%% 
+% Prints an asterisk that takes up no horizontal space.
+% Useful in tabular environments.
+\newcommand{\hangstar}{\makebox[0pt][l]{*}}
+
+%%
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+\usepackage{xstring}
+
+%%
+% Some shortcuts for Tufte's book titles.  The lowercase commands will
+% produce the initials of the book title in italics.  The all-caps commands
+% will print out the full title of the book in italics.
+\newcommand{\vdqi}{\textit{VDQI}\xspace}
+\newcommand{\ei}{\textit{EI}\xspace}
+\newcommand{\ve}{\textit{VE}\xspace}
+\newcommand{\be}{\textit{BE}\xspace}
+\newcommand{\VDQI}{\textit{The Visual Display of Quantitative Information}\xspace}
+\newcommand{\EI}{\textit{Envisioning Information}\xspace}
+\newcommand{\VE}{\textit{Visual Explanations}\xspace}
+\newcommand{\BE}{\textit{Beautiful Evidence}\xspace}
+
+\newcommand{\TL}{Tufte-\LaTeX\xspace}
+
+% Prints the month name (e.g., January) and the year (e.g., 2008)
+\newcommand{\monthyear}{%
+  \ifcase\month\or January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or
+  December\fi\space\number\year
+}
+
+
+\newcommand{\urlwhitespacereplace}[1]{\StrSubstitute{#1}{ }{_}[\wpLink]}
+
+\newcommand{\wikipedialink}[1]{http://en.wikipedia.org/wiki/#1}% needs \wpLink now
+
+\newcommand{\anonymouswikipedialink}[1]{\urlwhitespacereplace{#1}\href{\wikipedialink{\wpLink}}{Wikipedia}}
+
+\newcommand{\Wikiref}[1]{\urlwhitespacereplace{#1}\href{\wikipedialink{\wpLink}}{#1}}
+
+% Prints an epigraph and speaker in sans serif, all-caps type.
+\newcommand{\openepigraph}[2]{%
+  %\sffamily\fontsize{14}{16}\selectfont
+  \begin{fullwidth}
+  \sffamily\large
+  \begin{doublespace}
+  \noindent\allcaps{#1}\\% epigraph
+  \noindent\allcaps{#2}% author
+  \end{doublespace}
+  \end{fullwidth}
+}
+
+% Inserts a blank page
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+\usepackage{units}
+
+% Typesets the font size, leading, and measure in the form of 10/12x26 pc.
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}}
+
+% Macros for typesetting the documentation
+\newcommand{\hlred}[1]{\textcolor{Maroon}{#1}}% prints in red
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
+\newcommand{\hairsp}{\hspace{1pt}}% hair space
+\newcommand{\hquad}{\hskip0.5em\relax}% half quad space
+\newcommand{\TODO}{\textcolor{red}{\bf TODO!}\xspace}
+\newcommand{\na}{\quad--}% used in tables for N/A cells
+\providecommand{\XeLaTeX}{X\lower.5ex\hbox{\kern-0.15em\reflectbox{E}}\kern-0.1em\LaTeX}
+\newcommand{\tXeLaTeX}{\XeLaTeX\index{XeLaTeX@\protect\XeLaTeX}}
+% \index{\texttt{\textbackslash xyz}@\hangleft{\texttt{\textbackslash}}\texttt{xyz}}
+\newcommand{\tuftebs}{\symbol{'134}}% a backslash in tt type in OT1/T1
+\newcommand{\doccmdnoindex}[2][]{\texttt{\tuftebs#2}}% command name -- adds backslash automatically (and doesn't add cmd to the index)
+\newcommand{\doccmddef}[2][]{%
+  \hlred{\texttt{\tuftebs#2}}\label{cmd:#2}%
+  \ifthenelse{\isempty{#1}}%
+    {% add the command to the index
+      \index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2}}% command name
+    }%
+    {% add the command and package to the index
+      \index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2} (\texttt{#1} package)}% command name
+      \index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}% package name
+    }%
+}% command name -- adds backslash automatically
+\newcommand{\doccmd}[2][]{%
+  \texttt{\tuftebs#2}%
+  \ifthenelse{\isempty{#1}}%
+    {% add the command to the index
+      \index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2}}% command name
+    }%
+    {% add the command and package to the index
+      \index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2} (\texttt{#1} package)}% command name
+      \index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}% package name
+    }%
+}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quotation}\ttfamily\parskip0pt\parindent0pt\ignorespaces}{\end{quotation}}% command specification environment
+\newcommand{\docenv}[1]{\texttt{#1}\index{#1 environment@\texttt{#1} environment}\index{environments!#1@\texttt{#1}}}% environment name
+\newcommand{\docenvdef}[1]{\hlred{\texttt{#1}}\label{env:#1}\index{#1 environment@\texttt{#1} environment}\index{environments!#1@\texttt{#1}}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}\index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}\index{#1 class option@\texttt{#1} class option}\index{class options!#1@\texttt{#1}}}% document class option name
+\newcommand{\docclsoptdef}[1]{\hlred{\texttt{#1}}\label{clsopt:#1}\index{#1 class option@\texttt{#1} class option}\index{class options!#1@\texttt{#1}}}% document class option name defined
+\newcommand{\docmsg}[2]{\bigskip\begin{fullwidth}\noindent\ttfamily#1\end{fullwidth}\medskip\par\noindent#2}
+\newcommand{\docfilehook}[2]{\texttt{#1}\index{file hooks!#2}\index{#1@\texttt{#1}}}
+\newcommand{\doccounter}[1]{\texttt{#1}\index{#1 counter@\texttt{#1} counter}}
+
+\newcommand{\studyq}[1]{\marginnote{Q: #1}}
+
+\hypersetup{colorlinks}% uncomment this line if you prefer colored hyperlinks (e.g., for onscreen viewing)
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% custom commands
+
+\newtheorem{theorem}{\color{pastel-blue}Theorem}[section]
+\newtheorem{lemma}[theorem]{\color{pastel-blue}Lemma}
+\newtheorem{proposition}[theorem]{\color{pastel-blue}Proposition}
+\newtheorem{corollary}[theorem]{\color{pastel-blue}Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\hyphenpenalty=5000
+
+% more pastel ones
+\xdefinecolor{pastel-red}{rgb}{0.77,0.31,0.32}
+\xdefinecolor{pastel-green}{rgb}{0.33,0.66,0.41}
+\definecolor{pastel-blue}{rgb}{0.30,0.45,0.69} % crayola blue
+\definecolor{gray}{rgb}{0.2,0.2,0.2} % dark gray
+
+\xdefinecolor{orange}{rgb}{1,0.45,0}
+\xdefinecolor{green}{rgb}{0,0.35,0}
+\definecolor{blue}{rgb}{0.12,0.46,0.99} % crayola blue
+\definecolor{gray}{rgb}{0.2,0.2,0.2} % dark gray
+
+\xdefinecolor{cerulean}{rgb}{0.01,0.48,0.65}
+\xdefinecolor{ust-blue}{rgb}{0,0.20,0.47}
+\xdefinecolor{ust-mustard}{rgb}{0.67,0.52,0.13}
+
+%\newcommand\comment[1]{{\color{red}#1}}
+
+\newcommand{\dy}{\partial}
+\newcommand{\ddy}[2]{\frac{\dy#1}{\dy#2}}
+
+\newcommand{\ab}{\boldsymbol{a}}
+\newcommand{\bb}{\boldsymbol{b}}
+\newcommand{\Bb}{\boldsymbol{B}}
+\newcommand{\cb}{\boldsymbol{c}}
+\newcommand{\db}{\boldsymbol{d}}
+\newcommand{\eb}{\boldsymbol{e}}
+\newcommand{\Eb}{\boldsymbol{E}}
+\newcommand{\Fb}{\boldsymbol{F}}
+\newcommand{\lb}{\boldsymbol{l}}
+\newcommand{\Lb}{\boldsymbol{L}}
+\newcommand{\nb}{\boldsymbol{n}}
+\newcommand{\rb}{\boldsymbol{r}}
+\newcommand{\tb}{\boldsymbol{t}}
+\newcommand{\ub}{\boldsymbol{u}}
+\newcommand{\vb}{\boldsymbol{v}}
+\newcommand{\xb}{\boldsymbol{x}}
+\newcommand{\wb}{\boldsymbol{w}}
+\newcommand{\yb}{\boldsymbol{y}}
+
+\newcommand{\Xb}{\boldsymbol{X}}
+
+\newcommand{\ex}{\mathrm{e}}
+\newcommand{\zi}{{\rm i}}
+
+\newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
+\newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
+
+\newcommand{\zbar}{{\overline{z}}}
+
+\newcommand\Def[1]{\textbf{#1}}
+
+\newcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% some extra formatting (hacked from Patrick Farrell's notes)
+%  https://courses.maths.ox.ac.uk/node/view_material/4915
+%
+
+% chapter format
+\titleformat{\chapter}%
+  {\huge\rmfamily\itshape\color{pastel-red}}% format applied to label+text
+  {\llap{\colorbox{pastel-red}{\parbox{1.5cm}{\hfill\itshape\huge\color{white}\thechapter}}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+% section format
+\titleformat{\section}%
+  {\normalfont\Large\itshape\color{pastel-green}}% format applied to label+text
+  {\llap{\colorbox{pastel-green}{\parbox{1.5cm}{\hfill\color{white}\thesection}}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+% subsection format
+\titleformat{\subsection}%
+  {\normalfont\large\itshape\color{pastel-blue}}% format applied to label+text
+  {\llap{\colorbox{pastel-blue}{\parbox{1.5cm}{\hfill\color{white}\thesubsection}}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Front matter
+%\frontmatter
+
+% r.3 full title page
+%\maketitle
+
+% v.4 copyright page
+
+\chapter*{}
+
+\begin{fullwidth}
+
+\par \begin{center}{\Huge Dynamics 1H}\end{center}
+
+\vspace*{5mm}
+
+\par \begin{center}{\Large typed up by B. S. H. Mithrandir}\end{center}
+
+\vspace*{5mm}
+
+\begin{itemize}
+  \item \textit{Last compiled: \monthyear}
+  \item Adapted from notes of R. J. Johnson Durham
+  \item Was part of the Durham Core B module given in the first year. Includes
+  solving Newton's equations as a differential equation, and various other
+  well-known differentiation equations.
+  \item[]
+  \item \TODO diagrams
+\end{itemize}
+
+\par
+
+\par Licensed under the Apache License, Version 2.0 (the ``License''); you may not
+use this file except in compliance with the License. You may obtain a copy
+of the License at \url{http://www.apache.org/licenses/LICENSE-2.0}. Unless
+required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+\end{fullwidth}
+
+%===============================================================================
+
+\chapter{Kinematics}
+
+Mechanics is a model of the motion and interaction of everyday size objects
+according to Newton's Laws.
+
+\begin{example}[Newton's Laws]
+  \begin{enumerate}
+    \item A body stays at rest or in motion of constant velocity unless acted on
+    by an external influence.
+    
+    \item A body's rate of change of momentum equals to the net force acting on
+    it.
+    
+    \item Action and reaction are equal and opposite.
+  \end{enumerate}
+\end{example}
+
+The aim is to identify forces acting on a body and solve the equations of
+motion. This is a differential equation for the body's position as a function of
+time.
+
+We will normally assume a point mass object with no extent, which is a good
+approximation when the object size is much less than the size of its trajectory.
+\Def{Position} of the particle is described by its displacement vector from a given
+origin $\rb$. Its \Def{velocity} is then given by its time-derivative
+\begin{equation*}
+  \dot{\rb} = \frac{\mathrm{d}\rb}{\mathrm{d}t}
+  = \lim_{h\to0} \frac{\rb(t+h) - \rb(t)}{h}.
+\end{equation*}
+$\dot{\rb}$ is the tangent vector pointing in the direction of motion, with
+speed $|\dot{\rb}(t)|$. If the reference axes are $\eb_{x,y,z}$ (assumed to be
+unit length), then
+\begin{equation*}
+  \rb(t) = x(t)\eb_x + y(t)\eb_y + z(t)\eb_z, \qquad
+  \vb = \dot{\rb} = \dot{x}\eb_x + \dot{y}\eb_y + \dot{z}\eb_z,
+\end{equation*}
+with speed $|\vb| = \sqrt{\vb\cdot\vb} = \sqrt{\dot{x}^2 + \dot{y}^2 +
+\dot{z}^2}$.
+\begin{example}
+  \begin{equation*}
+    \rb(t) = (t, 1, t^2) \qquad \Rightarrow \qquad \vb = (1, 0, 2t), \qquad
+    |\vb| = \sqrt{1 + 4t^2}.
+  \end{equation*}
+\end{example}
+\Def{Momentum} is defined to be $m\vb$, where $m$ is the mass of the
+object. \Def{Acceleration} is defined to be $\ab = \dot{\vb}$.
+
+Even if the speed is constant, acceleration can be non-zero if direction
+changes.
+\begin{example}
+  For circular motion around the origin, we have, for $\rho$ the radius and
+  $\theta$ the angle,
+  \begin{equation*}
+    \rb = (\rho\cos\theta, \rho\sin\theta),\qquad \theta = \theta(t).
+  \end{equation*}
+  So then
+  \begin{equation*}
+    \vb = \rho\dot{\theta}(-\sin\theta, \cos\theta),\qquad
+    |\vb| = \rho|\dot{\theta}| = \textnormal{constant}
+  \end{equation*}
+  for uniform circular motion. However,
+  \begin{equation*}
+    |\ab| = \rho\dot{\theta} 
+    = -\rho\dot{\theta}^2 (\cos\theta, \sin\theta) \neq 0,
+  \end{equation*}
+  so the acceleration is of magnitude $\rho\dot{\theta}^2$ in the direction
+  $-\rb$, i.e., towards the origin.
+\end{example}
+
+Physical dimensions (e.g., length, mass and time) of a correct equation must
+balance. Sometimes insight may be gained from just looking at the available
+dimensions to the problem.
+\begin{example}
+  For a pendulum, the period of its oscillation has dimensions $T$, so the
+  formula for a pendulum should only depend on $T$. The other available
+  dimensions in the problem are the mass $M$, the length $L$ and the
+  gravitational acceleration $g$; it may be shown that $T\sim\sqrt{L/g}$ (in
+  fact the constant of proportionality is $2\pi$).
+\end{example}
+
+Suppose we have a particle with position $\rb$ with respect to a fixed origin,
+but an observer is $\boldsymbol{R}$ from the origin. Then the motion with
+respect to the observer is
+\begin{equation*}
+  \tilde{\rb} = \rb - \boldsymbol{R},\qquad
+  \tilde{\vb} = \vb - \dot{\boldsymbol{R}},\qquad
+  \tilde{\ab} = \ab - \ddot{\boldsymbol{R}}.
+\end{equation*}
+Newton's first law defines an \Def{inertial frame of reference} which is
+un-accelerated, so that acceleration in the frame is zero if no forces act. An
+inertial frame is relative (e.g., a car moving on Earth sees Earth as
+stationary, whilst Earth moving in a galaxy sees the galaxy as stationary). We
+can apply the remaining two laws in inertial frames.
+
+\Def{Forces} is the influence that tends to make a body move, and this is
+modelled by a vector with respect to the inertial frame. Newton's second law
+then says that
+\begin{equation*}
+  \frac{\mathrm{d}}{\mathrm{d}t} m\vb = \Fb(\rb, \vb, \cdots, t),
+\end{equation*}
+where $\Fb$ is the sum of all forces. If $\Fb = 0$, (a \Def{free
+particle}), then $m\vb$ is constant and so $\vb$ is constant, consistent with
+the first law. It is our aim to solve this second order differential equation.
+This is generally difficult to do, and there are a few things we can do to
+simplify it: (i) choose axes to simplify the vectors involves; (ii) use
+conservation laws to reduce the problem (e.g., energy, momentum, angular
+momentum etc.)
+
+%-------------------------------------------------------------------------------
+
+\section{Sample one dimensional problems}
+
+\begin{enumerate}
+  \item Pushing a glass of Duff beer along the bar in Moe's Tavern at constant
+  velocity. This implies that $\Fb = 0$, but, horizontally, we must have a
+  balance between pushing and friction, whilst in the vertical we have weight
+  and normal reaction balancing. The horizontal motion may be studied by solving
+  $F = ma$.
+  
+  \item A cake of mass $m$ slides along a horizontal table, slowed by frictional
+  force $F = -b\ex^{a v}$, where $v = v(t)$, and the other parameters are
+  constant. If initial speed is $v_0$, how long does it take for the cake to
+  come to rest?
+  
+  For $\eb_x$ to be the direction of travel, we have
+  \begin{equation*}
+    m\frac{\mathrm{d}v}{\mathrm{d}t}\eb_x = -b\ex^{av}\eb_x.
+  \end{equation*}
+  The ODE is separable with
+  \begin{equation*}
+    \int m\ex^{-av}\, \mathrm{d}v = -\int b\, \mathrm{d}t.
+  \end{equation*}
+  With $v(0) = v_0$, the general solution is
+  \begin{equation*}
+    \frac{m}{a}\ex^{-av} = bt + \frac{m}{a}\ex^{-av_0}.
+  \end{equation*}
+  At $t=T$, $v=0$, so equating gives
+  \begin{equation*}
+    T = \frac{m}{ab} \left(1 - \ex^{-av_0}\right).
+  \end{equation*}
+  
+  \item For vertical motion under gravity $g$, a mass $m$ feels a force of $mg$
+  downwards. Choosing the axis to be vertically upward from the ground, with
+  surface where $z=0$, we have
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} m\dot{z} = -mg.
+  \end{equation*}
+  At $t=0$, $z=z_0$ and $\vb = v_0$, and the general solution is
+  \begin{equation*}
+    z(t) = -\frac{gt^2}{2} + v_0 t + z_0.
+  \end{equation*}
+  How far up does it go if $v_0 = 15\ \mathrm{m}\ \mathrm{s}^{-1}$? The maximum
+  point is where $\vb = 0$, with excursion $z - z_0$. From the velocity
+  equation, we end up with $v_0 = gt$ so $t = v_0/g$, and substituting into the
+  displacement equation, we have
+  \begin{equation*}
+    z - z_0 = -\frac{g}{2}\left(\frac{v_0}{g}\right)^2
+      + v_0\left(\frac{v_0}{g}\right) = \frac{v_0^2}{2g},
+  \end{equation*}
+  so with $g = 10\ \mathrm{m}\ \mathrm{s}^{-2}$, we have $z - z_0 = 11.5\
+  \mathrm{m}$.
+  
+  \item A parachutist drops from rest ($v(0) = 0$) at a great height, and
+  gravity $\Fb_w = mg\eb_z$ acts on him downwards with air resistance $\Fb_r =
+  -k\vb$ opposing motion. We thus have
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} mv = mg - kv,
+  \end{equation*}
+  which results in the linear ODE
+  \begin{equation*}
+    \frac{\mathrm{d}v}{\mathrm{d}t} + \frac{k}{m}v = g.
+  \end{equation*}
+  With the integrating factor $\mu = \ex^{kt/m}$, we obtain
+  \begin{equation*}
+    v\ex^{kt/m} = \frac{gm}{k}\ex^{kt/m} + c.
+  \end{equation*}
+  $v(0) = 0$ sets $c = -gm/k$, so
+  \begin{equation*}
+    v(t) = \frac{gm}{k}\left(1 - \ex^{-kt/m}\right).
+  \end{equation*}
+  As $t\to\infty$, $v\to mg/k$, known as the \Def{terminal speed}.
+  
+  
+  \item Restoring force which is proportional to displacement, acting such that
+  the force is directed towards the centre $x=0$ (e.g., a spring say). We have
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} mv = -kx \qquad\Rightarrow\qquad
+    \ddot{x} + \frac{k}{m}x = 0.
+  \end{equation*}
+  Since the particular integral is zero, the complementary function is the full
+  answer. The auxillary equation is $\lambda^2 + k/m = 0$, so $\lambda =
+  \pm\sqrt{k/m}\zi$, and so
+  \begin{equation*}
+    x(t) = \alpha\cos\sqrt{\frac{k}{m}}t + \beta\sin\sqrt{\frac{k}{m}}t,
+  \end{equation*}
+  and the solution is periodic with period $T = 2\pi/\omega = 2\pi/\sqrt{k/m}$.
+  This is \Def{simple harmonic motion}, and it can be shown that the
+  amplitude of maximum excursion is $|x|_{\max} = \sqrt{\alpha^2 + \beta^2}$.
+
+  \item For ballistics, a particle moves near the Earth's surface under its own
+  weight. Here, $\Fb = -mg\eb_y$, so
+  \begin{equation*}
+    \frac{\mathrm{d}\vb}{\mathrm{d}t} = -g\eb_y.
+  \end{equation*}
+  Without loss of generality, choosing $\rb(0) = 0$ and $\vb(0) = v_0
+  (\cos\alpha, \sin\alpha)$, the solution is
+  \begin{equation*}
+    \rb = -\frac{gt^2}{2}\eb_y + \vb_0 t 
+    = (v_0 t \cos\alpha, v_0 t \sin\alpha - gt^2/2).
+  \end{equation*}
+  
+  Suppose the time taken to return to $y=0$ is $t=T$. Then
+  \begin{equation*}
+    v_0 T \sin\alpha - \frac{gT^2}{2} = 
+    T\left(v_0 \sin\alpha - \frac{gT}{2}\right) = 0,
+  \end{equation*}
+  so we have $T=0$ or $T=(2/g)v_0 \sin\alpha$.
+  
+  How far does it travel? This is the horizontal displacement until $y=0$ for
+  the second time, so
+  \begin{equation*}
+    \rb(T) = \frac{2v_0^2}{g}\sin\alpha\cos\alpha = \frac{v_0^2}{g}\sin2\alpha.
+  \end{equation*}
+  
+  The equation of trajectory is given by $y(x)$. With $t = x/(v_0\cos\alpha)$,
+  we have
+  \begin{equation*}
+    y = v_0\left(\frac{x}{v_0\cos\alpha}\right)\sin\alpha 
+      - \frac{g}{2}\left(\frac{x}{v_0\cos\alpha}\right)^2
+      = x\tan\alpha - \frac{1}{2}\frac{g}{v_0^2\cos^2\alpha}x^2.
+  \end{equation*}
+  This is an equation for a parabola, as expected. The turning point is where it
+  is highest, given by
+  \begin{equation*}
+    0 = \frac{\mathrm{d}y}{\mathrm{d}x} 
+    = \tan\alpha - \frac{g}{v_0^2\cos\alpha}x,
+  \end{equation*}
+  which is
+  \begin{equation*}
+    x = \frac{\sin\alpha\cos\alpha v_0^2}{g} = \frac{v_0^2}{2g}\sin2\alpha
+    =\frac{1}{2}\rb(t),
+  \end{equation*}
+  which is also expected.
+  
+  Suppose we want to choose than angle $\alpha$ to hit some target located at
+  $(x_0, y_0)$, given that we launch at speed $v_0$. Thus
+  \begin{equation*}
+    y_0 = x_0 \tan\alpha - \frac{gx_0^2}{v_0^2}(1+\tan^2\alpha).
+  \end{equation*}
+  This is a quadratic in $\tan\alpha$, and we see that: (i) if there are two
+  roots, then there are two possibilities; (ii) a repeated root implies target
+  is at maximum range; (iii) complex roots implies target is out of range.
+  
+  \item Air resistance is modelled by $-\Lambda\vb$. Then
+  \begin{equation*}
+    \frac{\mathrm{d}\vb}{\mathrm{d}t} = \boldsymbol{g} - \frac{\Lambda}{m}\vb.
+  \end{equation*}
+  This is a linear equation with integrating factor $\ex^{(\Lambda/m)t}$. So
+  that the solution is
+  \begin{equation*}
+    \vb = \frac{\boldsymbol{g}}{\alpha} 
+      + \left(\vb_0-\frac{\boldsymbol{g}}{\alpha}\right)\ex^{-\alpha t},\qquad 
+    \alpha = \frac{\Lambda}{m},\qquad \vb(0) = \vb_0.
+  \end{equation*}
+  As $t\to\infty$, $\vb\to m\boldsymbol{g}/\Lambda$, which is the terminal
+  velocity along $\boldsymbol{g}$.
+  
+  \item A particle of mass $m$ with electric charge $q$ moving at velocity $\vb$
+  through an electric field $\Eb$ and magnetic field $\Bb$ feels a force
+  \begin{equation*}
+    \Fb = m\frac{\mathrm{d}\vb}{\mathrm{d}t} = q\Eb + q(\vb\times\Bb),
+  \end{equation*}
+  known as the \Def{Lorentz force}. Suppose that $\Eb$ and $\vb$ are
+  parallel and constant along $\eb_z$, then
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} m\vb = qE\eb_z + qB\vb\times\eb_z,
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    m\ddot{x} = qB\dot{y},\qquad m\ddot{y} = -qB\dot{x},\qquad
+    m\ddot{z} = qE.
+  \end{equation*}
+  The last equation implies that
+  \begin{equation*}
+    z(t) = \frac{1}{2}t^2 \frac{qE}{m} + c_1 t + c_2.
+  \end{equation*}
+  Taking $\rb(0) = 0$ and $\dot{\rb}(0) = v_0 \eb_x$, we have
+  \begin{equation*}
+    z(t) = \frac{1}{2}\frac{qE}{m} t^2.
+  \end{equation*}
+  The second equation may be integrated once and, using the initial conditions,
+  \begin{equation*}
+    m\dot{y} = -qBx.
+  \end{equation*}
+  From the first equation, this gives
+  \begin{equation*}
+    m\ddot{x} = qB\dot{y} = -q^2 B^2 \frac{x}{m} \qquad \Rightarrow \qquad
+    \ddot{x} = \left(\frac{qB}{m}\right)^2 x = 0,
+  \end{equation*}
+  which, after using the initial conditions, has as solutions
+  \begin{equation*}
+    x(t) = \frac{m v_0}{qB} \sin\left(\frac{qB}{m} t\right).
+  \end{equation*}
+  Returning to the second equation, this yields
+  \begin{equation*}
+    y(t) = \frac{m v_0}{qB} \left(\cos\left(\frac{qB}{m} t\right) - 1\right).
+  \end{equation*}
+  We see that
+  \begin{equation*}
+    \left(y(t) + \frac{m v_0}{qB}\right)^2 + x^2(t) =
+    \left(\frac{m v_0}{qB}\right),
+  \end{equation*}
+  which is an equation of a circle. Moreover, $x(t)$ and $y(t)$ is independent
+  of $\Eb$, so $x$ and $y$ motion is influences by the magnetic field, whilst
+  the $z$ motion is influences by the electric field. Since $z(t)\sim t^2$, the
+  motion is a spiral of increasing pitch.
+\end{enumerate}
+
+%-------------------------------------------------------------------------------
+
+\section{Energy}
+
+Consider the special case where $\mathrm{d}(m\dot{x})/\mathrm{d} t = F(x)$. This
+can be integrated, by multiplying both sides by $\dot{x}$ and integrating in
+time as
+\begin{equation*}
+  \frac{1}{2}m \int m \frac{\mathrm{d}}{\mathrm{d}t}\dot{x}^2\, \mathrm{d}t
+  = \int F(x) \frac{\mathrm{d}x}{\mathrm{d}t}\, \mathrm{d}t =
+  \int F(x)\, \mathrm{d}x.
+\end{equation*}
+Integrating this then results in
+\begin{equation*}
+  E = \frac{1}{2}mv^2 - \int F(x)\, \mathrm{d}x,
+\end{equation*}
+where $E$ is the total energy (conserved when there is no forcing or
+dissipation), the kinetic energy and the potential energy. The equation of
+motion may be then be thought of as studying the evolution of the energy.
+
+\begin{example}
+  Motion under weight near the Earth's surface on a vertical line is given by
+  \begin{equation*}
+    m\ddot{x} = -mg,
+  \end{equation*}
+  so the potential energy $V(x) = mgx$. Energy is zero when $x = \dot{x} = 0$,
+  so integrating the equation with this conditions fixing the constants leads to
+  \begin{equation*}
+    \frac{1}{2}m\dot{x}^2 + mgx = E,
+  \end{equation*}
+  where $E$ is a constant. Then, for two different states, they should satisfy
+  \begin{equation*}
+    \frac{1}{2}v_1^2 + gx_1 = \frac{1}{2}v_2^2 + gx_2.
+  \end{equation*}
+\end{example}
+
+In general for a potential energy $V(x)$, this results in
+\begin{equation*}
+  \dot{x}^2 = \frac{2}{m} (E - V(x)) \qquad \Rightarrow \qquad
+  \frac{\mathrm{d}x}{\mathrm{d}t} = \pm \sqrt{\frac{2}{m}(E - V(x))}.
+\end{equation*}
+The ODE is separable, which results in
+\begin{equation*}
+  \int\frac{\mathrm{d}x}{\sqrt{E - V(x)}} = \pm \sqrt{\frac{2}{m}}(t - t_0).
+\end{equation*}
+
+\begin{example}
+  Suppose $F(x) = -kx$, so we have simple harmonic motion, with $k > 0$ and the
+  potential being $V(x) = kx^2 / 2$, then the LHS integral is
+  \begin{equation*}
+    \int\frac{\mathrm{d}x}{\sqrt{E} - kx^2 /2} = 
+    \frac{1}{\sqrt{E}}\int\frac{\mathrm{d}x}{\sqrt{E} - kx^2 / (2E)}.
+  \end{equation*}
+  Substituting with $u^2 = kx^2 / (2E)$ gives $u = \sqrt{k/(2E)}$ and
+  $\mathrm{d}x = \sqrt{2E/k}\mathrm{d}u$, so
+  \begin{equation*}
+    \sqrt{\frac{2E}{k}}\frac{1}{\sqrt{E}} \int \frac{\mathrm{d}u}{1-u^2}
+    = \sqrt{\frac{2}{k}}\arcsin\sqrt\frac{k}{2E}x,
+  \end{equation*}
+  and the general solution is
+  \begin{equation*}
+    x(t) = \pm \sqrt{\frac{2E}{k}}\sin\left(\sqrt{\frac{k}{m}}(t - t_0)\right).
+  \end{equation*}
+\end{example}
+
+In three dimensions, a similar approach by taking the scalar product of
+$\dot{\rb}$ gives
+\begin{equation*}
+  E = \frac{1}{2}m|\dot{\rb}|^2 - \int \Fb\cdot\mathrm{d}\rb.
+\end{equation*}
+\begin{example}
+  For $\rb(t) = t\eb_x + \eb_y + t^2 \eb_z$, this gives the kinetic energy as
+  $m(1+4t^2)/2$.
+\end{example}
+
+With potential energy $V(\rb) = -\int \Fb \cdot \mathrm{d}\rb$, the relation is
+that $\Fb(\rb) = -\nabla V(\rb)$. $\Fb$ is \Def{conservative} is this
+relation holds.
+
+\begin{example}
+  For gravity near Earth's surface,
+  \begin{equation*}
+    \Fb = m\boldsymbol{g} = -mg\eb_z,
+  \end{equation*}
+  so then $\dy V/\dy z = mg$ and $V(x,y,z) = mgz$.
+\end{example}
+
+\Def{Constraint forces} are forces that are always perpendicular to motion,
+i.e., $\Fb\cdot\rb = 0$, and so does not contribute towards energy conservation.
+For example, in a pendulum, string tension does not appear in the energy
+equation.
+
+\begin{example}
+  A particle slides down the surface of a smooth sphere from rest at the top.
+  Where does it leave the surface? (i.e., where is $F_n = 0$?)
+  
+  Let $\rho$ be the radius of the sphere and $\theta$ the angle from the north
+  pole. Assuming that energy is conserved, then the energy balance is
+  \begin{equation*}
+    \frac{1}{2}m\rho^2\dot{\theta}^2 = mg\rho(1 - \cos\theta).
+  \end{equation*}
+  The radial force balance is [\Def{centrifugal force}]
+  \begin{equation*}
+    F_n = mg\cos\theta - m\rho\dot{\theta}^2.
+  \end{equation*}
+  Substituting one into the other results in
+  \begin{equation*}
+    F_n = mg(3\cos\theta - 2),
+  \end{equation*}
+  so the particle leaves when $\theta = \arccos(2/3)\approx 48^\circ$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Motion near equilibrium}
+
+At equilibrium point $\rb = \rb_0$, $\Fb(\rb_0) = 0$. For $\rb(t) = \rb_0 =
+\textnormal{constant}$, the derivatives are zero for all time, so $\Fb(\rb_0) =
+0$ by Newton's second law. Conversely, if $\Fb(\rb_0) = 0$, then $\rb = \rb_0 =
+\textnormal{constant}$, and obeys Newton's second law.
+
+Consider the equilibrium in one dimension only, and assume forces are
+conservative with $F(x) = -\mathrm{d}V/\mathrm{d}x$.. Therefore the equilibrium
+point $x=x_0$ is a turning point of $V(x)$.
+
+\begin{example}
+  In SHM, $V(x) = kx^2 / 2$, and equilibrium point is at $x=0$ where it is a
+  minimum of $V(x)$. Near the equilibrium point $x_0$ then, we can make a Taylor
+  expansion about $x_0$, which results in
+  \begin{equation*}
+    m\ddot{x} = F(x) = F(x_0) + (x - x_0) F'(x_0) + \ldots.
+  \end{equation*}
+  Since $F(x_0) = 0$ and $F(x) = -V'(x)$ by definition, we have
+  \begin{equation*}
+    m\ddot{x} = -(x - x_0) V''(x_0) + \ldots.
+  \end{equation*}
+  Let $x = x_0 + \epsilon$, then $m\ddot{e} + V''(x_0) + \epsilon \approx 0$. If
+  $V''(x_0) > 0$, $x_0$ is a stable equilibrium point, and particle executes SHM
+  around $x_0$ of the form
+  \begin{equation*}
+    x(t) = x_0 + A\sin\omega t + B\cos\omega t, \qquad
+    \omega^2 = \frac{V''(x_0)}{m}.
+  \end{equation*}
+  On the other hand, if $V''(x_0) < 0$, $x_0$ is unstable, and particle moves
+  away from it as
+  \begin{equation*}
+    x(t) = x_0 + C\ex^{\lambda t} + D\ex^{-\lambda t}, \qquad
+    \lambda^2 = -\frac{V''(x_0)}{m}.
+  \end{equation*}
+  If $V''(x_0)$ then we need to retain higher order terms.
+\end{example}
+
+\begin{example}
+\begin{enumerate}
+  \item Suppose $V(x) = x(x^2 - 1)$, then
+  \begin{equation*}
+    F(x) = -\frac{\mathrm{d}V}{\mathrm{d}x} = -3x^2 - 1 = 0 \qquad \Rightarrow
+    \qquad x = \pm\frac{1}{\sqrt{3}}.
+  \end{equation*}
+  Then since $V''(x) = 6x$, $V''(1/\sqrt{3}) = 2\sqrt{3} > 0$ so $x =
+  1/\sqrt{3}$ is a stable equilibrium. For an object of mass $m$, $\omega^2 =
+  2\sqrt{3}/m$, so the period of oscillation is $T = 2\pi / \sqrt{2\sqrt{3}/m}$.
+  
+  \item A particle of mass $m$ moves along the $x$-axis in potential $V(x) =
+  k(x^2 - 2) \ex^{-2x}$, $k > 0$. The equilibrium point is found as
+  \begin{equation*}
+    0 = V'(x) = 2k\ex^{-2x}(2-x)(1+x)
+  \end{equation*}
+  so it is $x = -1, 2$. Then either by drawing the potential or working out the
+  second derivative, $x=-1$ is the stable equilibrium point. To find the period,
+  let $x = -1 + \epsilon$, then $m\ddot{x} = -V'(x)$ leads to
+  \begin{equation*}
+    m\ddot{\epsilon} = -2k(3-\epsilon)\epsilon \ex^{-2\epsilon + 2}.
+  \end{equation*}
+  Noting that $\ex^{-2\epsilon} = 1 - 2\epsilon + 2\epsilon^2+\ldots$, then the
+  linear term remaining is
+  \begin{equation*}
+    m\ddot{\epsilon} = -2k(3)\epsilon\ex^2 1 = -6k\ex^2 \epsilon.
+  \end{equation*}
+  Then $\omega^2 = 6k\ex^2 / m$ and $T = (2\pi/\ex)\sqrt{m/(6k)}$.
+  
+  What is the escape velocity away from the potential well? We require the
+  initial kinetic energy to be greater than the potential difference involves
+  (at $x=2$) to escape to $+\infty$, i.e.,
+  \begin{equation*}
+    E = mv_0^2 / 2 + V(-1) > V(2)
+  \end{equation*}
+  giving $v_0 > \sqrt{2(V(-2) - V(-1))/m}$, so
+  \begin{equation*}
+    v_0 > \sqrt{\frac{2k}{m}(2\ex^{-4} + \ex^2)}.
+  \end{equation*}
+  Observe that this initial speed of the particle can be towards either
+  direction, and it will still speed off to $+\infty$ eventually.
+\end{enumerate}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Simple pendulum}
+
+For a pendulum of length $\ell$ with mass $m$ on the end hang freely, ignoring
+tension force. Let $\theta$ be the angle from the vertical, then the energy is
+\begin{equation*}
+  E = \mbox{PE} + \mbox{KE} = \frac{1}{2} m(\ell\dot{\theta})^2 - m g \ell (1 -
+  \cos\theta),
+\end{equation*}
+since the vertical displacement from $\theta = 0$ is given by $z = \ell(1 -
+\cos\theta)$, so that $V(z) = mgz = mg\ell(1-\cos\theta)$, and that for angular
+velocity $\dot{\theta}$ on a circle of radius $\ell$, $\vb = \ell\dot{\theta}
+\hat{\eb}_\theta$. We see that $V(\theta)$ has $\theta = 0, \pm\pi$ as
+stationary points, only the former of which is stable.
+
+From $\dot{E} = 0$, the equations of motion are
+\begin{equation*}
+  \ddot{\theta} + \frac{g}{\ell}\sin\theta = 0.
+\end{equation*}
+For $|\theta| \ll 1$, $\sin\theta \approx \theta + O(\theta^3)$, so equation
+reduces to simple harmonic motion with solutions
+\begin{equation*}
+  \theta(t) = A\cos\omega t + B \sin\omega t, \qquad \omega^2 = \frac{g}{\ell}.
+\end{equation*}
+
+%-------------------------------------------------------------------------------
+
+\section{Damped vibrations}
+
+Assume an object of mass $m$ hangs from a spring where the spring has some
+natural length, and denote $x(t)$ as the extension. For a spring with spring
+constant $K$, $x$ evolves as
+\begin{equation*}
+  m\ddot{x} = mg - Kx.
+\end{equation*}
+Since there is no damping and $F(x) = mg - Kx$ is conservation, the equilibrium
+point is $x(t) = mg/k$. Let $u(t) = x(t) - mg/k$, then the perturbation $u(t)$
+evolves as $m\ddot{u} + Ku = 0$, so the solution with $x(0) = 0$ is 
+\begin{equation*}
+  x(t) = \frac{mg}{k} + \sqrt{\frac{2E}{k}} \sin\sqrt{\frac{K}{m}}t,
+\end{equation*}
+with $E$ the energy at equilibrium. The period of oscillation is thus $T =
+2\pi/\omega = 2\pi\sqrt{m/K}$.
+
+Suppose there is friction proportional to velocity, so that
+\begin{equation*}
+  m\ddot{x} = mg - Kx - \Lambda \dot{x},
+\end{equation*}
+where $\Lambda > 0$ is a damping constant. Then an equilibrium solution is still
+$x(t) = mg/K$ but with $\dot{x} = 0$, so the perturbation $u(t)$ now evolves as
+\begin{equation*}
+  m\ddot{u} = -Ku - \Lambda \dot{u}.
+\end{equation*}
+Let $\mu = \Lambda / m$ and $\sigma = K / m$, then we obtain the second order
+ODE
+\begin{equation*}
+  \ddot{u} + \mu\dot{u} + \sigma u = 0.
+\end{equation*}
+The auxiliary equation has solutions
+\begin{equation*}
+  \lambda_\pm = -\frac{\mu}{2} \pm \sqrt{\left(\frac{\mu}{2}\right)^2 - \sigma},
+\end{equation*}
+so that, depending on friction and spring constant, yields real or complex
+solutions.
+
+Suppose damping is small, with $(\mu/2)^2 - \sigma = -\omega^2 < 0$, then
+$\lambda_\pm = -\mu/2 \pm \zi \omega$and solution is
+\begin{equation*}
+  u(t) = \ex^{-\mu t/2}(A \cos\omega t + B \sin \omega t),
+\end{equation*}
+which is a decaying oscillation with period
+\begin{equation*}
+  T = \frac{2\pi}{\omega} = \frac{2\pi}{\sqrt{\sigma - (\mu/2)^2}}.
+\end{equation*}
+
+If damping is large with $(\mu/2)^2 - \sigma = k^2 > 0$, then $\lambda_\pm =
+-(\mu/2) \pm k < 0$, so solutions are
+\begin{equation*}
+  u(t) = A\ex^{\lambda_+ t} + B\ex^{\lambda_- t}, \qquad
+  x(t\to\infty) \to \frac{mg}{K},
+\end{equation*}
+and there are no oscillations at all.
+
+For critical damping, the characteristic equation becomes degenerate and so
+solutions take the form
+\begin{equation*}
+  u(t) = A\ex^{\lambda t} + B t \ex^{\lambda t} \to 0
+\end{equation*}
+as $t\to\infty$, where $\lambda = -\mu/2$. There is a maximum of one
+oscillation. From a practical point of view, shock absorbers on vehicles are set
+slightly sub-critical to give a smooth return to equilibrium position soon, so
+it is ready for the next obstacle. Having it too sub-critical can be a problem
+(e.g. resonance).
+
+%-------------------------------------------------------------------------------
+
+\section{Forcing and resonance}
+
+Consider the forced case of
+\begin{equation*}
+  m\ddot{x} = mg - Kx - \Lambda \dot{x} + D\sin\alpha t.
+\end{equation*}
+Normalising the constants by $m$, and defining $u = x - mg/K$, we obtain
+\begin{equation*}
+  \ddot{u} + \mu \dot{u} + \sigma u = C\sin\alpha t.
+\end{equation*}
+The complementary function always damps to zero as $t\to\infty$, with two
+arbitrary constants fixed by initial conditions. This \Def{transient}
+response vanishes rapidly. On the other hand, the particular integral has the
+form
+\begin{equation*}
+  u_p = A\cos\alpha t + B\sin\alpha t,
+\end{equation*}
+so that
+\begin{equation*}
+  -\alpha^2 B - \mu\alpha A + \sigma B = C, \qquad
+  -\alpha^2 + \mu\alpha B + \sigma A = 0,
+\end{equation*}
+which results in
+\begin{equation*}
+  A = -\frac{\mu\alpha C}{(\sigma - \alpha^2)^2 + (\mu\alpha)^2}, \qquad
+  B = \frac{(\sigma - \alpha^2)C}{(\sigma - \alpha^2)^2 + (\mu\alpha)^2}.
+\end{equation*}
+Hence, independent of initial conditions, the \Def{steady state} response
+is
+\begin{equation*}
+  u(t\to\infty) = \frac{C}{(\sigma - \alpha^2)^2 + (\mu\alpha)^2} \left[
+  (\sigma - \alpha^2)\sin\alpha t - \mu\alpha\cos\alpha t\right],
+\end{equation*}
+which, upon using trigonometric identities, may be written as
+\begin{equation*}
+  u(t\to\infty) = \frac{C \sin(\alpha t - \phi)}{\sqrt{(\sigma - \alpha^2)^2 +
+  (\mu\alpha)^2}}, \qquad \tan\phi = \frac{\mu\alpha}{\sigma - \alpha^2}.
+\end{equation*}
+The \Def{phase difference} $\phi$ is that between the input and output.
+
+If the forcing frequency $\alpha$ changes then the response amplitude is maximum
+if $\alpha^2 = \sigma$, independent of $\mu$. There is thus
+\Def{resonance} if $\alpha = \sqrt{\sigma} = \sqrt{K/m}$, the medium's
+\Def{natural frequency}. At resonance with forcing amplitude $C$, the
+response amplitude is
+\begin{equation*}
+  \frac{C}{\mu\alpha} = \frac{mC}{\Lambda \alpha}, \qquad \phi = \frac{\pi}{2}.
+\end{equation*}
+Note that resonant response may be large if $\Lambda \alpha$ is small.
+
+%-------------------------------------------------------------------------------
+
+\section{Angular momentum}
+
+The radial component of the equation of motion is given by
+\begin{equation*}
+  \rb\times\frac{\mathrm{d}}{\mathrm{d}t}(m\vb) = \rb \times \Fb.
+\end{equation*}
+So then defining the \Def{angular momentum} about $\rb = 0$ to be $\Lb =
+\rb + m\vb$,
+\begin{equation*}
+  \frac{\mathrm{d}\Lb}{\mathrm{d}t}
+    = m\dot{\rb}\times\vb + m\rb\times\dot{\vb}
+    = m\vb\times\vb + \rb\times\Fb = \rb\times\Fb.
+\end{equation*}
+The force $\Fb$ exerts a \Def{torque} or \Def{moment} equal to
+$\rb\times\Fb = 0$ about $\rb = 0$. (Angular momentum about $\rb_0$ is $(\rb -
+\rb_0)\times m\vb$.)
+
+\begin{example}
+  For $\rb = (t, 1, t^2)$, $\vb = (1, 0, 2t)$, so $\Lb = m(2t, -t^2, -1)$.
+\end{example}
+
+Note that angular momentum is associated with \Def{rotation}, as non-zero
+$\Lb$ needs $\vb$ and $\rb$ to be non-parallel, and that $|\Lb|\sim |\vb|$.
+Addition, we have $|\Lb| = m|\rb|~|\vb|\sin\alpha$, and $\Lb\cdot\rb =
+\Lb\cdot\vb = 0$ by definition.
+
+%===============================================================================
+
+\chapter{Central forces}
+
+A \Def{central force} involves attraction or repulsion from a fixed point.
+With that force as the origin, $\Fb$ is parallel to $\rb$ so that $\rb\times\Fb
+= 0$, and thus $\Lb$ is conserved, and motion is in two-dimensions. For $\Fb =
+f(r)\hat{\eb}_r$ where $r = |\rb|$, $f(r) < 0$ represents attraction while $f(r) >
+0$ represents repulsion.
+
+\begin{example}
+  \begin{enumerate}
+    \item Gravitational attraction between two masses $M$ and $m$, with force on
+    $m$ due to $M$ is given by Newton's law
+    \begin{equation*}
+      \Fb = -m\frac{GM}{r^2}\hat{\eb}_r.
+    \end{equation*}
+    Near Earth's surface, $r = R = 6400\ \mathrm{km}$ and $g = 9.81\ \mathrm{m}\
+    \mathrm{s}^{-2}$, so that $g = GM/R^2$. If $m\ll M$ then the bigger mass is
+    essentially unaffected by the interaction, and its centre can be taken as $\rb
+    = 0$.
+    
+    \item In electrostatic interactions, by Coulomb's law, two charges $q$ and
+    $Q$ feel the Coulomb force
+    \begin{equation*}
+      \Fb = \frac{qQ}{r^2}\hat{\eb}_r.
+    \end{equation*}
+  \end{enumerate}
+\end{example}
+Not all forces results in angular momentum being conserved. Friction and the
+electromagnetic force $\Fb = q\vb\times \Bb$ are two examples.
+
+Suppose that $m\ddot{r} = \Fb$ and $\Fb$ is a central force, so that $\Lb =
+\vb\times(m\rb)$ is constant. Since $\Fb$ is along $\rb$, $\ddot{\rb}$ is along
+$\rb$ also. Choose $\Lb\sim\hat{\eb}_z$ and $\hat{\eb}_{x,y}$ fixed. Since $\Fb$
+is a central force, this means it is more natural to take polar co=ordinates
+with $\hat{\eb}_r$ along $\rb$ and $\hat{\eb}_\theta$ perpendicular. So
+then
+\begin{equation*}
+  \hat{\eb}_r = \cos\theta\hat{\eb}_x + \sin\theta \hat{\eb}_y,\qquad
+  \hat{\eb}_\theta = -\sin\theta\hat{\eb}_x + \cos\theta \hat{\eb}_y.
+\end{equation*}
+The disadvantage here is that $\hat{\eb}_{r,\theta}$ are time dependent.
+
+Note then the position, velocity and acceleration are then respectively defined
+by (after repeated use of chain rule)
+\begin{equation*}
+  \rb = r\hat{\eb}_r, \qquad
+  \vb = \dot{r}\hat{\eb}_r + r\dot{\theta}\hat{\eb}_\theta,\qquad
+  \ab = (\ddot{r} - r\dot{\theta}^2)\hat{\eb}_r + 
+    (2\dot{r}\dot{\theta} + r\ddot{\theta})\hat{\eb}_\theta.
+\end{equation*}
+Note that (i) circulation motion is where $r$ is constant, and the expressions
+for $\vb$ and $\ab$ agree since the derivatives of $r$ vanish, and (ii) the
+kinetic energy is given by $E_k = m(\dot{r}^2 + r^2\dot{\theta}^2)/2$.
+
+Furthermore, since $\Fb = f(r)\hat{\eb}_r = m\ab$, the equations separate into a
+radial and transverse part given by
+\begin{equation*}
+  m(\ddot{r} - r\dot{\theta}^2) = f(r), \qquad
+  m(2\dot{r}\dot{\theta} + r\ddot{\theta}) = 0.
+\end{equation*}
+Multiplying the transverse part by $r$, we see that $r^2\dot{\theta}$ is a
+constant of motion. Noting that
+\begin{equation*}
+  \Lb = m\rb\times\dot{\rb} = mr\hat{\eb}_r \times(\dot{r}\hat{\eb}_r +
+  r\dot{\theta}\hat{\eb}_\theta)
+\end{equation*}
+with $\hat{\eb}_r \times \hat{\eb}_\theta = 0$, then $\Lb =
+mr^2\dot{\theta}\hat{\eb}_z$, and so $|\Lb|$ is a constant of motion, which we
+know already. The problem may be be reduced to a one dimensional problem since
+$\dot{\theta} = |\Lb|/(mr^2)$. Indeed, the radial part now becomes
+\begin{equation*}
+  m\left(\ddot{r} - \frac{L^2}{m^2 r^3}\right) = f(r), \qquad
+  \Fb = \frac{L^2}{mr^3} + f(r),
+\end{equation*}
+where $L = |\Lb|$.
+
+\begin{example}
+  A point mass alien of mass $m$ moves under the influence of a force $mc^2a^4 /
+  r^5$, attracting her to some fixed point $O$ at distance $r$. She was set in
+  motion at a distance $r=a$ from $O$, with speed $u$ perpendicular to $\rb$.
+  Show her orbit is circular if $u = c$.
+  
+  Note that for a circular orbit we required $f(r) < 0$. Then, notice that $\Lb
+  = mr^2\dot{\theta} = mr(r\dot{\theta})$ so that $L = mau$. Orbit is circular
+  if $\rb = \ab$ is constant and that $\ddot{r} = 0$. Substituting in gives
+  \begin{equation*}
+    \ddot{r} - \frac{(mau)^2}{m^2 a^3} = -\frac{c^2 a^4}{a^5},
+  \end{equation*}
+  and so $\ddot{r} = 0$ if and only if $c = u$.
+\end{example}
+
+For a central force, note that since $m\ddot{\rb} = f(r)\hat{\eb}_r$,
+\begin{equation*}
+  \frac{1}{2}m\dot{\rb}\cdot\dot{\rb} = \int f(r) \hat{\eb}_r \cdot \dot{\rb}\,
+    \mathrm{d}t.
+\end{equation*}
+For $\dot{\rb} = \dot{r}\hat{\eb}_r + r\dot{\theta}\hat{\eb}_{\theta}$ and
+defining $V(r) = -\int f(r)\, \mathrm{d}r$ so that $f(r) =
+-\mathrm{d}V/\mathrm{d}r$, the energy may be defined as
+\begin{equation*}
+  E = \frac{1}{2} m\left(\dot{r}^2 + r^2\dot{\theta}^2\right) + V(r).
+\end{equation*}
+
+In summary:
+\begin{enumerate}
+  \item $F(\rb) = f(r)\hat{\eb}_r$ results in planar motion perpendicular to the
+  angular momentum vector $\Lb = mr^2\dot{\theta}$;
+  \item the energy is
+  \begin{equation*}\begin{aligned}
+    E &= \frac{1}{2} m\left(\dot{r}^2 + r^2\dot{\theta}^2\right) + V(r)\\
+      &= \frac{1}{2} m\left(\dot{r}^2 + \frac{L^2}{m^2}{r^2}\right) + V(r)
+  \end{aligned}\end{equation*}
+  where $f(r) = -\mathrm{d}V/\mathrm{d}r$ and $\dot{\theta} = L / mr^2$, with
+  $L$ and $E$ fixed by the initial vectors $\rb(0)$ and $\vb(0)$.
+\end{enumerate}
+These are separable first order ODEs for $r(t)$ and $\theta(t)$, describing
+motion in a plane perpendicular to $\Lb$.
+
+\begin{example}
+  Suppose our alien was set in motion at distance $r=a$ with transverse speed
+  $\sqrt{5/8} c$. Find the turning points of her subsequent orbit and show that
+  $r(t)\leq q$.
+  
+  Since $f(r) = mc^2a^4/r^5$, the potential is
+  \begin{equation*}
+    V(r) = -\int f(r)\, \mathrm{d}r = -\frac{Mc^2 a^4}{4r^4}.
+  \end{equation*}
+  With $\vb(0) = \sqrt{5/8}c \hat{\eb}_{\theta}$,
+  \begin{equation*}
+    E = \frac{1}{2}m\frac{5}{8}c^2 - \frac{mc^2a^4}{4a^4} = \frac{1}{16}mc^2,
+    \qquad L = ma\sqrt{\frac{5}{8}}c.
+  \end{equation*}
+  Since $\dot{\theta} = L/(mr^2)$, this gives
+  \begin{equation*}
+    \dot{\theta} = \frac{ac}{r^2}\sqrt{\frac{5}{8}}.
+  \end{equation*}
+  The energy equation $E = (m/2)(\dot{r}^2 + r^2\dot{\theta}^2) + V(r)$
+  then reads
+  \begin{equation*}
+    \frac{1}{6}mc^2 = \frac{1}{2}m \left(\dot{r}^2 + 
+      r^2\frac{a^2 c^2}{r^4}\sqrt{\frac{5}{8}}\right) - \frac{mc^2 a^4}{4r^4}.
+  \end{equation*}
+  This re-arranges to
+  \begin{equation*}
+    \dot{r}^2 = \frac{1}{8}c^2 \left(1 - \frac{a^2}{r^2}\right)
+      \left(1 - \frac{4a^2}{r^2}\right).
+  \end{equation*}
+  At the turning points, $\dot{r}=0$, so the turning points are $r=a, 2a$.
+  However, $\dot{r}^2 < 0$ for $a < r < 2a$ and so $r > a$ is not permitted.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Motion under gravity}
+
+Motion under this particular central force follows the inverse square law where
+\begin{equation*}
+  \Fb = -F\frac{Mm}{r^2} \hat{\eb}_r \qquad\Rightarrow\qquad
+  V(r) = -G \frac{Mm}{r}.
+\end{equation*}
+So over distances with respect to Earth's radius,
+\begin{equation*}
+  E = \frac{1}{2}mv^2 - G\frac{Mm}{r} = \textnormal{constant}.
+\end{equation*}
+If $E<0$, we have \Def{bound orbits}, otherwise we have
+\Def{orbits}.
+
+\begin{example}
+  To work out the escape speed from Earth, suppose a particle of mass $m$ start
+  at $r = R$ with speed $v$ has energy
+  \begin{equation*}
+    E = \frac{1}{2}mv^2 - G\frac{Mm}{R} = \textnormal{constant},
+  \end{equation*}
+  where $M$ is the Earth's mass. To reach $r = \infty$, we need the kinetic term
+  to be larger than the potential term. For $GM = gR^2$, $v\geq \sqrt{2gR}$ is
+  required, which equates to about $v = 11.2\ \mathrm{km}\ \mathrm{s}^{-1}$. It
+  is of interest to note that for any massive body, $v_{E} = \sqrt{2gR}$ is
+  dependent on the planet's size and gravitational field strength, but not on
+  the escaper's mass.
+\end{example}
+
+\begin{example}
+  Show that if $f(r) = -G(Mm/r^2)$, there is a solution to the equation of
+  motion with $r(t) = r_0$, $v(t) = v_0$ describing steady motion around a
+  circle. Express $L$ in terms of $(r_0, v_0$ and show that $E < 0$.
+  
+  Radial equation of motion is $m(\ddot{r} - r^2 \dot{\theta}^2) = -G(Mm/r^2)$,
+  and for steady motion $\ddot{r} = 0$, thus
+  \begin{equation*}
+    m\frac{v_0^2}{r_0} = G\frac{Mm}{r_0^2},
+  \end{equation*}
+  so $L = m r_0 v_0$. For the energy equation,
+  \begin{equation*}
+    E = \frac{1}{2} m v_0^2 - G\frac{Mm}{r_0} = -\frac{1}{2} m v_0^2 < 0.
+  \end{equation*}
+  The circle is covered once in time $T = 2\pi r_0 / v_0$, and so also from the
+  first part,
+  \begin{equation*}
+    T^2 = \frac{2\pi^2 r_0^2}{v_0^2} = \left(\frac{4\pi^2}{GM}\right) r_0^3.
+  \end{equation*}
+  This is \Def{Kepler's third law}, where $T^2\sim r^3$, independent of
+  the satellite.
+\end{example}
+
+\begin{example}[Example: Geostationary satellites]
+  For $T = 24\ \mathrm{hrs}$, using Kepler's third law,
+  \begin{equation*}
+    r_o = \left(\frac{g R^2 T^2}{4\pi^2}\right) \approx 42000\ \mathrm{km}.
+  \end{equation*}
+  So a geostationary satellite occupies an orbit at around 35600 km in the
+  equatorial plane.
+\end{example}
+
+\begin{example}[Example: Hubble space telescope]
+  This is in a low-Earth orbit at an altitude of around 600 km, so the orbital
+  radius is $r_o = 600 + 6400 = 7000\ \mathrm{km}$. Since $T^2$ is proportional
+  to $r^3$, the orbital period of the Hubble telescope is given by
+  \begin{equation*}
+    \left(\frac{T_H}{T_G}\right)^2 = \left(\frac{r_{o,H}}{r_{o,G}}\right)^3
+    \qquad \Rightarrow \qquad
+    T_H = \left(\frac{7000}{420000}\right)^{3/2}\ \mathrm{s} \approx
+    1\ \mathrm{hr}\ 38\ \mathrm{mins}.
+  \end{equation*}
+\end{example}
+
+\begin{example}[Example: Saturn's ``year'' and radius of orbit]
+  Saturn has an orbital period of around 30 years, so $(T_S / T_E)^2 = (r_{o,S}
+  / r_{o, E})^3$ leads to Saturn's orbit being $30^{2/3} \approx 10$ times the
+  Earth's orbital radius (so around 10 AU).
+\end{example}
+
+A mass $m$ may trace out a non-circular orbit around mass $M$ with shape
+characterised by its turning points of $r(t) = |\rb(t)|$. At a turning point,
+$\dot{r} = 0$, and since
+\begin{equation*}
+  E = \frac{m}{2}\left(\dot{r} + r^2 \dot{\theta}^2 \right) - \frac{GMm}{r},
+  \qquad
+  L = mr^2 \dot{\theta}
+\end{equation*}
+are constants with $\dot{\theta} = L / (mr^2)$, we have the following quadratic
+for $r$
+\begin{equation*}
+  Er^2 + GMmr - \frac{L^2}{2m} = 0,
+\end{equation*}
+which has roots $r_{1,2}$ satisfying $E(r - r_1)(r - r_2) = 0$. We see that
+\begin{equation*}
+  r_1 + r_2 = -\frac{GMm}{E}, \qquad r_1 r_2 = -\frac{L^2}{2mE}.
+\end{equation*}
+Thus if $E < 0$, the particle traces an elliptical path with a bounded orbit,
+and if $E > 0$ it traces a hyperbola with an unbounded orbit.
+\begin{example}
+  A spacecraft in a circular Earth orbit at radius $E$ fires its motor very
+  briefly, and increases its speed from $v_0$ to $u$. Find the nature of the
+  subsequent orbit.
+  
+  Before the start of the motor, the speed is $v_0$ so $v_0^2 = GM/D$. Just
+  afterwards, $r = D$, and thereafter, $E = mu^2 / 2 - GMm / D$. At the start of
+  the orbit, the velocity is transverse, and so $L = mr(r\dot{\theta}) = mD u$.
+  Then it may be seen that $r_1 = D$ is a turning point. Then
+  \begin{equation*}
+    r_2 = -\frac{GMm}{E} - r_1 = \ldots = D\frac{u^2}{2v_0^2 - u^2}.
+  \end{equation*}
+  We then note that when $u > v_0$, then $r_2 > D$, and $r_2 \to \infty$
+  as $u^2 \to 2v_0^2 = 2GM/D$. Indeed, when $u^2 > 2v_0^2$, $E > 0$. On the
+  other hand, if $u < v_0$, then $r_2 < D$, and the orbit is bounded. If $v_0
+  \to u$, then $r_2 < r_1$, and if $r_2 < R$, then the spacecraft crashes.
+\end{example}
+
+If an object comes towards $r = 0$ from $r = \infty$ where it has speed $v$ and
+is on a line to miss by $b$ (the \Def{impact parameters}) in the absence
+of gravity, then $L = mbv$ and $E = mv^2 / 2 > 0$. The orbit is open and its
+distance of closest approach $r_{\rm min}$ is then the single positive root of
+\begin{equation*}
+  Er^2 + GMmr - \frac{L^2}{2m} = 0.
+\end{equation*}
+
+\begin{example}[Example: Asteroids]
+  We hope $r_{\rm min} > R$, so that
+  \begin{equation*}
+    Er^2_{\rm min} + GMmr_{\rm min} > ER^2 + GMmR,
+  \end{equation*}
+  or equivalently,
+  \begin{equation*}
+    \frac{L^2}{2m} > ER^2 + GMmR.
+  \end{equation*}
+  Let $GM = gR^2$, then
+  \begin{equation*}
+    \frac{L^2}{m} >: 2R^2 (E + mgR), \qquad L = mbv,
+  \end{equation*}
+  so that for avoiding impact, the impact parameter needs to satisfy
+  \begin{equation*}
+    b > R \sqrt{1 + \frac{2gR}{v^2}}.
+  \end{equation*}
+  Thus the Earth's \Def{gravitational cross-section} at speed $v$ is $\pi
+  R^2 (1+ 2gR / v)$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Kepler's orbits}
+
+Generally speaking $r(t)$ is only solvable in terms of elliptic functions. If
+instead we consider solutions of the form $r(\theta)$ of the particle using
+\begin{equation*}
+  \dot{r} = \dot{\theta} \frac{\mathrm{d}r}{\mathrm{d}\theta} = \frac{L}{mr^2} r'(\theta),
+\end{equation*}
+then
+\begin{align*}
+  E &= \frac{M}{2}\left[\left(\frac{L^2}{mr^2}\right)^2 \left(\frac{\mathrm{d}r}{\mathrm{d}\theta}\right)^2 + r^2 \left(\frac{L^2}{mr^2}\right)^2\right] - \frac{GMm}{r}\\
+  &= \frac{L^2}{2m}\left[\left(\frac{1}{r^2}\frac{\mathrm{d}r}{\mathrm{d}\theta}\right)^2 + \frac{1}{r}^2\right] - \frac{GMm}{r}.
+\end{align*}
+Letting $u = 1/r$, then $\mathrm{d}u/\mathrm{d}\theta = -(1/r^2)
+(\mathrm{d}r/\mathrm{d}\theta)$, so
+\begin{equation*}
+  E = \frac{L^2}{2m} \left[\left(\frac{\mathrm{d}u}{\mathrm{d}\theta}\right)^2 +
+  u^2\right] - GMmu.
+\end{equation*}
+The equation is separable, leading to
+\begin{equation*}
+  \int\; \mathrm{d}\theta = \pm \int \frac{L}{\sqrt{2mE + 2GM^2u - L^2 u^2}}\; \mathrm{d}u.
+\end{equation*}
+Completing the square leads to
+\begin{equation*}
+  \theta - \theta_0 = \pm \int \frac{L}{\sqrt{2mE + (GMm^2 / L)^2 - (GMm^2 / L - L u)^2}}\; \mathrm{d}u.
+\end{equation*}
+Substituting $v = Lu - GMm^2 / L$ and noting that $\int\mathrm{d}x /
+\sqrt{a^2 - x^2} = \mathrm{arcsin}(x/a)$ leads to
+\begin{align*}
+  \theta - \theta_0 &= \pm \int \frac{1}{\sqrt{2mE + (GMm^2 / L)^2 - v^2}}\; \mathrm{d}v\\
+  &= \pm \mathrm{arcsin}\left(\frac{Lu - GMm^2 / L}{\sqrt{2mE + (GMm^2 / L)^2}}\right).
+\end{align*}
+With $\theta_0 = \pi / 2$ unwrapping $u = 1/r$, this results in
+\begin{equation*}
+  \cos\theta \sqrt{2mE + \left(\frac{GMm^2}{L}\right)^2} = \frac{L}{r} -
+  \frac{GMm^2}{L}.
+\end{equation*}
+Rearranging to
+\begin{equation*}
+  \frac{GMm^2}{L^2}\left(\cos\theta\sqrt{1 + \frac{2EL}{G^2M^2m^3}} + 1\right) = \frac{1}{r}
+\end{equation*}
+we have
+\begin{equation*}
+  r = \frac{A}{1 + \epsilon \cos \theta}, \qquad \epsilon = \sqrt{1 + \frac{2EL}{G^2M^2m^3}}, \qquad A = \frac{L^2}{GMm^2},
+\end{equation*}
+where $\epsilon$ is the \Def{eccentricity} of the orbit and $A$ is an
+amplitude.
+
+If $\epsilon = 0$ then we have a circular orbit, and $r = r_0 = A$. The energy
+is
+\begin{equation*}
+  E = -\frac{1}{2}m^3 \left(\frac{GM}{L}\right)^2 = -\frac{1}{2}\frac{GMm}{r_0} < 0.
+\end{equation*}
+
+When $\epsilon < 1$, we note that $E < 0$ and $r(\theta) < \infty$, so there
+have a bounded orbit. We note that the orbit is closed ($r(\theta) = r(\theta +
+2\pi)$), symmetric ($r(\theta) = r(-\theta)$) and that $r$ increases as $\theta
+\to \pi$. Noting that $r_{\rm min/max} = A / (1 \pm \epsilon)$, the orbit is an
+elliptical curve, and is near circular when $\epsilon \approx = 0$. Note that
+$r_{\rm min/max}$ are turning points, and that
+\begin{align*}
+  r_{\rm min} r_{\rm max} &= \frac{A}{1 + \epsilon} \frac{A}{1 - \epsilon} = -\frac{L^2}{2ME},\\
+  r_{\rm min} + r_{\rm max} &= A\left(\frac{2}{1 - \epsilon^2} \right) = -\frac{GMm}{E},
+\end{align*}
+which are consistent with previous calculations.
+
+(For completeness, note that $\epsilon_{\rm Earth} = 0.017$, where as
+$\epsilon_{\textnormal{Halley's comet}} = 0.967$.)
+
+When $\epsilon > 0$, $e > 0$ and we have an open hyperbolic orbit, approaching
+infinity when $\cos \theta \to -1/\epsilon$. When $\epsilon = 1$, this traces
+out instead a parabolic open orbit, approaching infinity when $\theta \to \pi$.
+
+Kepler formulated his three laws of planetary motion:
+\begin{enumerate}
+  \item Planetary orbits are ellipses, with the Sun at one of the focus;
+  \item The radius from the Sun to planet sweeps equal areas in equal time;
+  \item $T^2 = Ka^3$, where $T$ is the planet's period of orbit and $a = (r_{\rm
+  min} + r_{\rm max}) / 2$ is the semi-major axis.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+  \item This is just another way of saying idealised point planets with no
+  mutual interaction.
+  
+  \item The area is $(r/2)r\dot{\theta} = \textnormal{const}$ is equivalent to
+  statement of angular momentum conservation, or saying that the force is
+  central.
+  
+  \item For $0 \leq \epsilon < 1$,
+  \begin{equation*}
+    T = \int\mathrm{d}t = \int_0^{2\pi} \frac{\mathrm{d}\theta}{\dot{\theta}}
+      = \frac{m}{L} \left(\frac{L^3}{2Mm^2}\right) \int_0^{2\pi} \frac{\mathrm{d}\theta}{(1 + \epsilon \cos \theta)^2} = \frac{L^3}{(GM)^2 m^3} \frac{2\pi}{(1 - \epsilon^2)^{3/2}}.
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    a = \frac{r_{\rm min} + r_{\rm max}}{2} = \frac{L^2}{GMm^2} \left(\frac{1}{1 - \epsilon^2}\right), \qquad gR^2 = GM,
+  \end{equation*}
+  this implies that
+  \begin{equation*}
+    T = \frac{L^3}{(GM)^2 m^3} \left(\frac{aGMm^2}{L^2}\right)^{3/2} 2\pi,
+  \end{equation*}
+  so that
+  \begin{equation*}
+    T^2 = \frac{4\pi^2}{GM}a^3 = \frac{4\pi^2}{gR^2} a^3.
+  \end{equation*}
+\end{enumerate}
+\end{proof}
+
+%===============================================================================
+
+\chapter{Vibrating Strings}
+
+Here we mostly deal with the \Def{wave equation}
+\begin{equation*}
+  \ddy{^2 u}{x^2} = \frac{1}{c^2} \ddy{^2 u}{t^2}, 
+    \qquad u = u(x,t), \quad c > 0, \quad c \in \mathbb{R},
+\end{equation*}
+where $u$ is the transverse displacement of an idealised string, $x$ is the
+distance along the string, $t$ is time, and $c$ is the wave speed. This is a
+linear homogeneous partial differential equation, and so can be solved in terms
+of a Fourier series via separation of variables.
+
+%-------------------------------------------------------------------------------
+
+\section{Derivation}
+
+Let $\rho$ be the density and $T$ the tension, considered to be constants. Let
+$u$ be a small transverse displacement from equilibrium, with the line between
+$u(x + \delta x)$ and $u(x)$ connected by a line at angle $\theta$. Then the
+transverse component satisfies
+\begin{equation*}
+  (\rho \delta x) \ddy{^2 u}{t^2} = 
+    (T \sin \theta)_{x + \delta x} - (T \sin \theta)_{x}.
+\end{equation*}
+For small displacement, $\theta$ is small so $\theta \approx \tan\theta = \dy u/
+\dy x$, and
+\begin{equation*}
+  (\rho \delta x) \ddy{^2 u}{t^2} = (T \ddy{u}{x})_{x + \delta x} - (T \ddy{u}{x})_{x}.
+\end{equation*}
+By the Mean Value Theorem,
+\begin{equation*}
+  (\rho \delta x) \ddy{^2 u}{t^2} = T \delta x \left(\ddy{^2 u}{x^2} \right)_{\rm x_c},
+\end{equation*}
+and so as $\delta x \to 0$,
+\begin{equation*}
+  \rho \ddy{^2 u}{t^2} = T \ddy{^2 u}{x^2},
+\end{equation*}
+and with $c^2 = T / \rho$ we obtain the wave equation. Derivation using the
+longitudinal component gives the same PDE.
+
+Solutions of the wave equation takes the form
+\begin{equation*}
+  u(x,t) = f(x - ct) + g(x + ct),
+\end{equation*}
+where $f$ and $g$ are arbitrary functions that are twice differentiable. This may
+be confirmed by substituting in and using the chain rule.
+
+\begin{example}
+  $u(x,t) = x$ and $u(x,t) = t$ are solutions, since
+  \begin{equation*}
+    x = \frac{1}{2}\left((x-ct) + (x+ct)\right), \qquad
+    t = \frac{1}{2}\left((x-ct) - (x+ct)\right)
+  \end{equation*}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Travelling waves}
+
+Consider the case where $u(x,t) = f(x - ct)$. Now, $p = x - ct =
+\textnormal{const}$ on the curve $f(p)$, so $x = \textnormal{const} + ct$, so
+$f(x - ct)$ describes waves travelling towards $x = +\infty$ with speed $c$.
+Conversely, $g(x + ct)$ describe waves travelling towards $x=-\infty$. These
+waves are \Def{non-dispersive}, i.e. the shape of the wave does not change
+overall. Since the PDE is linear and homogeneous, by the
+\Def{superposition principle}, solutions may be built up as linear
+combinations of other solutions; physically, this is the \Def{interference
+of waves}.
+
+%-------------------------------------------------------------------------------
+
+\section{d'Alembert's formula}
+
+The wave $u(x,t)$ is completely determined by specifying the string's initial
+shape and velocity $u(x, 0) = R(x)$ and $u_t (x,y) = S(x)$.
+
+From $u(x,y) = f(x-ct) + g(x+ct)$, we have $u_t (x,t)= -cf'(x-ct) + cg'(x+ct)$,
+so that
+\begin{equation*}
+  R(x) = f(x) + g(x), \qquad S(x) = -cf'(x) + cg'(x).
+\end{equation*}
+Then rearranging gives
+\begin{equation*}
+  -\frac{1}{c}\int_a^x S(z)\; \mathrm{d}z = f(x) - g(x),
+\end{equation*}
+so that
+\begin{align*}
+  f(x) &= \frac{1}{2}\left( R(x) - \frac{1}{c} \int_a^x S(z)\; \mathrm{d}z\right) 
+       = \frac{1}{2}\left( R(x) + \frac{1}{c} \int_x^a S(z)\; \mathrm{d}z\right),\\
+  g(x) &= \frac{1}{2}\left( R(x) + \frac{1}{c} \int_a^x S(z)\; \mathrm{d}z\right).
+\end{align*}
+So that
+\begin{equation*}
+  u(x,t) = \frac{1}{2}\left(R(x-ct) + R(x+ct) + \frac{1}{c} \int_{x-ct}^{x+ct} S(z)\; \mathrm{d}z\right).
+\end{equation*}
+
+\begin{example}
+For a plucked string, $S(x) = 0$, so
+\begin{equation*}
+  u(x,t) = \frac{1}{2}\left(R(x-ct) + R(x+ct) \right).
+\end{equation*}
+Waves go either side from original position with half the magnitude. For a
+struck string with $R(x) = 0$,
+\begin{equation*}
+  u(x,t) = \frac{1}{c} \int_{x-ct}^{x+ct} S(z)\; \mathrm{d}z.
+\end{equation*}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Finite string}
+
+d'Alembert's formular does not include any boundary conditions; on a finite
+string the spreading waves may bounce back and forth. Consider an ideal string,
+with density $\rho$ under tension $T$ between fixed points a distance $L$ apart.
+We aim to solve
+\begin{equation*}
+  \ddy{^2 u}{x^2} = \frac{1}{c^2}\ddy{^2 u}{t^2}, \qquad
+  u(0,t) = u(L,t) = 0,
+\end{equation*}
+with the initial conditions $u(x, 0) = R(x)$ and $u_t (x, 0) = S(x)$.
+
+For \Def{separation of variables}, consider solutions of the form
+\begin{equation*}
+  u(x, t) = \sum_{i=1}^\infty X_i(x) T_i(t).
+\end{equation*}
+The idea is that each product term itself solves the PDE, and we construct all
+solutions by the principle of linear superposition. We observe that
+\begin{equation*}
+  \frac{1}{X_i}\ddy{^2 X_i}{x^2} = \frac{1}{c^2}\frac{1}{T_i}\ddy{^2 T_i}{t^2} = K,
+\end{equation*}
+where $K$ is a \Def{constant of separation} (since LHS is a function of
+$x$ only and RHS is a function of $t$ only, they equal when they are a
+constant). For boundary conditions to be obeys, $K < 0$, so taking $K =
+-k^2$ results in
+\begin{equation*}
+  \ddy{^2 X_k}{x^2} - k X_k = 0, \qquad
+  \ddy{^2 T_k}{t^2} - ck T_k = 0.
+\end{equation*}
+So the individual solutions are
+\begin{equation*}
+  u_k(x,t) = \left(A \sin kx + B\cos kx\right) \left(C \sin kct + D\cos kct\right).
+\end{equation*}
+To satisfy the spatial boundary conditions, $B = 0$ for all $k$, while $kL =
+n\pi$ for $n \in \mathbb{N}$, so
+\begin{equation*}
+  u(x, t) = \sum_{n=1}^\infty \sin\frac{n\pi x}{L} \left(a_n \cos\frac{n\pi ct}{L} + b_n \sin \frac{n\pi ct}{L} \right),
+\end{equation*}
+and the constants $a_n$ and $b_n$ are determined by the initial conditions:
+with
+\begin{equation*}
+  R(x) = \sum_{n=1}^\infty a_n \sin \frac{n\pi x}{L}, \qquad
+  S(x) = \sum_{n=1}^\infty b_n \frac{n\pi c}{L}\sin \frac{n\pi x}{L},
+\end{equation*}
+the coefficients are obtained by noting the orthogonality relations of of
+trigonometric functions, so
+\begin{equation*}
+  a_n = \frac{2}{L} \int_0^L R(x) \sin\frac{n\pi x}{L}\; \mathrm{d}x, \qquad
+  b_n = \frac{2}{n\pi c} \int_0^L S(x) \sin\frac{n\pi x}{L}\; \mathrm{d}x.
+\end{equation*}
+
+\begin{example}
+An ideal string, fixed at $x = 0, L$ is pulled aside a distance $h$ at its
+midpoint ($x = L / 2$) into a triangular shape, and released from rest.
+
+Since $S(x) = 0$, $b_n = 0$. On the other hand,
+\begin{equation}
+  R(x) = 
+  \begin{cases}
+    2h x / L, & \quad 0 < x < L/2\\
+    2h(L - x) / L, & L / 2 < x < L.
+  \end{cases}
+\end{equation}
+Now, $R(x)$ is even about $x = L / 2$, and thus $R(x) \sin n\pi x /L$ is odd
+about $x = L / 2$ for even $n$ and even about $x = L / 2$ for odd $n$, so the
+coefficients $a_n$ are zero when $n$ is odd. Thus
+\begin{align*}
+  a_n &= 2 \frac{2}{L} \int^{L/2}_0 2h \frac{x}{L} \sin\frac{n\pi x}{L}\; \mathrm{d}x \\
+  &= \frac{8 h}{L^2}\left[\frac{L}{2}\left(-\frac{L}{n\pi}\right)\cos\frac{n\pi}{2} +
+  \left(\frac{L}{n\pi}\right)^2 \sin\frac{n\pi}{2}\right]
+\end{align*}
+for $n = 2k+1$. Thus the full solution is
+\begin{equation*}
+  u(x, t) = \frac{8h}{\pi^2} \sum_{k=0}^\infty \frac{(-1)^k}{(2k + 1)^2} 
+    \sin\frac{(2k+1) \pi x}{L}\cos\frac{(2k+1) \pi ct}{L}.
+\end{equation*}
+\end{example}
+
+\begin{example}
+If $R(x) = \sin(5\pi x / L)$ and $S(x) = 0$, then the only non-zero coefficient
+is $a_5 = 1$, and the solution is $u(x, t) = \sin(5\pi x/L)\sin(5\pi ct / L)$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Standing waves}
+
+Taking the case $S(x) = 0$, the solution is
+\begin{align*}
+  u(x,t) &= \sum_{n=1}^\infty a_n \sin\frac{n\pi x}{L} \cos\frac{n\pi ct}{L}\\
+  &= \frac{1}{2} \sum_{n=1}^\infty a_n\left(\sin\frac{n\pi (x-ct)}{L} + \sin\frac{n\pi (x+ct)}{L}\right)
+\end{align*}
+by trigonometric identities. Each term in the sum (the \Def{harmonic}) is
+a pair of left and right propagating waves, reflected to and fro and
+\Def{superimposed} to give a \Def{standing wave}.
+
+A standing wave has $x$ dependence but is otherwise independent of $t$. The
+factor $\sin(n\pi x / L)$ gives $n+1$ \Def{nodes} (the zeros), and the
+wave has \Def{wavelength} $\lambda$ where $L = n\lambda / 2$. Each
+harmonic has \Def{angular frequency} $\omega = n\pi c/ L$, with $c =
+\sqrt{T / \rho}$.
+
+%===============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% r.5 contents
+%\tableofcontents
+
+%\listoffigures
+
+%\listoftables
+
+% r.7 dedication
+%\cleardoublepage
+%~\vfill
+%\begin{doublespace}
+%\noindent\fontsize{18}{22}\selectfont\itshape
+%\nohyphenation
+%Dedicated to those who appreciate \LaTeX{} 
+%and the work of \mbox{Edward R.~Tufte} 
+%and \mbox{Donald E.~Knuth}.
+%\end{doublespace}
+%\vfill
+
+% r.9 introduction
+% \cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% actual useful crap (normal chapters)
+\mainmatter
+
+%\part{Basics (?)}
+
+
+%\backmatter
+
+%\bibliography{refs}
+\bibliographystyle{plainnat}
+
+%\printindex
+
+\end{document}
+
