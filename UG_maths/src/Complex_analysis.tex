@@ -1088,8 +1088,115 @@ obvious...)
 \end{proof}
 
 \begin{example}
+By Cauchy's theorem, $\oint_{|z| = 1} z^n\; \mathrm{d}z = 0$ for all $n \geq 0$.
+On the other hand, Cauchy's theorem doesn't tell us anything if $n < 0$ because
+$f(z)$ is then not holomorphic at $z=0$. However, the above integral is zero for
+all $n \neq -1$ by the fundamental theorem of calculus since a primitive exists
+and is well-defined on the contour.
 
+If $\gamma$ is some contour not enclosing $z = 0$, then $\oint_\gamma z^n\;
+\mathrm{d}z = 0$ for all $n \geq 0$.
 \end{example}
+
+\begin{example}
+  For $\oint_\gamma \exp[\cos z^3]\; \mathrm{d}z$, while we can't directly find
+  a primitive of the integrand, since the integrand is a composite of
+  holomorphic functions, the integrand is holomorhpic, and the integral is zero
+  by Cauchy's theorem.
+\end{example}
+
+\begin{example}
+  It can be shown that if the curve $\gamma$ encloses $z=0$, then $\oint_\gamma
+  z^{-1}\; \mathrm{d}z = 2\pi \zi$. Consider the curve \TODO picture. If the gap
+  between the `cut' is small enough, the line integrals going into the unit
+  circle cancels each other, giving
+  \begin{equation*}
+    \oint_\mu \frac{1}{z}\; \mathrm{d}z = \oint_\gamma \frac{1}{z}\; \mathrm{d}z - \oint_{|z| = 1} \frac{1}{z}\; \mathrm{d}z.
+  \end{equation*}
+  By Cauchy's theorem, $\oint_\mu \frac{1}{z}\; \mathrm{d}z = 0$, so then
+  \begin{equation*}
+    \oint_\gamma \frac{1}{z}\; \mathrm{d}z = \oint_{|z| = 1} \frac{1}{z}\; \mathrm{d}z = 2\pi \zi.
+  \end{equation*}
+\end{example}
+
+Note that Cauchy's theorem holding implies $\oint_\gamma f(z)\; \mathrm{d}z =
+0$, which implies the primitive of $f(z)$ exists, and vice-versa. Although this
+of course does not mean we can write the primitive down in closed form.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Cauchy's integral formula}
+
+Consider how many times a contour $\gamma$ winds around a point $z_0$ \TODO picture
+
+More formally, let $\gamma$ be a closed curve in $\mathbb{C}$ and $z_0 \in
+\mathbb{C}$ be a point not on $\gamma$. The \Def{winding number} of $\gamma$
+with respect to $z_0$ is
+\begin{equation}
+  I(\gamma; z_0) = \frac{1}{2\pi\zi} \oint_\gamma \frac{\mathrm{d}z}{z - z_0}.
+\end{equation}
+
+\begin{theorem}
+  Let $\gamma : [a,b]$ be a (piece-wise) closed curve and $z_0$ not on $\gamma$.
+  Then $I(\gamma; z_0) \in \mathbb{Z}$.
+\end{theorem}
+\begin{proof}
+  Consider.
+  \begin{equation*}
+    g(t) = \int_a^t \frac{\gamma'(s)}{\gamma(s) - z_0}\; \mathrm{d}s.
+  \end{equation*}
+  At points where the integrand is continuous, by the fundamental theorem of
+  calculus, we have
+  \begin{equation*}
+    g'(t) = \frac{\gamma'(t)}{\gamma(t) - z_0} \quad \Rightarrow \quad \frac{\mathrm{d}}{\mathrm{d}t} \ex^{-g(t)}[\gamma(t) - z_0] = 0
+  \end{equation*}
+  for all $t$ such that $g'(t)$ exists. Since the time-derivative of the
+  continuous function is zero, the function is constant and equal to
+  $\ex^{-g(a)}[\gamma(a) - z_0]$. By a similar argument, we must have
+  \begin{equation*}
+    \ex^{-g(a)}[\gamma(a) - z_0] = \ex^{-g(b)}[\gamma(b) - z_0],
+  \end{equation*}
+  but since $\gamma(a) = \gamma(b)$ as $\gamma$ is closed, $\ex^{-g(a)} =
+  \ex^{-g(b)}$. However, $g(a) = 0$, so $g(b) = 2\pi n\zi$ for $n\in\mathbb{Z}$,
+  and so
+  \begin{equation*}
+    I(\gamma; z_0) = \frac{1}{2\pi\zi}g(b) = n.
+  \end{equation*}
+  \qed
+\end{proof}
+
+\begin{theorem}[Cauchy's integral formula]
+  Let $f$ be holomorphic on a region $A$ which encloses $\gamma$, a closed curve
+  in $A$ (or, \emph{homotopic} to a point). Let $z_0 \in A$ not be a point on
+  $\gamma$, then
+  \begin{equation*}
+    f(z_0) I(\gamma; z_0) = \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z.
+  \end{equation*}
+  So if $\gamma$ is in addition a simple closed curve, then
+  \begin{equation*}
+    f(z_0) 2\pi\zi = \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z.
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    g(z) = \begin{cases} \cfrac{f(z) - f(z_0)}{z - z_0}&, z \neq z_0,\\
+      f'(z)&, z = z_0.\end{cases}
+  \end{equation*}
+  Since $f$ is differentiable at $z_0$, it is continuous there. The function $g$
+  is thus holomorphic maybe except at $z_0$, so by a version of Cauchy's theorem
+  with $z_0$ deleted,
+  \begin{equation*}
+    0 = \oint_\gamma g(z)\; \mathrm{d}z = \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z - \oint_\gamma \frac{f(z_0)}{z - z_0}\; \mathrm{d}z,
+  \end{equation*}
+  so then
+  \begin{equation*}
+    \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z = f(z_0) \oint_\gamma \frac{1}{z - z_0}\; \mathrm{d}z = f(z_0) I(\gamma; z_0) 2\pi\zi,
+  \end{equation*}
+  and the result follows. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Residue theorem}
