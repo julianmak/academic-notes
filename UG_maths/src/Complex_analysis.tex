@@ -1054,7 +1054,7 @@ of integrals along each individual differentiable curve.
 
 %-------------------------------------------------------------------------------
 
-\subsection{Cauchy's theorem and residue theorem}
+\subsection{Cauchy's theorem and corollaries}
 
 Cauchy's theorem is one of the centre pieces of complex analysis. Before the
 statement, we need an extra tool from topology regarding simple closed curves.
@@ -1123,10 +1123,6 @@ Note that Cauchy's theorem holding implies $\oint_\gamma f(z)\; \mathrm{d}z =
 0$, which implies the primitive of $f(z)$ exists, and vice-versa. Although this
 of course does not mean we can write the primitive down in closed form.
 
-%-------------------------------------------------------------------------------
-
-\subsection{Cauchy's integral formula}
-
 Consider how many times a contour $\gamma$ winds around a point $z_0$ \TODO picture
 
 More formally, let $\gamma$ be a closed curve in $\mathbb{C}$ and $z_0 \in
@@ -1169,13 +1165,13 @@ with respect to $z_0$ is
   Let $f$ be holomorphic on a region $A$ which encloses $\gamma$, a closed curve
   in $A$ (or, \emph{homotopic} to a point). Let $z_0 \in A$ not be a point on
   $\gamma$, then
-  \begin{equation*}
+  \begin{equation}
     f(z_0) I(\gamma; z_0) = \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z.
-  \end{equation*}
+  \end{equation}
   So if $\gamma$ is in addition a simple closed curve, then
-  \begin{equation*}
-    f(z_0) 2\pi\zi = \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z.
-  \end{equation*}
+  \begin{equation}
+    2\pi\zi f(z_0) = \oint_\gamma \frac{f(z)}{z - z_0}\; \mathrm{d}z.
+  \end{equation}
 \end{theorem}
 
 \begin{proof}
@@ -1197,9 +1193,138 @@ with respect to $z_0$ is
   and the result follows. \qed
 \end{proof}
 
+\begin{example}
+  Taking $z_0 = 0$, we have
+  \begin{equation*}
+    \oint_{|z| = 1} \frac{\cos z}{z}\; \mathrm{d}z = 2\pi\zi \cos(0) = 2\pi\zi.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  \begin{align*}
+    \oint_{|z| = 2} \frac{(z+1) \sin z}{(z-3)(z-1)}\; \mathrm{d}z &= \oint_{|z| = 2} \frac{(z+1) \sin z}{z-3}\frac{1}{z-1}\; \mathrm{d}z \\
+      &= -2\pi\zi \sin 1.
+  \end{align*}
+\end{example}
+
+\begin{example}
+  Making use of partial fractions, we have
+  \begin{align*}
+    \oint_{|z| = 4} \frac{2\ex^z}{z^2 - 4z + 3}\; \mathrm{d}z &= \oint_{|z| = 4} \left(\frac{\ex^z}{z - 3} - \frac{\ex^z}{z - 1}\right)\; \mathrm{d}z \\
+      &= 2\pi\zi (\ex^3 - 1).
+  \end{align*}
+\end{example}
+
+Note that, by defining $f(w) = (2\pi\zi)^{-1}\oint_\gamma f(z)/(z-w)\;
+\mathrm{d}z$ for all $w$ inside the bounding curve $\gamma$, this shows that
+holomorphic functions $f(z)$ is completely determined inside $\gamma$ by its
+value of the boundary curve $\gamma$. Additionally, note that if $\gamma$ is the
+circle of radius $r > 0$ centred on $w$, then since we can parameterise the
+curve as $\gamma(t) = w + r\ex^{\zi t}$ for $t\in[0, 2\pi]$, so
+\begin{align*}
+  f(w) = \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z - w}\; \mathrm{d}z &= \frac{1}{2\pi\zi} \int_0^{2\pi} \frac{f(w + r\ex^{\zi t})}{w + r\ex^{\zi t} - w} \zi r\ex^{\zi t}\; \mathrm{d}t\\
+    &= \frac{1}{2\pi} \int_0^{2\pi} f(w + r \ex^{\zi t})\; \mathrm{d}t,
+\end{align*}
+which is the average value of $f(z)$ on $\gamma$.
+
+Taking $f(w)$ as above, and differentiating with respect to $w$, we get
+\begin{align*}
+  f'(w) &= \frac{1}{2\pi\zi} \oint_\gamma \frac{\mathrm{d}}{\mathrm{d}w} \frac{f(z)}{z - w}\; \mathrm{d}z\\
+    &= 1\times \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{(z - w)^2}\; \mathrm{d}z.
+\end{align*}
+It can be shown that, by induction,
+\begin{equation}
+  f^{(n)} = \frac{n!}{2\pi\zi} \oint_\gamma \frac{f(z)}{(z - w)^{n+1}}\; \mathrm{d}z.
+\end{equation}
+
+\begin{example}
+  For
+  \begin{equation*}
+    \oint_{|z|=1} \frac{\ex^{3z}\cos z}{z^2}\; \mathrm{d}z,
+  \end{equation*}
+  we note that we can define $f(z) = \ex^{3z}\cos z$ and $w=0$, which tells us
+  \begin{align*}
+    \oint_{|z|=1} \frac{\ex^{3z}\cos z}{z^2}\; \mathrm{d}z &= \frac{2\pi\zi f'(0)}{1!} \\
+      &= 2\pi\zi \left.(3\ex^{3z}\cos z - \ex^{3z}\sin z)\right|_{z = 0} \\
+      &= 6\pi\zi.
+  \end{align*}
+\end{example}
+
+The following theorem is a converse to Cauchy's theorem.
+\begin{theorem}[Morera's theorem]
+  Let $f(z)$ be defined on an open subset $D \subset \mathbb{C}$ and is
+  continuous in $D$. If $\oint_\gamma f(z)\; \mathrm{d}z = 0$ for all simple and
+  closed $\gamma$ in $D$, then $f(z) $ is holomorphic.
+\end{theorem}
+
+\begin{proof}
+  By the fundamental theorem of calculus, since $\oint_\gamma f(z)\; \mathrm{d}z
+  = 0$ if and only if there exists a primitive $F'(z) = f(z)$ in $D$. By
+  Cauchy's theorem for derivatives, $F(z)$ is twice differentiable (in fact
+  infinitely differentiable) by Taylor's theorem (see next one), hence $f(z)$
+  itself is differentiable on $D$ and therefore holomorphic. \qed
+\end{proof}
+
+\begin{theorem}[Taylor's theorem]
+  Let $f(z)$ be holomorphic on $|z - z_0| < R$ (i.e. within the disk of
+  convergence) for some $R > 0$. Then $f(z)$ is infinitely differentiable and
+  \begin{equation}
+    f(z) = \sum^\infty_{n=0} \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n, \qquad |z - z_0| < R.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  By renaming the variable and choosing $z_0 = 0$ for simplicity, let 
+  \begin{equation*}
+    f(w) = \sum^\infty_{n=0} \frac{f^{(n)}(0)}{n!} w^n.
+  \end{equation*}
+  By Cauchy's integral formula, for a curve $\gamma$ within the disk of
+  convergence, we have
+  \begin{align*}
+    f(w) &= \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z - w}\; \mathrm{d}z\\
+      &= \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z (1 - w/z)}\; \mathrm{d}z.
+  \end{align*}
+  The factor in the denominator is a sum of a geometric series, i.e.,
+  \begin{align*}
+    f(w) = \frac{1}{2\pi\zi} \oint_\gamma \frac{f(z)}{z} \sum^\infty_{n=0} \left(\frac{w}{z}\right)^n\; \mathrm{d}z.
+  \end{align*}
+  Since we are in the disk of convergence, we have uniform convergence, so we
+  can swap the sum and integral, leading to
+  \begin{align*}
+    f(w) &= \sum^\infty_{n=0} \frac{1}{n!} \frac{n!}{2\pi\zi} \oint_\gamma \frac{f(z)}{z} \left(\frac{w}{z}\right)^n\; \mathrm{d}z \\
+      &= \sum^\infty_{n=0} \frac{w^n}{n!} \frac{n!}{2\pi\zi} \oint_\gamma \frac{f(z)}{z^{n+1}}\; \mathrm{d}z\\
+      &= \sum^\infty_{n=0} \frac{w^n}{n!} f^{(n)}(0)
+  \end{align*}
+  by Cauchy's formula for derivatives. Therefore $f(z)$ itself is clearly
+  infinitely differentiable since it has a Taylor expansion within the disk of
+  convergence.
+  \qed
+\end{proof}
+
+\begin{corollary}
+  If $f(z)$ and $g(z)$ is holomorphic on some disc $D \subset \mathbb{C}$ and
+  agree on some disk $K \subset D$, then they agree on the whole of $D$.
+\end{corollary}
+\begin{proof}
+  By Taylor's theorem, $f(z)$ and $g(z)$ are limits of the same power series, so
+  $f(z) = g(z)$. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Residue theorem}
+
+We say a function $h(z)$ has a \Def{zero of order $r$} at $z=z_0$ if
+
+\begin{equation*}
+  h(z_0) = h'(z_0) = \ldots = h^{(r-1)}(z_0) = 0, \qquad h^{(r)}(z_0) \neq 0.
+\end{equation*}
+
+\begin{example}
+  $z^n$ clearly has a zero of order $n$ at $z = 0$, which $z \sin z$ has zeroes
+  of order $1$ at $z = m \pi$ for $m \in \mathbb{Z} \ \{0\}$ and a zero of order
+  2 at $z = 0$.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
