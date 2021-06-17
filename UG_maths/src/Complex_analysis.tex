@@ -1326,6 +1326,84 @@ We say a function $h(z)$ has a \Def{zero of order $r$} at $z=z_0$ if
   2 at $z = 0$.
 \end{example}
 
+\begin{lemma}
+  If complex functions $h(z)$ and $m(z)$ have a zero of order $r$ and $s$
+  respectively at $z=z_0$, then $h(z)m(z)$ has a zero of order $r + s$ at
+  $z=z_0$. \qedwhite
+\end{lemma}
+
+(Try product rule followed by induction for example.)
+
+\begin{lemma}
+  If $h(z)$ has a zero of order $r$ at $z=z_0$, then $h(z) = (z-z_0)^r k(z)$ for
+  some holomorphic function $k(z)$ where $k(z_0) \neq 0$.
+\end{lemma}
+
+\begin{proof}
+  By Taylor expansion,
+  \begin{align*}
+    h(z) &= \frac{h^{(r)}(z_0)}{r!} (z-z_0)^r + \frac{h^{(r+1)}(z_0)}{(r+1)!} (z-z_0)^{r+1} + \ldots\\
+      &= (z-z_0)^r \left[\frac{h^{(r)}(z_0)}{r!} + \frac{h^{(r+1)}(z_0)}{(r+1)!} + \ldots\right]\\
+      &=(z-z_0)^r k(z),
+  \end{align*}
+  with $k(z)$ defined according to the Taylor expansion, and it is clear that
+  $k(z_0) \neq 0$ since the first term is the Taylor expansion is not zero. \qed
+\end{proof}
+
+\begin{lemma}
+  Suppose we now have a function $f(z) = g(z) / h(z)$ where $g(z)$ is
+  holomorphic at $z=z_0$, but $h(z_0) = 0$. If $h(z)$ has a zero of order $r$ at
+  $z=z_0$, then $f(z)$ may be written as
+  \begin{equation*}
+    f(z) = \frac{c_{-r}}{(z-z_0)^r} + \frac{c_{-r+1}}{(z-z_0)^{r-1}} + \ldots + c_0 + c_1 (z-z_0) + \ldots,
+  \end{equation*}
+  with some constants $c_i$.
+\end{lemma}
+
+\begin{proof}
+  By the previous lemma, since $h(z) = (z-z_0) k(z)$, then
+  \begin{equation}
+    f(z) = \frac{1}{(z-z_0)^r}\left(\frac{g(z)}{k(z)}\right).
+  \end{equation}
+  Since $k(z_0) \neq 0$, $g(z) / h(z)$ is holomorphic, and can be represented as
+  a power series about $z=z_0$ by Taylor's expansion. \qed
+\end{proof}
+
+The previous series is called a \Def{Laurent series} of $f(z)$ about the
+singularity $z=z_0$. If $f(z)$ is represented by such a series, then $z_0$ is
+called a \Def{pole} of $f(z)$, and the highest power of $1/(z-z_0)$ is called
+the \Def{order} of the pole.
+
+\begin{example}
+  The function $f(z) = (3z-1) / (z \sin z)$ has a pole of order 2 at $z=0$, and
+  poles of order $1$ at $z = m\pi$, for $m \in \mathbb{Z}$.
+  
+  On the other hand, the function $f(z) = \cos z / (z^4 \sin^2 z)$ has a pole of
+  order 6 at $z=0$ and poles of order 2 at $z=m\pi$ for $m \in \mathbb{Z}
+  \setminus \{0\}$, since $\cos m\pi \neq 0$ for all $m \in \mathbb{Z}$.
+\end{example}
+
+In general, if $f(z) = g(z) / h(z)$, and if $g(z)$ has a zero of order $r$ at
+$z=z_0$ but $h(z_0) \neq 0$, then $f(z)$ has a zero of order $r$ at $z=z_0$. If
+$g(z)$ has a zero of order $r$ and $h(z)$ has a zero of order $s$ at $z=z_0$,
+and $s \leq r$, then $z_0$ is a \Def{removable singularity}, in that the Laurent
+series of $f(z)$ about $z=z_0$ has no negative powers of $(z-z_0)$, so may be
+ignored. If on the other hand $r < s$, then $f(z)$ has a pole of order $s-r$ at
+$z=z_0$.
+
+\begin{lemma}
+  Assume $\gamma$ is a simple and closed contour, and $f(z)$ has a singularity
+  inside $\gamma$. Then by integrating its Laurent series we get, by Cauchy's
+  theorem,
+  \begin{equation*}
+    \oint_\gamma f(z)\; \mathrm{d}z = 2\pi\zi c_{-1}.
+  \end{equation*}
+   \qedwhite
+\end{lemma}
+
+Here $c_{-1}$ is called the \Def{residue} of the pole of $f(z)$ at $z=z_0$,
+sometimes denoted as $\mbox{Res}(f; z_0)$. There are two cases where the
+residues of $f(z)$ are relative easy to compute for:
 %-------------------------------------------------------------------------------
 
 \section{Applications for real integrals}
