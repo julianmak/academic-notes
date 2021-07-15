@@ -595,19 +595,131 @@ appropriate curve in phase space.
   \end{equation*}
   where $Z_i$ is the intensive variables associated with the entropy.
   
+  Recall that $Y_i = -T Z_i$ and $\mathrm{d}U = T\ \mathrm{d}S + Y_i\
+  \mathrm{d}X_i$, which implies the first relation via substitution and
+  integration. Differentiating the first relation leads to
+  \begin{equation*}
+    \mathrm{d}S = U\ \mathrm{d}\left(\frac{1}{T}\right) + \frac{1}{T}\ \mathrm{d}U + X_i\ \mathrm{d}Z_i + Z_i\ \mathrm{d}Z_i,
+  \end{equation*}
+  and upon using the first law by substituting $\mathrm{d}S$ leads to the second
+  relation.
+  
   \item For an ideal gas, given $PV = nRT$ and $U = (3/2)RNT$, where $R$ is the
   universal gas constant, derive the associated \Def{entropic fundamental
   relation} $S(U,V,N)$.
 
+  To make the equation more exact, consider scaling by $N$ as $u = U/N$, $v =
+  V/N$, which leads to
+  \begin{equation*}
+    Pv = RT, \qquad u = \frac{3}{2}RT.
+  \end{equation*}
+  Note that we have
+  \begin{itemize}
+    \item $X_i$: $V$, $N$;
+    \item $Y_i$: $-P$, $\mu$,
+    \item $Z_i$: $P/T$, $-\mu / T$.
+  \end{itemize}
+  Using the Gibbs--Duhem relation and scaling by $N$ leads to
+  \begin{equation*}
+    u\ \mathrm{d}\left(\frac{1}{T}\right) + v\ \mathrm{d}\left(\frac{P}{T}\right) = \mathrm{d}\left(\frac{\mu}{T}\right).
+  \end{equation*}
+  By computing the relevant derivatives, we have
+  \begin{equation*}
+    \mathrm{d}\left(\frac{\mu}{T}\right) = -\frac{3R}{2}\frac{\mathrm{d}u}{u} - R\frac{\mathrm{d}v}{v},
+  \end{equation*}
+  which upon integrating leads to
+  \begin{equation*}
+    \frac{\mu}{T} = \frac{3R}{2} \log\frac{u}{u_0} - R \log\frac{v}{v_0}.
+  \end{equation*}
+  Using Euler's relation in the form
+  \begin{equation*}
+    S = \frac{1}{T}U + \frac{P}{T}V - \frac{\mu}{T}N,
+  \end{equation*}
+  substituting accordingly results in
+  \begin{equation*}
+    S(U,V,N) = \frac{5}{2}NR + NR \log\left(\frac{u^{3/2}v}{u_0^{3/2}v}\right).
+  \end{equation*}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 
 \subsection{Thermodynamic potentials}
 
+Recall that the Legendre transform of a given function $f(x,y)$ is achieved via
+the consideration of
+\begin{equation*}
+  \mathrm{d}f = \frac{\partial f}{\partial x}\mathrm{d}x + \frac{\partial f}{\partial y}\mathrm{d}y \equiv u(x,y)\ \mathrm{d}x + v(x,y)\ \mathrm{d}y.
+\end{equation*}
+To define $f$ as a function of $u$ rather than $x$, consider
+\begin{equation*}
+  g(v,y) = f - ux,
+\end{equation*}
+which then implies
+\begin{equation*}
+  \mathrm{d}y = \mathrm{d}f - u\ \mathrm{d}x - x\ \mathrm{d}u = v\ \mathrm{d}y - x\ \mathrm{d}u,
+\end{equation*}
+where $v = \partial g / \partial y$ and $x - \partial g / \partial u$.
+
+The Legendre transform is an involute transformation of real valued convex
+functions in one dimension, such that their derivatives of the original and
+transformed functions are inverses of each other. Physically is used to convert
+functions of one quantity to a function of its conjugate variable (e.g. position
+to momenta, pressure to volume, temperature to entropy, and vice-versa). The
+\Def{thermodynamic potentials} are Legendre transforms of $U$ with respect to
+the various extensive parameters. Some important ones are:
+\begin{itemize}
+  \item \textbf{Helmholtz free energy}, which is the transformation of $U$
+  with respect to $S$, given by
+  \begin{equation}
+    F(T, X_i) = U - T.
+  \end{equation}
+  
+  \item \textbf{Enthalpy}, which is the transformation of $U$
+  with respect to $V$, given by
+  \begin{equation}
+    H(P, S, X_i) = U + PV.
+  \end{equation}
+  
+  \item \textbf{Gibbs free energy}, which is the transformation of $U$
+  with respect to $S$ and $V$, given by
+  \begin{equation}
+    G(T, X_i) = U - TS + PV.
+  \end{equation}
+\end{itemize}
+\marginnote{These could be thought of as the capacity to do mechanical and
+non-mechanical work ($F$), to do non-mechanical work and release heat ($H$),
+capacity to do non-mechanical (reversible) work ($G$), and capacity to do work
+and release heat $U$.} Sometimes it is easier to consider these potentials
+instead of directly trying to find the measurements for the extensive
+parameters. Which one we choose depends on how the system is described. For
+example, if it is natural to vary $T$ for example, then we consider $F$.
+
+\begin{example}
+Show that $\mathrm{d}F = -S\ \mathrm{d}T + Y_i\ \mathrm{d}X_i$.
+
+From the definition of the Helmholtz free energy,
+\begin{align*}
+  \mathrm{d}F &= \mathrm{d}U - T\ \mathrm{d}S - S\ \mathrm{d}T\\
+    &= (T\ \mathrm{d}S + Y_i\ \mathrm{d}X_i) - T\ \mathrm{d}S - S\ \mathrm{d}T\\
+    &= -S\ \mathrm{d}T + Y_i\ \mathrm{d}X_i.
+\end{align*}
+
+Since $\mathrm{d}F = (\partial F / \partial T)\ \mathrm{d}T + (\partial F /
+\partial X_i)\ \mathrm{d}X_i$, we note that
+\begin{equation}
+  -S(T, X_i) = \frac{\partial F}{\partial T}, \qquad Y_i(T, X_i) = \frac{\partial F}{\partial X_i},
+\end{equation}
+and similar identities hold for the other thermodynamic potentials, i.e., from
+the thermodynamic potentials you can derive essentially all the things you want
+to know.
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \subsection{Maxwell relations}
+
+For simplicity, we concentrate on a system with extensive parameters $U$, $S$,
+$V$ and $N$.
 
 %-------------------------------------------------------------------------------
 
