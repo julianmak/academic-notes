@@ -305,9 +305,9 @@
   \item It is sometimes said that there are probably two ways to approach
   thermodynamics: start from classical thermodynamics first, or start from a
   stat mech approach. These notes take the latter approach. From a physical
-  understanding point of view (and my personal point of view), these particular
-  notes might be more informative / useful if the intended user already has some
-  exposure already to the traditional way of approaching thermodynamics.
+  understanding point of view, these particular notes might be more informative
+  / useful if the intended user already has some exposure already to the
+  traditional way of approaching thermodynamics.
   \item[]
   \item \TODO diagrams
   \item \TODO to possibly merge in some other notes (e.g. expand a bit more on
@@ -332,6 +332,10 @@ under the License.
 \chapter{Classical thermodynamics}
 
 The aim is to describe thermodynamics in \Def{equilibrium}.
+
+%-------------------------------------------------------------------------------
+
+\subsection{Postulates and definitions}
 
 \Def{Extensive variables} $X_i$ of a thermodynamic system are those that depend
 and scales proportionally to the system size. The set of all extensive variables
@@ -486,7 +490,8 @@ From this, we note that
   \end{equation}
 \end{itemize}
 All signs are by convention. Occasionally, we employ the \Def{inverse
-temperature} variable $\beta$ given by
+temperature}\sidenote{Sometimes this is defined with a factor of the Boltzmann
+constant $k_B$, i.e. $\beta = (k_B T)^{-1}$.} variable $\beta$ given by
 \begin{equation}
   \beta = \frac{1}{T} = \frac{\partial S}{\partial U}.
 \end{equation}
@@ -518,18 +523,123 @@ in equilibrium. A quasi-static process is \Def{adiabatic} if the system does not
 exchange heat with its surroundings, i.e. $\mathrm{d}S = 0$ along the
 appropriate curve in phase space.
 
-\begin{example}[Ideal gas]
-Consider an \Def{ideal gas}\sidenote{Randomly moving point particles that are
-not subject to inter-particle interactions.} in equilibrium, which is made to
-undergo a quasi-static expansion from $V_i$ to $V_f$ adiabatically. During this
-process, $PV^\gamma = \textnormal{constant}$, where $\gamma$ is some number (the
-\Def{adaibatic index} or the \Def{heat capacity ratio}). We aim to calculated
-the change in internal energy of the gas, and the work done and heat absorbed by
-the gas when it goes from $(P_i, V_i)$ to $(P_f, V_f)$.
+%-------------------------------------------------------------------------------
 
-% expand at constant P, then decreasing P at constant V
-\end{example}
+\subsection{Some examples}
+
+\begin{enumerate}
+  \item Consider an \Def{ideal gas}\sidenote{Randomly moving point particles
+  that are not subject to inter-particle interactions.} in equilibrium, which is
+  made to undergo a quasi-static expansion from $V_i$ to $V_f$ adiabatically.
+  During this process, $PV^\gamma = \textnormal{constant}$, where $\gamma$ is
+  some number (the \Def{adaibatic index} or the \Def{heat capacity ratio}). We
+  aim to calculate the change in internal energy of the gas, and the work done
+  and heat absorbed by the gas when it goes from $(P_i, V_i)$ to $(P_f, V_f)$.
+
+  Starting from the first law with $\mathrm{d}U = T\ \mathrm{d}S - P\
+  \mathrm{d}V$, since the process is adiabatic, $\mathrm{d}S = 0$, so $\mathrm{d}U
+  = - P\ \mathrm{d}V$. By assumption,
+  \begin{equation*}
+    PV^\gamma = P_i V_i^\gamma = C \qquad \Rightarrow \qquad P = \frac{P_i
+    V_i^\gamma}{V^\gamma},
+  \end{equation*}
+  so integrating gives
+  \begin{align*}
+    \Delta U = U_f - U_i &= \int_{V_i}^{V_f} - \frac{P_i V_i^\gamma}{V^\gamma}\; \mathrm{d}V \\
+      &= -P_i V_i^\gamma \left[\frac{V^{-\gamma + 1}}{-\gamma + 1}\right]^{V_f}_{V_i}\\
+      &= \frac{P_f V_f - P_i V_i}{\gamma - 1}
+  \end{align*}
+  via using $P_i V_i^\gamma = P_f V_f^\gamma$.
+
+  \item From $S \sim (UVN)^{1/3}$, derive the equation of state.
+
+  This is asking for the intensive variables and their relations to the
+  extensive variables. For some constant $c$, we have $U = cS^3 / (VN)$, so
+  \begin{equation*}
+    T = \frac{\partial U}{\partial S} = \frac{3cS^2}{VN}, \quad
+    P = -\frac{\partial U}{\partial V} = \frac{cS^3}{V^2 N}, \quad
+    \mu = \frac{\partial U}{\partial N} = -\frac{cS^3}{VN^2}.
+  \end{equation*}
+
+  \item Derive the \Def{Euler relation}
+  \begin{equation}
+    U(S, X_i) = TS + X_i Y_i,
+  \end{equation}
+  where $Y_i$ are the intensive variables associated with $X_i$ via the internal
+  energy (instead of a entropy).
+
+  Since $U$ is extensive, we have $U(\lambda S, \lambda X_i) = \lambda U(S,
+  X_i)$ by homogeneity, so by chain rule and taking a derivative with respect to
+  $\lambda$,
+  \begin{equation*}
+    \frac{\partial U}{\partial (\lambda S)}(\lambda S, \lambda X_i) \frac{\partial (\lambda S)}{\partial \lambda} + \frac{\partial U}{\partial (\lambda X_i)}(\lambda S, \lambda X_i) \frac{\partial (\lambda X_i)}{\partial \lambda} = U(S, X_i).
+  \end{equation*}
+  If we set $\lambda = 1$, then the result follows on noting $\partial U /
+  \partial S = T$, and $\partial U / \partial X_i = Y_i$.
+
+  \item Prove the \Def{Gibbs--Duhem relation}
+  \begin{equation}
+    S\ \mathrm{d}T + X_i\ \mathrm{d}Y_i = 0.
+  \end{equation}
+
+  Differentiating the Euler relation leads to
+  \begin{equation*}
+    \mathrm{d}U = T\ \mathrm{d}S + S\ \mathrm{d}T + X_i\ \mathrm{d}Y_i + Y_i\ \mathrm{d}X_i,
+  \end{equation*}
+  and since the first law tells us $\mathrm{d}U = T\ \mathrm{d}S + Y_i\
+\mathrm{d}X_i$, the result follows.
+
+  \item Show that the Euler and Gibbs--Duhem relations can be written as
+  \begin{equation*}
+    S = \frac{1}{T} U + Z_i X_i, \qquad U\ \mathrm{d}\left(\frac{1}{T}\right) + X_i\ \mathrm{d}Z_i = 0,
+  \end{equation*}
+  where $Z_i$ is the intensive variables associated with the entropy.
+  
+  \item For an ideal gas, given $PV = nRT$ and $U = (3/2)RNT$, where $R$ is the
+  universal gas constant, derive the associated \Def{entropic fundamental
+  relation} $S(U,V,N)$.
+
+\end{enumerate}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Thermodynamic potentials}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Maxwell relations}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Phase transitions}
+
 %===============================================================================
+
+\chapter{Ensembles}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Recap on probability and classical mechanics}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Microcanonical ensemble}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Canonical ensemble}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Ideal gas example}
+
+%===============================================================================
+
+\chapter{Quantum statistics}
+
+%===============================================================================
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
