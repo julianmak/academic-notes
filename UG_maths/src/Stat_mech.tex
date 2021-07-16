@@ -310,6 +310,7 @@
   traditional way of approaching thermodynamics.
   \item[]
   \item \TODO diagrams
+  \item \TODO probably wants more context...
   \item \TODO to possibly merge in some other notes (e.g. expand a bit more on
   classical thermodynamics; or maybe not and keep it separate to highlight
   differences in approach)
@@ -714,24 +715,216 @@ the thermodynamic potentials you can derive essentially all the things you want
 to know.
 \end{example}
 
-%-------------------------------------------------------------------------------
+From the thermodynamic potentials, one can derive the \Def{Maxwell relations},
+which essentially relate the second derivatives of the potentials. For
+simplicity, we concentrate on a system with extensive parameters $U$, $S$, $V$
+and $N$. Recall that $\mathrm{d}U = T\ \mathrm{d}S - P\ \mathrm{d}V + \mu\
+\mathrm{d}N$, so that
+\begin{equation*}
+  T = \left.\frac{\partial U}{\partial S}\right|_{V, N}, \qquad
+  P = -\left.\frac{\partial U}{\partial V}\right|_{S, N}, \qquad
+  \mu = \left.\frac{\partial U}{\partial N}\right|_{S, V}.
+\end{equation*}
+Assuming we have the relevant conditions required for partial derivatives to
+commute, then we would have for example
+\begin{equation*}
+  \left.\frac{\partial T}{\partial V}\right|_N = \frac{\partial}{\partial V}\left.\frac{\partial U}{\partial S}\right|_N = \frac{\partial}{\partial S}\left.\frac{\partial U}{\partial V}\right|_N = -\left.\frac{\partial P}{\partial S}\right|_N,
+\end{equation*}
+and many others. These can also be derived from $F$, $H$ and $G$ via
+\begin{align*}
+  \mathrm{d}F &= -S\ \mathrm{d}T - P\ \mathrm{d}V + \mu\ \mathrm{d}N,\\
+  \mathrm{d}H &= +T\ \mathrm{d}S + V\ \mathrm{d}P + \mu\ \mathrm{d}N,\\
+  \mathrm{d}G &= -S\ \mathrm{d}T + V\ \mathrm{d}P + \mu\ \mathrm{d}N.
+\end{align*}
 
-\subsection{Maxwell relations}
+In general, Maxwell relatives are reflective of the symmetry properties of the
+physical quantities. We have
+\begin{equation}
+  \frac{\partial Y_i}{\partial X_j} = \frac{\partial X_i}{\partial Y_j}, \qquad
+  \frac{\partial Y_i}{\partial Y_j} = -\frac{\partial X_j}{\partial X_i}.
+\end{equation}
 
-For simplicity, we concentrate on a system with extensive parameters $U$, $S$,
-$V$ and $N$.
-
-%-------------------------------------------------------------------------------
-
-\subsection{Phase transitions}
+Some useful physical quantities arising from the thermodynamic potentials are as
+follows:
+\begin{itemize}
+  \item \Def{Specific heat}, defined as
+  \begin{equation}
+    c = T \frac{\partial S}{\partial T}.
+  \end{equation}
+  For the specific heats we need to specify which quantities are being held fix.
+  For example, if have hold volume fixed ($\mathrm{d}V = 0$), then
+  \begin{equation}
+    c_V = \left. T\frac{\partial S}{\partial T}\right|_V = \left. -T\frac{\partial^2 F}{\partial T^2}\right|_V.
+  \end{equation}
+  On the other hand, if we hold pressure fixed ($\mathrm{d}P = 0$), then we have
+  \begin{equation}
+    c_P = \left. T\frac{\partial S}{\partial T}\right|_P = \left. -T\frac{\partial^2 G}{\partial T^2}\right|_P,
+  \end{equation}
+  and note the appearance of the Gibbs instead of Helmholtz free energy
+  appearing here. Note also that $\gamma = c_P / c_V$.
+  
+  \item The \Def{susceptibility} (variation of extensive quantity with the
+  corresponding intensive quantity) is defined as
+  \begin{equation}
+    \chi = \frac{\partial X}{\partial Y},
+  \end{equation}
+  for conjugate $X$ and $Y$.
+  
+  \item The \Def{compressibility} is defined as
+  \begin{equation}
+    \kappa = -\frac{1}{V}\frac{\partial V}{\partial P}.
+  \end{equation}
+  
+  \item The \Def{coefficient of thermal expansion} is defined as
+  \begin{equation}
+    \alpha = \frac{1}{V}\frac{\partial V}{\partial T}.
+  \end{equation}
+\end{itemize}
 
 %===============================================================================
 
 \chapter{Ensembles}
 
+An \Def{(statistical) ensemble} considers a collection of a large (possibly
+infinite) number of virtual copies all at once, each of which represents a
+possible state that the real system might be in, and we consider obtaining the
+statistics of the ensemble\sidenote{Concept introduced by Gibbs.}. An ensemble
+can be thought of as a probability distribution for the state of the system.
+
 %-------------------------------------------------------------------------------
 
-\subsection{Recap on probability and classical mechanics}
+\subsection{Recap on probability}
+
+Recall that, for a random variable $X$, the \Def{$m^{\textnormal{th}}$ moment of
+probability} is defined as
+\begin{equation}
+  \overline{X^m} = \langle X^m \rangle = \begin{cases} \sum_{i=1}^n x_i^m p(x_i), & X \textnormal{ discrete} \\ \int x^m p(x)\; \mathrm{d}x, & X \textnormal{ continuous},\end{cases}
+\end{equation}
+where $p$ are the relevant probability density functions (pdfs). For example,
+the usual mean (expectation) and variance are the first and second central
+moments respectively, i.e.
+\begin{equation*}
+  \mathbb{E}(X) = \mu = \langle X \rangle, \qquad \textnormal{Var}(X) = \sigma^2 = \langle (X - \mathbb{E}(X))^2 \rangle = \langle X^2 \rangle - \langle X \rangle^2.
+\end{equation*}
+
+The \Def{moment generating function} is then defined as
+\begin{equation}
+  M(t) = \int \mathrm{e}^{xt} p(x)\; \mathrm{d}x = \sum_{n=0}^\infty \frac{t^n}{n!}\langle x^n\rangle.
+\end{equation}
+The moments are then computed by evaluating derivatives of $M(t)$ at $t=0$
+accordingly, i.e. $\langle x^n\rangle = M^{(n)}(0)$.
+
+A \Def{Bernoulli random variable} $X$ is one that can only take two different
+values, and thus follow the \Def{binomial distribution}
+\begin{equation}
+  X\sim \mbox{B}(n, p_0), \qquad P(X = k) = \begin{pmatrix}n \\ k\end{pmatrix} p_0^k (1 - p_0)^{n-k},
+\end{equation}
+for some specified $p_0$. The binomial distribution can be viewed as a Bernoulli
+trial repeated $n$ times. The binomial distribution has some special limits:
+\begin{itemize}
+  \item for $n\gg 1$ and $p_0 \ll 1$ such that $n p_0 = \lambda < \infty$, we
+  tend to the \Def{Poisson distribution}
+  \begin{equation}
+    \frac{\lambda^k \mathrm{e}^{-\lambda}}{k!} = P(X = k), \qquad X \sim \mbox{Po}(\lambda).
+  \end{equation}
+  
+  \item for $n\gg 1$, by the \Def{central limit theorem}, we tend to the
+  \Def{Gaussian distribution} 
+  \begin{equation}
+    \frac{1}{\sqrt{2\pi\sigma^2}}\mathrm{e}^{-(x - \mu)^2 / (2\sigma^2)} = p(x), \qquad X \sim \mbox{N}(\mu, \sigma).
+  \end{equation}
+\end{itemize}
+
+\begin{theorem}[Central limit theorem]
+Let $\{X_k\}$ be a sequence of mutually independent, identically distributed
+random variable whose mean and variance are defined as $\mu = \langle X \rangle$
+and $\sigma^2 = \langle (X - \mu)^2 \rangle$. If $S_n = \sum X_k$ then, for all
+$x \in \mathbb{R}$,
+\begin{equation*}
+  \lim_{n\to\infty} P\left(\frac{S_n - n\mu}{\sqrt{n\sigma^2}} < X\right) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x \mathrm{e}^{-u^2/2}\; \mathrm{d}u,
+\end{equation*}
+where $u$ is a re-scaled variable. \qedwhite
+\end{theorem}
+
+\begin{example}
+(\textbf{1d random walk}) At every point on $\mathbb{Z}$, one can move left with
+probability $p_L = p$ and to the right with $p_R = 1 - p_L$. Starting from
+$x=0$, the probability of finding the object at $x=m\in \mathbb{Z}$ after $N$
+steps is given by a binomial distribution. Suppose we move $n_L$ steps left and
+a $n_R$ steps right, then we have $n_L + n_R = N$ and $m = n_R - n_L$. Thus the probability of object being at $x=m$ after $N$ steps is given by
+\begin{equation*}
+  P(X = m) = \begin{pmatrix}N \\ n_R\end{pmatrix} p_R^{n_R} p_L^{n_L} = \begin{pmatrix}N \\ (N+m)/2\end{pmatrix} p^{(N-m)/2} (1-p)^{(N+m)/2}.
+\end{equation*}
+It is clear that if $p=1/2$, then $\langle X_N\rangle = 0$, otherwise there is a
+bias towards one direction.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Recap on classical mechanics}
+
+For a given \Def{macrostate} $(N, V, E)$, at any given time $t$, is equally
+likely to be in any one of an extremely large number of distinct
+\Def{microstates}, specified by the instantaneous position and momenta of all
+particles that constitute the system. As time passes, a system evolves through
+distinct microstates, and we aim to obtain the long time behaviour via averaging
+the microstates. One possible way is to consider an ensemble of copies
+characterised by the same macrostate, but ranging over microstates. Assuming
+ergodicity, time averaging corresponds to ensemble averaging, and we can decide
+to take one or the other depending on which is more convenient.
+
+Recall that, given a Lagrangian $L(q, \dot{q}; t)$, where $q$ is a generalised
+co-ordinate and dot denotes a partial time derivative, the Euler--Lagrange
+equations are given by
+\begin{equation}
+  \frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} = 0,
+\end{equation}
+which is a set of $n$ second order ODEs that determines all $q_i(t)$ given $2n$
+initial conditions. By defining the conjugate momenta variable as $p_i =
+\partial L / \partial \dot{q}_i$, we consider the Legendre transform of the
+Lagrangian
+\begin{equation*}
+  H(q, p; t) = \sum_i \dot{q}_i p_i - L(q, \dot{q}; t),
+\end{equation*}
+where $H$ is the Hamiltonian, which can be interpreted as the total energy in a
+system. The Hamilton--Jacobi equations are then
+\begin{equation}
+  \dot{q}_i = \frac{\partial H}{\partial p_i}, \qquad \dot{p_i} = -\frac{\partial H}{\partial q_i},
+\end{equation}
+and now we have instead $2n$ first order ODEs. Time evolution of the system is
+then defined by the trajectory in the $(q,p)$ phase space.
+
+In general, we want to consider many particles in $d$ dimensions interacting in
+a complicated fashion. We will generally be interested in the behaviour of the
+system in some narrow range of energies $H(p,q) \in (E-\delta E, E+\delta E)$.
+An ensemble will then be represented by a ``swarm'' of representative points
+moving on the phase space. We define a \Def{density function} $\rho(p,q,;t)$ as
+a measure of how the members of the ensemble are distributed over all possible
+microstates at different instances of time. For infinitesimal volume
+$\mathrm{d}\omega$, $\rho\ \mathrm{d}\omega$ gives the number of representative
+points around some specified $(p,q)$. We this, we define the \Def{ensemble
+average} of a function $f(p,q)$ as
+\begin{equation}
+  \langle f \rangle = \frac{\int f(p, q) \rho(p, q; t)\; \mathrm{d}\omega}{\int \rho(p, q; t)\; \mathrm{d}\omega}.
+\end{equation}
+The ensemble is said to be \Def{stationary} if $\rho$ is time independent. This
+describes a system in equilibrium.
+
+\begin{theorem}[Liouville's theorem]
+The local density of points in the phase space $\rho$, as seen by a co-moving
+observe along the point's trajectory, stays constant in time, i.e.
+\begin{equation*}
+  \frac{\mathrm{d}\rho}{\mathrm{d}t} = \frac{\partial \rho}{\partial t} + \{q, H\} = 0,
+\end{equation*}
+where $\{\cdot,\cdot\}$ is the Poisson bracket. \qedwhite
+\end{theorem}
+
+Following from Liouville's theorem, if a system is in equilibrium, $\partial
+\rho / \partial t = 0$, so that
+\begin{equation*}
+  \{q, H\} = \frac{\partial \rho}{\partial q_i} \dot{q}_i + \frac{\partial \rho}{\partial p_i} \dot{p}_i = 0,
+\end{equation*}
+which greatly reduces the arbitrary nature of $\rho$.
 
 %-------------------------------------------------------------------------------
 
