@@ -638,7 +638,7 @@ appropriate curve in phase space.
   \end{equation*}
   substituting accordingly results in
   \begin{equation*}
-    S(U,V,N) = \frac{5}{2}NR + NR \log\left(\frac{u^{3/2}v}{u_0^{3/2}v}\right).
+    S(U,V,N) = \frac{5}{2}NR + NR \log\left(\frac{u^{3/2}v}{u_0^{3/2}v_0}\right).
   \end{equation*}
 \end{enumerate}
 
@@ -898,7 +898,7 @@ In general, we want to consider many particles in $d$ dimensions interacting in
 a complicated fashion. We will generally be interested in the behaviour of the
 system in some narrow range of energies $H(p,q) \in (E-\delta E, E+\delta E)$.
 An ensemble will then be represented by a ``swarm'' of representative points
-moving on the phase space. We define a \Def{density function} $\rho(p,q,;t)$ as
+moving on the phase space. We define a \Def{density function} $\rho(p,q;t)$ as
 a measure of how the members of the ensemble are distributed over all possible
 microstates at different instances of time. For infinitesimal volume
 $\mathrm{d}\omega$, $\rho\ \mathrm{d}\omega$ gives the number of representative
@@ -929,6 +929,166 @@ which greatly reduces the arbitrary nature of $\rho$.
 %-------------------------------------------------------------------------------
 
 \subsection{Microcanonical ensemble}
+
+Mathematically, we assume the density function $\rho(q,p;t)$ is constant in the
+accessible regions of the phase space. Physically, we assume we have a
+completely isolated system with some Hamiltonian $H$. We want to fix the total
+energy to be $E_0$, and allow for some fluctuations of size $\delta E$ around
+$E_0$. Since the density function $\rho(p,q;t)$ gives the probability of finding
+the representative points at $(q,p)$ in the ensemble, the \Def{microcanonical
+ensemble} $\Sigma_{M}$ corresponds to having equal probability of finding any
+specific microstate in the energy range $(E_0 \pm \delta E)$.
+
+\begin{example}
+  For $\delta E =0 $, we constrain the available region of phase space to the
+  hyperspace $H = E_0$, i.e. $\rho(q,p;t) \propto \delta (H(q,p) - E_0)$.
+\end{example}
+
+In general, we define
+\begin{equation}
+  \Omega(E_0, \delta E) = \sum_n \int^{E_0 + \delta E}_{E_0 - \delta E} \delta(E_n - E)\; \mathrm{d}E,
+\end{equation}
+which is the number of microstates in the energy band $(E_0 \pm \delta E)$.
+Here, $E_n$ is the energy of the $n$ microstate, and equal probabilities imply
+that the probability of finding a state with energy $E_n$ is
+\begin{equation*}
+  p_n = \int^{E_0 + \delta E}_{E_0 - \delta E} \frac{\delta (E_n - E)}{\Omega(E_0, \delta E)}\; \mathrm{d}E.
+\end{equation*}
+
+Note that $\Sigma_M$ is assumed to be a stationary ensemble, so the ensemble
+average must be time-independent. Let $\overline{f}$ denote the ensemble average
+of $f$, and $\langle f\rangle_t$ denote the time average of $f$, then
+\begin{equation*}
+  \overline{f} = \langle \overline{f}\rangle_t = \overline{\langle f\rangle_t} = \langle f\rangle_t,
+\end{equation*}
+and this is the long time average of $f$ and corresponds to the value one would
+obtain on making an appropriate measurement of $f$.
+
+Knowledge of the number of microstates of the system enables us to define the
+entropy using the \Def{Boltzmann formula}
+\begin{equation}
+  S = k_B \log \Omega,
+\end{equation}
+where $k_B$ is the \Def{Boltzmann constant}\sidenote{$k_B = 1.380649\times
+10^{-23}\ \textnormal{J}\ \textnormal{K}^{-1}$}.
+To motivate this formula, consider two systems $\mathcal{S}_{1,2}$, each of
+which is separately in equilibrium with energies $E_{1,2}$ and number of
+microstates as $\Omega_1(E_1)$ and $\Omega_2(E_2)$. Bringing the two systems
+together and letting them equilibrate, the total energy $E = E_1 + E_2$ stats
+constant and the number of total microstates for the combined system is
+\begin{equation*}
+  \Omega(E_1, E_2) = \Omega_1 (E_1) \Omega_2 (E_2) = \Omega_1 (E_1) \Omega_2 (E - E_2) \equiv \Omega(E, E_1).
+\end{equation*}
+We postulate that the energy distribution between the system occurs in such a
+way so as to maximise the total number of microstates of the combined system.
+Suppose equilibrium values of the energies are labelled as $E_{1, \mathrm{eq}}$
+and $E_{2, \mathrm{eq}}$, then, by chain rule and definition of $E_2$,
+\begin{align*}
+  0 = \left.\frac{\partial \Omega}{\partial E_1}\right|_{E_{1, \mathrm{eq}}} &= \left[\frac{\partial \Omega_1}{\partial E_1} \Omega_2 (E_2)\right]_{E_{1, \mathrm{eq}}} + \left[\frac{\partial \Omega_2}{\partial E_2} \Omega_1 (E_1) \frac{\partial E_2}{\partial E_1}\right]_{E_{2, \mathrm{eq}}} \\
+    & = \left[\frac{\partial \Omega_1}{\partial E_1} \Omega_2 (E_2)\right]_{E_{1, \mathrm{eq}}} - \left[\frac{\partial \Omega_2}{\partial E_2} \Omega_1 (E_1)\right]_{E_{2, \mathrm{eq}}},
+\end{align*}
+and since $\Omega_{1,2} \neq 0$, this implies
+\begin{equation*}
+  \left.\frac{\partial \Omega_1}{\partial E_1}\right|_{E_{1, \mathrm{eq}}} = \left.\frac{\partial \Omega_2}{\partial E_2}\right|_{E_{2, \mathrm{eq}}}.
+\end{equation*}
+This means that the condition of equilibrium boils down to the quantity
+\begin{equation}
+  \beta \equiv = \frac{\partial \Omega}{\partial E},
+\end{equation}
+which is to be constant throughout the system. It is natural to associate
+$\beta$ with $(k_B T)^{-1}$, since
+\begin{equation*}
+  \left.\frac{\partial S}{\partial E}\right|_{V,N} = \frac{1}{T} = k_B \beta.
+\end{equation*}
+
+Let the total number of states accessible to a system with energy less than or
+equal to $E$ be
+\begin{equation*}
+  \Sigma (E) = \int_0^E \Omega(E')\; \mathrm{d}E',
+\end{equation*}
+and let the \Def{density of states} be
+\begin{equation}
+  D(E) = \frac{\mathrm{d}\Sigma(E)}{\mathrm{d}E}.
+\end{equation}
+
+\begin{example}
+For an ideal gas, consider $N$ free gas particles of mass $m$ in a volume $V$
+with total energy $E$. To calculate the entropy of this system, note that the
+canonical Hamiltonian for this system is
+\begin{equation*}
+  H = \sum_{i=1}^N \frac{|p_i|^2}{2m},
+\end{equation*}
+implying
+\begin{equation*}
+  \Sigma(E) = \int_{H \leq E} \frac{\mathrm{d}\omega}{\omega_0},
+\end{equation*}
+where $\omega_0$ is the volume occupied by a single microstate\sidenote{It turns
+out $\omega_0 = h^{3N}$ in 3-space, where $h$ is the Planck's constant.}. We
+need to convert the integral over volume in phase space to be specified in terms
+of $E$. For this, note that
+\begin{equation*}
+  \mathrm{d}\omega = \prod^{3N}_{i=1}\ \mathrm{d}q_i\ \mathrm{d}p_i = V^N\ \prod^{3N}_{i=1}\mathrm{d}p_i,
+\end{equation*}
+\end{example}
+so that
+\begin{equation*}
+  \Sigma(E) = \frac{V^N}{\omega_0} \int_R \prod^{3N}_{i=1}\ \mathrm{d}p_i = \frac{V^N}{\omega_0}\ \mbox{vol}\left(S_r^{3N-1}\right),
+\end{equation*}
+where $R = \{ p_i | \sum^N_{i=1} |p_i|^2 \leq 2m E\}$, and $S_r^{3N-1}$ is the
+$(3N-1)$-sphere of radius $r$. Now, it can be shown that the $(n-1)$-sphere of
+unit radius has area
+\begin{equation*}
+ \mbox{area}\left(S_1^{n-1}\right) = \frac{2\pi^{n/2}}{\Gamma(n/2)}
+\end{equation*}
+where $\Gamma$ is the gamma-function. So then
+\begin{align*}
+  \mbox{vol}\left(S_r^{3N-1}\right) = \int_0^r \mbox{area}\left(S_\rho^{n-1}\right)\; \mathrm{d}\rho &= \mbox{area}\left(S_1^{n-1}\right) \int_0^r \rho^{n-1}\; \mathrm{d}\rho \\
+    &= \frac{2\pi^{n/2}}{\Gamma(n/2)}\frac{r^n}{n},
+\end{align*}
+from which it follows that, taking $r = (2mE)^{1/2}$ (because $R$ is a sphere of
+radius $(2mE)^{1/2}$
+\begin{equation*}
+  \Sigma(E) = \frac{V^N}{h^{3N}}\frac{\pi^{3N/2}}{\Gamma(3N/2)}\frac{(2mE)^{3N/2}}{3N/2}.
+\end{equation*}
+For some small $\delta$ shell, we have the following relation
+between $\Sigma(N,V,E)$ and $\Omega(N,V,E,\delta)$:
+\begin{equation*}
+  \Omega \approx \frac{\partial \Sigma}{\partial E}\delta \approx \frac{3N}{2} \frac{\delta}{E}\Sigma
+\end{equation*}
+arguing that $3N \approx 3N-1$ for $N \gg 1$. So we have
+\begin{equation*}
+  \log \Omega \approx \log\Sigma + \log\frac{3N}{2} + \log\frac{\delta}{E}.
+\end{equation*}
+For $N\gg1$ the last term can be dropped but the ordering between the first and
+second term is not obvious. However, using \Def{Sterling's formula} where
+\begin{equation}
+  \log N! \approx N \log N - N \qquad \textnormal{for}\qquad N\gg1,
+\end{equation}
+noting that $\Gamma(N) \sim N!$, we have that
+\begin{align*}
+  \log \Sigma &\approx N\left[\log \left(\frac{2m\pi EV^{2/3}}{h^2}\right)^{3/2} - \frac{3}{2}\log\frac{3N}{2} + \frac{3}{2} + O\left(\frac{\log N}{N}\right)\right] \\
+    &= O(N\log N),
+\end{align*}
+so we have $\log \Omega \sim \log \Sigma$ for $N\gg1$. After tidying up factors,
+we obtain \marginnote{Note normally there should be a $1/N!$ factor in the
+normalisation to account for the fact that particles are indistinguishable,
+which would then modify the resulting formula for the entropy given here to have
+the order one constant going from $3/2$ to $5/2$, and $V$ replaced by $V/N$,
+resulting in the \Def{Sackur--Tetrode equation}. As given here without the
+factor of $1/N!$, $S$ is not extensive nor is it additive, resulting in
+\Def{Gibbs' paradox}.}
+\begin{equation*}
+  S \approx k_B\log \Sigma \approx k_B N \left\{\frac{3}{2} + \log\left[\left(\frac{4\pi mE}{3h^2 N}\right)^{3/2}V\right]\right\}.
+\end{equation*}
+Compare the derived result here with one obtained from thermodynamics, where
+\begin{equation*}
+  S \sim S_0 + N k_B\log\left(\frac{u^{3/2}v}{u_0^{3/2}v_0}\right).
+\end{equation*}
+One can derive the usual thermodynamic equations from $S$, for example,
+\begin{equation*}
+  \frac{1}{T} = \left.\frac{\partial S}{\partial E}\right|_{V,N} = Nk_B\frac{3}{2}\frac{1}{E} \quad \Rightarrow \quad E = \frac{3Nk_B}{2}T,
+\end{equation*}
+which agrees with the $u = (3/2)RT$ relation we know from thermodynamics.
 
 %-------------------------------------------------------------------------------
 
