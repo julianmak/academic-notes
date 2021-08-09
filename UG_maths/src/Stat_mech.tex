@@ -993,7 +993,7 @@ and since $\Omega_{1,2} \neq 0$, this implies
 \end{equation*}
 This means that the condition of equilibrium boils down to the quantity
 \begin{equation}
-  \beta \equiv = \frac{\partial \Omega}{\partial E},
+  \beta \equiv \frac{\partial \Omega}{\partial E},
 \end{equation}
 which is to be constant throughout the system. It is natural to associate
 $\beta$ with $(k_B T)^{-1}$, since
@@ -1093,6 +1093,72 @@ which agrees with the $u = (3/2)RT$ relation we know from thermodynamics.
 %-------------------------------------------------------------------------------
 
 \subsection{Canonical ensemble}
+
+Physically, it is easier to fix a system's temperature rather than the energy,
+as is the case for the microcanonical ensemble. Fixing a system's temperature
+can be achieved by coupling the system to a heat bath or reservoir. The
+corresponding ensemble is called the \Def{canonical ensemble}, denoted
+$\mathcal{E}_c$. In this system, the energy can fluctuate between zero and plus
+infinity, and we can only meaningfully take about the probability $p_r$ of
+finding a state of energy $E_r$. To determine $p_r$, we can either
+\begin{enumerate}
+  \item regard the system as being in equilibrium with the reservoir at some
+  common temperature $T$, and study the statistics of energy exchange, or
+  \item regard the system as a member of an ensemble $\mathcal{E}_c$ at
+  temperature $T$,and study the statistics of how the total energy $E$ is shared
+  between members of $\mathcal{E}_c$.
+\end{enumerate}
+
+Taking the first approach, we consider a system $S$ begin in equilibrium with a
+reservoir $R$ at some temperature $T$. We want to find the most likely
+distribution of energy $E_S$ of a system and $E_R$ of the reservoir. For
+isolated $S\cup R$, the total energy $E = E_S + E_R$ is fixed, and we consider
+\begin{equation*}
+  \frac{E_S}{E} = 1 - \frac{E_R}{E} \ll 1.
+\end{equation*}
+For a given state of $S$, $R$ will be in any of the states accessible to it, and
+we denote the number of such states $\Omega_R(E_R)$. At equilibrium, we expect
+that $\Omega_E(E_R)$ is maximised, and the same is true for the related
+quantities of $S$, so
+\begin{equation*}
+  p_{E_S} \propto \Omega_R(E_R) = \Omega_R(E - E_S).
+\end{equation*}
+Since $E_S \ll E$, Taylor expanding $\log\Omega_R$ gives
+\begin{align*}
+  \log \Omega_R(E_R) &= \log\Omega_R(E) - \left.\frac{\partial \log\Omega_R}{\partial E_R}\right|_{E_R = E} E_S + \ldots\\
+    &= \log\Omega_R(E) - \beta E_S + \ldots,
+\end{align*}
+recalling that the entropy is $k_B \log \Omega$ and that $1/T = \partial S /
+\partial E = k_B \log \partial \Omega / \partial E$, as well as $\beta = \beta_R
+= \beta_S$ since they are thermally coupled and in equilibrium. Then taking an
+exponential of both sides and normalising results in
+\begin{equation}
+  p_{E_S} = \frac{\ex^{-\beta E_S}}{\sum_S \ex^{-\beta E_S}},
+\end{equation}
+where we are summing over all accessible states in $S$. The factor $\ex^{-\beta
+E_S}$ is called the \Def{Boltzmann factor}.
+
+Taking the second approach, we view $S$ as a member of $\mathcal{E}_c$. Assuming
+we have $N$ identical systems labelled by $i$ sharing energy $E$, the energy of
+a system $r$ as $E_r$, and the number of states having this energy as $n_r$.
+Then
+\begin{equation*}
+  \sum_r n_r = N, \qquad \sum_r E_r n_r = E.
+\end{equation*}
+For average energy $U$ of each system, we have $E = NU$. We want to find the
+distribution of energy into the various systems $\{n_r\}$. The number of
+permutations of $\{n_r\}$ is given by
+\begin{equation*}
+  W(\{n_r\}) = \frac{N!}{\prod_r n_r !}.
+\end{equation*}
+All possible states of the ensemble, subject to the constraints, are all equally
+likely to occur, and so the frequency of occurrence of $\{n_r\}$ is proportional
+to $W(\{n_r\})$. The most probable distribution will be the one for which
+$W(\{n_r\})$ is maximised, and can be shown to be
+\begin{equation*}
+  n_r^* = C\ex^{-\beta E_r},
+\end{equation*}
+which is the same result above after normalising.
 
 %-------------------------------------------------------------------------------
 
