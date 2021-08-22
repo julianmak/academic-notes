@@ -928,7 +928,7 @@ which greatly reduces the arbitrary nature of $\rho$.
 
 %-------------------------------------------------------------------------------
 
-\subsection{Microcanonical ensemble}
+\section{Microcanonical ensemble}
 
 Mathematically, we assume the density function $\rho(q,p;t)$ is constant in the
 accessible regions of the phase space. Physically, we assume we have a
@@ -1092,7 +1092,7 @@ which agrees with the $u = (3/2)RT$ relation we know from thermodynamics.
 
 %-------------------------------------------------------------------------------
 
-\subsection{Canonical ensemble}
+\section{Canonical ensemble}
 
 Physically, it is easier to fix a system's temperature rather than the energy,
 as is the case for the microcanonical ensemble. Fixing a system's temperature
@@ -1160,9 +1160,86 @@ $W(\{n_r\})$ is maximised, and can be shown to be
 \end{equation*}
 which is the same result above after normalising.
 
+We see the average energy $U$ can be expressed as
+\begin{equation*}
+  U = \langle E_r \rangle = p_r E_r = \frac{\sum_r E_r \mathrm{e}^{-\beta E_r}}{\sum_r \mathrm{e}^{-\beta E_r}} = -\frac{\partial}{\partial \beta} \log \sum_r \mathrm{e}^{-\beta E_r}.
+\end{equation*}
+Also recall that the Helmholtz free energy is $F(T, X_i) = U - TS$, and that
+$\mathrm{d}F = -S\ \mathrm{d}T - P\ \mathrm{d}V + \mu\ \mathrm{d}N$, so that $-S
+= \partial F / \partial T$. Then
+\begin{equation*}
+  U = F + TS = F - T\frac{\partial F}{\partial T} = -T^2 \frac{\partial}{\partial T} \frac{F}{T} = \frac{\partial (F/T)}{\partial (1/T)} = \frac{\partial (\beta F)}{\partial \beta}.
+\end{equation*}
+Comparing the terms within the derivative, we have
+\begin{equation}
+  \log \sum_r \mathrm{e}^{-\beta E_r} = -\beta F = -\frac{F}{k_B T},
+\end{equation}
+which hives a basic relation between the macroscopic thermodynamics and
+microscopic statistical mechanics through $F$.
+
+We define the \Def{partition function} $Z$ by
+\begin{equation}
+  Z(T, V, N) = \sum_r \mathrm{e}^{-\beta E_r},
+\end{equation}
+so that
+\begin{equation}
+  F(T, V, N) = -k_B T \log Z.
+\end{equation}
+The partition function sums over the states of the appropriate energy levels,
+and depends on $V$ and $N$. The knowledge of $Z$ completely specified the
+thermodynamic properties of the system (since we then have $F$ and thus all the
+other thermodynamic quantities).
+
+\begin{example}
+  For the entropy $S$, note that
+  \begin{align*}
+    \left\langle \log p_r \right\rangle &= \left\langle \log \left(\frac{\mathrm{e}^{-\beta E_r}}{Z}\right) \right\rangle = \left\langle -\log Z - \beta E_r \right\rangle\\
+      &= -\log Z - \beta \left\langle E_r \right\rangle = \beta F - \beta U\\
+      &= -\frac{S}{k_B},
+  \end{align*}
+  thus $S = -k_B \left\langle \log p_r \right\rangle = -k_B \sum_r p_r \log
+  p_r$, as $Z$ and $\beta$ are fixed over the ensemble\marginnote{Note that
+  similarities with the \Def{Shannon information entropy} $H = -\sum_r p_r \log
+  p_r$.}
+\end{example}
+
+The above demonstration implies that the entropy is completely specified by the
+probability distribution (given by the Boltzmann weights $\mathrm{e}^{-\beta
+E_r}$). If the ground state of the system is unique then $S=0$, as prescribed by
+the third law of thermodynamics. Physically this relates the entropy to the
+degree of uncertainty of the system, hence entropy is sometimes viewed as a
+measure of disorder. Note that for the case where only one $E_r$ is available
+(i.e. fixed energy, so like in the micro-canonical ensemble) and $n_r = \Omega$,
+\begin{equation*}
+  S = -k_B \sum_r p_r \log p_r = -k_B \sum \Omega^{-1} \log \Omega^{-1} = -k_B \log \Omega^{-1} = k_B \log \Omega.
+\end{equation*}
+
+Consider a physical system that has some degeneracy where $g-i$ states have
+energy $E_i$. Then $Z = \sum_i g_i \mathrm{e}^{-\beta E_i}$, and the probability
+of finding a state with energy $E_i$ is (no sum)
+\begin{equation*}
+  p_i = \frac{1}{Z} g_i \mathrm{e}^{-\beta E_i}.
+\end{equation*}
+If we can consider the system where the energy spacings are sufficiently fine,
+then we can talk about the probability of finding a state with energy in ($E,
+E+\delta E$) using the \Def{density of states} $D(E)$, where $D(E)\ \mathrm{d}E$
+is the number of states in ($E, E+\delta E$). With that,
+\begin{equation*}
+  p(E)\ \mathrm{d}E = \frac{\mathrm{e}^{-\beta E} D(E)\ \mathrm{d}E}{\int_0^\infty \mathrm{e}^{-\beta E} D(E)\ \mathrm{d}E} = \frac{\mathrm{e}^{-\beta E} D(E)\ \mathrm{d}E}{Z(T)}
+\end{equation*}
+where $p(E)$ is the probability of finding the states with energy in the
+appropriate energy band. We note that the partition function $Z(T)$ as an
+integral is the Laplace transform of $D(E)$ with respect to $\beta$. This can be
+formally inverted as
+\begin{equation}
+  D(E) = \frac{1}{2\pi \mathrm{i}} \int_{\beta' - \mathrm{i}\infty}^{\beta' + \mathrm{i}\infty} Z(\beta) \mathrm{e}^{\beta E}\; \mathrm{d}\beta,
+\end{equation}
+where $\beta' > 0$, and the integral is taken in the usual sense for Laplace
+transform inversions. This is sometimes called the \Def{Bromwich integral}.
+
 %-------------------------------------------------------------------------------
 
-\subsection{Ideal gas example}
+\subsection{Ensemble averages in $\mathcal{E}_c$}
 
 %===============================================================================
 
