@@ -1,4 +1,11 @@
 # academic-notes
+
+NEW: If you are looking for material from courses I teach, see the links below:
+
+[OCES 3301 Data Analysis](https://github.com/julianmak/OCES3301_data_analysis)
+
+[OCES 2003 Descriptive Physical Oceanography](https://github.com/julianmak/OCES2003_descriptive_po)
+
 Misc. notes from courses I have taken / read up on. Part of a project to type up the notes I have made by hand throughout the years.
 
 These are my interpretations of the material. Typos, and worst, think-o's, are entirely my own (please do contact me at jclmak@ust.hk about it)
