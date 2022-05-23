@@ -330,6 +330,11 @@ and this is commutative. $1=(1,0)$ is the identity. So we see that
 $\mathbb{R}^2$ with this multiplication is a concrete visualisation of
 $\mathbb{C}$, and is called the \Def{Argand diagram}.
 
+\begin{marginfigure}
+  \includegraphics{figs/comp_argand}
+  \caption{Argand diagram.}
+\end{marginfigure}
+
 Given $z=x+\zi y$, the \Def{conjugate} of $z$ is defined to be
 $\zbar=x-\zi y$. Geometrically, this represents a reflection of $z$ in the
 `real' axis. The \Def{real} and \Def{imaginary} part of $z$ is
@@ -860,6 +865,10 @@ $\gamma_1$ and $\gamma_2$ are real differentiable functions in $t$.
   \begin{equation*}
     \gamma : [0, 1] \to \mathbb{C}, \qquad \gamma(t) = \ex^{2\pi \zi t}.
   \end{equation*}
+  \begin{marginfigure}
+    \includegraphics{comp_unit_circle}
+    \caption{Unit circle transversed in the positive sense.}
+  \end{marginfigure}
   Notice here that $\gamma$ is closed, and has a direction characterised by how
   $t$ is parameterised (in this case it is in the positive sense, or in the
   anti-clockwise). In general, a circle centred at $z_0$ with radius $r$ has the
@@ -870,13 +879,16 @@ $\gamma_1$ and $\gamma_2$ are real differentiable functions in $t$.
 \end{example}
 
 \begin{example}
+  \begin{marginfigure}
+    \includegraphics{comp_split_curve}
+    \caption{Two paths getting to the same point.}
+  \end{marginfigure}
   Consider two curves
   \begin{equation*}
     \gamma(t) = t + \zi t, \quad 0 \leq t \leq 1, \qquad \beta(t) = \begin{cases}t, & 0 \leq t \leq 1, \\ 1 + (t-1)\zi & 1 \leq t \leq 2. \end{cases}
   \end{equation*}
-  \TODO diagram
   
-  Both curves connect the origin to $z = 1 + \zi$, but the path is difference.
+  Both curves connect the origin to $z = 1 + \zi$, but the path is different.
   $\beta(t)$ here is piecewise differentiable. One question of course is whether
   the path matters (see later). In general, a vector from $z_0$ to $z_1$ may be
   parameterised as $\gamma(t) = z_0 + t (z_1 - z_0)$, for $t \in [0, 1]$.
@@ -899,12 +911,22 @@ variable.
   \begin{enumerate}
     \item $f(z) = z^2$, $\gamma(t) = \ex^{\zi \pi t}$, $t \in [0, 1]$\\
     
+    \begin{marginfigure}
+      \includegraphics{figs/comp_upper_semicircle}
+      \caption{Upper semi-circle transversed in the positive sense.}
+    \end{marginfigure}
+    
     The path is the upper unit semi-circle, and we have
     \begin{equation*}
       \int_\gamma f(z)\; \mathrm{d}z = \zi \pi \int^1_0 \ex^{3\zi\pi t}\; \mathrm{d}t = -\frac{2}{3}.
     \end{equation*}
     
     \item $f(z) = z^2$, $\gamma(t) = \ex^{-\zi \pi t}$, $t \in [0, 1]$\\
+    
+    \begin{marginfigure}
+      \includegraphics{figs/comp_lower_semicircle}
+      \caption{Lower semi-circle transversed in the \emph{negative} sense.}
+    \end{marginfigure}
     
     The path is the lower unit semi-circle, and we have
     \begin{equation*}
@@ -1030,7 +1052,11 @@ of integrals along each individual differentiable curve.
   equivalent to 3 by default.
   
   (1 $\Leftrightarrow$ 2) Suppose $\Gamma$ is a closed curve consisting of some
-  arbitrary closed simple curves $\gamma_{0,1}$ as illustrated \TODO diagram
+  arbitrary closed simple curves $\gamma_{0,1}$ as illustrated.
+  \begin{marginfigure}
+    \includegraphics{comp_joined_curve}
+    \caption{A joined path.}
+  \end{marginfigure}
   
   Then
   \begin{equation*}
@@ -1106,8 +1132,12 @@ If $\gamma$ is some contour not enclosing $z = 0$, then $\oint_\gamma z^n\;
 \end{example}
 
 \begin{example}
+  \begin{marginfigure}
+    \includegraphics{comp_keyhole}
+    \caption{A keyhole curve.}
+  \end{marginfigure}
   It can be shown that if the curve $\gamma$ encloses $z=0$, then $\oint_\gamma
-  z^{-1}\; \mathrm{d}z = 2\pi \zi$. Consider the curve \TODO picture. If the gap
+  z^{-1}\; \mathrm{d}z = 2\pi \zi$. Consider the curve as illustrated. If the gap
   between the `cut' is small enough, the line integrals going into the unit
   circle cancels each other, giving
   \begin{equation*}
@@ -1123,14 +1153,18 @@ Note that Cauchy's theorem holding implies $\oint_\gamma f(z)\; \mathrm{d}z =
 0$, which implies the primitive of $f(z)$ exists, and vice-versa. Although this
 of course does not mean we can write the primitive down in closed form.
 
-Consider how many times a contour $\gamma$ winds around a point $z_0$ \TODO picture
-
-More formally, let $\gamma$ be a closed curve in $\mathbb{C}$ and $z_0 \in
-\mathbb{C}$ be a point not on $\gamma$. The \Def{winding number} of $\gamma$
-with respect to $z_0$ is
+Consider how many times a contour $\gamma$ winds around a point $z_0$, as
+illustrated. More formally, let $\gamma$ be a closed curve in $\mathbb{C}$ and
+$z_0 \in \mathbb{C}$ be a point not on $\gamma$. The \Def{winding number} of
+$\gamma$ with respect to $z_0$ is
 \begin{equation}
   I(\gamma; z_0) = \frac{1}{2\pi\zi} \oint_\gamma \frac{\mathrm{d}z}{z - z_0}.
 \end{equation}
+\begin{marginfigure}
+  \includegraphics{figs/comp_winding_number}
+  \caption{Illustrating the \textbf{winding number} of a curve around some
+  point.}
+\end{marginfigure}
 
 \begin{theorem}
   Let $\gamma : [a,b]$ be a (piece-wise) closed curve and $z_0$ not on $\gamma$.
@@ -1329,10 +1363,8 @@ We say a function $h(z)$ has a \Def{zero of order $r$} at $z=z_0$ if
 \begin{lemma}
   If complex functions $h(z)$ and $m(z)$ have a zero of order $r$ and $s$
   respectively at $z=z_0$, then $h(z)m(z)$ has a zero of order $r + s$ at
-  $z=z_0$. \qedwhite
+  $z=z_0$. \qedwhite \marginnote{Try product rule followed by induction for example.}
 \end{lemma}
-
-(Try product rule followed by induction for example.)
 
 \begin{lemma}
   If $h(z)$ has a zero of order $r$ at $z=z_0$, then $h(z) = (z-z_0)^r k(z)$ for
@@ -1347,7 +1379,9 @@ We say a function $h(z)$ has a \Def{zero of order $r$} at $z=z_0$ if
       &=(z-z_0)^r k(z),
   \end{align*}
   with $k(z)$ defined according to the Taylor expansion, and it is clear that
-  $k(z_0) \neq 0$ since the first term is the Taylor expansion is not zero. \qed
+  $k(z_0) \neq 0$ since the first term is the Taylor expansion is not zero. 
+  
+  \qed
 \end{proof}
 
 \begin{lemma}
@@ -1404,9 +1438,287 @@ $z=z_0$.
 Here $c_{-1}$ is called the \Def{residue} of the pole of $f(z)$ at $z=z_0$,
 sometimes denoted as $\mbox{Res}(f; z_0)$. There are two cases where the
 residues of $f(z)$ are relative easy to compute for:
+
+\begin{itemize}
+  \item if $f(x) = g(z) / h(z)$, with $g(z_0) \neq 0$, and $f(z)$ has a pole of
+  order 1 at $z = z_0$, then
+  \begin{equation}
+    \underset{z \to z_0}{\mbox{res}}\ f(z) = \frac{g(z_0)}{h'(z_0)}.
+  \end{equation}
+  
+  \item For $f(z) = g(z) / (z - z_0)^r$ with $g(z_0) \neq 0$, then
+  \begin{equation}
+    \underset{z \to z_0}{\mbox{res}}\ f(z) = \frac{g^{(r-1)}(z_0)}{(r-1)!}.
+  \end{equation}
+\end{itemize}
+
+\begin{example}
+  For $f(z) = (z-1)/\cos z$, $z_0 = \pi/2$ is a simple pole, and
+  \begin{equation*}
+    \underset{z \to \pi/2}{\mbox{res}}\ f(z) = \frac{\pi/2 - 1}{-\sin\pi/2} = 1 - \frac{\pi}{2}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  For $f(z) = \sin z/(z - \pi/2)^3$, we have
+  \begin{equation*}
+    \underset{z \to \pi/2}{\mbox{res}}\ f(z) = \frac{1}{2!}-\sin \frac{\pi}{2} = -\frac{1}{2}.
+  \end{equation*}
+\end{example}
+
+\begin{theorem}[Residue theorem]
+  Let $f(z)$ be holomorphic on the simple closed curve $\gamma$ and inside
+  $\gamma$ except at a finite amount of poles $z_1, \ldots z_n$. Then
+  \begin{equation}
+    \oint_\gamma f(z)\; \mathrm{d}z = 2\pi \zi \sum^n_{k=1} \underset{z \to z_k}{\mbox{res}}\ f(z).
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Consider something like the figure on the right. By using the previous lemma
+  and Cauchy's theorem, we have
+  \begin{marginfigure}
+    \includegraphics{figs/comp_keyholes}
+    \caption{Curve with multiple keyhole cuts.}
+  \end{marginfigure}
+  \begin{equation}
+    \oint_\gamma f(z)\; \mathrm{d}z = \sum_k \oint_{\gamma_k} f(z)\; \mathrm{d}z = 2\pi \zi \sum_{k} \underset{z \to z_k}{\mbox{res}}\ f(z).
+  \end{equation}
+  \qed
+\end{proof}
+
+\begin{example}
+  Compute
+  \begin{equation*}
+    \oint_\gamma \frac{z-1}{(z^2+4)\sin z}\; \mathrm{d}z
+  \end{equation*}
+  where $z=2\zi$ and $z=0$ lies inside $\gamma$, and $\gamma$ is simple and
+  closed.
+  
+  Noting that $z^2+4 = (z+2\zi)(z-2\zi)$, we have two simple poles inside
+  $\gamma$, with residues
+  \begin{equation*}
+    \underset{z \to 0}{\mbox{res}}\ \frac{1}{\sin z}\frac{z-1}{z^2+4} = \left.\frac{1}{\cos z}\frac{z-1}{z^2+4}\right|_{z=0} = -\frac{1}{4}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \underset{z \to 2\zi}{\mbox{res}}\ \frac{z-1}{(z+2\zi)\sin z}\frac{1}{z-2\zi} = \left.\frac{z-1}{(z+2\zi)\sin z}\frac{1}{1!}\right|_{z=2\zi} = \frac{1-2\zi}{4\sinh 2},
+  \end{equation*}
+  so
+  \begin{equation*}
+    \oint_\gamma \frac{z-1}{(z^2+4)\sin z}\; \mathrm{d}z = \frac{\pi\zi}{2}\left(\frac{1-2\zi}{\sinh 2} - 1\right).
+  \end{equation*}
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \section{Applications for real integrals}
+
+\subsection{Rational functions of $\sin\theta$ and $\cos\theta$}
+
+Sometimes we have real integrals that we wish to evaluate that is actually quite
+easy to evaluate if we consider the integral as a complex integral.
+
+\begin{example}
+  Find
+  \begin{equation*}
+    I = \int_0^{2\pi} \frac{\mathrm{d}\theta}{5 - 4 \cos\theta}.
+  \end{equation*}
+  
+  Let $z=\ex^{\zi \theta}$, so $\mathrm{d}z=\zi z\; \mathrm{d}\theta$,
+  $\cos\theta = (z+z^{-1})/2$. We have
+  \begin{equation*}
+    I = \oint_{|z|=1} \frac{1}{\zi z} \frac{\mathrm{d}z}{5 - 4(z+z^{-1})/2} = \oint_{|z|=1}\frac{-1}{\zi} \frac{\mathrm{d}z}{5z - 2z^2 + 2}.
+  \end{equation*}
+  Noting the denominator factorises to $(2z-1)(z-2)$, the only pole within the
+  contour is $z=1/2$, so by Cauchy's integral formula or the residue theorem, we
+  have $I = (-2\pi \zi/\zi)(1/2)(-3/2)^{-1} = 2\pi/3$.
+\end{example}
+
+\begin{example}
+  What about for the above example if the integration domain is instead from $0$
+  to $\pi$?
+  
+  No new calculation really needs to be done here as we can rely on symmetries.
+  Note that
+  \begin{equation*}
+    \int_0^{\pi} \frac{\mathrm{d}\theta}{5 - 4 \cos\theta} = \frac{1}{2}\int_{-\pi}^{\pi} \frac{\mathrm{d}\theta}{5 - 4 \cos\theta}
+  \end{equation*}
+  since the integrand is an even function about $\theta=0$. However, note also
+  that
+  \begin{equation*}
+    \frac{1}{2}\left(\int^0_{-\pi} + \int^\pi_0\right)\; \mathrm{d}\theta = \frac{1}{2}\left(\int^{2\pi}_\pi + \int^\pi_0\right)\; \mathrm{d}\theta
+  \end{equation*}
+  by linearity and periodicity, so the relevant integral evaluates to $\pi/3$.
+\end{example}
+
+\subsection{Some rational polynomial functions over the real line}
+
+We could also consider some real integrals as segments of the analogous contour
+integral extended into complex space. The plan of attack is that we aim to
+compute the full contour integral (making use of Cauchy's theorem or the residue
+theorem accordingly), and generally aim to show that the segment that is
+extended into the complex plane goes to something with increasing distance from the
+real line, so the integral we actually wanted on the real line is then the
+difference between the full contour integral and the contour integral extended
+into the complex plane.\marginnote{If the contour integral extended into the
+complex plane is zero as will be for the cases here, then the analogous real
+integral is just the full contour integral.}
+
+For this, we note the following two properties:
+\begin{proposition}
+\begin{itemize}
+  \item (estimation) for all $\gamma:[a, b] \to \mathbb{C}$, we have
+  \begin{equation}
+    \left|\int_\gamma f(z)\; \mathrm{d}z\right| \leq \|\gamma\| \max_\gamma \left|f(\gamma(t))\right|
+  \end{equation}
+  
+  \item (polynomial estimation) a general polynomial is bounded as\marginnote{Can show this by triangle inequality.}
+  \begin{equation*}
+    \frac{1}{2}\left|a_n z^n\right| \leq \left|a_n z^n + \ldots + a_0 \right| \leq 2\left|a_n z^n\right|.
+  \end{equation*}
+\end{itemize}
+  \qedwhite
+\end{proposition}
+
+\begin{example}
+  Find
+  \begin{equation*}
+    I = \int_{-\infty}^\infty \frac{x+3}{(x^2+1)^2}\; \mathrm{d}x.
+  \end{equation*}
+  
+  Here we take $x\to z$ and consider the semi-circle contour $\gamma_R = \ell_R
+  + C_R$ as in the figure to the right. The aim is to show that the semi-circle
+  part $C_R$ goes to zero as $R\to \infty$.
+  
+  \begin{marginfigure}
+    \includegraphics{figs/comp_semicircle_curve}
+    \caption{Semi-circle curve with extrusion into the complex plane, with
+    $\gamma_R = C_R \cup \ell_R$.}
+  \end{marginfigure}
+  
+  
+  For $R > 1$, the residue is at $z=\zi$, and we note that
+  \begin{equation*}
+    \underset{z \to \zi}{\mbox{res}}\ \frac{z+3}{(z-\zi)^2}\frac{1}{(z+\zi)^2} = \left.\frac{1}{1!} \left(\frac{\mathrm{d}}{\mathrm{d}z} \frac{z+3}{(z+\zi)^2}\right)\right|_{z=\zi} = \frac{3}{4\zi},
+  \end{equation*}
+  so $\oint f(z)\; \mathrm{d}z = 3\pi/2$ by the residue theorem. Now, we have
+  \begin{equation*}
+    |(z^2+1)^2| \geq \frac{1}{2}|z|^4, \qquad |z+3| \leq 2|z|,
+  \end{equation*}
+  so
+  \begin{equation*}
+    \left|\int_{C_R} f(z)\; \mathrm{d}z\right| \leq \max_{C_R} \left|\frac{z+3}{(z^2+1)^2}\right| \pi R \leq \frac{2R}{R^4/2} \pi R = O\left(\frac{1}{R^2}\right),
+  \end{equation*}
+  thus the integral goes to zero as $R\to\infty$ by the absolute convergence
+  theorem. By linearity of integrals, 
+  \begin{equation*}
+    \frac{3\pi}{2} = \oint_{\gamma_R} f(z)\; \mathrm{d}z = \left(\int_{\ell_R} + \int_{C_R}\right) f(z)\; \mathrm{d}z \to I,
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \int_{-\infty}^\infty \frac{x+3}{(x^2+1)^2}\; \mathrm{d}x = \frac{3\pi}{2}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find
+  \begin{equation*}
+    I = \int_{-\infty}^\infty \frac{1}{x^2 - 2x + 5}\; \mathrm{d}x.
+  \end{equation*}
+  
+  The function has a pole at $z_0 = 1+2\zi$ (via the use of the quadratic
+  formula for example), with residue $-\zi/4$. Using the semi-circle contour as
+  above, we have also
+  \begin{equation*}
+    \left|\int_{C_R} f(z)\; \mathrm{d}z\right| = O\left(\frac{1}{R}\right),
+  \end{equation*}
+  so $I = 2\pi\zi(-\zi /4) = \pi/2$.
+\end{example}
+
+\begin{example}
+  Find
+  \begin{equation*}
+    I = \int_{-\infty}^\infty \frac{\cos x}{x^2 +1}\; \mathrm{d}x.
+  \end{equation*}
+  
+  We consider instead
+  \begin{equation*}
+    I' = \mbox{Re}\int_{-\infty}^\infty \frac{\ex^{\zi x}}{x^2 +1}\; \mathrm{d}x.
+  \end{equation*}
+  On the semi-circle extended into the complex plane, we have
+  \begin{equation*}
+    \left|\int_{C_R} \frac{\ex^{\zi z}}{z^2+1}\; \mathrm{d}z\right| \leq |\ex^{\zi z}| O\left(\frac{1}{R}\right).
+  \end{equation*}
+  Since $|\ex^{\zi z}|$ is bounded by unity, the integral on $C_R$ goes to zero
+  as $R\to\infty$. On the other hand, the integrand has a simple pole at
+  $z=\zi$, where
+  \begin{equation*}
+    \underset{z \to \zi}{\mbox{res}}\ \frac{1}{z-\zi}\frac{\ex^{\zi z}}{z+\zi} = \left.\frac{\ex^{\zi z}}{z+\zi} \frac{1}{1!}\right|_{z=\zi} = \frac{\zi}{2\ex},
+  \end{equation*}
+  so $I' = \pi/\ex$, which is purely real. So we have\marginnote{The sine one could have been anticipated since the integrand
+  there is odd about $x=0$.}
+  \begin{equation*}
+    \int_{-\infty}^\infty \frac{\cos x}{x^2 +1}\; \mathrm{d}x = \frac{\pi}{\ex}, \qquad \int_{-\infty}^\infty \frac{\sin x}{x^2 +1}\; \mathrm{d}x = 0.
+  \end{equation*}
+\end{example}
+
+If there are singularities on the real line itself, then we could in principle
+`indent' the contour on the real line to bypass the singularities in the way.
+
+\begin{lemma}[Indentation lemma]
+  Let $f$ have a simple pole at $z=a$, then\marginnote{The $\pi\zi$ factor comes
+  from going halfway around the full circle, although to show this properly is
+  non-trivial. This also only works for simple poles (essentially assumes small
+  $R$ and there is a Laurent expansions where terms can be bound accordingly).}
+  \begin{equation}
+    \lim_{z\to a} \int_{C_R} f(z)\; \mathrm{d}z = \pi\zi\underset{z \to a}{\mbox{res}}\ f(z),
+  \end{equation}
+  where the pole is assumed to be bypassed in the positive (anti-clockwise)
+  sense.
+  
+  \qedwhite
+\end{lemma}
+
+\begin{example}
+  Find the integral of the (unnormalised) \textbf{sinc function}
+  \begin{equation*}
+    I = \int_{-\infty}^\infty \frac{\sin x}{x}\; \mathrm{d}x.
+  \end{equation*}
+  
+  Here what we do is take an indented semi-circle contour as in the figure on
+  the right, and compute each parts separately.
+  
+  Starting with the upper semi-circle arc $C_R$, the standard estimate tells us
+  the integral on the semi-circle goes as $O(1)$ even if we bound $\sin x$ by
+  unity, so we need to work a bit harder. Note that by doing integral by parts,
+  we have
+  \begin{marginfigure}
+    \includegraphics{figs/comp_semicircle_indent}
+    \caption{Curve with indentation in the \emph{negative} sense around a pole,
+    where $\gamma_R = C_R \cup \ell_R \cup \epsilon$.}
+  \end{marginfigure}
+  \begin{equation*}
+    \int_{C_R} \frac{1}{z}\ex^{\zi z}\; \mathrm{d}z = \left[\frac{1}{z}\frac{\ex^{\zi z}}{\zi}\right]^R_{-R} + \frac{1}{\zi} \int_{C_R} \frac{1}{z^2} \ex^{\zi z}\; \mathrm{d}z.
+  \end{equation*}
+  Since the exponential terms are bounded by unity, both the boundary as well as
+  the integral in this case behaves as $O(1/R^2)$ as $R\to\infty$, so we have
+  what we need from the integral extruded into the complex plane.
+  
+  For the indented part, we note here that $z=0$ is a pole with residue $1$, and
+  noting that we are going clockwise \emph{above} the pole thus giving as an
+  extra minus sign, the integral is $-\pi \zi$. Now, by Cauchy's theorem, the
+  closed integral over the indented semi-circle since there are no singularities
+  within the contour, and so we have
+  \begin{align*}
+    0 = \oint_{\gamma_R} f(z)\; \mathrm{d}z &= \left(\int_\epsilon + \int_{C_R} + \int^R_{-R}\right)f(z)\; \mathrm{d}z \\
+      & \to -\pi \zi + 0 + \int^\infty_{-\infty} f(z)\; \mathrm{d}z
+  \end{align*}
+  as $R\to\infty$. Together, we have
+  \begin{equation*}
+    I = \mbox{Im} \int_{-\infty}^\infty \frac{\ex^{\zi z}}{z}\; \mathrm{d}z = \mbox{Im} (\pi \zi) = \pi.
+  \end{equation*}
+\end{example}
 
 %===============================================================================
 
