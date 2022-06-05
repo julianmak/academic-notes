@@ -1724,9 +1724,217 @@ If there are singularities on the real line itself, then we could in principle
 
 \chapter{More analysis topics}
 
+This chapter contains a collection of results that utilises some previous
+integration techniques.
+
+%-------------------------------------------------------------------------------
+
+\section{Some theorems}
+
+\begin{theorem}[Liouville's theorem]
+  A bounded entire function is constant.
+\end{theorem}
+
+\begin{proof}
+  Applying Cauchy's integral formula, we get
+  \begin{equation*}
+    f(a) - f(b) = \frac{1}{2\pi\zi}\oint_\gamma\left( \frac{f(z)}{z-a} - \frac{f(z)}{z-b}\right)\; \mathrm{d}z,
+  \end{equation*}
+  with $\gamma$ chosen such that $\gamma$ is a circle of radius $R$ centred on
+  $b$, with $R$ large enough to contain $a$. We see then
+  \begin{equation*}
+    f(a) - f(b) = \frac{a-b}{2\pi\zi}\oint_\gamma \frac{f(z)}{(z-a)(z-b)}\; \mathrm{d}z.
+  \end{equation*}
+  Since $z\in\gamma$, we note that $|z-b| = R$, while
+  \begin{equation*}
+    |z-a| = |z - b + b -a| \geq |z-b| - |b-a| \geq \frac{R}{2}.
+  \end{equation*}
+  Thus we have (since $f(z) \leq K$ is assumed to be bounded)
+  \begin{align*}
+    |f(a) - f(b)| &= \left|\frac{b-a}{2\pi\zi}\right| \cdot \left| \oint_\gamma \frac{f(z)}{(z-a)(z-b)}\; \mathrm{d}z\right|\\
+      &\leq \frac{|b-a|}{2\pi} \oint_\gamma \frac{K}{R \cdot R/2}\; |\mathrm{d}z| \\
+      &= \frac{|b-a|}{2\pi} \frac{2K}{R^2} 2\pi R \\
+      &\to 0
+  \end{align*}
+  as $R\to\infty$, hence $f(a) = f(b)$, i.e. a constant entire function. \qed
+\end{proof}
+
+\begin{lemma}[Cauchy's inequality]
+  Let $f:D(a;r) \subset \mathbb{C} \to \mathbb{C}$ be holomorphic, then
+  \begin{equation}
+    \left|f^{(n)}(a)\right| \leq K\frac{n!}{r^n},
+  \end{equation}
+  where $D(a; r) = \{z\in\mathbb{C}\ |\ |z-a| < r\}$ is the disk centred at
+  $z=a$ of radius $r$, for $n=0, 1, \ldots$, and such that $|f(z)| \leq K$ for
+  $z\in D(a;r)$.
+\end{lemma}
+
+\begin{proof}
+  By Cauchy's integral formula, we have
+  \begin{equation*}
+    f^{(n)}(a) = \frac{n!}{2\pi\zi} \oint_{\partial D(a;r)} \frac{f(z)}{(z-a)^{n+1}}\; \mathrm{d}z,
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \left|f^{(n)}(a)\right| \leq \frac{n!}{2\pi} \frac{K}{r^{n+1}} 2\pi r = K\frac{n!}{r^n}.
+  \end{equation*}
+  \qed
+\end{proof}
+
+\begin{corollary}
+  Applying Cauchy's inequality to some $a\in\mathbb{C}$ we see that $|f'(a)| \to
+  0$ as $R\to\infty$, showing that $f$ is an entire constant function, and
+  provides a simpler proof to Liouville's theorem.
+\end{corollary}
+
+\begin{theorem}[Fundamental theorem of algebra]
+  A polynomial of degree $n\geq1$ has $n$ roots in $\mathbb{C}$ if the leading
+  coefficient is non-zero.
+\end{theorem}
+
+\begin{proof}
+  We suppose otherwise, and that the polynomial $p(z)$ has no roots at all in
+  $\mathbb{C}$. So then since $p(z) \neq 0$, $p^{-1}(z)$ is holomorphic on
+  $\mathbb{C}$. The leading coefficient of $p(z)$ is non-zero, so $f(z) =
+  p^{-1}(z)$ is not constant. So, by triangle inequality,
+  \begin{equation*}
+    |p(z)| \geq |a_n| |z|^n - |a_0| - |a_1||z| - \ldots |a_{n-1}||z|^{n-1}.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    a = \sum_{i=0}^{n-1} |a_i|,
+  \end{equation*}
+  then for $|z| > 1$, we have
+  \begin{equation*}
+    |p(z)| \geq |z|^{n-1} \left(|a_n||z| - \frac{|a_0|}{|z|^{n-1}} - \ldots \frac{|a_{-1}|}{1}\right) \geq |z|^{n-1}\left(|a_n||z| - a\right).
+  \end{equation*}
+  Let $K = \max\{1, (M+a)/|a_n|\}$. We see that if $|z| > K$ then $|p(z)| > M$,
+  and hence $|p(z)|^{-1} < M^{-1}$. 
+  
+  But for $|z| \leq K$, $f(z) = p^{-1}(z)$ is bounded in the absolute value
+  because it is holomorphic, hence it is continuous. If this bound is $L$, then
+  for all $z$, $|f(z)| < \max\{M^{-1}, L\}$ and hence we have a bounded entire
+  function, which is a contradiction according to Liouville's theorem. Thus
+  $p(z)$ has a root in $\mathbb{C}$, and we factorise the root out and continue
+  by induction until the remaining polynomial has zero degree, i.e. a constant. \qed
+\end{proof}
+
+\begin{theorem}[Maximum modulus principle]
+
+\qedwhite
+
+\end{theorem}
+
+\begin{theorem}[Argument theorem]
+
+\qed
+
+\end{theorem}
+
+\begin{theorem}[Roche's theorem]
+
+\qed
+
+\end{theorem}
+
+\begin{corollary}
+  Proof of FTA from Roche's theorem
+\end{corollary}
+
+%-------------------------------------------------------------------------------
+
+\section{Zeroes of holomorphic functions}
+
+\begin{theorem}[Uniqueness theorem]
+
+\qedwhite
+
+\end{theorem}
+
+%%%%%%%%%%
+
+\subsection{Local formulae in argument theorem}
+
+%%%%%%%%%%
+
+\subsection{Maximum principle}
+
+%-------------------------------------------------------------------------------
+
+\section{Pointwise and uniform convergence}
+
+\begin{theorem}[Weierstrauss $M$-test]
+
+\qed
+
+\end{theorem}
+
+\begin{theorem}
+
+\qed
+
+\end{theorem}
+
+\begin{theorem}
+
+\qed
+
+\end{theorem}
+
 %===============================================================================
 
 \chapter{Conformal mapping}
+
+\begin{theorem}
+
+\qed
+
+\end{theorem}
+
+\begin{theorem}[Inverse function theorem]
+
+\qedwhite
+
+\end{theorem}
+
+\begin{theorem}
+  All conformal maps preserve the angles of two curves at their respective
+  intersections.
+\end{theorem}
+
+%%%%%%%%%%
+
+\subsection{M\"obius transformations}
+
+\begin{theorem}
+
+\qed
+
+\end{theorem}
+
+\begin{theorem}
+
+\qedwhite
+
+\end{theorem}
+
+%-------------------------------------------------------------------------------
+
+\section{Harmonic functions}
+
+\begin{theorem}
+
+\qed
+
+\end{theorem}
+
+%%%%%%%%%%
+
+\subsection{Dirichlet and Neumann problems}
+
+%%%%%%%%%%
+
+\subsection{Joukowsky transform and aerofoil theory}
 
 %===============================================================================
 
