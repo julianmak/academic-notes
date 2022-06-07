@@ -1820,36 +1820,141 @@ integration techniques.
 \end{proof}
 
 \begin{theorem}[Maximum modulus principle]
-
-\qedwhite
-
+  Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic with $\partial U$
+  a simple closed curve. Assuming $f$ is non-constant and that $|f(z_0)| =
+  \max_{z\in\overline{U}}|f(z)|$, then $z_0 \in \partial U$, i.e. occurs on the
+  boundary. \qedwhite
 \end{theorem}
 
 \begin{theorem}[Argument theorem]
-
-\qed
-
+  Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic on $U \ \{w_1,
+  \ldots w_\ell\}$ and poles of order $p_i\in\mathbb{N}$ at $w_j$, and assume
+  that $\partial U$ is a simple closed curve.\marginnote{e.g. keyhole indented
+  curves.} Let $z_1, \ldots z_m \in U$ be the zeroes of $f$ with order $n_j$. If
+  \begin{equation*}
+    \sum_1^{\ell} p_j = P, \quad \sum_1^m n_j = N,
+  \end{equation*}
+  then
+  \begin{equation}
+    \frac{1}{2\pi\zi} \oint_{\partial U} \frac{f'}{f}\; \mathrm{d}z = N - P.
+  \end{equation}
 \end{theorem}
 
-\begin{theorem}[Roche's theorem]
+\begin{proof}
+  We see that
+  \begin{equation*}
+    \frac{1}{2\pi\zi}\oint_{\gamma_j} \frac{f'}{f}\; \mathrm{d}z = -p_j, \quad 
+    \frac{1}{2\pi\zi}\oint_{\Gamma_j} \frac{f'}{f}\; \mathrm{d}z =  n_j,
+  \end{equation*}
+  where $\gamma_j$ are the indented curves circling the poles and $\Gamma_j$ are
+  the indented curves circling the zeroes\marginnote{Both following on from
+  residue theorem.}transversing in the negative sense. Then, constructing the
+  curve that is the union of $\partial U$, $\Gamma_j$ and $\gamma_j$ such that
+  $f'/f$ contain no zeros or poles, we have by Cauchy's theorem (and
+  transversing the indented curves in the negative sense)
+  \begin{align*}
+    0 &= \frac{1}{2\pi\zi} \oint_{\partial U} \frac{f'}{f}\; \mathrm{d}z + \frac{1}{2\pi\zi}\oint_{\gamma_j} \frac{f'}{f} + \frac{1}{2\pi\zi}\oint_{\Gamma_j} \frac{f'}{f}\; \mathrm{d}z \\
+      &= \frac{1}{2\pi\zi} \oint_{\partial U} \frac{f'}{f}\; \mathrm{d}z + \sum_1^m (-n_j) + \sum_1^\ell p_j,
+  \end{align*}
+  from which the result follows. \qed
+\end{proof}
 
-\qed
-
+\begin{theorem}[Rouche's theorem]
+  Let $f, g: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic and $\partial
+  U$ be simple and closed. If $|g| < |f|$ on $\partial U$, then $f(z)$ and $f(z)
+  + g(z)$ have the same number of solutions in $U$.\marginnote{From Wikipedia:
+  if a person were to walk a dog on a leash around and around a tree, such that
+  the distance between the person and the tree is always greater than the length
+  of the leash, then the person and the dog go around the tree the same number
+  of times.}
 \end{theorem}
 
-\begin{corollary}
-  Proof of FTA from Roche's theorem
-\end{corollary}
+\begin{proof}
+  Consider $F(z) = g(z) / f(z)$, and let $N_1$ and $N_2$ be the number of zeroes
+  of $f+g$ and $f$ in $U$ respectively. By the argument theorem, we have
+  \begin{equation*}
+    N_1 = \oint_{\partial U} \frac{f'+g'}{f+g}\; \mathrm{d}z, \quad 
+    N_2 = \oint_{\partial U} \frac{f'}{f}\; \mathrm{d}z,
+  \end{equation*}
+  and there are no poles since the functions are holomorphic. We note, then
+  \begin{align*}
+    N_1 - N_2 &= \frac{1}{2\pi\zi} \left[\oint_{\partial U} \frac{f'+g'F + fF'}{f+fF}\; \mathrm{d}z - \oint_{\partial U} \frac{f'}{f}\; \mathrm{d}z\right]\\
+      &=\frac{1}{2\pi\zi}\oint_{\partial U} \frac{F'}{f(1+F)}\; \mathrm{d}z.
+  \end{align*}
+  Since $|F| = |g/f| < 1$ by assumption, we can Taylor expand and obtain
+  \begin{equation*}
+    N_1 - N_2 = \frac{1}{2\pi\zi}\oint_{\partial U} F' (1 - F + F^2 + \ldots)\; \mathrm{d}z.
+  \end{equation*}
+  Notice however that $F'F^k \sim (F^{k+1})'$ for sensible values of integer
+  $k$, so by fundamental theorem of calculus, we conclude that the integral is
+  zero, so that $N_1 = N_2$.
+  \qed
+\end{proof}
+
+\begin{proof}[Alternate proof of the Fundamental Theorem of Algebra]
+  We can actually use Rouche's theorem. Let $f = a_n z^n$ and $g = \sum_i^{n-1}
+  a_i z^i$, and make use of the fact that $f$ has $n$ zeroes in the domain (the
+  roots of unity). Then on $|z| = r > 1$, we have
+  \begin{equation*}
+    \left|\frac{g}{z}\right| = \frac{|\sum a_i z^i|}{|a_n z^n|} \leq \frac{\sum_i |a_i|r^i}{|a_n| r^n} \leq \frac{\sum_i |a_i|r^{n-1}}{|a_n| r^n}
+  \end{equation*}
+  since $r > 1$. So since $|g/f| \to 0$ as $r\to \infty$, we can invoke Rouche's
+  theorem, so that $f + g = \sum_i^n a_i z^i$ has the same amount of zeroes as
+  $f = a_n z^n$ within $\mathbb{C}$. \qed
+\end{proof}
+
+\begin{example}
+  Show that all roots of $z^7 - 5z^3 + 12 = 0$ lie in the annulus $1 \leq |z| <
+  2$.
+  
+  We aim to show there are no roots in the unit circle and seven roots in the
+  circle of radius two, so by fundamental theorem of calculus we account for all
+  the roots within the annulus. Let $f = 12$ and $g = ^7 - 5z^3$ on $|z| < 1$.
+  For this choice we have
+  \begin{equation*}
+    |f| = 12, \quad |g| = |z^7 + 5z^3| < |z|^7 + 5|z|^3 = 6,
+  \end{equation*}
+  so $|f| > |g|$, and since $f$ has no roots in the unit circle, neither does
+  $f+g$.
+  
+  Within the circle of radius two, we let $f = z^7$ and $g = 12 - 5z^3$. Then
+  \begin{equation*}
+    |f| = 128, \quad |g| = |12 - 5z^3| < 12 + 5|z|^3 = 52,
+  \end{equation*}
+  so $|f| > |g|$, and since $f$ has seven roots here, so does $f+g$. By
+  fundamental theorem of algebra, $f+g$ can only have seven roots, so all roots
+  occur in the target annulus.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
 \section{Zeroes of holomorphic functions}
 
-\begin{theorem}[Uniqueness theorem]
+Let $A\subset \mathbb{C}$ and $a\in A$, then $a$ is \textbf{isolated} in $A$ if
+there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
+\epsilon)$ with $A$ is simply the point $a$.
 
-\qedwhite
-
+\begin{theorem}
+  Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic and denoting
+  $Z(f)$ to be the set of $z\in U$ that are zeroes of $f$. Assuming $f(z)$ is
+  not identically zero, then $Z(f)$ is discrete.\marginnote{Or, there are no
+  `lines' or `areas' of zeroes for non-trivial functions.} \qedwhite
 \end{theorem}
+
+\begin{theorem}[Uniqueness theorem]
+   Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic and $U$ is
+   connected. If $Z(f)$ is not discrete, then $f(z) \equiv 0$. \qedwhite
+\end{theorem}
+
+\begin{example}
+  Find all holomorphic functions $f:D(0, 1) \to \mathbb{C}$ where $f(1/n) = 1/n$
+  for $n\in\mathbb{N}$.
+  
+  Consider the holomorphic function $g(z) = f(z) - z$, then clearly $\{0, 1/n\}
+  \subseteq Z(g)$ by construction. However, $z=0$ is no isolated since $1/n\to
+  0$ for $n\to \infty$, so $g(z) \equiv 0$, and so $f(z) = z$ is the only
+  choice.
+\end{example}
 
 %%%%%%%%%%
 
