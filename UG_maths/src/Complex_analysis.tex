@@ -1731,7 +1731,11 @@ integration techniques.
 
 \section{Some theorems}
 
-\begin{theorem}[Liouville's theorem]
+%%%%%%%%%%
+
+\subsection{Liouville's theorem}
+
+\begin{theorem}
   A bounded entire function is constant.
 \end{theorem}
 
@@ -1759,7 +1763,11 @@ integration techniques.
   as $R\to\infty$, hence $f(a) = f(b)$, i.e. a constant entire function. \qed
 \end{proof}
 
-\begin{lemma}[Cauchy's inequality]
+%%%%%%%%%%
+
+\subsection{Cauchy's inequality}
+
+\begin{lemma}
   Let $f:D(a;r) \subset \mathbb{C} \to \mathbb{C}$ be holomorphic, then
   \begin{equation}
     \left|f^{(n)}(a)\right| \leq K\frac{n!}{r^n},
@@ -1787,7 +1795,11 @@ integration techniques.
   provides a simpler proof to Liouville's theorem.
 \end{corollary}
 
-\begin{theorem}[Fundamental theorem of algebra]
+%%%%%%%%%%
+
+\subsection{Fundamental theorem of algebra}
+
+\begin{theorem}
   A polynomial of degree $n\geq1$ has $n$ roots in $\mathbb{C}$ if the leading
   coefficient is non-zero.
 \end{theorem}
@@ -1819,12 +1831,49 @@ integration techniques.
   by induction until the remaining polynomial has zero degree, i.e. a constant. \qed
 \end{proof}
 
+%%%%%%%%%%
+
+\subsection{Maximum principle}
+
 \begin{theorem}[Maximum modulus principle]
   Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic with $\partial U$
   a simple closed curve. Assuming $f$ is non-constant and that $|f(z_0)| =
   \max_{z\in\overline{U}}|f(z)|$, then $z_0 \in \partial U$, i.e. occurs on the
   boundary. \qedwhite
 \end{theorem}
+
+\begin{example}
+  Find all $f: D(0,1) \to \mathbb{C}$ that are holomorphic and satisfy $f(0) =
+  1$, $|f| \geq 1$ for all $z \in D(0, 1)$.
+  
+  The inequality is the wrong way round so we consider $g = 1/f$. Note that
+  $g(0) = 1$, $g$ is holomorphic, and $|g| \leq 1$ in the unit disk by
+  construction. Then assuming $g$ is non-constant, by the maximum principle we
+  have
+  \begin{equation*}
+    1 = |g(0)| < \max_{\partial D} |f| \leq \max_D |f| = 1,
+  \end{equation*}
+  which gives a contradiction, so $g$ and thus $f$ is a constant, which in this
+  case means $f(z) \equiv 1$.
+\end{example}
+
+\begin{example}
+  Find the maximum value of $|f(z)|$ in the unit disk for $f(z) = z^2 - 3z + 2$.
+  
+  $f$ is holomorphic on the unit disk and the boundary is simple and closed, so
+  by the maximum principle, for $z \in \overline{D(0, 1)}$,
+  \begin{align*}
+    |f(z)| \leq \max_{|w|\leq 1} |f(w)| &= \max_{\theta \in [0, 2\pi]}\left|f(\ex^{\zi\theta})\right|\\
+      & \max_{\theta \in [0, 2\pi]} \sqrt{(\ex^{2\zi\theta}-3\ex^{\zi\theta} + 2)\ex^{-2\zi\theta}-3\ex^{-\zi\theta} + 2)}\\
+      & = \max_{\theta \in [0, 2\pi]} \sqrt{14 - 18 \cos\theta + 4\cos 2\theta}.
+  \end{align*}
+  The extrema are at $\theta = 0, \pi$, and the latter turns out to be the
+  maximiser, and $|f(z)| \leq 6$.
+\end{example}
+
+%%%%%%%%%%
+
+\subsection{Argument theorem}
 
 \begin{theorem}[Argument theorem]
   Let $f: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic on $U \ \{w_1,
@@ -1859,7 +1908,54 @@ integration techniques.
   from which the result follows. \qed
 \end{proof}
 
-\begin{theorem}[Rouche's theorem]
+\begin{example}
+  Let $f = z^5 - 3\zi z^3 + z - 20$ and let $\gamma$ be a curve which encloses
+  all zeroes of $f$. Evaluate
+  \begin{equation*}
+    I = \oint_\gamma \frac{5z^4 - 2\zi z^2 + 1}{z^5 - 3\zi z^3 + z - 20}\; \mathrm{d}z.
+  \end{equation*}
+  
+  By the argument theorem, note that $f$ has five zeroes and no poles, so $I =
+  2\pi\zi(5-0) = 10\pi zi$.
+\end{example}
+
+Following on from the argument theorem, the local version is as follows. Let $f:
+U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic and let $f$ have a zero of
+order $n\ \geq 1$ at $a \in U$. Taylor's theorem says that
+\begin{equation*}
+  f(z) = \sum_{k=n}^\infty a_k (z-a)^k = (z-a)^n \sum_{k=n}^\infty a_k (z-a)^{k-n} = (z-a)^n g(z),
+\end{equation*}
+where $g(z)$ is holomorphic and $g(a) = a_n \neq 0$ by assumption. We see that
+we have
+\begin{equation*}
+  \frac{f'}{f} = \frac{\mathrm{d}}{\mathrm{d}z}\log f(z) = \frac{\mathrm{d}}{\mathrm{d}z} \log (z-a)^n + \frac{\mathrm{d}}{\mathrm{d}z} \log g(z) = \frac{n}{z-a} + \frac{g'}{g}.
+\end{equation*}
+Since $g(a) \neq 0$, we have $g$ holomorphic in some $D(a, r)$ for small $r$. So
+then
+\begin{equation*}
+  \frac{1}{2\pi\zi} \oint_{\partial D} \frac{f'}{f}\; \mathrm{d}z = \frac{1}{2\pi\zi} \oint_{\partial D} \left(\frac{n}{z-a} + \frac{g'}{g}\right)\; \mathrm{d}z = n
+\end{equation*}
+by Residue theorem and Cauchy's theorem. Hence if $f$ has a zero of order $n$ at
+$z=a$, then
+\begin{equation}
+  \oint_{\partial D} \frac{f'}{f}\; \mathrm{d}z = 2\pi\zi n.
+\end{equation}
+
+By a similar argument, if $f$ has a pole of order $p \geq 1$ at $z=b$, then the
+Laurent series will be
+\begin{equation*}
+  f(z) = \sum_{k=-p}^\infty a_k (z-b)^k = (z-b)^{-p} \sum_{k=-p}^\infty a_k (z+p)^{k-n} = (z-b)^{-p} g(z),
+\end{equation*}
+with $a_{-p} \neq 0$, so that
+\begin{equation}
+  \oint_{\partial D} \frac{f'}{f}\; \mathrm{d}z = -2\pi\zi p.
+\end{equation}
+
+%%%%%%%%%%
+
+\subsection{Rouche's theorem}
+
+\begin{theorem}
   Let $f, g: U \subset \mathbb{C} \to \mathbb{C}$ be holomorphic and $\partial
   U$ be simple and closed. If $|g| < |f|$ on $\partial U$, then $f(z)$ and $f(z)
   + g(z)$ have the same number of solutions in $U$.\marginnote{From Wikipedia:
@@ -1926,9 +2022,9 @@ integration techniques.
   occur in the target annulus.
 \end{example}
 
-%-------------------------------------------------------------------------------
+%%%%%%%%%%
 
-\section{Zeroes of holomorphic functions}
+\subsection{Zeroes of holomorphic functions}
 
 Let $A\subset \mathbb{C}$ and $a\in A$, then $a$ is \textbf{isolated} in $A$ if
 there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
@@ -1956,14 +2052,6 @@ there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
   choice.
 \end{example}
 
-%%%%%%%%%%
-
-\subsection{Local formulae in argument theorem}
-
-%%%%%%%%%%
-
-\subsection{Maximum principle}
-
 %-------------------------------------------------------------------------------
 
 \section{Pointwise and uniform convergence}
@@ -1990,16 +2078,48 @@ there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
 
 \chapter{Conformal mapping}
 
+A mapping $f: A \to B$ is called \textbf{conformal} if for each $z_0 \in A$, $f$
+rotates tangent vectors of curves through $z_0$ by a definite angle $\theta$ and
+a stretch factor $r$. A conformal map preserves angles.
+
+\begin{example}
+  We have a few simple examples of conform maps:
+  \begin{itemize}
+    \item \emph{translations} $f(z) = z+\alpha$, $\alpha \in \mathbb{C}$
+    \item \emph{rotations} $f(z) = \ex^{\zi \theta}$, $\theta \in \mathbb{R}$
+    \item \emph{stretching} $f(z) = \beta z$, $\beta \in \mathbb{R}^+$
+    \item \emph{inversion} $f(z) = 1/z$
+  \end{itemize}
+\end{example}
+
 \begin{theorem}
-
-\qed
-
+  Let $f: U \to \mathbb{C}$ be holomorphic, then $f$ is conformal if and only if
+  and $f'(z) \neq 0$ for all $z\in U$.
 \end{theorem}
 
+\begin{proof}
+  We see that, by definition, for any curve $\gamma(t) \in U$ with $\gamma(0) =
+  z_0$ where $\gamma'(0) \neq 0$, the transformed curve $\sigma(t) =
+  f(\gamma(t))$ is differentiable at $t=0$. Let $u = \sigma'(0)$ and $v =
+  \gamma'(0)$, we have, assuming $f$ is conformal,
+  \begin{equation*}
+    |u| = r|v|, \qquad \mathrm{arg} v + \theta\ (\mathrm{mod}\ 2\pi) = \mathrm{arg} u.
+  \end{equation*}
+  By chain rule, $u = \sigma'(0) = f'(z_0) \gamma'(0) = f'(z_0) v$, which
+  implies
+  \begin{equation*}
+    r = |f'(z_0)|, \qquad \theta = \mathrm{arg}\ f'(z_0),
+  \end{equation*}
+  which for non-zero curves is only true if $f'(z_0) \neq 0$. \qed
+\end{proof}
+
+The aforementioned maps are conformal (with special circumstances for the
+inversion map).
+
 \begin{theorem}[Inverse function theorem]
-
-\qedwhite
-
+  Let $f: U \to \mathbb{C}$ be conformal and $\partial U$ be simple and closed.
+  $f$ by definition is invertible, and $f^{-1} : \mathrm{Im}(f) \to U$ is such
+  that $f^{-1}$ is also conformal. \qedwhite
 \end{theorem}
 
 \begin{theorem}
@@ -2011,10 +2131,30 @@ there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
 
 \subsection{M\"obius transformations}
 
+A \textbf{M\"obius transformation} is a map of the form
+\begin{equation}
+  T(z) = \frac{az + b}{cz + d}
+\end{equation}
+where $a,b,c,d \in \mathbb{C}$ and $ad - bc \neq 0$.\marginnote{Note $ad-bc$ looking like the determinant of a $2\times2$ matrix is not a coincidence.}
+
 \begin{theorem}
-
-\qed
-
+  We have the following properties for M\"obius maps:
+  \begin{itemize}
+    \item $T(z)$ is holomorphic for $z \neq -d/c$
+    \item $T'(z)$ is not zero for $z \neq -d/c$ \marginnote{So M\"obius maps are
+    conformal except at $z = d/c$.}
+    \item for every $T(z)$ there exists an inverse $T^{-1}(z)$ that is also a
+    M\"obius map\marginnote{Related to a non-vanishing determinant.}
+    \item the \textbf{cross ratios}
+    \begin{equation}
+      [z_1, z_2 : z_3, z_4] = \frac{(z_1 - z_3)(z_2 - z_4)}{(z_1 - z_4)(z_2 - z_3)}
+    \end{equation}
+    are invariant under M\"obius transformations, i.e.
+    \begin{equation*}
+      [z_1, z_2 : z_3, z_4] = [T(z_1), T(z_2) : T(z_3), T(z_4)]
+    \end{equation*}
+  \end{itemize}
+  \qedwhite
 \end{theorem}
 
 \begin{theorem}
