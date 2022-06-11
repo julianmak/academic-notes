@@ -1356,8 +1356,8 @@ We say a function $h(z)$ has a \Def{zero of order $r$} at $z=z_0$ if
 
 \begin{example}
   $z^n$ clearly has a zero of order $n$ at $z = 0$, which $z \sin z$ has zeroes
-  of order $1$ at $z = m \pi$ for $m \in \mathbb{Z} \ \{0\}$ and a zero of order
-  2 at $z = 0$.
+  of order $1$ at $z = m \pi$ for $m \in \mathbb{Z} \setminus \{0\}$ and a zero
+  of order 2 at $z = 0$.
 \end{example}
 
 \begin{lemma}
@@ -2076,7 +2076,9 @@ there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
 
 %===============================================================================
 
-\chapter{Conformal mapping}
+\chapter{Conformal mapping and harmonic functions}
+
+\section{Conformal mapping}
 
 A mapping $f: A \to B$ is called \textbf{conformal} if for each $z_0 \in A$, $f$
 rotates tangent vectors of curves through $z_0$ by a definite angle $\theta$ and
@@ -2127,6 +2129,17 @@ inversion map).
   intersections.
 \end{theorem}
 
+\begin{proof}
+  for a conformal map $f$, suppose curve $\tau_j$ is mapped to $\gamma_j$. Then
+  by the chain rule,
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} \gamma_j = \frac{\mathrm{d}}{\mathrm{d}t} f(\tau_j) = \frac{\mathrm{d}f}{\mathrm{d}z} \frac{\mathrm{d}\tau_j}{\mathrm{d}t}.
+  \end{equation*}
+  Since $f$ is conformal, $\mathrm{d}f/\mathrm{d}z \in \mathbb{C} \setminus
+  \{0\}$, so we have either a rotation or dilation, but the angle of
+  intersection is preserved.
+\end{proof}
+
 %%%%%%%%%%
 
 \subsection{M\"obius transformations}
@@ -2157,7 +2170,77 @@ where $a,b,c,d \in \mathbb{C}$ and $ad - bc \neq 0$.\marginnote{Note $ad-bc$ loo
   \qedwhite
 \end{theorem}
 
+\begin{example}
+  Find a M\"obius transformation $T$ which maps $z=0, -\zi, -1$ to $w = \zi, 1
+  0$ respectively.
+  
+  There are two ways to do this:
+  \begin{itemize}
+    \item shove the relevant values in to obtain
+    \begin{equation*}
+      \zi = \frac{b}{d}, \quad 1 = \frac{-a\zi + b}{-c\zi + d}, \quad 0 = -a + b,
+    \end{equation*}
+    which results in
+    \begin{equation*}
+      a = b,  \quad d= - \zi a, \quad c= \zi a,
+    \end{equation*}
+    from which
+    \begin{equation*}
+      T(z) = \frac{-\zi z - \zi}{z - 1}.
+    \end{equation*}
+    
+    \item by invariance of the cross ratio, we have
+    \begin{equation*}
+      \frac{(z + \zi)(0 + 1)}{(z + \zi)(0 + \zi)} = \frac{(w - 1)(\zi - 0)}{(w - 0)(\zi - 1)},
+    \end{equation*}
+    which upon making $w$ the argument results in
+    \begin{equation*}
+      w = T(z) = \frac{-\zi z - \zi}{z - 1}.
+    \end{equation*}
+  \end{itemize}
+\end{example}
+
+\begin{example}
+  Let $z_0 \in \mathbb{C}$, $\mbox{Im} z_0 > 0$, and $\theta_0 \in [0, 2\pi]$.
+  Show that the M\"obius transformation
+  \begin{equation*}
+    T(z) = \ex^{\zi \theta_0} \frac{z-z_0}{z - \overline{z}_0}
+  \end{equation*}
+  maps the upper half plane into the interior of the unit circle.
+  
+  Note that
+  \begin{equation*}
+    |T(z)| = \left|\ex^{\zi \theta_0} \frac{z-z_0}{z - \overline{z}_0}\right| = \frac{|z-z_0|}{|z - \overline{z}_0|}.
+  \end{equation*}
+  Now, since we are considering the domain $z \in U = \{z : \mbox{Im}(z) > 0\}$,
+  and since $\mbox{Im}z_0 > 0$, $|z - z_0| \leq |z - \overline{z}_0|$, so the
+  image satisfies $|T(z)| \leq 1$, which is the unit circle.
+\end{example}
+
+\begin{example}
+  Find a M\"obius transformation that maps the upper half plane into the unit
+  circle with $\zi$ being mapped to $0$, and $\lim_{z\to+\infty} T(z) = -1$.
+  
+  Using the above example, we should choose $z_0 = \zi$, and the limiting
+  behaviour tells us we should see choose $\theta_0 = -\pi$, resulting in
+  \begin{equation*}
+    T(z) = \ex^{-\zi\pi} \frac{z-\zi}{z+\zi}.
+  \end{equation*}
+\end{example}
+
+Note that the set of M\"obius transformation form the \textbf{M\"obius
+group}.\marginnote{Which, given the suggested link with $2\times2$ matrices with
+non-vanishing determinant, is maybe expected.}
+
 \begin{theorem}
+  \begin{itemize}
+    \item The equation $Az\overline{z} + Bz + \overline{B}\overline{z} + C = 0$,
+    determines a circle or line in the $z$-plane for $A, C \in \mathbb{R}$, $B
+    \in \mathbb{C}$.
+    
+    \item The M\"obius transformation maps a circle/line to a circle/line (but
+    not necessarily respectively).
+  \end{itemize}
 
 \qedwhite
 
@@ -2167,19 +2250,159 @@ where $a,b,c,d \in \mathbb{C}$ and $ad - bc \neq 0$.\marginnote{Note $ad-bc$ loo
 
 \section{Harmonic functions}
 
+Denoting $\nabla^2$ to be the Laplacian operator (operator of second
+derivatives), a real function $u$ is \textbf{harmonic} if $\nabla^2 u = 0$.
+Harmonic functions show up in Laplace and/or Poisson equations that are very
+prevalent in physical applications, and they have a very strong link with
+complex analysis.
+
 \begin{theorem}
-
-\qed
-
+  Let $f(z) = u + \zi v$ for $z = x + \zi y$. If $f$ is holomorphic, then $u$
+  and $v$ are harmonic.
 \end{theorem}
 
-%%%%%%%%%%
+\begin{proof}
+  If $f = u + \zi v$ is holomorphic, by definition the Cauchy--Riemann equations
+  are satisfied, so
+  \begin{equation*}
+    \frac{\partial u}{\partial x} - \frac{\partial v}{\partial y} = 0, \quad
+    \frac{\partial u}{\partial y} + \frac{\partial v}{\partial x} = 0,
+  \end{equation*}
+  and assuming the relevant functions are sufficiently continuous and ordering
+  of differentiation can be swapped, cross differentiation gives
+  \begin{equation*}
+    \nabla^2 u = 0, \quad \nabla^2 v = 0.
+  \end{equation*}
+  \qed
+\end{proof}
 
-\subsection{Dirichlet and Neumann problems}
+The converse to the above is not true: $u$ and $v$ harmonic does not necessarily
+imply they satisfy the Cauchy--Riemann equations, so $f(z) = u + \zi v$ does not
+imply holomorphic. However, $u$ and $v$ are known as \textbf{harmonic
+conjugates} if they satisfy the Cauchy--Riemann equations, and then it does
+imply $f(z) = u + \zi v$ is holomorphic.
 
-%%%%%%%%%%
+\begin{example}
+  Let $u = 8xy - 3x$. Find a real function $v$ where $u$ and $v$ are harmonic
+  conjugates.
+  
+  From one of the Cauchy--Riemann equations, we have
+  \begin{equation*}
+    \frac{\partial v}{\partial y} = \frac{\partial u}{\partial x} \quad \Rightarrow \quad v = \int \frac{\partial u}{\partial x}\; \mathrm{d}y = 4y^2 - 3y + C(x),
+  \end{equation*}
+  while the other gives 
+  \begin{equation*}
+    \frac{\partial u}{\partial y} + \frac{\partial v}{\partial x} = 0 \quad \Rightarrow \quad 8x + C'(x) = 0,
+  \end{equation*}
+  which leaves
+  \begin{equation*}
+    v = 4y^2 - 3y - 4x^2 + c.
+  \end{equation*}
+\end{example}
 
-\subsection{Joukowsky transform and aerofoil theory}
+Let $U \subset \mathbb{R}^2$, $\partial U$ be a simple closed curve, and $h, g :
+\partial U \to \mathbb{R}$. We might be interested in
+\begin{enumerate}
+  \item finding $u : U \to \mathbb{R}$ with $\nabla^2 u = 0$ and $u = h$ on
+  $\partial U$,
+  \item finding $u : U \to \mathbb{R}$ with $\nabla^2 u = 0$ and $\partial u /
+  \partial n = g$ on $\partial U$, where $n$ is the outward pointing normal to
+  $\partial U$.
+\end{enumerate}
+
+Both problems can be shown to admit unique solutions of $u$, and are known
+respectively as the \textbf{Dirichlet} and \textbf{Neumann problems}. These
+arise naturally in various physical problems (e.g. electrostatics).
+
+%-------------------------------------------------------------------------------
+
+\section{An example: Joukowsky transform}
+
+In two-dimensional inviscid flow, assuming irrotational flow ($\nabla^\perp
+\boldsymbol{u} = \boldsymbol{e}_z\cdot\nabla\times\boldsymbol{u}$) and
+incompressible flow ($\nabla\cdot\boldsymbol{u} = 0$), we can introduce a
+potential $\phi$ and streamfunction $\psi$ such that
+\begin{equation*}
+  \boldsymbol{u} = -\nabla \phi = \nabla^\perp \psi,
+\end{equation*}
+where $\nabla^\perp = (-\partial/\partial y, \partial / \partial x)$. Now, note
+that
+\begin{equation*}
+  \nabla^2 \phi = 0, \quad \nabla^2 \psi = 0,
+\end{equation*}
+so we seek $\phi$ and $\psi$ that are harmonic functions. Additionally, from
+$-\nabla \phi = \nabla^\perp \psi$, so $\phi$ and $\psi$ satisfy the
+Cauchy--Riemann equations, and are thus harmonic conjugates, and the resulting
+complex potential
+\begin{equation*}
+  F = \phi + \zi \psi
+\end{equation*}
+is holomorphic. In this case, one can show that because $\phi$ and $\psi$ are
+harmonic conjugates, the lines of constant $\phi$ and $\psi$ are orthogonal to
+each other.
+
+The idea here now is that if we can solve $\phi$ and $\psi$ for special cases,
+we can construct the potential $F$ that is holomorphic perhaps except at
+isolated locations. Via a suitable conformal map, $F$ can be mapped to other
+complex potentials in other configurations, and because of the angle preserving
+quantity, the transformed $\phi$ and $\psi$ will be still orthogonal and
+harmonic conjugates of each other, and are thus analogous solutions for the
+transformed problem.
+
+One such case is the case of a uniform flow past a disk. For simplicity, we
+consider the unit disk, and the domain is thus $\mathbb{C} \setminus D(1, 0)$.
+For the harmonic problems, it is easier to work in polar co-ordinates, and the
+Laplace equation for the potential $\phi$ is given by
+\begin{equation*}
+  \frac{1}{r}\frac{\partial}{\partial r} \left(r\frac{\partial\phi}{\partial r}\right) + \frac{1}{r^2} \frac{\partial^2 \phi}{\partial \theta^2} = 0,
+\end{equation*}
+which in this case is subject to boundary conditions at infinity and Neumann
+boundary conditions at the boundary of the unit disk
+\begin{equation*}
+  \phi \sim Ur\cos\theta \quad \textnormal{as} \quad r \to \infty, \qquad
+  \frac{\partial\phi}{\partial r} = 0 \quad \textnormal{on} \quad r=1.
+\end{equation*}
+By separation of variables, one can show that
+\begin{equation*}
+  \phi = U\left(r + \frac{1}{r}\right) \cos\theta,
+\end{equation*}
+where $U$ is the free-stream uniform flow, directed in the $x$ direction. A
+similar argument leads to
+\begin{equation*}
+  \psi = U\left(r - \frac{1}{r}\right) \sin\theta.
+\end{equation*}
+The complex potential is then
+\begin{align*}
+  F &= U\left[\left(r + \frac{1}{r}\right) \cos\theta + \zi \left(r - \frac{1}{r}\right) \sin\theta\right] \\
+    &= U\left(z + \frac{1}{z}\right),
+\end{align*}
+since $z = r\ex^{\zi\theta}$.\marginnote{Note this potential leads to no lift,
+since there is no circulation $\Gamma = \oint_\gamma
+\boldsymbol{u}\cdot\mathrm{d}\boldsymbol{l}$. The application of the
+\textbf{Kutta condition} adds a point vortex term $\zi\Gamma/(2\pi)\log z$ so
+that the closed contour integral to compute the circulation is non-zero.}
+
+A particular choice of practical relevance is the \textbf{Joukowsky map}
+\begin{equation*}
+  w = f(z) = z + \frac{1}{z}.
+\end{equation*}
+The function is holomorphic except at infinity, and noting that $f'(z) = 1 - 1 /
+z^2 \neq 0$ except at $z=\pm 1$ (the leading and trailing edge of the unit disk)
+and $z=0$ (which is not actually in the domain anyway), thus is it conformal
+away from those special points. In this instance, the unit circle is mapped onto
+the line segment going from $w=-2$ to $w=2$, and the potential is conformally
+mapped onto the domain away from the line segment, and thus the transformed
+potential and streamfunction are still valid potential and streamfunction for
+the irrotational and incompressible flow problem. New solutions can be generated
+accordingly (e.g. a unit disk not centered at the origin), which has
+applications in aerofoil theory in aeronautics.
+
+\begin{figure}
+  \includegraphics{figs/comp_joukowsky}
+  \caption{Sketch of constant potential and streamlines for the unit disk, and
+  the image under the Joukowsky transform to a line segment. An off centered
+  disk in $x$ would could be sent to something that resembles an aerofoil.}
+\end{figure}
 
 %===============================================================================
 
