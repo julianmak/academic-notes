@@ -290,8 +290,6 @@
   \item The original course does not have geometry of complex numbers since that
   was covered in Core A (Geometry 1A), but for consistency reasons this has been
   moved here.
-  \item[]
-  \item \TODO Diagrams to do
 \end{itemize}
 
 \par
@@ -2056,23 +2054,168 @@ there exists some $\epsilon > 0$ such that the intersection of the disk $D(a,
 
 \section{Pointwise and uniform convergence}
 
+A sequence of functions $f_j(z)$ for $z\in U$ \textbf{converges pointwise} to
+$f(z)$ if for all $\epsilon > 0$, there exists some $N$ where for all $N > j$,
+we have $|f_j(z) - f(z)| < \epsilon$, where $\epsilon$ can be a function of $z$. 
+
+On the other hand, $f_j(z)$ \textbf{converges uniformly} to $f(z)$ if $\epsilon$
+is independent of the choice of $z$, or, more formally, we have instead
+\begin{equation}
+  \sup_{z\in U} |f_j(z) - f(z)| < \epsilon,
+\end{equation}
+i.e. the supremum tends to zero, rather than just the differences tend to zero.
+Note that uniform convergence implies pointwise convergence but not vice-versa.
+
+\begin{example}
+  $f_n = z^n$ for $|z|<1$ converges pointwise to $f(z) = 0$ but not uniformly,
+  because the points with smaller modulus goes to zero `faster'. To formalise
+  this, we note that
+  \begin{equation*}
+    |f_n(z) - f(z)| = |z|^n \to 0 \quad \textnormal{as} \quad n \to \infty
+  \end{equation*}
+  so we have pointwise convergence. However, taking $z_n = (1/2)^{1/n}$,
+  \begin{equation*}
+    \max_{|z|<1} |f_n(z) - f(z)| = \max_{|z|<1} |f_n(z)| \geq |f_n(z_n)| = \frac{1}{2},
+  \end{equation*}
+  which does not tend to zero as $n\to\infty$, and we do not have uniform
+  convergence.
+  
+  Note that if we consider $|z| \leq 1$ then we don't even have pointwise
+  convergence.
+\end{example}
+
+A sum $\sum_{j=0}^\infty f_j(z)$ converges uniformly to $S(z)$ if $s_n(z) =
+\sum_{j=1}^n f_j(z) \to s(z)$ as $n\to\infty$.
+
+\begin{theorem}
+  Let $f_j(z)$ converge uniformly to $f(z)$, then
+  \begin{enumerate}
+    \item $f_j(z)$ continuous for all $j$ implies $f(z)$ is continuous
+    \item $\int_\gamma \lim_{j\to\infty} f_j\; \mathrm{d}z = \lim_{j\to\infty} \int_\gamma f_j\; \mathrm{d}z$
+    \item $f_j(z)$ holomorphic for all $j$ implies $f$ is holomorphic.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Only doing the first one. Since sequences converges uniformly, we have for all
+  $\epsilon > 0$, there exists $N$ such that for all $n\geq N$, $|f_n(z) - f(z)|
+  < \epsilon / 3$. Choosing some $n_1 \geq N$, since $f_{n_1}$ is continuous by
+  assumption, we have that there exists some $\delta > 0$ for all $\epsilon / 3$
+  where
+  \begin{equation*}
+    |z - z_1| < \delta \quad \Rightarrow \quad |f_n(z) - f_{n_1}(z_1)| < \frac{\epsilon}{3}.
+  \end{equation*}
+  So then
+  \begin{align*}
+    |f(z) - f(z_1)| &= |f(z) - f_{n_1}(z) + f_{n_1}(z) - f_{n_1}(z_1) + f_{n_1}(z_1) - f(z_1)| \\
+      &\leq |f(z) - f_{n_1}(z)| + |f_{n_1}(z) - f_{n_1}(z_1)| + |f_{n_1}(z_1) - f(z_1)| \\ 
+      &< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon
+  \end{align*}
+  for all $|z - z_1| < \delta$, and we have continuity of $f$. \qedwhite
+\end{proof}
+
+\begin{theorem}
+  Let $\sum_{j=1}^\infty f_j(z)$ converge uniformly to $S(z)$, then
+  \begin{equation*}
+    \int_\gamma \sum_{j=1}^\infty f_j\; \mathrm{d}z = \sum_{j=1}^\infty \int_\gamma f_j\; \mathrm{d}z
+  \end{equation*}
+  and
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}z} \sum_{j=1}^\infty f_j = \sum_{j=1}^\infty \frac{\mathrm{d}}{\mathrm{d}z} f_j.
+  \end{equation*}
+\end{theorem}
+
+So with uniform convergence we are allowed to swap the ordering of limits and
+other operations, which is not an obvious property. Compare this with absolute
+convergence.
+
+The below provides a useful test for uniform convergence for series.
+
 \begin{theorem}[Weierstrauss $M$-test]
-
-\qed
-
+  Assume $|f_n(z)| \leq M_n$ for all $z\in U$ and $\sum_{n=1}^\infty M_n \leq
+  \infty$, then $\sum_{n=1}^\infty f_n(z)$ converges uniformly.
 \end{theorem}
 
-\begin{theorem}
+\begin{proof}
+  Assuming the sum of $M_n$ converges so for all $\epsilon > 0$, then by
+  Cauchy's criterion there exists some $N$ where for $n \geq N$,
+  \begin{equation*}
+    \sum_{k = n+1}^{m} M_k < \epsilon
+  \end{equation*}
+  for all choices of $m > n > N$. Thus, denoting $S_m(z)$ as the partial sums,
+  for $n\geq N$, we have
+  \begin{equation*}
+    |S_m(z) - S_n(z)| = \left|\sum_{k=n+1}^{m} f_k(z)\right| \leq \sum_{k=n+1}^{m} \left|f_k(z)\right|
+  \end{equation*}
+  by the triangle inequality. Further, by assumption,
+  \begin{equation*}
+    \sum_{k=n+1}^{m} \left|f_k(z)\right|\leq \sum_{k = n+1}^{n+p} M_k < \epsilon.
+  \end{equation*}
+  So since
+  \begin{equation*}
+    |S_m(z) - S_n(z)| < \epsilon,
+  \end{equation*}
+  $S_m$ is a Cauchy sequence, and by completeness of $\mathbb{C}$ we have
+  \begin{equation*}
+    |S(z) - S_n(z)| = |\lim_{m\to\infty}S_m(z) - S_n(z)| = \lim_{m\to\infty}|S_m(z) - S_n(z)| < \epsilon.
+  \end{equation*}
+  The choice of $N$ is independent of choice of $z$, we have uniform convergence. \qed
+\end{proof}
 
-\qed
-
-\end{theorem}
-
-\begin{theorem}
-
-\qed
-
-\end{theorem}
+\begin{example}
+  \begin{enumerate}
+    \item Find the domain $U$ where
+    \begin{equation*}
+      \sum_{n=1}^\infty \frac{(-1)^n}{(2n-1)!}z^n
+    \end{equation*}
+    converges uniformly.
+    
+    We have
+    \begin{equation*}
+      \left|\frac{(-1)^n}{(2n+1)!}z^n\right| = \frac{|z|^n}{(2n-1)!} \leq \frac{|z|^n}{n!} = M_n.
+    \end{equation*}
+    Now,
+    \begin{equation*}
+      \sum_{n=1}^\infty M_n = \sum_{n=0}^\infty \frac{|z|^n}{n!} - 1 = \ex^{|z|} - 1 < \infty
+    \end{equation*}
+    for all $z\in\mathbb{C}$, so the above series converges uniformly for all
+    $z\in\mathbb{C}$ by the Weierstrauss $M$-test.
+    
+    \item Show that
+    \begin{equation*}
+      \sum_{n=0}^\infty \frac{1}{n+1}\frac{1}{z^n}
+    \end{equation*}
+    is uniformly convergent on $|z| \leq R > 1$.
+    
+    We have
+    \begin{equation*}
+      \left|\frac{1}{n+1}\frac{1}{z^n}\right| = \frac{1}{n+1}\frac{1}{|z|^n} \leq \frac{1}{n+1}\frac{1}{R^n} \leq \frac{1}{R^n}.
+    \end{equation*}
+    Since sum of $1/R^n$ converges for $R > 1$, the above function is uniformly
+    convergent on $|z| \leq R > 1$ by the Weierstrauss $M$-test.
+    
+    \item Prove that
+    \begin{equation*}
+      \sum_{n=0}^\infty \frac{1}{n^2 + z^2}
+    \end{equation*}
+    converges uniformly on $U = \{z : 1 < |z| < 2\}$.
+    
+    Note that by the reverse triangle inequality,
+    \begin{equation*}
+      |n^2 + z^2| \geq n^2 - |z|^2 \geq n^2 - 4 \geq \frac{n^2}{2}
+    \end{equation*}
+    for $n\geq 3$. We can patch up the shortfall by noting that
+    \begin{equation*}
+      \frac{1}{z^2} + \frac{1}{1+z^2} + \frac{1}{4+z^2}
+    \end{equation*}
+    is holomorphic on $U$ and hence finite, so that
+    \begin{equation*}
+      \sum_{n=0}^\infty \frac{1}{n^2 + z^2} \leq \frac{1}{z^2} + \frac{1}{1+z^2} + \frac{1}{4+z^2} + \sum_{n=3}^\infty \frac{2}{n^2} = \sum_n M_n < \infty,
+    \end{equation*}
+    so by Weierstrauss $M$-test the above function is uniformly convergent on
+    $U$.
+  \end{enumerate}
+\end{example}
 
 %===============================================================================
 
