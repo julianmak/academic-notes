@@ -947,9 +947,73 @@ $\|\boldsymbol{x}\|_2 \leq 1$ such that $\| \boldsymbol{\mathsf{A}} \| =
 
 \chapter{Ordinary differential equations}
 
+Let $U \subset \mathbb{R}^n$ be open. A \textbf{vector field} or
+\textbf{autonomous differential equation} is a continuous map $v : U \to
+\mathbb{R}^n$ with no explicit time dependence. Here, $U$ is called the
+\textbf{phase space} of $v$.
+
+For $\boldsymbol{x} \in U$, $\tau \in \mathbb{R}$, a continuous differential
+curve $\alpha : (a,b) \to U$ is an \textbf{integral curve} of $v$ at
+$(\boldsymbol{x}, \tau)$ if $\tau \in (a,b)$, $\alpha(t) = \boldsymbol{x}$ and
+$\alpha'(t) = v(\alpha(t))$. Note the integral curves have tangent vectors which
+agree with $v$ at a given point.
+
+More generally, for $U \in \mathbb{R}^n$, $I \subset \mathbb{R}$, a
+\textbf{differential equation} is a continuous map $V : U\times I \to
+\mathbb{R}^n$. A \textbf{solution} of $V$ at $\boldsymbol{x} \in U$ and $\tau
+\in I$ is a continuously differential curve $\alpha : I \to U$ with $\alpha'(t)
+= V(\alpha(t), t)$ and $\alpha(t) = \boldsymbol{x}$.
+
+%-------------------------------------------------------------------------------
+
+\section{Picard--Lindel\"of theorem}
+
+This is an existence and uniqueness theorem for differential equations.
+
+\begin{theorem}
+  Let $U \subset \mathbb{R}^n$, $I \subset \mathbb{R}$ be open and $V : U\times
+  I \to \mathbb{R}^n$ be a differential equation where, for all
+  $\boldsymbol{x}_1, \boldsymbol{x}_2 \in U$, $t \in I$, there exists $L \geq 0$
+  such that\marginnote{Compare this with the \textbf{Lipschitz condition} where
+  $\|v(\boldsymbol{x}_1) - v(\boldsymbol{x}_2)\| \leq L \|\boldsymbol{x}_1 -
+  \boldsymbol{x}_2\|$, where $L$ is the \textbf{Lipschitz constant}.}
+  \begin{equation*}
+    \|v(\boldsymbol{x}_1, t) - v(\boldsymbol{x}_2, t)\| \leq L \|\boldsymbol{x}_1 - \boldsymbol{x}_2\|_2.
+  \end{equation*}
+  Given $(\boldsymbol{u}, \tau) \in U \times I$, there exists $a,b>0$ with
+  \begin{equation*}
+    U_1 = \{\boldsymbol{x} \in U\ :\ \|\boldsymbol{x} - \boldsymbol{u}\| < a\}, \quad
+    I_1 = \{t \in I\ :\ |t - \tau| < b\}
+  \end{equation*}
+  such that the differential equation $v$ has an unique solution for all
+  $\boldsymbol{x} \in U_1$ and $\tau \in I_1$. Furthermore, the resulting
+  $\alpha : U_1 \times I_1 \to U$ given by $\alpha(\boldsymbol{x}, t) =
+  \alpha_{\boldsymbol{x}}(t)$ is continuous.
+\end{theorem}
+
+\begin{proof}
+  This one is quite long! 
+\end{proof}
+
+%-------------------------------------------------------------------------------
+
+\section{Differentiation in $\mathbb{R}^n$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inverse function theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Implicit function theorem}
+
 %===============================================================================
 
 \chapter{Tangent spaces and vector fields}
+
+%-------------------------------------------------------------------------------
+
+\section{Method of Lagrange multipliers}
 
 %===============================================================================
 
