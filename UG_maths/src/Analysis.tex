@@ -992,8 +992,107 @@ This is an existence and uniqueness theorem for differential equations.
 \end{theorem}
 
 \begin{proof}
-  This one is quite long! 
+  This one is quite long! The key idea is to construct a contraction mapping $A$
+  and make use of the fixed point theorem to demonstrate existence and
+  uniqueness. We are going to split this up into little bits.
+  
+  \begin{itemize}
+    \item We first construct an integral curve $\alpha$ with
+    $\partial\alpha/\partial t (\boldsymbol{x}, t) = v(\alpha, t)$,
+    $\alpha(\boldsymbol{x}, \tau) = \boldsymbol{x}$. By integrating,
+    \begin{equation*}
+      \alpha(\boldsymbol{x}, t) = \boldsymbol{x} + \int_\tau^t v(\alpha(\boldsymbol{x}, s), s)\; \mathrm{d}s.
+    \end{equation*}
+    Define some operator $A$ such that
+    \begin{equation*}
+      A\beta(\boldsymbol{x}, t) = \boldsymbol{x} + \int_\tau^t v(\beta(\boldsymbol{x}, s), s)\; \mathrm{d}s,
+    \end{equation*}
+    then we note that $A\alpha =\alpha$, and $\alpha$ is a fixed point of the
+    operator $A$. We aim to show that $A$ is a contraction in a space satisfying
+    the relevant properties.
+    
+    \item Let $a_1, b_1 > 0$ be such that
+    \begin{equation*}
+      D_1 = D(\boldsymbol{u}; 2a_1) \subset U, \quad D_2 = D(\tau; b_1) \subset I.
+    \end{equation*}
+    By the Heine--Borel theorem\marginnote{Recall $D$ denotes \emph{closed}
+    balls, while $B$ denote open balls.}, $D_1 \times D_2 \subset
+    \mathbb{R}^{n+1}$ is compact, and so there exists some $K \geq 0$ such that,
+    with respect to the Euclidean norm, $\|\boldsymbol{v}(\boldsymbol{x}, t)\| <
+    K$ for all $(\boldsymbol{x}, t) \in D_1 \times D_2$.
+    
+    Let $a, b > 0$ be such that
+    \begin{equation*}
+      0 < a < a_1, \qquad b < \min \left\{b_1, \frac{a}{K}, \frac{1}{L}\right\}.
+    \end{equation*}
+    Recall that $U_1 = B(\boldsymbol{u}; a)$ and $I_1 = B(\tau; b)$, so let
+    \begin{equation*}
+      M = \{\beta\ :\ U_1 \times I_1 \to D \subset \mathbb{R}^n \}
+    \end{equation*}
+    where $\beta$ is continuous and $\beta(\boldsymbol{x}, \tau) =
+    \boldsymbol{x}$ for all $\boldsymbol{x}\in U_1$. This implies that
+    \begin{equation*}
+      M \subseteq \left( C_b(U_1 \times I_1) \right)^n,
+    \end{equation*}
+    and since $\left( C_b(U_1 \times I_1) \right)^n$ is a Banach space with the
+    supremum norm, if $M$ is closed, then $M$ is complete.
+    
+    \item Suppose $(\beta_n) \in M$ where $\beta_n \to \beta$. For
+    $(\boldsymbol{x}, t) \in U_1 \times I_1$, $\|\beta(\boldsymbol{x}, t) -
+    \beta_n (\boldsymbol{x}, t)\| \leq \|\beta - \beta_n\|$ so $\beta_n \to
+    \beta$, but since $D_1$ is closed, $\beta \in D$ and obviously
+    $\beta_n((\boldsymbol{x}, \tau) \to \beta(\boldsymbol{x}, \tau) =
+    \boldsymbol{x}$, so $M$ is closed and so is complete.
+    
+    \item If we now consider $A\beta$, then we have $A\beta(\boldsymbol{x},
+    \tau) = \boldsymbol{x}$ and that
+    \begin{align*}
+      \|A\beta(\boldsymbol{x}, t) - \boldsymbol{u}\| & \leq \|A((\boldsymbol{x}, t) - \boldsymbol{x}\|  - \| \boldsymbol{x} - \boldsymbol{u}\|\\
+        &\leq \int_\tau^t \|v(\beta(\boldsymbol{x}, s), s\|\; \mathrm{d}s + a\\
+        &\leq K|t - \tau| + a\\
+        &\leq Kb + a\\
+        &< 2a < 2a_1 
+    \end{align*}
+    by Cauchy--Schwartz, definition of $U_1$, second bullet point, definition of
+    $I_1$, and definition of $b$ and $a$ respectively. By definition of $D_1$,
+    we have $A\beta(\boldsymbol{x}, t) \in D_1$.
+    
+    \item Note then we have
+    \begin{align*}
+      \|A\beta(\boldsymbol{x}, t) - A\beta(\boldsymbol{y}, t') &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + \left\|\int_\tau^t v(\beta(\boldsymbol{x}, s), s) - v(\beta(\boldsymbol{y}, s), s)\; \mathrm{d}s\right\|\\
+        &\quad + \left\|\int_t^{t'} v(\beta(\boldsymbol{y}, s), s)\; \mathrm{d}s\right\|\\
+      &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + L\int_\tau^t \left\|v(\beta(\boldsymbol{x}, s), s) - v(\beta(\boldsymbol{y}, s), s)\right\|\; \mathrm{d}s\\
+        &\quad + K|t - t'|\\
+      &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + L \sup_{s\in[\tau, t]}\|\beta(\boldsymbol{x}, s) - \beta(\boldsymbol{y}, s)\| + K|t - t'|,
+    \end{align*}
+    by the Lipshitz conditions. All terms can be made arbitrarily small since
+    $\boldsymbol{x}$ can be made close to $\boldsymbol{y}$, $t$ can be made
+    close to $t'$, and since $[\tau, t]$ is compact, $\|\beta(\boldsymbol{x}, s)
+    - \beta(\boldsymbol{y}, s)\|$ can be made arbitrarily small. So now $A\beta
+    \in D_1$ is continuous, and therefore $A\beta \in M$, and $A : M \to M$ is a
+    self mapping.
+    
+    \item Since $A$ is a self-mapping, for $\beta_{1,2} \in M$, we have
+    \begin{align*}
+      \|A\beta_1 - A\beta_2\| &\leq \int_\tau^t \|v(\beta_1(\boldsymbol{x}, s), s) - v(\beta_2(\boldsymbol{x}, s), s) \|\; \mathrm{d}s \\
+        &\leq L \int_\tau^t \|\beta_1 - \beta_2\|\; \mathrm{d}s\\
+        &= L |t - \tau| \|\beta_1 - \beta_2\|\\
+        &\leq (Lb) \|\beta_1 - \beta_2\|
+    \end{align*}
+    by definition of $I_1$. Note that $Lb < 1$ by the definition of
+    $b$\marginnote{$b < 1 / L$.}, and therefore $A$ is a contraction.
+  \end{itemize}
+  Since $A$ is a contraction and $M$ is complete, by contraction mapping there
+  is one unique point in $M$ that is fixed under $A$. Clearly this is $\alpha$
+  by definition of $\beta$ (see first bullet point), and hence $\alpha$ is the
+  unique solution to the ODE satisfying the stated conditions. \qed
 \end{proof}
+
+Note that it doesn't matter if $\alpha : I_1 \to U$, since we can redefine $M$
+and $A$ as $M_{\boldsymbol{x}} = \{\beta\ :\ I_1 \to D\}$ with $\beta(t) =
+\boldsymbol{x}$, and $A_{\boldsymbol{x}} : M_{\boldsymbol{x}} \to
+M_{\boldsymbol{x}}$. There will be an unique solution for fixed $\boldsymbol{x}
+\in U_1$, where the generation solution gives this solution.
 
 %-------------------------------------------------------------------------------
 
