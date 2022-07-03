@@ -1249,12 +1249,127 @@ diffeomorphism.
 \begin{proof}
   This one is quite long!
   
-  \qed
+  \begin{itemize}
+    \item If $f$ is locally invertible at $\boldsymbol{u}$, then it is a
+    diffeomorphism, so clearly $Df(\boldsymbol{u})$ is invertible. However, this
+    is for an isolated point, and we need to show that is also true on the
+    appropriate neighbourhood.
+    
+    \item Assume that $\boldsymbol{u} = \boldsymbol{0} = f(\boldsymbol{u})$,
+    i.e. a fixed point, and $Df(\boldsymbol{0}) = I$. Define, for
+    $\boldsymbol{y} \in \mathbb{R}^n$,
+    \begin{equation*}
+      g_{\boldsymbol{y}}(\boldsymbol{x}) = \boldsymbol{y} + \boldsymbol{x} - f(\boldsymbol{x}) \quad \Rightarrow \quad \boldsymbol{y} - f(\boldsymbol{x}) = g_{\boldsymbol{y}} - \boldsymbol{x}.
+    \end{equation*}
+    Note that $Dg_{\boldsymbol{y}}(\boldsymbol{x}) = I - Df(\boldsymbol{x})$ and
+    does not depend on $\boldsymbol{y}$. Also that
+    $Dg_{\boldsymbol{y}}(\boldsymbol{0}) = I - I = 0$. 
+    
+    By continuity, we have $\|Dg_{\boldsymbol{y}}(\boldsymbol{x}) =
+    \|Dg_{\boldsymbol{0}}(\boldsymbol{x})\| \leq 1/2$ for some $\boldsymbol{x}$
+    near $\boldsymbol{0}$. This implies that
+    \begin{equation*}
+      \|g_{\boldsymbol{y}}(\boldsymbol{x}_1 - g_{\boldsymbol{y}}(\boldsymbol{x}_2)\| \leq \frac{1}{2}\|\boldsymbol{x}_1 - \boldsymbol{x}_2\|
+    \end{equation*}
+    for $\boldsymbol{x}_{1,2} \in D(0; r)$. Taking $\boldsymbol{x}_2 =
+    \boldsymbol{0}$, we also get
+    \begin{equation*}
+      \|g_{\boldsymbol{y}}(\boldsymbol{x}) - \boldsymbol{y}\| \leq \frac{1}{2}\|\boldsymbol{x}\|,
+    \end{equation*}
+    so we have
+    \begin{equation*}
+      \|g_{\boldsymbol{y}}(\boldsymbol{x})\| \leq \frac{1}{2}\|\boldsymbol{x}\| + \|\boldsymbol{y}\|
+    \end{equation*}
+    for $\boldsymbol{y} \in D(0; r/2)$ and $\boldsymbol{x} \in D(0; r)$, and
+    thus $\|g_{\boldsymbol{y}}(\boldsymbol{x})\| \leq r$. Hence we have
+    $g_{\boldsymbol{y}}(x) : D(0; r) \to D(0; r)$, and $g_{\boldsymbol{y}}(x)$
+    is by construction a contraction since
+    $\|g_{\boldsymbol{y}}(\boldsymbol{x}_1 -
+    g_{\boldsymbol{y}}(\boldsymbol{x}_2)\} \leq (1/2)\|\boldsymbol{x}_1 -
+    \boldsymbol{x}_2\|$.
+  
+    \item By contraction mapping theorem, for all $\boldsymbol{y} \in D(0; r/2)$,
+    there exists a unique $\boldsymbol{x} \in D(0; r)$ with $\boldsymbol{y} =
+    f(\boldsymbol{x})$, so there exists an inverse function defined on $D(0;
+    r/2)$.
+    
+    Define
+    \begin{equation*}
+      U_1 = \{\boldsymbol{x} \in U\ :\ \|\boldsymbol{x}\| < r, \|f(\boldsymbol{x})\| < r/2\}, \quad V_1 = f(U_1) = B(0; r/2).
+    \end{equation*}
+    By definition, both the domain and image are open sets. $f : U_1 \to V_1$ is a
+    restricted bijection since it is a bijection on $D(0; r/2) \supset B(0; r/2)$.
+    Given $\boldsymbol{x}_{1,2} \in D(0; r)$, we have
+    \begin{align*}
+      \|\boldsymbol{x}_1 - \boldsymbol{x}_2\| &= \| g_{\boldsymbol{0}}(\boldsymbol{x}_1) + f(\boldsymbol{x}_1) - g_{\boldsymbol{0}}(\boldsymbol{x}_2) + f(\boldsymbol{x}_2)\| \\
+        & \leq \|g_{\boldsymbol{0}} - g_{\boldsymbol{0}}(\boldsymbol{x}_2)\| + \|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\| \\
+        & \leq \frac{1}{2} \|\boldsymbol{x}_1 - \boldsymbol{x}_2\| + \|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\|,
+    \end{align*}
+    so that $\|\boldsymbol{x}_1 - \boldsymbol{x}_2\| \leq 2\|f(\boldsymbol{x}_1) -
+    f(\boldsymbol{x}_2)\|$. For $\boldsymbol{x}_2 = 0$, we have
+    $\|\boldsymbol{x}_1\| \leq 2\|f(\boldsymbol{x}_1)\|$. Since
+    $\|f(\boldsymbol{x}_1)\| < r/2$ by construction, we have $\|\boldsymbol{x}_1\|
+    < r$, so indeed $V_1 = B(0; r/2)$.
+    
+    For $f^{-1} = \phi$, $\|\boldsymbol{x}_1 - \boldsymbol{x}_2\| \leq
+    2\|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\|$ implies that
+    $\|\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\| \leq 2\|\boldsymbol{x}_1
+    - \boldsymbol{x}_2\|$, so that $f^{-1}$ is Lipschutz continuous.
+    
+    \item Note that $Df(\boldsymbol{x})$ is invertible for all $\boldsymbol{x}
+    \in D(0; r)$, since we have $g_{\boldsymbol{0}}(\boldsymbol{x}) -
+    \boldsymbol{x} = f(\boldsymbol{x})$, so that $Df(\boldsymbol{x}) = I -
+    Dg_{\boldsymbol{0}}(\boldsymbol{x})$, but
+    $\|Dg_{\boldsymbol{0}}(\boldsymbol{x})\| \leq 1/2$ from point 2 above, so
+    $Df(\boldsymbol{x})$ is invertible for all $x \in D(0;r)$, and in particular
+    for $x \in B(0; r) \subset D(0; r)$.
+    
+    \item Recall that if $f$ id differentiable, then $f(\boldsymbol{x}_1) -
+    f(\boldsymbol{x}_2) = Df(\boldsymbol{x}_1)(\boldsymbol{x}_1 -
+    \boldsymbol{x}_2) + R(\boldsymbol{x}_1 - \boldsymbol{x}_2)$ with
+    $R(\boldsymbol{h}) / \|\boldsymbol{h}\| \to 0$ as $\|\boldsymbol{h}\| \to
+    0$. Let $\boldsymbol{y}_i = f(\boldsymbol{x}_i)$. For $i=1,2$,
+    \begin{equation*}
+      \boldsymbol{y}_1 - \boldsymbol{y}_2 = Df(\boldsymbol{x}_1)\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right) + R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right),
+    \end{equation*}
+    so that
+    \begin{align*}
+      \left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}(\boldsymbol{y}_1 - \boldsymbol{y}_2) &= \left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right) \\
+        &+\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right).
+    \end{align*}
+    
+    We want to show that the remainder term tends to zero, which will show that
+    $\phi = f^{-1}$ is differentiable. For that, note we have, by
+    Cauchy--Schwartz and point 3 above,
+    \begin{align*}
+      \frac{\|\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}{\|\boldsymbol{y}_1 - \boldsymbol{y}_2\|} \leq  \frac{\|\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}\|\cdot \|R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}{(1/2)\|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}.
+    \end{align*}
+    $\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}$ is bounded since $f$ is
+    differentiable. Further more, $f$ differentiable means
+    $\|R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| /
+    \|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| \to 0$ as
+    $\|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| \to 0$.
+    Thus the desired remainder goes to zero since $\boldsymbol{y}_1 -
+    \boldsymbol{y}_2 \to 0$ implies $\phi(\boldsymbol{y}_1) -
+    \phi(\boldsymbol{y}_2) \to 0$, and $\phi = f^{-1}$ is differentiable.
+    
+    \item The derivative $D\phi(\boldsymbol{y}) =
+    (Df(\phi(\boldsymbol{y})))^{-1} = \mbox{inv} \circ Df \circ
+    \phi)\boldsymbol{y}$, so by construction, $D\phi = Df^{-1}$ is continuous.
+    By chain rule, if $f\in C^k$, $D^{k-1}\phi$ is continuous, and thus $\phi =
+    f^{-1} \in C^k$.
+  \end{itemize}
+  
+   \qed
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Implicit function theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Manifolds}
 
 %===============================================================================
 
