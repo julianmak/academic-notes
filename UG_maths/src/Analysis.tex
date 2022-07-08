@@ -1367,9 +1367,153 @@ diffeomorphism.
 
 \subsection{Implicit function theorem}
 
+\begin{theorem}
+  Let $U\subset \mathbb{R}^n$, $V \subset \mathbb{R}^m$ be open and $f : U
+  \times V \to \mathbb{R}^m$ be a $C^k$-function, with $k \geq 1$. Let
+  $(\boldsymbol{u}, \boldsymbol{v}) \in U \times V$ such that the matrix
+  $[\partial f_i / \partial x_j](\boldsymbol{u}, \boldsymbol{v})$ is invertible
+  with $\boldsymbol{c} = f(\boldsymbol{u}, \boldsymbol{v})$. Then there is a
+  $C^k$-function $\eta : U_1 \to V_1$ with $\boldsymbol{u} \in U_1 \subset U$,
+  $\boldsymbol{v} \in V_1 \subset V$ where $\eta(\boldsymbol{u}) =
+  \boldsymbol{v}$ and $f(\boldsymbol{x}, \eta(\boldsymbol{x})) = \boldsymbol{c}$
+  for all $\boldsymbol{x} \in N( (\boldsymbol{u}, \boldsymbol{v}); r)$. Further
+  more, if $f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ for
+  $(\boldsymbol{x}, \boldsymbol{y}) \in U_1 \times V_1$, then we have $y =
+  \eta(\boldsymbol{x})$ in the respective sets.
+\end{theorem}
+
+\begin{proof}
+  Define $\phi : U \times V \to \mathbb{R}^n \times \mathbb{R}^m$ where
+  $(\boldsymbol{x}, \boldsymbol{y}) \mapsto (\boldsymbol{x}, f(\boldsymbol{x},
+  \boldsymbol{y}))$. We have
+  \begin{equation*}
+    D\phi(\boldsymbol{u}, \boldsymbol{v}) = \begin{pmatrix}I & 0 \\ \partial f_i/\partial x_j (\boldsymbol{u}, \boldsymbol{v}) & \partial f_i / \partial x_j (\boldsymbol{u}, \boldsymbol{v}) \end{pmatrix},
+  \end{equation*}
+  so $\mbox{det} D\phi(\boldsymbol{u}, \boldsymbol{v}) \neq 0$, and so by the
+  inverse function theorem, $\phi$ is locally a diffeomorphism.
+  
+  Since $\phi(\boldsymbol{x}, \boldsymbol{y}) = (\boldsymbol{x},
+  f(\boldsymbol{x}, \boldsymbol{y})$, we have $\phi^{-1}(\boldsymbol{a},
+  \boldsymbol{b}) = (\boldsymbol{a}, g(\boldsymbol{a}, \boldsymbol{b})$. Setting
+  $\eta(\boldsymbol{x}) = g(\boldsymbol{x}, \boldsymbol{c})$, then defining
+  $\hat{p}_2$ as the projection operator for the second argument, we have
+  \begin{align*}
+    f(\boldsymbol{x}, \eta(\boldsymbol{x})) &= f(\boldsymbol{x}, g(\boldsymbol{x}, c)) \\
+      &= \hat{p}_2 \phi(\boldsymbol{x}, g(\boldsymbol{x}, c) \\
+      &= \hat{p}_2 \phi \phi^{-1} (\boldsymbol{x}, \boldsymbol{c}) \\
+      &= \hat{p}_2(\boldsymbol{x}, \boldsymbol{c}) = \boldsymbol{c}.
+  \end{align*}
+  So we have $f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ iff
+  $\boldsymbol{y} = \eta(\boldsymbol{x})$ for $(\boldsymbol{x}, \boldsymbol{y})
+  \in W$ where $\phi$ is a diffeomorphism. This is achieved by choosing
+  $\boldsymbol{u} \in U_1 \subset U$, $\boldsymbol{v} \in V_1 \subset V$ so that
+  $U_1 \times V_1 \subset W$, with $\eta(U_1) = V_1$. \qed
+\end{proof}
+
+The implicit function theorem gives a criterion of when we can solve
+$f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ unique for
+$\boldsymbol{y}$. In fact, if the linear equation $[Df(\boldsymbol{u},
+\boldsymbol{v})](\boldsymbol{x}, \boldsymbol{y}) = 0$ is uniquely solvable, then
+$f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ is uniquely solvable for
+$\boldsymbol{y}$.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Manifolds}
+
+Let $M \subset \mathbb{R}^n$, $k \geq 0$, $\ell \geq 1$. $M$ is a
+\textbf{$C^\ell$ $k$-dimensional manifold} if, for all $\boldsymbol{p} \in M$,
+we also have $\boldsymbol{p} \in U \subset \mathbb{R}^n$ where there exists a
+$C^\ell$-diffeomorphism $h : U \to U' \subset \mathbb{R}^k \times
+\mathbb{R}^{n-k}$ with $h(U \cap M) = U' \cap (\mathbb{R}^k \times
+\{\boldsymbol{0}\})$. Informally, a manifold is a structure where every point of
+$M$ has a neighbourhood that resembles $\mathbb{R}^k$. $h$ here is called a
+\textbf{chart}, which maps neighbourhoods of the manifold to $\mathbb{R}^k$
+(think \textbf{co-ordinate system} or segments of maps). A collection of charts
+that spans the whole of $M$ is called an \textbf{atlas}.\marginnote{Notice then
+in the previous proof, $\phi$ is a chart, and $W \cap \{(\boldsymbol{x},
+\boldsymbol{y}) \in \mathbb{R}^n\ |\ f(\boldsymbol{x}, \boldsymbol{y}) =
+\boldsymbol{c}\}$ is a $k$-manifold.}
+
+\begin{example}
+  An open subset $U \subset \mathbb{R}$ is a $C^\infty$ $n$-manifold where the
+  chart is $\mbox{id}: U \to U$.
+  
+  For a slightly less trivial example, consider the \textbf{unit $n$-sphere}
+  $S^n = \{ \boldsymbol{x} \in \mathbb{R}^{n+1}\ :\ \|\boldsymbol{x}\| =
+  1\}$.\marginnote{Note that $2$-sphere would be the standard sphere, which is
+  two-dimensional with zero volume.} With $f : \mathbb{R}^{n+1} \to \mathbb{R}$
+  with $\boldsymbol{x} \mapsto \|\boldsymbol{x}\|^2$, we have $S^n =
+  f^{-1}(\{1\})$. For every $\boldsymbol{x} \neq 0$, $Df(\boldsymbol{x}) \neq
+  0$, so by implicit function theorem with respect to some co-ordinate system,
+  there exists charts (it turns out an atlas for $S^n$ requires strictly more
+  than 1 chart). Since $f$ is a polynomial (e.g. standard Cartesian
+  co-ordinates), $S^n$ is a $C^\infty$ $n$-manifold.
+\end{example}
+
+Let $f : U \subset \mathbb{R}^n \to \mathbb{R}^k$ be a $C^1$ function. A point
+$\boldsymbol{x} \in U$ is called a \textbf{critical point} if
+$\mbox{rank}(Df(\boldsymbol{x})) < k$, i.e. the columns of the derivative matrix
+do not span $\mathbb{R}^k$, and $f(\boldsymbol{x})$ is called a \textbf{critical
+value}. Otherwise $\boldsymbol{x}$ is called a \textbf{regular point}.
+
+\begin{example}
+  \begin{itemize}
+    \item For $f: \mathbb{R}^n \to \mathbb{R}$ with $f(x) = \|\boldsymbol{x}\|$,
+    clearly $\boldsymbol{x} = \boldsymbol{0}$ is the only critical point, and 0
+    is the associated critical value.
+    
+    \item For $f:\mathbb{R}^n \to \mathbb{R}^k$, if $k > n$ then there are no
+    regular points in $\mathbb{R}^n$ by definition.
+    
+    \item For $f:\mathbb{R}^3 \to \mathbb{R}^2$, is we have $f(x,y,z) = (\ex^z
+    x, (y-1) \sin z)$, then
+    \begin{equation*}
+      Df(x,y,z) = \begin{pmatrix}
+         \ex^z & 0 & \ex^z x\\
+         0 & \sin z & (y-1)\cos z
+      \end{pmatrix}.
+    \end{equation*}
+    If $\sin z \neq 0$ then all points are regular since $\ex^z \neq 0$. If
+    $\sin z = 0$, then $\cos z = \pm 1$, and points with $y\neq 1$ are regular
+    points. Otherwise, the critical points are $(x, 1, n\pi)$ with
+    $n\in\mathbb{Z}$, and the critical values are $f(x, 1, n\pi) = (x\ex^{n\pi},
+    0)$ (or just the whole $y=0$ line in $\mathbb{R}^2$).
+  \end{itemize}
+\end{example}
+
+\begin{theorem}
+  Let $f : U \subset \mathbb{R}^n \to \mathbb{R}^k$ be a $C^\ell$-map with $\ell
+  \geq 1$, and $U$ is open. If $\boldsymbol{y} \in \mathbb{R}^k$ is a regular
+  value, then $f^{-1}(\{\boldsymbol{y}\})$ is a $C^\ell$ $(n-k)$-manifold.
+\end{theorem}
+
+\begin{proof}
+  Let $\boldsymbol{x} \in f^{-1}(\{\boldsymbol{y}\})$. Since $\boldsymbol{x}$ is
+  not a critical point, $Df(\boldsymbol{x})$ has rank $k$. After rearranging
+  co-ordinates, we can assume that $(\partial f_i / \partial
+  x_j)(\boldsymbol{x})$ is invertible, with $i = 1,\ldots k$ and $j = n-k+1$.
+  The existence of the chart follows from the implicit function theorem, and so
+  $f^{-1}(\{\boldsymbol{y}\})$ is a $C^\ell$ $(n-k)$-manifold by definition. \qed
+\end{proof}
+
+Note that if $\boldsymbol{y} \notin f(U)$ then $\phi =
+f^{-1}(\{\boldsymbol{y}\})$ is still a $(n-k)$-manifold.
+
+\begin{example}
+  \begin{itemize}
+    \item For $f:\mathbb{R}^n \to \mathbb{R}$ with $\boldsymbol{x} \mapsto
+    \|\boldsymbol{x}\|$, we have $S^{n-1} = f^{-1}(\{1\})$ following from
+    previous example.
+    
+    \item For $f(x,y,z) = (\ex^z x, (y-1) \sin z)$, the inverse of the regular
+    values $f^{-1}(\{(a,b)\ :\ b\neq 0\})$ is a $1$-manifold.
+    
+    \item For $f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^2$ with
+    $(\boldsymbol{x}, \boldsymbol{y}) \mapsto (\|\boldsymbol{x}\|,
+    \|\boldsymbol{y}\|)$, we have $f^{-1}(\{1, 1\}) = S^{n-1} \times S^{m-1}$.
+  \end{itemize}
+\end{example}
 
 %===============================================================================
 
