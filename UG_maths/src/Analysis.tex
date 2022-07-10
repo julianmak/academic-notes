@@ -215,30 +215,11 @@
 \newcommand{\dy}{\partial}
 \newcommand{\ddy}[2]{\frac{\dy#1}{\dy#2}}
 
-\newcommand{\ab}{\boldsymbol{a}}
-\newcommand{\bb}{\boldsymbol{b}}
-\newcommand{\cb}{\boldsymbol{c}}
-\newcommand{\db}{\boldsymbol{d}}
-\newcommand{\eb}{\boldsymbol{e}}
-\newcommand{\lb}{\boldsymbol{l}}
-\newcommand{\nb}{\boldsymbol{n}}
-\newcommand{\tb}{\boldsymbol{t}}
-\newcommand{\ub}{\boldsymbol{u}}
-\newcommand{\vb}{\boldsymbol{v}}
-\newcommand{\xb}{\boldsymbol{x}}
-\newcommand{\wb}{\boldsymbol{w}}
-\newcommand{\yb}{\boldsymbol{y}}
-\newcommand{\zb}{\boldsymbol{z}}
-
-\newcommand{\Xb}{\boldsymbol{X}}
-
 \newcommand{\ex}{\mathrm{e}}
 \newcommand{\zi}{{\rm i}}
 
 \newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
 \newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
-
-\newcommand{\zbar}{{\overline{z}}}
 
 \newcommand\Def[1]{\textbf{#1}}
 
@@ -305,7 +286,7 @@
   real analysis, touching on metric spaces, tangent spaces, vector fields,
   manifolds, and differential forms.
   \item[]
-  \item \TODO diagrams
+  \item \TODO diagrams, notation (bold vs not bold)
 \end{itemize}
 
 \par
@@ -363,31 +344,32 @@ any $N\subseteq M$ is also a metric space using the same $d$.
 \begin{example}
   \begin{enumerate}
     \item On $\mathbb{R}$, $d(x,y) = |y - x|$ gives a metric.
-    \item On $\mathbb{R}^2$, $d_1 (\xb, yb) = |y_1 - x_1| + |y_2 - x_2|$ is also a
+    \item On $\mathbb{R}^2$, $d_1 (x, y) = |y_1 - x_1| + |y_2 - x_2|$ is also a
     metric, but notice that, for example, $d_1( (1, 1), (0, 0) ) = 2$ as opposed
     to the expected distance of $\sqrt{2}$.
   \end{enumerate}
 \end{example}
 
-The standard (Euclidean) metric in $\mathbb{R}^2$ is given by
+The standard (Euclidean) metric in $\mathbb{R}^2$ is given by\marginnote{We will
+not be distinguishing vectors by bold quantities in this document.}
 \begin{equation*}
-  d(\xb, \yb) = \sqrt{|x_1 - y_1|^2 + |x_2 - y_2|^2}.
+  d(x, y) = \sqrt{|x_1 - y_1|^2 + |x_2 - y_2|^2}.
 \end{equation*}
 
-Let $V$ be a real vector space. An \textbf{inner product} on $V$ is a
-function $(\cdot, \cdot) : V\times V\to \mathbb{R}$ that, for all $\xb, \yb\in
-V$, satisfies the following:
+Let $V$ be a real vector space. An \textbf{inner product} on $V$ is a function
+$(\cdot, \cdot) : V\times V\to \mathbb{R}$ that, for all $x, y \in V$, satisfies
+the following:
 \begin{itemize}
   \item linearity in the first factor;
-  \item $(\xb, \yb) = (\yb, \xb)$;
-  \item $(\xb, \xb) \geq 0$ and is zero iff $\xb = 0$.
+  \item $(x, y) = (y, x)$;
+  \item $(x, x) \geq 0$ and is zero iff $x = 0$.
 \end{itemize}
 \begin{example}
   \begin{enumerate}
-    \item For $V = \mathbb{R}^n$, the standard inner product is given by $(\xb,
-    \yb) = x_i y_i$ (where Einstein notation is understood). If $\boldsymbol{A}$
-    is a symmetric matrix, then $(\xb, \yb) = \xb^T \boldsymbol{A} \yb$ is an
-    inner product if all eigenvalues of $\boldsymbol{A}$ are positive.
+    \item For $V = \mathbb{R}^n$, the standard inner product is given by $(x, y)
+    = x_i y_i$ (where Einstein notation is understood). If $A$ is a symmetric
+    matrix, then $(x, y) = x^T A y$ is an inner product if all eigenvalues of
+    $A$ are positive.
     
     \item For $V = C[a, b]$, $(f, g) = \int_a^b f(x) g(x)\, \mathrm{d}x$ is an
     inner product since $V$ is a vector space of continuous functions, and the
@@ -400,37 +382,36 @@ V$, satisfies the following:
   Let $V$ be a real vector space, and $(\cdot, \cdot)$ an inner product on $V$.
   Then
   \begin{equation*}
-    \left|(\xb, \yb)\right| \leq \|\xb\| \cdot \|\yb\|,
+    \left|(x, y)\right| \leq \|x\| \cdot \|y\|,
   \end{equation*}
   where $\|\cdot\|$ is the standard Euclidean norm of the vector, and there is
-  equality iff $\xb = \lambda \yb$ for some $\lambda \in \mathbb{R}$.
+  equality iff $x = \lambda y$ for some $\lambda \in \mathbb{R}$.
 \end{theorem}
 
 \begin{proof}
-  Note that $(\xb, \boldsymbol{0}) = (\xb, \xb - \xb) = (\xb, \xb) - (\xb, \xb)
-  = \boldsymbol{0}$, so we may assume that $\yb \neq \boldsymbol{0}$. Then, with
-  $\lambda = -(\xb, \yb) / \|\yb\|^2$,
+  Note that $(x, 0) = (x, x - x) = (x, x) - (x, x) =
+  0$, so we may assume that $y \neq 0$. Then, with
+  $\lambda = -(x, y) / \|y\|^2$,
   \begin{align*}
-    0 \leq (\xb + \lambda \yb, \xb + \lambda \yb) 
-      & = \| \xb \|^2 + 2\lambda(\xb, \yb) + \lambda^2 \| \yb \|^2\\
-      & = \| \xb \|^2 - \frac{(\xb, \yb)^2}{\| \yb \|^2}.
+    0 \leq (x + \lambda y, x + \lambda y) 
+      & = \| x \|^2 + 2\lambda(x, y) + \lambda^2 \| y \|^2\\
+      & = \| x \|^2 - \frac{(x, y)^2}{\| y \|^2}.
   \end{align*}
-  So $(\xb, \yb)^2 \leq \| \xb \|^2 \| \yb \|^2$ and the result follows. \qed
+  So $(x, y)^2 \leq \| x \|^2 \| y \|^2$ and the result follows. \qed
 \end{proof}
 
 \begin{lemma}
   Let $V$ be a real vector space with inner product $(\cdot, \cdot)$. Then $d: V
-  \times V \to [0, \infty)$ with $d(\xb, \yb) = \| \xb - \yb\|$ gives a metric
-  on $V$.
+  \times V \to [0, \infty)$ with $d(x, y) = \| x - y\|$ gives a metric on $V$.
 \end{lemma}
 
 \begin{proof}
-  Clearly $d(\xb, \xb) = 0$ and is symmetric, so we just need to check the
-  triangle inequality. By Cauchy--Schwartz,
+  Clearly $d(x, x) = 0$ and is symmetric, so we just need to check the triangle
+  inequality. By Cauchy--Schwartz,
   \begin{align*}
-    \| \ab + \bb\| &= \sqrt{\|\ab\|^2 + 2(\ab, \bb) + \| \bb\|^2} \\
-      &\leq \sqrt{\|\ab\|^2 + 2\|\ab\| \|\bb\| + \| \bb\|^2} \\
-      &\leq \|\ab\| + \|\bb\|,
+    \| a + b\| &= \sqrt{\|a\|^2 + 2(a, b) + \| b\|^2} \\
+      &\leq \sqrt{\|a\|^2 + 2\|a\| \|b\| + \| b\|^2} \\
+      &\leq \|a\| + \|b\|,
   \end{align*}
   as required. \qed
 \end{proof}
@@ -562,16 +543,16 @@ converges.
 
 \section{Topology of metric spaces}
 
-Let $(M, d)$ be a metric space with $\xb \in M$ and $r > 0$. Define the
-\textbf{open ball} around $\xb$ of radius $r$ to be
+Let $(M, d)$ be a metric space with $x \in M$ and $r > 0$. Define the
+\textbf{open ball} around $x$ of radius $r$ to be
 \begin{equation*}
-  B(\xb; r) = \{ \yb \in M\ |\ d(\xb, \yb) < r\}.
+  B(x; r) = \{ y \in M\ : \ d(x, y) < r\}.
 \end{equation*}
-The analogous \textbf{closed ball} $D(\xb; r)$ is defined with the less than or
+The analogous \textbf{closed ball} $D(x; r)$ is defined with the less than or
 equal to sign. A set $A \subset M$ is \textbf{bounded} if it can be contained in
-some $D(\xb; r)$ for some $\xb \in M$, $r > 0$. A set $U \subset M$ is
-\textbf{open} if, for all $\xb \in U$, there exists $r_{\xb} > 0$ such that
-$B(\xb; r_{\xb}) \subset U$. A set $A \subset M$ is \textbf{closed} if $M
+some $D(x; r)$ for some $x \in M$, $r > 0$. A set $U \subset M$ is
+\textbf{open} if, for all $x \in U$, there exists $r_{x} > 0$ such that
+$B(x; r_{x}) \subset U$. A set $A \subset M$ is \textbf{closed} if $M
 \setminus A$ is open.
 
 \begin{lemma}
@@ -581,20 +562,20 @@ Let $(M, d)$ be a metric space, then:
     \item $\bigcup_i A_i$ is open if all $A_i \subset M$ are open;
     \item $\bigcap_i^n$ is open if all $A_i \subset M$ are open and $n <
     \infty$;
-    \item $B(\xb; r)$ is open for some $r > 0$.
+    \item $B(x; r)$ is open for some $r > 0$.
   \end{enumerate}
 \end{lemma}
 
 \begin{proof}
   The first two are obvious. For 3), suppose the open sets $U_i$ indexed by $i$
-  are open and $\xb \in \bigcap_{i=1}^n U_i$. Then $\xb in U_i$ for all $i$, so
-  there is some $B(\xb; r_i) \subset U_i$. Taking the minimum of such $r_i > 0$
-  means $B(\xb; r_i) \subset \bigcap_{i=1}^n U_i$, and thus the collective
+  are open and $x \in \bigcap_{i=1}^n U_i$. Then $x in U_i$ for all $i$, so
+  there is some $B(x; r_i) \subset U_i$. Taking the minimum of such $r_i > 0$
+  means $B(x; r_i) \subset \bigcap_{i=1}^n U_i$, and thus the collective
   finite union is open.
   
-  For 4), let $\yb \in B(\xb; r)$, $r_y = r - d(\xb, \yb) > 0$ and $\zb \in
-  B(\yb; r_y)$. Then $d(\xb, \zb) \leq d(\xb, \yb) + d(\yb, \zb) < d(\xb, \yb) +
-  r - d(\xb, \yb) = r$, so $B(\yb; r_y) \subseteq B(\xb; r)$. \qed
+  For 4), let $y \in B(x; r)$, $r_y = r - d(x, y) > 0$ and $z \in
+  B(y; r_y)$. Then $d(x, z) \leq d(x, y) + d(y, z) < d(x, y) +
+  r - d(x, y) = r$, so $B(y; r_y) \subseteq B(x; r)$. \qed
 \end{proof}
 
 \begin{corollary}
@@ -604,7 +585,7 @@ The following may be shown by considering the appropriate complements:
     \item $\bigcap_i A_i$ is closed if $A_i \subset M$ for all $i$;
     \item $\bigcup_i A_i$ is closed if $A_i \subset M$ for all $i$ and $n <
     \infty$;
-    \item $D(\xb; r)$ is closed.
+    \item $D(x; r)$ is closed.
   \end{enumerate}
   \qedwhite
 \end{corollary}
@@ -736,24 +717,23 @@ $f(M)$ compact implies $f(M)$ is closed and bounded.
 Let $V$ be a real vector space. The \textbf{norm} on $V$ is a function
 $\|\cdot\| : V \to [0, \infty)$ where:
 \begin{enumerate}
-  \item $\|\xb\| = 0$ iff $\xb = \boldsymbol{0}$;
-  \item $\|\lambda \xb \| = |\lambda| \cdot \|\xb\|$ for all $\xb \in V$ and
+  \item $\|x\| = 0$ iff $x = 0$;
+  \item $\|\lambda x \| = |\lambda| \cdot \|x\|$ for all $x \in V$ and
   $\lambda \in \mathbb{R}$;
-  \item $\|\xb + \yb\| \leq \|\xb\| + \|\yb\|$.
+  \item $\|x + y\| \leq \|x\| + \|y\|$.
 \end{enumerate}
 The pair $\left(V, \| \cdot \|\right)$ gives a \textbf{normed vector space}.
 
 \begin{lemma}
-  Let $V$ be a normed vector space, then $d(\xb, \yb) = \|\xb - \yb\|$ defines a
-  metric on $V$.
+  Let $V$ be a normed vector space, then $d(x, y) = \|x - y\|$ defines a metric
+  on $V$.
 \end{lemma}
 
 \begin{proof}
   Two of the properties follow from definition. To show the reflexive property,
   note that
   \begin{equation*}
-    d(\yb, \xb) = \| \yb - \xb \| = \| (-1)(\xb - \yb)\| = 
-    \| \xb - \yb \| = d(\xb, \yb).
+    d(y, x) = \| y - x \| = \| (-1)(x - y)\| = \| x - y \| = d(x, y).
   \end{equation*}
   \qed
 \end{proof}
@@ -773,13 +753,13 @@ The pair $\left(V, \| \cdot \|\right)$ gives a \textbf{normed vector space}.
       \|f\|_{\infty} = \sup\{ |f(x)|\in \mathbb{R}\ ;\ x\in X\}.
     \end{equation*}
     
-    \item For $X$ a metric space, $C_b (X) = \{f : x \to \mathbb{R}\ |\ f\
+    \item For $X$ a metric space, $C_b (X) = \{f : x \to \mathbb{R}\ : \ f\
     \textnormal{continuous and bounded}\}$ is also a normed vector space with
     the supremum norm.
   \end{enumerate}
 \end{example}
 
-If $C(X) = \{f : x \to \mathbb{R}\ |\ f\ \textnormal{continuous}\}$ then $f$
+If $C(X) = \{f : x \to \mathbb{R}\ : \ f\ \textnormal{continuous}\}$ then $f$
 does not have a supremum, however, we have the following:
 \begin{proposition}
   If $X$ is compact, then $C(X) = C_b(X)$, so $C(X)$ is a normed vector space.
@@ -792,9 +772,9 @@ does not have a supremum, however, we have the following:
 \end{proof}
 
 Let $(V, \|\cdot\|_V)$ and $(W, \|\cdot\|_W)$ be two normed vector spaces. A
-function $f : V \to W$ is continuous at $\xb \in V$ if, for all $\epsilon > 0$,
-there exists $\delta > 0$ such that $\| \xb - \yb\|_V < \delta$ implies that
-$\|f(\xb) - f(\yb)\|_W < \epsilon$.
+function $f : V \to W$ is continuous at $x \in V$ if, for all $\epsilon > 0$,
+there exists $\delta > 0$ such that $\| x - y\|_V < \delta$ implies that $\|f(x)
+- f(y)\|_W < \epsilon$.
 
 Let $V$ be a normed vector space. $V$ is a \textbf{Banach space} if $V$ with
 the metric induced by the norm is complete.
@@ -911,32 +891,26 @@ up to some isomorphism.
 \section{A norm for matrix spaces}
 
 We want a norm reflecting the fact that matrices can be identified with linear
-maps. Let $\boldsymbol{A} = (A_{ij}) \in M_{n,k}(\mathbb{R})$. We define
+maps. Let $A = (A_{ij}) \in M_{n,k}(\mathbb{R})$. We define
 \begin{equation}
-  \| \boldsymbol{A} \| = \sup \{ \|\boldsymbol{A}\boldsymbol{x}\|_2 \ : \ \boldsymbol{x} \in \mathbb{R}^k,\ \|\boldsymbol{x}\|_2 \leq 1\},
+  \| A \| = \sup \{ \|Ax\|_2 \ : \ x \in \mathbb{R}^k,\ \|x\|_2 \leq 1\},
 \end{equation}
-where $\|\cdot\|$ is the Euclidean norm. Here, $\boldsymbol{A}\boldsymbol{x} \in
-\mathbb{R}^n$, and $\boldsymbol{x} \mapsto \|\boldsymbol{A}\boldsymbol{x}\|_2$
-is clearly a continuous map. By the Heine--Borel theorem, $\{
-\|\boldsymbol{A}\boldsymbol{x}\|_2 : \|\boldsymbol{x}\|_2 \leq 1\}$ is bounded
-and closed, so the supremum exists, and there is $\boldsymbol{x}$ with
-$\|\boldsymbol{x}\|_2 \leq 1$ such that $\| \boldsymbol{A} \| =
-\|\boldsymbol{A}\boldsymbol{x}\|_2$ exists.
+where $\|\cdot\|$ is the Euclidean norm. Here, $Ax \in \mathbb{R}^n$, and $x
+\mapsto \|Ax\|_2$ is clearly a continuous map. By the Heine--Borel theorem, $\{
+\|Ax\|_2\ : \ \|x\|_2 \leq 1\}$ is bounded and closed, so the supremum exists, and
+there is $x$ with $\|x\|_2 \leq 1$ such that $\| A \| = \|Ax\|_2$ exists.
 
 \begin{lemma}
   We have
   \begin{itemize}
-    \item $\|\boldsymbol{A}\boldsymbol{x}\|_2 \leq \|\boldsymbol{A}\|
-    \|\boldsymbol{x}\|_2$ for all $\boldsymbol{A}$ and $\boldsymbol{x}$
+    \item $\|Ax\|_2 \leq \|A\| \|x\|_2$ for all $A$ and $x$
 
-    \item $\|\boldsymbol{A}\boldsymbol{\mathsf{B}}\| \leq \|\boldsymbol{A}\|
-    \|\boldsymbol{\mathsf{B}}\|$
+    \item $\|AB\| \leq \|A\|\|B\|$
     
-    \item $\|\boldsymbol{A}\|_\infty \leq \|\boldsymbol{A}\| \leq k\sqrt{n}
-    \|\boldsymbol{A}\|_\infty$,
+    \item $\|A\|_\infty \leq \|A\| \leq k\sqrt{n}\|A\|_\infty$,
   \end{itemize}
-  where $\|\boldsymbol{A}\|_\infty = \max \{ |A_{ij}|\ : \ \boldsymbol{A} \in
-  M_{n,k}(\mathbb{R})\}$. \qedwhite
+  where $\|A\|_\infty = \max \{ |A_{ij}|\ : \ A \in M_{n,k}(\mathbb{R})\}$.
+  \qedwhite
 \end{lemma}
 
 %===============================================================================
@@ -948,17 +922,16 @@ Let $U \subset \mathbb{R}^n$ be open. A \textbf{vector field} or
 \mathbb{R}^n$ with no explicit time dependence. Here, $U$ is called the
 \textbf{phase space} of $v$.
 
-For $\boldsymbol{x} \in U$, $\tau \in \mathbb{R}$, a continuous differential
-curve $\alpha : (a,b) \to U$ is an \textbf{integral curve} of $v$ at
-$(\boldsymbol{x}, \tau)$ if $\tau \in (a,b)$, $\alpha(t) = \boldsymbol{x}$ and
-$\alpha'(t) = v(\alpha(t))$. Note the integral curves have tangent vectors which
-agree with $v$ at a given point.
+For $x \in U$, $\tau \in \mathbb{R}$, a continuous differential curve $\alpha :
+(a,b) \to U$ is an \textbf{integral curve} of $v$ at $(x, \tau)$ if $\tau \in
+(a,b)$, $\alpha(t) = x$ and $\alpha'(t) = v(\alpha(t))$. Note the integral
+curves have tangent vectors which agree with $v$ at a given point.
 
 More generally, for $U \in \mathbb{R}^n$, $I \subset \mathbb{R}$, a
 \textbf{differential equation} is a continuous map $V : U\times I \to
-\mathbb{R}^n$. A \textbf{solution} of $V$ at $\boldsymbol{x} \in U$ and $\tau
-\in I$ is a continuously differential curve $\alpha : I \to U$ with $\alpha'(t)
-= V(\alpha(t), t)$ and $\alpha(t) = \boldsymbol{x}$.
+\mathbb{R}^n$. A \textbf{solution} of $V$ at $x \in U$ and $\tau \in I$ is a
+continuously differential curve $\alpha : I \to U$ with $\alpha'(t) =
+V(\alpha(t), t)$ and $\alpha(t) = x$.
 
 %-------------------------------------------------------------------------------
 
@@ -968,23 +941,20 @@ This is an existence and uniqueness theorem for differential equations.
 
 \begin{theorem}
   Let $U \subset \mathbb{R}^n$, $I \subset \mathbb{R}$ be open and $V : U\times
-  I \to \mathbb{R}^n$ be a differential equation where, for all
-  $\boldsymbol{x}_1, \boldsymbol{x}_2 \in U$, $t \in I$, there exists $L \geq 0$
-  such that\marginnote{Compare this with the \textbf{Lipschitz condition} where
-  $\|v(\boldsymbol{x}_1) - v(\boldsymbol{x}_2)\| \leq L \|\boldsymbol{x}_1 -
-  \boldsymbol{x}_2\|$, where $L$ is the \textbf{Lipschitz constant}.}
+  I \to \mathbb{R}^n$ be a differential equation where, for all $x_1, x_2 \in
+  U$, $t \in I$, there exists $L \geq 0$ such that\marginnote{Compare this with
+  the \textbf{Lipschitz condition} where $\|v(x_1) - v(x_2)\| \leq L \|x_1 -
+  x_2\|$, where $L$ is the \textbf{Lipschitz constant}.}
   \begin{equation*}
-    \|v(\boldsymbol{x}_1, t) - v(\boldsymbol{x}_2, t)\| \leq L \|\boldsymbol{x}_1 - \boldsymbol{x}_2\|_2.
+    \|v(x_1, t) - v(x_2, t)\| \leq L \|x_1 - x_2\|_2.
   \end{equation*}
-  Given $(\boldsymbol{u}, \tau) \in U \times I$, there exists $a,b>0$ with
+  Given $(u, \tau) \in U \times I$, there exists $a,b>0$ with
   \begin{equation*}
-    U_1 = \{\boldsymbol{x} \in U\ :\ \|\boldsymbol{x} - \boldsymbol{u}\| < a\}, \quad
-    I_1 = \{t \in I\ :\ |t - \tau| < b\}
+    U_1 = \{x \in U\ :\ \|x - u\| < a\}, \quad I_1 = \{t \in I\ :\ |t - \tau| < b\}
   \end{equation*}
-  such that the differential equation $v$ has an unique solution for all
-  $\boldsymbol{x} \in U_1$ and $\tau \in I_1$. Furthermore, the resulting
-  $\alpha : U_1 \times I_1 \to U$ given by $\alpha(\boldsymbol{x}, t) =
-  \alpha_{\boldsymbol{x}}(t)$ is continuous.
+  such that the differential equation $v$ has an unique solution for all $x \in
+  U_1$ and $\tau \in I_1$. Furthermore, the resulting $\alpha : U_1 \times I_1
+  \to U$ given by $\alpha(x, t) = \alpha_{x}(t)$ is continuous.
 \end{theorem}
 
 \begin{proof}
@@ -994,14 +964,14 @@ This is an existence and uniqueness theorem for differential equations.
   
   \begin{itemize}
     \item We first construct an integral curve $\alpha$ with
-    $\partial\alpha/\partial t (\boldsymbol{x}, t) = v(\alpha, t)$,
-    $\alpha(\boldsymbol{x}, \tau) = \boldsymbol{x}$. By integrating,
+    $\partial\alpha/\partial t (x, t) = v(\alpha, t)$, $\alpha(x, \tau) = x$. By
+    integrating,
     \begin{equation*}
-      \alpha(\boldsymbol{x}, t) = \boldsymbol{x} + \int_\tau^t v(\alpha(\boldsymbol{x}, s), s)\; \mathrm{d}s.
+      \alpha(x, t) = x + \int_\tau^t v(\alpha(x, s), s)\; \mathrm{d}s.
     \end{equation*}
     Define some operator $A$ such that
     \begin{equation*}
-      A\beta(\boldsymbol{x}, t) = \boldsymbol{x} + \int_\tau^t v(\beta(\boldsymbol{x}, s), s)\; \mathrm{d}s,
+      A\beta(x, t) = x + \int_\tau^t v(\beta(x, s), s)\; \mathrm{d}s,
     \end{equation*}
     then we note that $A\alpha =\alpha$, and $\alpha$ is a fixed point of the
     operator $A$. We aim to show that $A$ is a contraction in a space satisfying
@@ -1009,24 +979,24 @@ This is an existence and uniqueness theorem for differential equations.
     
     \item Let $a_1, b_1 > 0$ be such that
     \begin{equation*}
-      D_1 = D(\boldsymbol{u}; 2a_1) \subset U, \quad D_2 = D(\tau; b_1) \subset I.
+      D_1 = D(u; 2a_1) \subset U, \quad D_2 = D(\tau; b_1) \subset I.
     \end{equation*}
     By the Heine--Borel theorem\marginnote{Recall $D$ denotes \emph{closed}
     balls, while $B$ denote open balls.}, $D_1 \times D_2 \subset
     \mathbb{R}^{n+1}$ is compact, and so there exists some $K \geq 0$ such that,
-    with respect to the Euclidean norm, $\|\boldsymbol{v}(\boldsymbol{x}, t)\| <
-    K$ for all $(\boldsymbol{x}, t) \in D_1 \times D_2$.
+    with respect to the Euclidean norm, $\|v(x, t)\| < K$ for all $(x, t) \in
+    D_1 \times D_2$.
     
     Let $a, b > 0$ be such that
     \begin{equation*}
       0 < a < a_1, \qquad b < \min \left\{b_1, \frac{a}{K}, \frac{1}{L}\right\}.
     \end{equation*}
-    Recall that $U_1 = B(\boldsymbol{u}; a)$ and $I_1 = B(\tau; b)$, so let
+    Recall that $U_1 = B(u; a)$ and $I_1 = B(\tau; b)$, so let
     \begin{equation*}
       M = \{\beta\ :\ U_1 \times I_1 \to D \subset \mathbb{R}^n \}
     \end{equation*}
-    where $\beta$ is continuous and $\beta(\boldsymbol{x}, \tau) =
-    \boldsymbol{x}$ for all $\boldsymbol{x}\in U_1$. This implies that
+    where $\beta$ is continuous and $\beta(x, \tau) = x$ for all $x\in U_1$.
+    This implies that
     \begin{equation*}
       M \subseteq \left( C_b(U_1 \times I_1) \right)^n,
     \end{equation*}
@@ -1034,43 +1004,42 @@ This is an existence and uniqueness theorem for differential equations.
     supremum norm, if $M$ is closed, then $M$ is complete.
     
     \item Suppose $(\beta_n) \in M$ where $\beta_n \to \beta$. For
-    $(\boldsymbol{x}, t) \in U_1 \times I_1$, $\|\beta(\boldsymbol{x}, t) -
-    \beta_n (\boldsymbol{x}, t)\| \leq \|\beta - \beta_n\|$ so $\beta_n \to
+    $(x, t) \in U_1 \times I_1$, $\|\beta(x, t) -
+    \beta_n (x, t)\| \leq \|\beta - \beta_n\|$ so $\beta_n \to
     \beta$, but since $D_1$ is closed, $\beta \in D$ and obviously
-    $\beta_n((\boldsymbol{x}, \tau) \to \beta(\boldsymbol{x}, \tau) =
-    \boldsymbol{x}$, so $M$ is closed and so is complete.
+    $\beta_n((x, \tau) \to \beta(x, \tau) =
+    x$, so $M$ is closed and so is complete.
     
-    \item If we now consider $A\beta$, then we have $A\beta(\boldsymbol{x},
-    \tau) = \boldsymbol{x}$ and that
+    \item If we now consider $A\beta$, then we have $A\beta(x,
+    \tau) = x$ and that
     \begin{align*}
-      \|A\beta(\boldsymbol{x}, t) - \boldsymbol{u}\| & \leq \|A((\boldsymbol{x}, t) - \boldsymbol{x}\|  - \| \boldsymbol{x} - \boldsymbol{u}\|\\
-        &\leq \int_\tau^t \|v(\beta(\boldsymbol{x}, s), s\|\; \mathrm{d}s + a\\
+      \|A\beta(x, t) - u\| & \leq \|A((x, t) - x\|  - \| x - u\|\\
+        &\leq \int_\tau^t \|v(\beta(x, s), s\|\; \mathrm{d}s + a\\
         &\leq K|t - \tau| + a\\
         &\leq Kb + a\\
         &< 2a < 2a_1 
     \end{align*}
     by Cauchy--Schwartz, definition of $U_1$, second bullet point, definition of
     $I_1$, and definition of $b$ and $a$ respectively. By definition of $D_1$,
-    we have $A\beta(\boldsymbol{x}, t) \in D_1$.
+    we have $A\beta(x, t) \in D_1$.
     
     \item Note then we have
     \begin{align*}
-      \|A\beta(\boldsymbol{x}, t) - A\beta(\boldsymbol{y}, t') &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + \left\|\int_\tau^t v(\beta(\boldsymbol{x}, s), s) - v(\beta(\boldsymbol{y}, s), s)\; \mathrm{d}s\right\|\\
-        &\quad + \left\|\int_t^{t'} v(\beta(\boldsymbol{y}, s), s)\; \mathrm{d}s\right\|\\
-      &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + L\int_\tau^t \left\|v(\beta(\boldsymbol{x}, s), s) - v(\beta(\boldsymbol{y}, s), s)\right\|\; \mathrm{d}s\\
+      \|A\beta(x, t) - A\beta(y, t') &\leq \|x - y\| + \left\|\int_\tau^t v(\beta(x, s), s) - v(\beta(y, s), s)\; \mathrm{d}s\right\|\\
+        &\quad + \left\|\int_t^{t'} v(\beta(y, s), s)\; \mathrm{d}s\right\|\\
+      &\leq \|x - y\| + L\int_\tau^t \left\|v(\beta(x, s), s) - v(\beta(y, s), s)\right\|\; \mathrm{d}s\\
         &\quad + K|t - t'|\\
-      &\leq \|\boldsymbol{x} - \boldsymbol{y}\| + L \sup_{s\in[\tau, t]}\|\beta(\boldsymbol{x}, s) - \beta(\boldsymbol{y}, s)\| + K|t - t'|,
+      &\leq \|x - y\| + L \sup_{s\in[\tau, t]}\|\beta(x, s) - \beta(y, s)\| + K|t - t'|,
     \end{align*}
-    by the Lipshitz conditions. All terms can be made arbitrarily small since
-    $\boldsymbol{x}$ can be made close to $\boldsymbol{y}$, $t$ can be made
-    close to $t'$, and since $[\tau, t]$ is compact, $\|\beta(\boldsymbol{x}, s)
-    - \beta(\boldsymbol{y}, s)\|$ can be made arbitrarily small. So now $A\beta
-    \in D_1$ is continuous, and therefore $A\beta \in M$, and $A : M \to M$ is a
-    self mapping.
+    by the Lipschitz conditions. All terms can be made arbitrarily small since
+    $x$ can be made close to $y$, $t$ can be made close to $t'$, and since
+    $[\tau, t]$ is compact, $\|\beta(x, s) - \beta(y, s)\|$ can be made
+    arbitrarily small. So now $A\beta \in D_1$ is continuous, and therefore
+    $A\beta \in M$, and $A : M \to M$ is a self mapping.
     
     \item Since $A$ is a self-mapping, for $\beta_{1,2} \in M$, we have
     \begin{align*}
-      \|A\beta_1 - A\beta_2\| &\leq \int_\tau^t \|v(\beta_1(\boldsymbol{x}, s), s) - v(\beta_2(\boldsymbol{x}, s), s) \|\; \mathrm{d}s \\
+      \|A\beta_1 - A\beta_2\| &\leq \int_\tau^t \|v(\beta_1(x, s), s) - v(\beta_2(x, s), s) \|\; \mathrm{d}s \\
         &\leq L \int_\tau^t \|\beta_1 - \beta_2\|\; \mathrm{d}s\\
         &= L |t - \tau| \|\beta_1 - \beta_2\|\\
         &\leq (Lb) \|\beta_1 - \beta_2\|
@@ -1085,71 +1054,65 @@ This is an existence and uniqueness theorem for differential equations.
 \end{proof}
 
 Note that it doesn't matter if $\alpha : I_1 \to U$, since we can redefine $M$
-and $A$ as $M_{\boldsymbol{x}} = \{\beta\ :\ I_1 \to D\}$ with $\beta(t) =
-\boldsymbol{x}$, and $A_{\boldsymbol{x}} : M_{\boldsymbol{x}} \to
-M_{\boldsymbol{x}}$. There will be an unique solution for fixed $\boldsymbol{x}
-\in U_1$, where the generation solution gives this solution.
+and $A$ as $M_{x} = \{\beta\ :\ I_1 \to D\}$ with $\beta(t) = x$, and $A_{x} :
+M_{x} \to M_{x}$. There will be an unique solution for fixed $x \in U_1$, where
+the generation solution gives this solution.
 
 %-------------------------------------------------------------------------------
 
 \section{Differentiation in $\mathbb{R}^n$}
 
-Let $U \subset \mathbb{R}^n$ be open. Recall that $f : U \to \mathbb{R}^n$ is differentiable at $\boldsymbol{x} \in U$ with derivative
+Let $U \subset \mathbb{R}^n$ be open. Recall that $f : U \to \mathbb{R}^n$ is differentiable at $x \in U$ with derivative
 \begin{equation}
-  Df(\boldsymbol{x}) = \left(\frac{\partial f_i}{\partial x_j}\right) \in M_{p,n}(\mathbb{R})
+  Df(x) = \left(\frac{\partial f_i}{\partial x_j}\right) \in M_{p,n}(\mathbb{R})
 \end{equation}
-if near $\boldsymbol{x}$ we can write
+if near $x$ we can write
 \begin{equation*}
-  f(\boldsymbol{x} + \boldsymbol{h}) = f(\boldsymbol{x}) + Df(\boldsymbol{x}) \cdot \boldsymbol{h} + R(\boldsymbol{h}), \qquad \lim_{\|\boldsymbol{h}\|\to 0} \frac{R(\boldsymbol{h})}{\|\boldsymbol{h}\|} = 0.
+  f(x + h) = f(x) + Df(x) \cdot h + R(h), \qquad \lim_{\|h\|\to 0} \frac{R(h)}{\|h\|} = 0.
 \end{equation*}
-If $f$ is differential for all $\boldsymbol{x} \in U$, then $Df : U \to M_{p,
-n}(\mathbb{R}) = \mathbb{R}^{pn}$. If $D^i f$ is continuous then $f$ is said to
-be of \textbf{$i$-class}, with $f \in C^i (U)$.
+If $f$ is differential for all $x \in U$, then $Df : U \to M_{p, n}(\mathbb{R})
+= \mathbb{R}^{pn}$. If $D^i f$ is continuous then $f$ is said to be of
+\textbf{$i$-class}, with $f \in C^i (U)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Mean value theorem}
 
 \begin{theorem}
-  Let $U \subset \mathbb{R}^n$ be open, $\boldsymbol{x} \in U$, $\boldsymbol{h}
-  \in \mathbb{R}^n$ where $\boldsymbol{x} + t\boldsymbol{h} \in U$ for all $t
-  \in [0, 1]$ and $f \in C^1 : U \to \mathbb{R}^p$, then
+  Let $U \subset \mathbb{R}^n$ be open, $x \in U$, $h \in \mathbb{R}^n$ where $x
+  + th \in U$ for all $t \in [0, 1]$ and $f \in C^1 : U \to \mathbb{R}^p$, then
   \begin{equation*}
-    f(\boldsymbol{x} + \boldsymbol{h}) - f(\boldsymbol{x}) = \int^1_0 Df(\boldsymbol{x} + t\boldsymbol{h})\cdot\boldsymbol{h}\; \mathrm{d}t.
+    f(x + h) - f(x) = \int^1_0 Df(x + th)\cdot h\; \mathrm{d}t.
   \end{equation*}
 \end{theorem}
 
 \begin{proof}
-  Let $f_i : U \to \mathbb{R}$ with $g_i(t) = f_i(\boldsymbol{x} +
-  t\boldsymbol{h})$, so that $g : [0, 1] \to \mathbb{R}$. Then we have $g_i'(t)
-  = Df_i(\boldsymbol{x} + t\boldsymbol{h}) \cdot \boldsymbol{h}$. By the
+  Let $f_i : U \to \mathbb{R}$ with $g_i(t) = f_i(x + th)$, so that $g : [0, 1]
+  \to \mathbb{R}$. Then we have $g_i'(t) = Df_i(x + th) \cdot h$. By the
   fundamental theorem of calculus,
   \begin{align*}
-    g_i(1) - g_i(0) &= \int_0^1 Df_i(\boldsymbol{x} + t\boldsymbol{h}) \cdot \boldsymbol{h}\; \mathrm{d}t \\
-      &= f_i(\boldsymbol{x} + t\boldsymbol{h}) - f_i(\boldsymbol{x}).
+    g_i(1) - g_i(0) &= \int_0^1 Df_i(x + th) \cdot h\; \mathrm{d}t \\
+      &= f_i(x + th) - f_i(x).
   \end{align*}
   Since this is true per component, we have the result in higher dimensions. \qed
 \end{proof}
 
 \begin{corollary}
-  Let $U \subset \mathbb{R}^n$ be open and convex\sidenote{So for all
-  $\boldsymbol{x}, \boldsymbol{y} \in U$, $\boldsymbol{x} t +
-  (1-t)\boldsymbol{y} \in U$ for $t\in[0, 1]$.}, and also that $f \in C^1 : U
-  \to \mathbb{R}^n$. Assume that there exists some $C = \sup
-  \{\|Df(\boldsymbol{x})\| \in \mathbb{R}\ :\ \boldsymbol{x} \in U\}$, then
-  $\|f(\boldsymbol{y}) - f(\boldsymbol{x})\| \leq C\|\boldsymbol{y} -
-  \boldsymbol{x}\|$.
+  Let $U \subset \mathbb{R}^n$ be open and convex\sidenote{So for all $x, y \in
+  U$, $x t + (1-t)y \in U$ for $t\in[0, 1]$.}, and also that $f \in C^1 : U \to
+  \mathbb{R}^n$. Assume that there exists some $C = \sup \{\|Df(x)\| \in
+  \mathbb{R}\ :\ x \in U\}$, then $\|f(y) - f(x)\| \leq C\|y - x\|$.
 \end{corollary}
 
 \begin{proof}
   By the mean value theorem, we have
   \begin{align*}
-    \|f(\boldsymbol{x} + \boldsymbol{h}) - f(\boldsymbol{x})\| &\leq \int_0^1 \|Df(\boldsymbol{x} + \boldsymbol{h} \cdot \boldsymbol{h}\|\; \mathrm{d}t\\
-      &\leq \int_0^1 \|Df(\boldsymbol{x} + \boldsymbol{h})\| \cdot \|\boldsymbol{h}\|\; \mathrm{d}t\\
-      &\leq \int_0^1 C \cdot \|\boldsymbol{h}\|\; \mathrm{d}t = C \cdot \|\boldsymbol{h}\|.
+    \|f(x + h) - f(x)\| &\leq \int_0^1 \|Df(x + h \cdot h\|\; \mathrm{d}t\\
+      &\leq \int_0^1 \|Df(x + h)\| \cdot \|h\|\; \mathrm{d}t\\
+      &\leq \int_0^1 C \cdot \|h\|\; \mathrm{d}t = C \cdot \|h\|.
   \end{align*}
-  Since $\boldsymbol{h}$ is arbitrary (up to us assuming convexity), letting
-  $\boldsymbol{h} = \boldsymbol{y} - \boldsymbol{x}$ leads the result. \qed
+  Since $h$ is arbitrary (up to us assuming convexity), letting $h = y - x$
+  leads the result. \qed
 \end{proof}
 
 Note that for the above corollary, $U$ can always be reduced so that $C$ exists
@@ -1163,7 +1126,7 @@ locally. For the Picard--Lindel\"of theorem, we get $v \in C^1 : U \times I \to
 Let $U \subset \mathbb{R}^n$ and $V \subset \mathbb{R}^p$ be open. A
 $C^1$-function $f : U \to V$ is a \textbf{diffeomorphism} if there exists
 $f^{-1} : V \to U$ where $f \circ f^{-1} = f^{-1} \circ f = \mbox{id}$ (the
-identity map), and $f^{-1}$ is differential for all $\boldsymbol{x} \in V$.
+identity map), and $f^{-1}$ is differential for all $x \in V$.
 
 \begin{example}
   $f = x^3$ has $f^{-1} = x^{1/3}$, but since $f^{-1}$ is not differentiable at
@@ -1174,9 +1137,8 @@ By the chain rule, note that
 \begin{equation*}
   D(f^{-1} \circ f) = \left(Df^{-1}(f)\right) Df = I_n, \quad D(f \circ f^{-1}) = \left(Df(f^{-1})\right) Df^{-1} = I_p.
 \end{equation*}
-If $\boldsymbol{y} = f(\boldsymbol{x})$ then $Df^{-1}(\boldsymbol{y}) =
-(Df(\boldsymbol{x}))^{-1}$, then inverse matrix of $Df(\boldsymbol{x})$, so
-$Df(\boldsymbol{x})$ is invertible and $p=n$ if $f$ is a diffeomorphism.
+If $y = f(x)$ then $Df^{-1}(y) = (Df(x))^{-1}$, then inverse matrix of $Df(x)$,
+so $Df(x)$ is invertible and $p=n$ if $f$ is a diffeomorphism.
 
 \begin{lemma}
   \begin{enumerate}
@@ -1235,129 +1197,108 @@ $Df(\boldsymbol{x})$ is invertible and $p=n$ if $f$ is a diffeomorphism.
 \subsection{Inverse function theorem}
 
 Let $U \subset \mathbb{R}^n$ be open and $f \in C^k : U \to \mathbb{R}^n$. $f$
-is \textbf{locally invertible} at $\boldsymbol{x} \in U$ if there exists $U_1
-\subset U$ such that for $\boldsymbol{x} \in U_1$, $V_1 \subset \mathbb{R}^n$
-where $f(\boldsymbol{x}) \in V_1$ is open and $f: U_1 \to V_1$ is a
-diffeomorphism.
+is \textbf{locally invertible} at $x \in U$ if there exists $U_1 \subset U$ such
+that for $x \in U_1$, $V_1 \subset \mathbb{R}^n$ where $f(x) \in V_1$ is open
+and $f: U_1 \to V_1$ is a diffeomorphism.
 
 \begin{theorem}
-  Let $U \subset \mathbb{R}^n$ be open and $f \in C^k : U \to \mathbb{R}^n$,
-  $\boldsymbol{u} \in U$. $f$ is locally invertible iff $Df(\boldsymbol{u})$ is
-  invertible. Here the local inverse is of class $C^k$.
+  Let $U \subset \mathbb{R}^n$ be open and $f \in C^k : U \to \mathbb{R}^n$, $u
+  \in U$. $f$ is locally invertible iff $Df(u)$ is invertible. Here the local
+  inverse is of class $C^k$.
 \end{theorem}
 
 \begin{proof}
   This one is quite long!
   
   \begin{itemize}
-    \item If $f$ is locally invertible at $\boldsymbol{u}$, then it is a
-    diffeomorphism, so clearly $Df(\boldsymbol{u})$ is invertible. However, this
-    is for an isolated point, and we need to show that is also true on the
-    appropriate neighbourhood.
+    \item If $f$ is locally invertible at $u$, then it is a diffeomorphism, so
+    clearly $Df(u)$ is invertible. However, this is for an isolated point, and
+    we need to show that is also true on the appropriate neighbourhood.
     
-    \item Assume that $\boldsymbol{u} = \boldsymbol{0} = f(\boldsymbol{u})$,
-    i.e. a fixed point, and $Df(\boldsymbol{0}) = I$. Define, for
-    $\boldsymbol{y} \in \mathbb{R}^n$,
+    \item Assume that $u = 0 = f(u)$, i.e. a fixed point, and $Df(0) = I$.
+    Define, for $y \in \mathbb{R}^n$,
     \begin{equation*}
-      g_{\boldsymbol{y}}(\boldsymbol{x}) = \boldsymbol{y} + \boldsymbol{x} - f(\boldsymbol{x}) \quad \Rightarrow \quad \boldsymbol{y} - f(\boldsymbol{x}) = g_{\boldsymbol{y}} - \boldsymbol{x}.
+      g_{y}(x) = y + x - f(x) \quad \Rightarrow \quad y - f(x) = g_{y} - x.
     \end{equation*}
-    Note that $Dg_{\boldsymbol{y}}(\boldsymbol{x}) = I - Df(\boldsymbol{x})$ and
-    does not depend on $\boldsymbol{y}$. Also that
-    $Dg_{\boldsymbol{y}}(\boldsymbol{0}) = I - I = 0$. 
+    Note that $Dg_{y}(x) = I - Df(x)$ and does not depend on $y$. Also that
+    $Dg_{y}(0) = I - I = 0$. 
     
-    By continuity, we have $\|Dg_{\boldsymbol{y}}(\boldsymbol{x}) =
-    \|Dg_{\boldsymbol{0}}(\boldsymbol{x})\| \leq 1/2$ for some $\boldsymbol{x}$
-    near $\boldsymbol{0}$. This implies that
+    By continuity, we have $\|Dg_{y}(x) = \|Dg_{0}(x)\| \leq 1/2$
+    for some $x$ near $0$. This implies that
     \begin{equation*}
-      \|g_{\boldsymbol{y}}(\boldsymbol{x}_1 - g_{\boldsymbol{y}}(\boldsymbol{x}_2)\| \leq \frac{1}{2}\|\boldsymbol{x}_1 - \boldsymbol{x}_2\|
+      \|g_{y}(x_1 - g_{y}(x_2)\| \leq \frac{1}{2}\|x_1 - x_2\|
     \end{equation*}
-    for $\boldsymbol{x}_{1,2} \in D(0; r)$. Taking $\boldsymbol{x}_2 =
-    \boldsymbol{0}$, we also get
+    for $x_{1,2} \in D(0; r)$. Taking $x_2 = 0$, we also get
     \begin{equation*}
-      \|g_{\boldsymbol{y}}(\boldsymbol{x}) - \boldsymbol{y}\| \leq \frac{1}{2}\|\boldsymbol{x}\|,
+      \|g_{y}(x) - y\| \leq \frac{1}{2}\|x\|,
     \end{equation*}
     so we have
     \begin{equation*}
-      \|g_{\boldsymbol{y}}(\boldsymbol{x})\| \leq \frac{1}{2}\|\boldsymbol{x}\| + \|\boldsymbol{y}\|
+      \|g_{y}(x)\| \leq \frac{1}{2}\|x\| + \|y\|
     \end{equation*}
-    for $\boldsymbol{y} \in D(0; r/2)$ and $\boldsymbol{x} \in D(0; r)$, and
-    thus $\|g_{\boldsymbol{y}}(\boldsymbol{x})\| \leq r$. Hence we have
-    $g_{\boldsymbol{y}}(x) : D(0; r) \to D(0; r)$, and $g_{\boldsymbol{y}}(x)$
-    is by construction a contraction since
-    $\|g_{\boldsymbol{y}}(\boldsymbol{x}_1 -
-    g_{\boldsymbol{y}}(\boldsymbol{x}_2)\} \leq (1/2)\|\boldsymbol{x}_1 -
-    \boldsymbol{x}_2\|$.
+    for $y \in D(0; r/2)$ and $x \in D(0; r)$, and thus $\|g_{y}(x)\| \leq r$.
+    Hence we have $g_{y}(x) : D(0; r) \to D(0; r)$, and $g_{y}(x)$ is by
+    construction a contraction since $\|g_{y}(x_1 - g_{y}(x_2)\} \leq (1/2)\|x_1
+    - x_2\|$.
   
-    \item By contraction mapping theorem, for all $\boldsymbol{y} \in D(0; r/2)$,
-    there exists a unique $\boldsymbol{x} \in D(0; r)$ with $\boldsymbol{y} =
-    f(\boldsymbol{x})$, so there exists an inverse function defined on $D(0;
-    r/2)$.
+    \item By contraction mapping theorem, for all $y \in D(0; r/2)$, there
+    exists a unique $x \in D(0; r)$ with $y = f(x)$, so there exists an inverse
+    function defined on $D(0; r/2)$.
     
     Define
     \begin{equation*}
-      U_1 = \{\boldsymbol{x} \in U\ :\ \|\boldsymbol{x}\| < r, \|f(\boldsymbol{x})\| < r/2\}, \quad V_1 = f(U_1) = B(0; r/2).
+      U_1 = \{x \in U\ :\ \|x\| < r, \|f(x)\| < r/2\}, \quad V_1 = f(U_1) = B(0; r/2).
     \end{equation*}
-    By definition, both the domain and image are open sets. $f : U_1 \to V_1$ is a
-    restricted bijection since it is a bijection on $D(0; r/2) \supset B(0; r/2)$.
-    Given $\boldsymbol{x}_{1,2} \in D(0; r)$, we have
+    By definition, both the domain and image are open sets. $f : U_1 \to V_1$ is
+    a restricted bijection since it is a bijection on $D(0; r/2) \supset B(0;
+    r/2)$. Given $x_{1,2} \in D(0; r)$, we have
     \begin{align*}
-      \|\boldsymbol{x}_1 - \boldsymbol{x}_2\| &= \| g_{\boldsymbol{0}}(\boldsymbol{x}_1) + f(\boldsymbol{x}_1) - g_{\boldsymbol{0}}(\boldsymbol{x}_2) + f(\boldsymbol{x}_2)\| \\
-        & \leq \|g_{\boldsymbol{0}} - g_{\boldsymbol{0}}(\boldsymbol{x}_2)\| + \|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\| \\
-        & \leq \frac{1}{2} \|\boldsymbol{x}_1 - \boldsymbol{x}_2\| + \|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\|,
+      \|x_1 - x_2\| &= \| g_{0}(x_1) + f(x_1) - g_{0}(x_2) + f(x_2)\| \\
+        & \leq \|g_{0} - g_{0}(x_2)\| + \|f(x_1) - f(x_2)\| \\
+        & \leq \frac{1}{2} \|x_1 - x_2\| + \|f(x_1) - f(x_2)\|,
     \end{align*}
-    so that $\|\boldsymbol{x}_1 - \boldsymbol{x}_2\| \leq 2\|f(\boldsymbol{x}_1) -
-    f(\boldsymbol{x}_2)\|$. For $\boldsymbol{x}_2 = 0$, we have
-    $\|\boldsymbol{x}_1\| \leq 2\|f(\boldsymbol{x}_1)\|$. Since
-    $\|f(\boldsymbol{x}_1)\| < r/2$ by construction, we have $\|\boldsymbol{x}_1\|
-    < r$, so indeed $V_1 = B(0; r/2)$.
+    so that $\|x_1 - x_2\| \leq 2\|f(x_1) - f(x_2)\|$. For $x_2 = 0$, we have
+    $\|x_1\| \leq 2\|f(x_1)\|$. Since $\|f(x_1)\| < r/2$ by construction, we
+    have $\|x_1\| < r$, so indeed $V_1 = B(0; r/2)$.
     
-    For $f^{-1} = \phi$, $\|\boldsymbol{x}_1 - \boldsymbol{x}_2\| \leq
-    2\|f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2)\|$ implies that
-    $\|\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\| \leq 2\|\boldsymbol{x}_1
-    - \boldsymbol{x}_2\|$, so that $f^{-1}$ is Lipschutz continuous.
+    For $f^{-1} = \phi$, $\|x_1 - x_2\| \leq 2\|f(x_1) - f(x_2)\|$ implies that
+    $\|\phi(y_1) - \phi(y_2)\| \leq 2\|x_1 - x_2\|$, so that $f^{-1}$ is
+    Lipschitz continuous.
     
-    \item Note that $Df(\boldsymbol{x})$ is invertible for all $\boldsymbol{x}
-    \in D(0; r)$, since we have $g_{\boldsymbol{0}}(\boldsymbol{x}) -
-    \boldsymbol{x} = f(\boldsymbol{x})$, so that $Df(\boldsymbol{x}) = I -
-    Dg_{\boldsymbol{0}}(\boldsymbol{x})$, but
-    $\|Dg_{\boldsymbol{0}}(\boldsymbol{x})\| \leq 1/2$ from point 2 above, so
-    $Df(\boldsymbol{x})$ is invertible for all $x \in D(0;r)$, and in particular
-    for $x \in B(0; r) \subset D(0; r)$.
+    \item Note that $Df(x)$ is invertible for all $x \in D(0; r)$, since we have
+    $g_{0}(x) - x = f(x)$, so that $Df(x) = I - Dg_{0}(x)$, but $\|Dg_{0}(x)\|
+    \leq 1/2$ from point 2 above, so $Df(x)$ is invertible for all $x \in
+    D(0;r)$, and in particular for $x \in B(0; r) \subset D(0; r)$.
     
-    \item Recall that if $f$ id differentiable, then $f(\boldsymbol{x}_1) -
-    f(\boldsymbol{x}_2) = Df(\boldsymbol{x}_1)(\boldsymbol{x}_1 -
-    \boldsymbol{x}_2) + R(\boldsymbol{x}_1 - \boldsymbol{x}_2)$ with
-    $R(\boldsymbol{h}) / \|\boldsymbol{h}\| \to 0$ as $\|\boldsymbol{h}\| \to
-    0$. Let $\boldsymbol{y}_i = f(\boldsymbol{x}_i)$. For $i=1,2$,
+    \item Recall that if $f$ id differentiable, then $f(x_1) - f(x_2) =
+    Df(x_1)(x_1 - x_2) + R(x_1 - x_2)$ with $R(h) / \|h\| \to 0$ as $\|h\| \to
+    0$. Let $y_i = f(x_i)$. For $i=1,2$,
     \begin{equation*}
-      \boldsymbol{y}_1 - \boldsymbol{y}_2 = Df(\boldsymbol{x}_1)\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right) + R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right),
+      y_1 - y_2 = Df(x_1)\left(\phi(y_1) - \phi(y_2)\right) + R\left(\phi(y_1) - \phi(y_2)\right),
     \end{equation*}
     so that
     \begin{align*}
-      \left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}(\boldsymbol{y}_1 - \boldsymbol{y}_2) &= \left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right) \\
-        &+\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right).
+      \left(Df(\phi(y_1))\right)^{-1}(y_1 - y_2) &= \left(\phi(y_1) - \phi(y_2)\right) \\
+        &+\left(Df(\phi(y_1))\right)^{-1}R\left(\phi(y_1) - \phi(y_2)\right).
     \end{align*}
     
     We want to show that the remainder term tends to zero, which will show that
     $\phi = f^{-1}$ is differentiable. For that, note we have, by
     Cauchy--Schwartz and point 3 above,
     \begin{align*}
-      \frac{\|\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}{\|\boldsymbol{y}_1 - \boldsymbol{y}_2\|} \leq  \frac{\|\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}\|\cdot \|R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}{(1/2)\|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\|}.
+      \frac{\|\left(Df(\phi(y_1))\right)^{-1}R\left(\phi(y_1) - \phi(y_2)\right)\|}{\|y_1 - y_2\|} \leq  \frac{\|\left(Df(\phi(y_1))\right)^{-1}\|\cdot \|R\left(\phi(y_1) - \phi(y_2)\right)\|}{(1/2)\|\left(\phi(y_1) - \phi(y_2)\right)\|}.
     \end{align*}
-    $\left(Df(\phi(\boldsymbol{y}_1))\right)^{-1}$ is bounded since $f$ is
-    differentiable. Further more, $f$ differentiable means
-    $\|R\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| /
-    \|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| \to 0$ as
-    $\|\left(\phi(\boldsymbol{y}_1) - \phi(\boldsymbol{y}_2)\right)\| \to 0$.
-    Thus the desired remainder goes to zero since $\boldsymbol{y}_1 -
-    \boldsymbol{y}_2 \to 0$ implies $\phi(\boldsymbol{y}_1) -
-    \phi(\boldsymbol{y}_2) \to 0$, and $\phi = f^{-1}$ is differentiable.
+    $\left(Df(\phi(y_1))\right)^{-1}$ is bounded since $f$ is differentiable.
+    Further more, $f$ differentiable means $\|R\left(\phi(y_1) -
+    \phi(y_2)\right)\| / \|\left(\phi(y_1) - \phi(y_2)\right)\| \to 0$ as
+    $\|\left(\phi(y_1) - \phi(y_2)\right)\| \to 0$. Thus the desired remainder
+    goes to zero since $y_1 - y_2 \to 0$ implies $\phi(y_1) - \phi(y_2) \to 0$,
+    and $\phi = f^{-1}$ is differentiable.
     
-    \item The derivative $D\phi(\boldsymbol{y}) =
-    (Df(\phi(\boldsymbol{y})))^{-1} = \mbox{inv} \circ Df \circ
-    \phi)\boldsymbol{y}$, so by construction, $D\phi = Df^{-1}$ is continuous.
-    By chain rule, if $f\in C^k$, $D^{k-1}\phi$ is continuous, and thus $\phi =
-    f^{-1} \in C^k$.
+    \item The derivative $D\phi(y) = (Df(\phi(y)))^{-1} = \mbox{inv} \circ Df
+    \circ \phi)y$, so by construction, $D\phi = Df^{-1}$ is continuous. By chain
+    rule, if $f\in C^k$, $D^{k-1}\phi$ is continuous, and thus $\phi = f^{-1}
+    \in C^k$.
   \end{itemize}
   
    \qed
@@ -1369,99 +1310,86 @@ diffeomorphism.
 
 \begin{theorem}
   Let $U\subset \mathbb{R}^n$, $V \subset \mathbb{R}^m$ be open and $f : U
-  \times V \to \mathbb{R}^m$ be a $C^k$-function, with $k \geq 1$. Let
-  $(\boldsymbol{u}, \boldsymbol{v}) \in U \times V$ such that the matrix
-  $[\partial f_i / \partial x_j](\boldsymbol{u}, \boldsymbol{v})$ is invertible
-  with $\boldsymbol{c} = f(\boldsymbol{u}, \boldsymbol{v})$. Then there is a
-  $C^k$-function $\eta : U_1 \to V_1$ with $\boldsymbol{u} \in U_1 \subset U$,
-  $\boldsymbol{v} \in V_1 \subset V$ where $\eta(\boldsymbol{u}) =
-  \boldsymbol{v}$ and $f(\boldsymbol{x}, \eta(\boldsymbol{x})) = \boldsymbol{c}$
-  for all $\boldsymbol{x} \in N( (\boldsymbol{u}, \boldsymbol{v}); r)$. Further
-  more, if $f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ for
-  $(\boldsymbol{x}, \boldsymbol{y}) \in U_1 \times V_1$, then we have $y =
-  \eta(\boldsymbol{x})$ in the respective sets.
+  \times V \to \mathbb{R}^m$ be a $C^k$-function, with $k \geq 1$. Let $(u, v)
+  \in U \times V$ such that the matrix $[\partial f_i / \partial x_j](u, v)$ is
+  invertible with $\boldsymbol{c} = f(u, v)$. Then there is a $C^k$-function
+  $\eta : U_1 \to V_1$ with $u \in U_1 \subset U$, $v \in V_1 \subset V$ where
+  $\eta(u) = v$ and $f(x, \eta(x)) = \boldsymbol{c}$ for all $x \in N( (u, v);
+  r)$. Further more, if $f(x, y) = \boldsymbol{c}$ for $(x, y) \in U_1 \times
+  V_1$, then we have $y = \eta(x)$ in the respective sets.
 \end{theorem}
 
 \begin{proof}
-  Define $\phi : U \times V \to \mathbb{R}^n \times \mathbb{R}^m$ where
-  $(\boldsymbol{x}, \boldsymbol{y}) \mapsto (\boldsymbol{x}, f(\boldsymbol{x},
-  \boldsymbol{y}))$. We have
+  Define $\phi : U \times V \to \mathbb{R}^n \times \mathbb{R}^m$ where $(x, y)
+  \mapsto (x, f(x, y))$. We have
   \begin{equation*}
-    D\phi(\boldsymbol{u}, \boldsymbol{v}) = \begin{pmatrix}I & 0 \\ \partial f_i/\partial x_j (\boldsymbol{u}, \boldsymbol{v}) & \partial f_i / \partial x_j (\boldsymbol{u}, \boldsymbol{v}) \end{pmatrix},
+    D\phi(u, v) = \begin{pmatrix}I & 0 \\ \partial f_i/\partial x_j (u, v) & \partial f_i / \partial x_j (u, v) \end{pmatrix},
   \end{equation*}
-  so $\mbox{det} D\phi(\boldsymbol{u}, \boldsymbol{v}) \neq 0$, and so by the
-  inverse function theorem, $\phi$ is locally a diffeomorphism.
+  so $\mbox{det} D\phi(u, v) \neq 0$, and so by the inverse function theorem,
+  $\phi$ is locally a diffeomorphism.
   
-  Since $\phi(\boldsymbol{x}, \boldsymbol{y}) = (\boldsymbol{x},
-  f(\boldsymbol{x}, \boldsymbol{y})$, we have $\phi^{-1}(\boldsymbol{a},
-  \boldsymbol{b}) = (\boldsymbol{a}, g(\boldsymbol{a}, \boldsymbol{b})$. Setting
-  $\eta(\boldsymbol{x}) = g(\boldsymbol{x}, \boldsymbol{c})$, then defining
+  Since $\phi(x, y) = (x, f(x, y)$, we have $\phi^{-1}(A, \boldsymbol{b}) = (A,
+  g(A, \boldsymbol{b})$. Setting $\eta(x) = g(x, \boldsymbol{c})$, then defining
   $\hat{p}_2$ as the projection operator for the second argument, we have
   \begin{align*}
-    f(\boldsymbol{x}, \eta(\boldsymbol{x})) &= f(\boldsymbol{x}, g(\boldsymbol{x}, c)) \\
-      &= \hat{p}_2 \phi(\boldsymbol{x}, g(\boldsymbol{x}, c) \\
-      &= \hat{p}_2 \phi \phi^{-1} (\boldsymbol{x}, \boldsymbol{c}) \\
-      &= \hat{p}_2(\boldsymbol{x}, \boldsymbol{c}) = \boldsymbol{c}.
+    f(x, \eta(x)) &= f(x, g(x, c)) \\
+      &= \hat{p}_2 \phi(x, g(x, c) \\
+      &= \hat{p}_2 \phi \phi^{-1} (x, \boldsymbol{c}) \\
+      &= \hat{p}_2(x, \boldsymbol{c}) = \boldsymbol{c}.
   \end{align*}
-  So we have $f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ iff
-  $\boldsymbol{y} = \eta(\boldsymbol{x})$ for $(\boldsymbol{x}, \boldsymbol{y})
-  \in W$ where $\phi$ is a diffeomorphism. This is achieved by choosing
-  $\boldsymbol{u} \in U_1 \subset U$, $\boldsymbol{v} \in V_1 \subset V$ so that
-  $U_1 \times V_1 \subset W$, with $\eta(U_1) = V_1$. \qed
+  So we have $f(x, y) = \boldsymbol{c}$ iff $y = \eta(x)$ for $(x, y) \in W$
+  where $\phi$ is a diffeomorphism. This is achieved by choosing $u \in U_1
+  \subset U$, $v \in V_1 \subset V$ so that $U_1 \times V_1 \subset W$, with
+  $\eta(U_1) = V_1$. \qed
 \end{proof}
 
-The implicit function theorem gives a criterion of when we can solve
-$f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ unique for
-$\boldsymbol{y}$. In fact, if the linear equation $[Df(\boldsymbol{u},
-\boldsymbol{v})](\boldsymbol{x}, \boldsymbol{y}) = 0$ is uniquely solvable, then
-$f(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{c}$ is uniquely solvable for
-$\boldsymbol{y}$.
+The implicit function theorem gives a criterion of when we can solve $f(x, y) =
+\boldsymbol{c}$ unique for $y$. In fact, if the linear equation $[Df(u, v)](x,
+y) = 0$ is uniquely solvable, then $f(x, y) = \boldsymbol{c}$ is uniquely
+solvable for $y$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Manifolds}
 
 Let $M \subset \mathbb{R}^n$, $k \geq 0$, $\ell \geq 1$. $M$ is a
-\textbf{$C^\ell$ $k$-dimensional manifold} if, for all $\boldsymbol{p} \in M$,
-we also have $\boldsymbol{p} \in U \subset \mathbb{R}^n$ where there exists a
-$C^\ell$-diffeomorphism $h : U \to U' \subset \mathbb{R}^k \times
-\mathbb{R}^{n-k}$ with $h(U \cap M) = U' \cap (\mathbb{R}^k \times
-\{\boldsymbol{0}\})$. Informally, a manifold is a structure where every point of
-$M$ has a neighbourhood that resembles $\mathbb{R}^k$. $h$ here is called a
-\textbf{chart}, which maps neighbourhoods of the manifold to $\mathbb{R}^k$
-(think \textbf{co-ordinate system} or segments of maps). A collection of charts
-that spans the whole of $M$ is called an \textbf{atlas}.\marginnote{Notice then
-in the previous proof, $\phi$ is a chart, and $W \cap \{(\boldsymbol{x},
-\boldsymbol{y}) \in \mathbb{R}^n\ |\ f(\boldsymbol{x}, \boldsymbol{y}) =
-\boldsymbol{c}\}$ is a $k$-manifold.}
+\textbf{$C^\ell$ $k$-dimensional manifold} if, for all $p \in M$, we also have
+$p \in U \subset \mathbb{R}^n$ where there exists a $C^\ell$-diffeomorphism $h :
+U \to U' \subset \mathbb{R}^k \times \mathbb{R}^{n-k}$ with $h(U \cap M) = U'
+\cap (\mathbb{R}^k \times \{0\})$. Informally, a manifold is a structure where
+every point of $M$ has a neighbourhood that resembles $\mathbb{R}^k$. $h$ here
+is called a \textbf{chart}, which maps neighbourhoods of the manifold to
+$\mathbb{R}^k$ (think \textbf{co-ordinate system} or segments of maps). A
+collection of charts that spans the whole of $M$ is called an
+\textbf{atlas}.\marginnote{Notice then in the previous proof, $\phi$ is a chart,
+and $W \cap \{(x, y) \in \mathbb{R}^n\ : \ f(x, y) = \boldsymbol{c}\}$ is a
+$k$-manifold.}
 
 \begin{example}
   An open subset $U \subset \mathbb{R}$ is a $C^\infty$ $n$-manifold where the
   chart is $\mbox{id}: U \to U$.
   
   For a slightly less trivial example, consider the \textbf{unit $n$-sphere}
-  $S^n = \{ \boldsymbol{x} \in \mathbb{R}^{n+1}\ :\ \|\boldsymbol{x}\| =
-  1\}$.\marginnote{Note that $2$-sphere would be the standard sphere, which is
-  two-dimensional with zero volume.} With $f : \mathbb{R}^{n+1} \to \mathbb{R}$
-  with $\boldsymbol{x} \mapsto \|\boldsymbol{x}\|^2$, we have $S^n =
-  f^{-1}(\{1\})$. For every $\boldsymbol{x} \neq 0$, $Df(\boldsymbol{x}) \neq
-  0$, so by implicit function theorem with respect to some co-ordinate system,
-  there exists charts (it turns out an atlas for $S^n$ requires strictly more
-  than 1 chart). Since $f$ is a polynomial (e.g. standard Cartesian
-  co-ordinates), $S^n$ is a $C^\infty$ $n$-manifold.
+  $S^n = \{ x \in \mathbb{R}^{n+1}\ :\ \|x\| = 1\}$.\marginnote{Note that
+  $2$-sphere would be the standard sphere, which is two-dimensional with zero
+  volume.} With $f : \mathbb{R}^{n+1} \to \mathbb{R}$ with $x \mapsto \|x\|^2$,
+  we have $S^n = f^{-1}(\{1\})$. For every $x \neq 0$, $Df(x) \neq 0$, so by
+  implicit function theorem with respect to some co-ordinate system, there
+  exists charts (it turns out an atlas for $S^n$ requires strictly more than 1
+  chart). Since $f$ is a polynomial (e.g. standard Cartesian co-ordinates),
+  $S^n$ is a $C^\infty$ $n$-manifold.
 \end{example}
 
 Let $f : U \subset \mathbb{R}^n \to \mathbb{R}^k$ be a $C^1$ function. A point
-$\boldsymbol{x} \in U$ is called a \textbf{critical point} if
-$\mbox{rank}(Df(\boldsymbol{x})) < k$, i.e. the columns of the derivative matrix
-do not span $\mathbb{R}^k$, and $f(\boldsymbol{x})$ is called a \textbf{critical
-value}. Otherwise $\boldsymbol{x}$ is called a \textbf{regular point}.
+$x \in U$ is called a \textbf{critical point} if $\mbox{rank}(Df(x)) < k$, i.e.
+the columns of the derivative matrix do not span $\mathbb{R}^k$, and $f(x)$ is
+called a \textbf{critical value}. Otherwise $x$ is called a \textbf{regular
+point}.
 
 \begin{example}
   \begin{itemize}
-    \item For $f: \mathbb{R}^n \to \mathbb{R}$ with $f(x) = \|\boldsymbol{x}\|$,
-    clearly $\boldsymbol{x} = \boldsymbol{0}$ is the only critical point, and 0
-    is the associated critical value.
+    \item For $f: \mathbb{R}^n \to \mathbb{R}$ with $f(x) = \|x\|$, clearly $x =
+    0$ is the only critical point, and 0 is the associated critical value.
     
     \item For $f:\mathbb{R}^n \to \mathbb{R}^k$, if $k > n$ then there are no
     regular points in $\mathbb{R}^n$ by definition.
@@ -1484,34 +1412,32 @@ value}. Otherwise $\boldsymbol{x}$ is called a \textbf{regular point}.
 
 \begin{theorem}
   Let $f : U \subset \mathbb{R}^n \to \mathbb{R}^k$ be a $C^\ell$-map with $\ell
-  \geq 1$, and $U$ is open. If $\boldsymbol{y} \in \mathbb{R}^k$ is a regular
-  value, then $f^{-1}(\{\boldsymbol{y}\})$ is a $C^\ell$ $(n-k)$-manifold.
+  \geq 1$, and $U$ is open. If $y \in \mathbb{R}^k$ is a regular value, then
+  $f^{-1}(\{y\})$ is a $C^\ell$ $(n-k)$-manifold.
 \end{theorem}
 
 \begin{proof}
-  Let $\boldsymbol{x} \in f^{-1}(\{\boldsymbol{y}\})$. Since $\boldsymbol{x}$ is
-  not a critical point, $Df(\boldsymbol{x})$ has rank $k$. After rearranging
-  co-ordinates, we can assume that $(\partial f_i / \partial
-  x_j)(\boldsymbol{x})$ is invertible, with $i = 1,\ldots k$ and $j = n-k+1$.
-  The existence of the chart follows from the implicit function theorem, and so
-  $f^{-1}(\{\boldsymbol{y}\})$ is a $C^\ell$ $(n-k)$-manifold by definition. \qed
+  Let $x \in f^{-1}(\{y\})$. Since $x$ is not a critical point, $Df(x)$ has rank
+  $k$. After rearranging co-ordinates, we can assume that $(\partial f_i /
+  \partial x_j)(x)$ is invertible, with $i = 1,\ldots k$ and $j = n-k+1$. The
+  existence of the chart follows from the implicit function theorem, and so
+  $f^{-1}(\{y\})$ is a $C^\ell$ $(n-k)$-manifold by definition. \qed
 \end{proof}
 
-Note that if $\boldsymbol{y} \notin f(U)$ then $\phi =
-f^{-1}(\{\boldsymbol{y}\})$ is still a $(n-k)$-manifold.
+Note that if $y \notin f(U)$ then $\phi = f^{-1}(\{y\})$ is still a
+$(n-k)$-manifold.
 
 \begin{example}
   \begin{itemize}
-    \item For $f:\mathbb{R}^n \to \mathbb{R}$ with $\boldsymbol{x} \mapsto
-    \|\boldsymbol{x}\|$, we have $S^{n-1} = f^{-1}(\{1\})$ following from
-    previous example.
+    \item For $f:\mathbb{R}^n \to \mathbb{R}$ with $x \mapsto \|x\|$, we have
+    $S^{n-1} = f^{-1}(\{1\})$ following from previous example.
     
     \item For $f(x,y,z) = (\ex^z x, (y-1) \sin z)$, the inverse of the regular
     values $f^{-1}(\{(a,b)\ :\ b\neq 0\})$ is a $1$-manifold.
     
-    \item For $f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^2$ with
-    $(\boldsymbol{x}, \boldsymbol{y}) \mapsto (\|\boldsymbol{x}\|,
-    \|\boldsymbol{y}\|)$, we have $f^{-1}(\{1, 1\}) = S^{n-1} \times S^{m-1}$.
+    \item For $f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^2$ with $(x, y)
+    \mapsto (\|x\|, \|y\|)$, we have $f^{-1}(\{1, 1\}) = S^{n-1} \times
+    S^{m-1}$.
   \end{itemize}
 \end{example}
 
@@ -1519,17 +1445,249 @@ f^{-1}(\{\boldsymbol{y}\})$ is still a $(n-k)$-manifold.
 
 \chapter{Tangent spaces and vector fields}
 
+Let $M \subset \mathbb{R}^n$ be a $C^\ell$ $k$-manifold with $\ell \geq 1$. The
+\textbf{tangent vector} $v$ at $p \in M$ is an element in $\mathbb{R}^n$ of the
+form $v = \gamma'(0)$ with $\gamma : (-\epsilon, \epsilon) \to M$ being a $C^1$
+curve, and that $\gamma(0) = p$.
+
+The set of all tangent vectors at point $p \in M$ is the \textbf{tangent space}
+$T_p(M)$ at $p$.
+
+\begin{proposition}
+  Let $M \subset \mathbb{R}^n$ be a $C^\ell$ $k$-manifold, and $p \in M$. Then
+  $T_p(M)$ is a $k$-vector space of $\mathbb{R}^n$. In fact, if $h : U \to U'
+  \subset \mathbb{R}^k \times \mathbb{R}^{n-k}$ is a chart with $h(p) = 0$, then
+  $T_p(M) \subseteq (Dh^{-1}(0))(\mathbb{R}^k \times \{0\})$.
+\end{proposition}
+
+\begin{proof}
+  Let $h$ be a chart, $\gamma : (-\epsilon, \epsilon) \to M$ with
+  $\gamma(0) = p \in U$. We can assume
+  $\gamma : (-\epsilon, \epsilon) \to U \cap M$, so
+  \begin{equation*}
+    h \circ \boldsymbol{g} : (-\epsilon, \epsilon) \to \mathbb{R}^k \times \{0\},
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \gamma = h^{-1} \circ h \circ \gamma,
+  \end{equation*}
+  so that
+  \begin{equation*}
+    v = \gamma'(0) = (Dh^{-1}(h\circ \gamma(0)))(h \circ \gamma)'(0) = Dh^{-1}(0) \cdot \boldsymbol{w},
+  \end{equation*}
+  and thus $T_p(M) \subseteq Dh^{-1}(0)(\mathbb{R}^k \times \{0\})$. On the
+  other hand, let $\boldsymbol{\delta}(t) = t\boldsymbol{w}$, $\boldsymbol{w}
+  \in \mathbb{R}^k$, and we get a curve in $M$ via $h^{-1} \circ
+  \boldsymbol{\delta}$. By the chain rule,
+  \begin{equation*}
+    (h^{-1} \circ \boldsymbol{\delta})'(0) = Dh^{-1}(0) \cdot \boldsymbol{w},
+  \end{equation*}
+  which implies that $Dh^{-1}(0)(\mathbb{R}^k \times \{0\}) \subseteq T_p(M)$,
+  and so $Dh^{-1}(0)(\mathbb{R}^k \times \{0\}) = T_p(M)$.
+  
+  The chart $h$ is a diffeomorphism so $h$ is injective, which means
+  $\mbox{dim}(T_p(M)) = \mbox{dim}(\mathbb{R}^k) = k$, as required. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $g : U \subset \mathbb{R}^n \to \mathbb{R}^{n-k}$ be a $C^\ell$-function,
+  $U$ is open, and $\boldsymbol{c} \in \mathbb{R}^{n-k}$ is a regular value.
+  Then $M = g^{-1}(\{\boldsymbol{c}\})$ is a $k$-manifold and $T_p(M) =
+  \mbox{ker}\{ Dg(p)\ : \ p\in M\}$. \qedwhite
+\end{theorem}
+
+Here the kernel is the one induced by the matrix representing the linear map.
+
+\begin{example}
+  Let $M = \{(x,y,z)\ : \ x^3 + y^3 + z^3 = 1\}$, and $g(x,y,z) = x^3 + y^3 +
+  z^3$. If $p = (1, -1, 1)$, then $T_p(M) = \mbox{ker}(3(1)^2,
+  3(-1)^2, 3(1)^2) = \mbox{ker}(3, 3, 3) = \{(x,y,z)\ : \ x + y + z = 0\}$. On
+  the other hand, for $\boldsymbol{q} = (1,0,0)$, we have $T_q(M) =
+  \mbox{ker}(3, 0, 0) = \{(x,y,z)\ : \ x = 0\}$.
+\end{example}
+
+Let $M \subset \mathbb{R}^n$ be a $C^1$ manifold, $u \subset \mathbb{R}^n$ open,
+and $M \subset U$ with $f : U \to \mathbb{R}$ a $C^1$-function. The point $p \in
+M$ is a \textbf{critical point} of $f|_M$ if for every $C^1$ curve $\gamma :
+(-\epsilon, \epsilon) \to M$ with $\gamma(0) = p$, $(f \circ \gamma)'(0) = 0$,
+i.e., the tangent vector is zero at the critical point $p$.
+
+If $f|_M$ has a local extreme at $p \in M$ then $p$ is a critical point. By the
+chain rule, $f|_M$ has a critical point exactly when $Df(p)|_{T_p(M)} = 0$.
+
 %-------------------------------------------------------------------------------
 
 \section{Method of Lagrange multipliers}
+
+\begin{proposition}
+  Let $U \subset \mathbb{R}^{n+m}$ be open, $g : U \to \mathbb{R}^n$ be a
+  $C^\ell$-function with $\ell \geq 1$, and $0 \in \mathbb{R}^n$ be a regular
+  value of $g$. For $f : U \to \mathbb{R}$ a $C^1$-function, $p \in M =
+  g^{-1}(\{0\})$ is a critical point iff there exists some \textbf{Lagrange
+  multipliers} $\lambda_1, \ldots \lambda_n \in \mathbb{R}$ with $D(f + \lambda_i
+  g_i)(p) = 0$.\marginnote{Einstein summation convention implied.}
+\end{proposition}
+
+\begin{proof}
+  Assume there exists the relevant Lagrange multipliers, then
+  \begin{equation*}
+    0 = D(f + \lambda_i g_i)(p) \quad \Leftrightarrow \quad Df(p) = -\lambda_i Dg_i(p).
+  \end{equation*}
+  Hence $Df(p)$ is a linear combination of row vectors of $Dg_i(p)$. Note that
+  $Dg_i(p)|_{T_p(M)} = 0$ by the previous theorem, so $p$ is a critical point.
+  
+  On the other hand, note that $\mbox{rank}(Dg(p) = n)$ if $p$ is regular, so
+  $Dg_i(p)$ are linear independent row vectors. Note also that $Df(p)$ is a
+  linear map from $\mathbb{R}^{n+m}$ to $\mathbb{R}$, vanishing on $T_p(M)$
+  which is $m$-dimensional and sits in the $n$-dimensional subvector space of
+  the dual space $(R^{n+m})^*$ housing all of the $Dg_i(p)$. Since $Dg_i(p)$
+  form a basis for this subspace, we must have constants where $Df(p) =
+  -\lambda_i Dg_i(p)$. \qed
+\end{proof}
+
+The method of Lagrange multipliers gives a method of finding critical
+points and extrema.\marginnote{So it is used a lot in optimisation
+procedures.} Let $F : U \times \mathbb{R}^n \to \mathbb{R}$ with $(x, \lambda_1,
+\ldots \lambda_n) \mapsto f(x) + \lambda_i g_i(x)$, the previous identity gives
+\begin{equation}
+  \frac{\partial F}{\partial x_i} = 0, \qquad \frac{\partial F}{\partial
+  \lambda_j} = 0, \qquad i = 1, \ldots n+m, \quad j = 1,\ldots n.
+\end{equation}
+Solving the system gives finitely many critical points. Furthermore, if $M$ is
+compact, then we can find extrema of $f$ via this method.
+
+\begin{example}
+  Find the maximum value of $f(x,y) = x+y$ on $M = \{(x,y)\ : \ x^4 + y^4 = 1\}$.
+  
+  Defining $g(x,y) = x^4 + y^4 - 1$, we have $g^{-1}(\{0\}) = M$ and is a
+  manifold. We define
+  \begin{equation*}
+    F(x,y) = f + \lambda_i g_i = x + y + \lambda(x^4 + y^4 -1),
+  \end{equation*}
+  which results in
+  \begin{align*}
+    0 = \frac{\partial F}{\partial x} &= 1 + 4\lambda x^3,\\
+    0 = \frac{\partial F}{\partial y} &= 1 + 4\lambda y^3,\\
+    0 = \frac{\partial F}{\partial \lambda} &= x^4 + y^4 - 1.
+  \end{align*}
+  Since $(0,0) \notin M$, the first two equations give
+  \begin{equation*}
+    x = y = \left(-\frac{1}{4\lambda}\right)^{1/3},
+  \end{equation*}
+  so the constraint results in $\lambda = \pm 8^{1/4}/4$, and the critical
+  points are $\pm(2^{-1/4}, 2^{-1/4})$. The maximum is thus
+  \begin{equation*}
+    f(2^{-1/4}, 2^{-1/4}) = \frac{2}{\sqrt{2}}.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Find the extrema of $f(x,y,z) = 5x + y - 3z$ on the intersection of $x + y + z
+  = 0$ with $S^2 = \{(x,y,z)\ : \ x^2 + y^2 + z^2 = 1\}$.
+  
+  Consider
+  \begin{equation*}
+    F(x,y,z,\lambda,\mu) = 5x + y - 3z + \lambda(x + y + z) + \mu(x^2 + y^2 + z^2 - 1).
+  \end{equation*}
+  It can be shown that $\lambda = -1$ from the first three equations. That
+  results in $y\mu = 0$ in the second equation, and for a non-trivial
+  constraint, we thus have $y=0$. This leads then in $x = -2\mu$, $z = 2/\mu$,
+  resulting in $2x^2 = 1$, and thus the critical points are
+  \begin{equation*}
+    a = \left(\frac{1}{\sqrt{2}}, 0, -\frac{1}{\sqrt{2}}\right), \quad
+    b = \left(-\frac{1}{\sqrt{2}}, 0, \frac{1}{\sqrt{2}}\right).
+  \end{equation*}
+  The extrema are then $f(a) = 8/\sqrt{2}$ and $f(b) = -8/\sqrt{2}$.
+\end{example}
+
+\begin{proposition}
+  Let $A \subset \mathbb{R}^n$ be compact, $B \subset \mathbb{R}^n$ be closed,
+  and both non-empty. Then there exists $a \in A$ and $b \in B$ where
+  \begin{equation*}
+    \|a - b\| \leq \|x - y\|
+  \end{equation*}
+  for all $x \in A$ and $y \in B$, and this can be any norm.
+\end{proposition}
+
+\begin{proof}
+  Let $d = \inf \{\|x - y\|\ : \ x\in A, y \in B\}$. For all $n \in \mathbb{N}$,
+  there exists some $a_n \in A$ and $b_n \in B$ such that
+  \begin{equation*}
+    \|a_n - b_n\| < d + \frac{1}{n}.
+  \end{equation*}
+  By passing to a sub-sequence, we can assume $a_n \to a$ since $A$ is compact.
+  Then we see that
+  \begin{equation*}
+    \|b_n\| \leq \|b_n - a_n\| + \|a_n - a\| + \|a\| \leq d + 1 + \|a\|
+  \end{equation*}
+  for $n\gg1$. This implies that $B \cap D(0; d + 1 + \|a\|)$ is compact, so
+  $b_n \to b$ as $n\to \infty$. Since $b \in B$, we have
+  \begin{equation*}
+    \|a - b\| \leq \|a - a_n\| + \|a_n - b_n\| + \|b_n - b\| < d + \epsilon
+  \end{equation*}
+  for some $\epsilon$. Since $d$ is the infimum, we must have $\|a - b\| \leq
+  \|x + y\|$ for all $x \in A$ and $y \in B$. \qed
+\end{proof}
+
+\begin{example}
+  Find $q \in M = \{x \in \mathbb{R}^3\ : \ 2x^ + y^2 + z = 1\}$ which has
+  minimum distance to $p = (0, 0, -5)$.
+  
+  Now, $M = g^{-1}(\{0\})$ where $g = 2x^2 + y^2 + z - 1$, and since $0$ is a
+  regular value, $M$ is closed (but not bounded). Let $f(x,y,z) = x^2 + y^2 +
+  (z+5)^2 = \|x - p\|^2$ be the norm of choice, and minimising the norm gives us
+  the desired solution. Consider
+  \begin{equation*}
+    F(x,y,z,\lambda) = x^2 + y^2 + (z+5)^2 + \lambda (2x^2 + y^2 + z - 1).
+  \end{equation*}
+  The usual manoeuver gives $x=0$ or $\lambda = -1/2$, which we consider
+  separately.
+  \begin{itemize}
+    \item For $\lambda = -1/2$, we have $y=0$, $z=-19/4$, $x = \pm\sqrt{23/8}$,
+    so $f(\pm\sqrt{23/8}, 0, -19/4) = 47/16 < 3$.
+    
+    \item For $x=0$, we have $y=0$ or $\lambda=-1$. The former case gives $z=1$
+    and thus $f(0,0,1) = 36 > 3$. For $\lambda=-1$, we have $z=-9/2$ and thus
+    $y=\pm\sqrt{11/2}$, which gives $f(0, \pm\sqrt{11/2}, -9/2) = 23/4 > 3$.
+  \end{itemize}
+  So $q = (\pm\sqrt{23/8}, 0, -19/4)$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Tangent spaces}
+
+%-------------------------------------------------------------------------------
+
+\section{Vector fields}
 
 %===============================================================================
 
 \chapter{Differential forms on $\mathbb{R}^n$}
 
+%-------------------------------------------------------------------------------
+
+\section{Riemann integrals}
+
+%-------------------------------------------------------------------------------
+
+\section{Differential 1-forms and line integrals}
+
+%-------------------------------------------------------------------------------
+
+\section{Differential $k$-forms}
+
+%-------------------------------------------------------------------------------
+
+\section{Integration in $\mathbb{R}^n$}
+
 %===============================================================================
 
 \chapter{Differential forms on oriented manifolds}
+
+%-------------------------------------------------------------------------------
+
+\section{Stokes' theorem}
 
 %===============================================================================
 
