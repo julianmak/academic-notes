@@ -38,6 +38,8 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{figs/}}
 
+\usepackage{tikz-cd}
+
 % The fancyvrb package lets us customize the formatting of verbatim
 % environments.  We use a slightly smaller font.
 \usepackage{fancyvrb}
@@ -1657,9 +1659,89 @@ compact, then we can find extrema of $f$ via this method.
 
 \section{Tangent spaces}
 
+Let $M \subset \mathbb{R}^m$ and $N \subset \mathbb{R}^n$ be two $C^\ell$
+manifolds, $\ell \geq 1$. Assume we have a continuous map $f : M \to N$ which
+extends to a $C^1$ map $\overline{f} : U \to \mathbb{R}^n$, where $U \supset M$
+is open. We define, for $p \in M$,
+\begin{equation*}
+  T_p(\overline{f}) : T_p (M) \to  T_{\overline{f}(p)}(N),
+\end{equation*}
+where for $\gamma : (-\epsilon, \epsilon) \to M$ a $C^1$ curve with $\gamma(0) =
+p$ and $(\overline{f} \circ \gamma)(0) = \overline{f}(p)$, we have
+\begin{equation*}
+  T_p(\overline{f}) = (f \circ \gamma)'(0) \in T_{f(p)}(N).
+\end{equation*}
+By chain rule,
+\begin{equation*}
+  (\overline{f} \circ \gamma)' = D\overline{f}(\gamma(0))\cdot\gamma'(0) = D\overline{f}(p) \cdot \gamma'(0),
+\end{equation*}
+which implies that for $T_p(\overline{f}) : T_p(M) \to  T_{\overline{f}(p)}(N)$, we have
+\begin{equation*}
+  T_p(f(v)) = Df(p)\cdot v.
+\end{equation*}
+We observe that $v \in T_p(M)$ implies that $D\overline{f}(p)\cdot v \in
+T_{\overline{f}(p)}(N)$, and $T_p(\overline{f})$ is a linear map between the two
+tangent spaces.
+
+A map $f: M\to N$ is called a \textbf{$C^\ell$ map} if $f$ extends to a $C^\ell$
+map $\overline{f}: U \to \mathbb{R}^n$ as before. Here, if $T_p(f)$ is not
+surjective, then $p \in M$ is a \textbf{critical point}, and $f(p)$ its
+\textbf{critical value}.
+
+\begin{theorem}
+  Let $M \subset \mathbb{R}^m$ and $N \subset \mathbb{R}^n$ be two $C^\ell$
+  manifolds, $\ell \geq 1$, and $f : M \to N$ which extends to a $C^\ell$ map.
+  If $x \in N$ is a regular value, then $f^{-1}(\{x\})$ is a $C^\ell$ manifold
+  of dimension $\mbox{dim}(M) - \mbox{dim}(N)$.
+\end{theorem}
+
+\begin{proof}
+  Let $y \in f^{-1}(\{x\}) \subseteq M$, and we seek a chart around $y$. Let $s
+  = \mbox{dim}(M)$ and $r = \mbox{dim}(N)$. We need
+  \begin{equation*}
+    \psi : U^r \subset \mathbb{R}^{s-r} \times \mathbb{R}^{m+r-s},
+  \end{equation*}
+  with
+  \begin{equation*}
+    \psi\left(f^{-1}(\{x\} \cap U)\right) = U' \cap \left(\mathbb{R}^{s-r} \times \{0\}\right).
+  \end{equation*}
+  Let $g : V \to \mathbb{R}^N \times \mathbb{R}^{n-r}$ be a chart around $x\in
+  N$. Choose $U_y$ such that $y \in U_y$, $f(U_y) \subset V$, and a chart
+  \begin{equation*}
+    h : U_y \to U_y' \subset \mathbb{R}^s \times \mathbb{R}^{m-s}.
+  \end{equation*}
+  We have the following:
+  
+  \begin{tikzcd}
+          \mathbb{R}^s \times \{0\} \arrow[r] & M \arrow[r, "f"] & N \arrow[r, "\hat{p}"] \arrow[dr, "g"] & \mathbb{R}^r \times \{0\}\\
+          \mathbb{R}^s \times \mathbb{R}^{m-s} \arrow[ur, "h"] & & & \mathbb{R}^r \times \mathbb{R}^{n-r}
+  \end{tikzcd}
+  
+  Let $\phi : \mathbb{R}^s \to \mathbb{R}^r$, which has full rank since
+  \begin{itemize}
+    \item a chart maps tangent plane to tangent plane
+    \item $f$ is surjective by assumption since $x$ is a regular point
+    \item a chart maps to tangent plane.
+  \end{itemize}
+  For $0 \in \mathbb{R}^s$ corresponding to $g\in M$ via $h$, $D\phi(0)$ has
+  full rank. The same conclusion follows with $0 \in \mathbb{R}^r$ corresponding
+  to $x\in N$ via $g$. Thus $\phi^{-1}(\{0\})$ is a manifold and corresponds to
+  $f^{-1}(\{x\}) \cap U_y$ by
+  \begin{equation*}
+    h\left(\phi^{-1}(\{0\} \times \{0\})\right) = f^{-1}(\{x\}) \cap U_y,
+  \end{equation*}
+  so $\phi$ is a chart and $f^{-1}(\{x\})$ is a manifold. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Vector fields}
+
+Let $M \subset \mathbb{R}^n$ be a $C^\ell$ manifold with $\ell \geq 1$. A
+continuous function $v : M \to \mathbb{R}^n$ is called a \textbf{vector field}
+if $v(x) \in T_x(M)$ for all $x\in M$. It is called a \textbf{$C^\ell$-vector
+field} if there is an open set $U \subset \mathbb{R}^n$ containing $M$ such that
+$v$ extends to a $C^\ell$ function $\overline{v} : U \to \mathbb{R}^n$.
 
 %===============================================================================
 
