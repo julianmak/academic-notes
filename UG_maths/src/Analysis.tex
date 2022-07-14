@@ -1743,9 +1743,143 @@ if $v(x) \in T_x(M)$ for all $x\in M$. It is called a \textbf{$C^\ell$-vector
 field} if there is an open set $U \subset \mathbb{R}^n$ containing $M$ such that
 $v$ extends to a $C^\ell$ function $\overline{v} : U \to \mathbb{R}^n$.
 
+\begin{example}
+  For $S^{n-1} = \{x \in \mathbb{R}^n\ :\ \|x\|^2 = 1\}$. Let $g(x) = \|x\|^2$,
+  then $S^{n-1} = g^{-1}(\{1\})$. By theorem,
+  \begin{align*}
+    T_p(S^{n-1}) = \mbox{ker}Dg(p) = \mbox{ker}(2p) &= \{x \in \mathbb{R}^n\ :\ 2x_i p_i = 0\}\\
+      &= \{x \in \mathbb{R}^n\ :\ (x, p) = 0\}.
+  \end{align*}
+  So for a vector field $v(x)$ on $S^{n-1}$, we need $(x, v(x)) = 0$ for all $x
+  \in S^{n-1}$. For $n = 2m$, let $v : \mathbb{R}^{2m} \to \mathbb{R}^{2m}$,
+  with
+  \begin{equation*}
+    (x_1, \ldots, x_{2m}) \mapsto (-x_2 x_1, -x_3 x_2, \ldots, -x_{2m} x_{2m-1}).
+  \end{equation*}
+  Here we have $(x, v(x)) = 0$ for all $x \in \mathbb{R}^{2m}$, so $v$ restricts
+  to a vector field on $S^{2m-1}$, is $C^\infty$, and $v(x) \neq 0$ for all $x
+  \in S^{2m-1}$. 
+  
+  $v$ is called a \textbf{non-vanishing vector field} in this case. Note that
+  there are no non-vanishing vector fields on $S^{2m}$.\marginnote{This is
+  related to the \textbf{hairy ball theorem}.}
+\end{example}
+
+\begin{example}
+  For $0 < \epsilon < 1$, define
+  \begin{equation*}
+    \phi : (1-\epsilon, 1+\epsilon) \times \mathbb{R}^2 \to \mathbb{R}^3; \quad \Phi(r, \phi, \theta) = \begin{pmatrix}(2+r\cos\phi) \cos\theta \\ (2+r\cos\phi)\sin\theta \\ r\sin\phi \end{pmatrix},
+  \end{equation*}
+  where $\phi$ and $\theta$ are both full angles from $0$ to $2\pi$. The
+  \textbf{$2$-torus} is then
+  \begin{equation*}
+    T^2 = \{x \in \mathbb{R}^3\ :\ (x,y,z) = \Phi(1, \phi, \theta)\}.
+  \end{equation*}
+  If we restrict $\Phi$ to small angles we get charts, and so we get tangent
+  plans and vector fields. Note that the $2$-torus does have non-vanishing
+  vector fields, compared to the $2$-sphere.
+\end{example}
+
+Let $U, V \subset \mathbb{R}^n$ be open sets, $h : U \times V$ be a $C^\infty$
+diffeomorphism, and $v : U \to \mathbb{R}^n$ be a vector field. We define the
+vector field on $v$ by
+\begin{equation*}
+  h * v : V \to \mathbb{R}^n, \quad h * v(x) = Dh\left(h^{-1}(x)\right)\cdot v(h^{-1}(x)).
+\end{equation*}
+
+\begin{lemma}
+  If $M$ is a $C^\infty$ manifold and $v$ a $C^\ell$ vector field, with $\ell
+  \geq 1$. For all $p \in M$, there exists open $I \subset \mathbb{R}$ with $0
+  \in I$, and an integral curve $\gamma : I \to M$ such that $\gamma(0) = p$,
+  $\gamma'(t) = v(\gamma(t))$ for all $t \in I$.
+  \qedwhite
+\end{lemma}
+
+\begin{lemma}
+  As above, for $i=1,2$, let $\gamma_i : I_i \to M$ be integral curves of $v$
+  with $\gamma_1(0) = p = \gamma_2(0)$, $I_i$ open, and $0 \in I_i$. Then
+  $\gamma_1(t) = \gamma_2(t)$ for all $t \in I_1 \cap I_2$.
+\end{lemma}
+
+\begin{proof}
+  Uniqueness follows from the Picard--Lindel\"of theorem. \qed
+\end{proof}
+
+Note that the integral curve can now be extended to an integral curve of $I_1
+\cup I_2$, and we get a maximal curve through a point $p$ this way.
+
+\begin{proposition}
+  Let $M$ be a compact $C^\infty$ manifold and $v$ and $C^\ell$ vector field
+  with $\ell \geq 1$. For all $p \in M$, there exists $\gamma : \mathbb{R} \to
+  M$ with $\gamma(0) = p$.
+\end{proposition}
+
+\begin{proof}
+  Let $\gamma : I \to M$ be the maximal integral curve, and assume $I \cap [0,
+  \infty)$ is bounded. Then these exists $T = \sup\{I \cap [0, \infty)\}$.
+  Choose a sequence $(t_n) \in I$ with $t_n \to T$, then $\gamma(t_n)$ is a
+  sequence in $M$. Since $M$ is compact, we can assume $\gamma(t_n) \to x \in
+  M$.
+  
+  Let $\beta : (T-\epsilon, T+\epsilon) \to M$ be an integral curve with
+  $\beta(T) = x$. Since $t_n \to T$ for large $n$, and $t_n \in (T-\epsilon,
+  T+\epsilon)$, we should have $\gamma(t_n) = \beta(t_n)$ by uniqueness, and so
+  $\gamma$ can be extended beyond $T$. However, this is a contradiction since
+  $\gamma$ was assumed to be maximal, so $I$ is not bounded, and thus $\gamma$
+  can be extended to $\mathbb{R}$. \qed
+\end{proof}
+
+For $v$ a $C^\ell$ vector field ($\ell \geq 1$) on a compact manifold $M$, the
+\textbf{flow} $\Phi$ is defined as
+\begin{equation}
+  \Phi : M \times \mathbb{R} \to M, \qquad (x, t) \mapsto \gamma_x(t)
+\end{equation}
+where $\gamma_x$ is the integral curve with $\gamma_x(0) = x$.
+
+\begin{theorem}
+  Let $M$ be a compact $C^\infty$ manifold and $v$ a $C^\ell$ vector field,
+  $\ell \geq 1$. Then the flow $\Phi$ is continuous and
+  \begin{enumerate}
+    \item $\Phi(x, 0) = x$ for all $x \in M$,
+    \item $\Phi(\Phi(x, t), x) = \Phi(x, t+s)$ for all $x\in M$, $t,s \in \mathbb{R}$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Continuity holds and follows from Picard--Lindel\"of, and $\Phi(x,0) = x$
+  follows from definition of the flow map. Let $y = \Phi(x, t)$, so $\gamma_x(t)
+  = y$. Define $\gamma(u) = \gamma_x(u+t)$, which is an integral curve with
+  $\gamma(0) = y$. By uniqueness, $\gamma = \gamma_y$, and so
+  \begin{equation*}
+    \Phi(\Phi(x, t), s) = \gamma_y(s) = \gamma(s) = \gamma_x(s+t) = \Phi(x, t+s).
+  \end{equation*}
+  \qed
+\end{proof}
+
+Note that if we write $x\cdot t = \Phi(x,t)$, then $x\cdot 0 =x$, and $(x\cdot
+t)\cdot s = x\cdot (t+s)$, so the abelian group $\mathbb{R}$ acts on the set
+$M$. Since $\Phi$ is continuous we have a topological action. Every $C^1$ vector
+field $v$ on a compact manifold $M$ gives rise to an $\mathbb{R}$-action on $M$.
+
+Note also that $v$ is of $C^\ell$ class implies that $\Phi$ is of $C^\ell$
+class.
+
 %===============================================================================
 
 \chapter{Differential forms on $\mathbb{R}^n$}
+
+In lower dimensions, from the standard fundamental theorem of calculus, Stokes'
+theorem and divergence theorem, we see we have identities of the form
+\begin{equation}
+  \int_M \mathrm{d}\omega = \int_{\partial M} \omega,
+\end{equation}
+where $M$ is some (oriented) manifold, and $\omega$ is some function / vector
+field. This is in fact true in higher dimensions, and the result is the
+\textbf{generalised Stokes' theorem}. It will be seen $\omega$ is a
+\textbf{differential $k$-form}, and $M$ are the \textbf{oriented
+$\ell$-manifolds} in $\mathbb{R}^n$ with boundary $\partial M$. To get to the
+general result, we go through some machinery first in $\mathbb{R}^n$, before
+proceeding to general (oriented) manifolds.
 
 %-------------------------------------------------------------------------------
 
