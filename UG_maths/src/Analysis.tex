@@ -1885,9 +1885,105 @@ proceeding to general (oriented) manifolds.
 
 \section{Riemann integrals}
 
+For $f: [a,b] \to \mathbb{R}$, recall that for a partition $Z = \{t_0, t_1,
+\ldots, t_n\}$, the \textbf{upper/lower Riemann sums} are defined as
+\begin{equation}
+  \mathcal{U}(f, Z) = \sum_{i=0}^{n-1} M_i(f)(t_{i+1}-t_i), \qquad \mathcal{L}(f, Z) = \sum_{i=0}^{n-1} m_i(f)(t_{i+1}-t_i),
+\end{equation}
+where for $x \in [t_{i-1}, t_i]$,
+\begin{equation*}
+  M_i(f) = \sup f(x), \quad m_i(f) = \inf f(x).
+\end{equation*}
+If $Z'$ is a \textbf{refinement} of $Z$ (i.e. $Z' \supset Z$, where $Z'$ is a
+partition), then
+\begin{equation*}
+  \mathcal{L}(f, Z) \leq \mathcal{L}(f, Z') \leq \mathcal{U}(f, Z') \leq \mathcal{U}(f, Z).
+\end{equation*}
+For two partitions, the \textbf{common refinement} is $Z'' = Z' \cup Z$, which
+implies that
+\begin{equation*}
+  \mathcal{L}(f, Z) \leq \mathcal{L}(f, Z'') \leq \mathcal{U}(f, Z'') \leq \mathcal{U}(f, Z').
+\end{equation*}
+The \textbf{upper Riemann integral} is then defined as
+\begin{equation}
+  \int_{[a,b]}^u f\; \mathrm{d}x = \inf \{\mathcal{U}(f, Z)\ :\ Z\ \textnormal{a partition of } [a,b]\},
+\end{equation}
+while the \textbf{lower Riemann integral} is
+\begin{equation}
+  \int_{[a,b]}^l f\; \mathrm{d}x = \inf \{\mathcal{L}(f, Z)\ :\ Z\ \textnormal{a partition of } [a,b]\}.
+\end{equation}
+For bounded $f$, we should have
+\begin{equation*}
+  \int_{[a,b]}^l f\; \mathrm{d}x \leq \int_{[a,b]}^u f\; \mathrm{d}x \leq \infty.
+\end{equation*}
+If the two sums coincide as $|t_{i-1} - t_i|\to 0$, then $f$ is \textbf{Riemann
+integrable}.
+
+In $\mathbb{R}^n$, to generalise, $f$ defined analogously if each individual
+component of $f$ is Riemann integrable.
+
+\begin{lemma}
+  Let $f : [a,b] \to \mathbb{R}^n$ be integrable. Then $\|f\|$ is also integrable and
+  \begin{equation*}
+    \left\| \int_{[a,b]} f\; \mathrm{d}x \right\| \leq \int_{[a,b]} \|f\|\; \mathrm{d}x.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  $\|f\|$ is clear integrable. We see that for all $\epsilon>0$, there exists a
+  common partition $Z$ such that
+  \begin{equation*}
+    \mathcal{U}(f_i, Z) - \mathcal{L}(f_i, Z) \leq \epsilon, \quad \mathcal{U}(\|f\|, Z) - \mathcal{L}(\|f\|, Z) \leq \epsilon
+  \end{equation*}
+  for all components $f_i$ of $f$. For any partition $Z = \{x_0, \ldots, x_n\}$
+  and any choice $\xi_i$
+  \begin{equation*}
+    a = x_0 \leq \xi_0 \leq x_1 \leq \xi_1 \leq \ldots \leq x_{n-1} \leq \xi_{n-1} \leq x_n = b,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \left\|\sum_{i=0}^{n-1} f(\xi_i)(x_{i+1} - x_i) \right\| \leq \sum_{i=0}^{n-1} \|f(\xi_i)\|(x_{i+1} - x_i)
+  \end{equation*}
+  by the triangle inequality. For such a partition $Z$, we have both
+  \begin{align*}
+    \left| \int_a^b f_i\; \mathrm{d}x - \sum_{k=0}^{n-1} f_i(\xi_k)(x_{k+1} - x_k)\right| &\leq \epsilon,\\
+    \left| \int_a^b \|f\|\; \mathrm{d}x - \sum_{k=0}^{n-1} \|f(\xi_k)\|(x_{k+1} - x_k)\right| &\leq \epsilon,
+  \end{align*}
+  which implies that, considering each component,
+  \begin{equation*}
+    \left\| \int_a^b f\; \mathrm{d}x - \sum_{k=0}^{n-1} f(\xi_k)(x_{k+1} - x_k) \right\| \leq \sqrt{n\epsilon^2} = \sqrt{n} \epsilon.
+  \end{equation*}
+  Then,
+  \begin{align*}
+    \left\|\int_{[a,b]} f\; \mathrm{d}x \right\| &\leq \left\|\sum_{k=0}^{n-1} f(\xi_k)(x_{k+1} - x_k) \right\| + \sqrt{n} \epsilon \\
+      &\leq \sum_{k=0}^{n-1}\left\| f(\xi_k)(x_{k+1} - x_k) \right\| + \sqrt{n} \epsilon\\
+      &\leq \int_a^b \|f\|\; \mathrm{d}x + \epsilon + \sqrt{n}\epsilon.
+  \end{align*}
+  Since $\epsilon$ was arbitrary, we have the result as required. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Differential 1-forms and line integrals}
+
+Let $V$ be a real vector space with norm $\|\cdot\|$, and $c:[a,b] \to V$ be
+continuous. The \textbf{length} of $c$ is defined as
+\begin{equation*}
+  L(c) = \sup \left\{\sum_i^{n-1} \|c(t_{i+1} - c(t_i)\|\ :\ \forall\ n\in N, t_i \ in Z\right\}.
+\end{equation*}
+The curve $c$ is \textbf{rectifiable} if $L(c) < \infty$.
+
+Note that the length of a curve is (and should be) independent of its
+parameterisation.
+
+\begin{proposition}
+  For $c: [a,b] \to^n$ of class $C^1$, $c$ is rectifiable, and $L(c) = \int_a^b
+  \|c'(t)\|\; \mathrm{d}t$.
+\end{proposition}
+
+\begin{proof}
+  \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
