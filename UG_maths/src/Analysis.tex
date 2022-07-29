@@ -1982,8 +1982,243 @@ parameterisation.
 \end{proposition}
 
 \begin{proof}
+  Note that
+  \begin{align*}
+    \sum_i \| c(t_{i+1} - c(t_i)\| & = \sum_i \left\| \int_{[t_i, t_{i+1}]} c'(t)\; \mathrm{d}t\right\| \\
+      & \leq \sum_i \int_{[t_i, t_{i+1}]} \|c'(t)\|\; \mathrm{d}t\\
+      &= \int_a^b \|c'(t)\|\; \mathrm{d}t < \infty
+  \end{align*}
+  since $c \in C^1[a,b]$, so $L(c) < \infty$ and $c$ is rectifiable.
+  
+  Let $f(t) = L\left(c|_{[a,t]}\right)$ for $a \leq t_0 < t \leq b$. Then
+  \begin{align*}
+    \left|\frac{c(t) - c(t_0)}{t - t_0} \right| \leq \frac{L\left(c|_{[t_0,t]}\right)}{t - t_0}  &= \frac{f(t) - f(t_0)}{t - t_0} \\
+      &\leq \frac{1}{t - t_0} \int_{[t_0, t]} \|c'(s)\|\; \mathrm{d}s = \|c'(t_1)\|
+  \end{align*}
+  for $t_1 \in [t_0, t]$ by the mean value theorem. So as $t_0, t_1 \to t$,
+  \begin{equation*}
+    \|c'(t)\| \leq f'(t) \leq \|c'(t)\|,
+  \end{equation*}
+  and so $f'(t)$ exists and $f'(t) = \|c'(t)\|$. Thus
+  \begin{equation*}
+    L(c) = f(b) - f(a) = \int_a^b f'(t)\; \mathrm{d}t = \int_a^b \|c'(t)\|\; \mathrm{d}t < \infty
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+\begin{example}
+  For the helix, we have $c(t) = (at, r\cos t, r\sin t)$, so $\|c'(t)\| =
+  \sqrt{r^2 + a^2}$, and
+  \begin{equation*}
+    L(c)|_{[0, 2\pi]} = \int_0^{2\pi} \sqrt{r^2 + a^2}\; \mathrm{d}t = 2\pi \sqrt{r^2 + a^2}.
+  \end{equation*}
+\end{example}
+
+Recall the differential $Df(x) : \mathbb{R}^n \to \mathbb{R}$ is a linear map.
+Denote this now has $\mathrm{d}f_x : \mathbb{R}^n \to \mathbb{R}$, and the real
+vector space of all linear maps $\phi : \mathbb{R}^n \to \mathbb{R}$ to be
+$\mathcal{L}(\mathbb{R}^n, \mathbb{R})$. Since $\phi \in
+\mathcal{L}(\mathbb{R}^n, \mathbb{R})$ is linear, we only investigate the action
+of $\phi$ on the basis $\{e_i\}$. We see that
+\begin{equation*}
+  \mathrm{d}f_x (e_i) = \frac{\partial f}{\partial x_i}(x),
+\end{equation*}
+so\marginnote{Einstein summation.}
+\begin{equation*}
+  \mathrm{d}f_x (v) = \frac{\partial f}{\partial x_i} v_i = \langle \nabla f, v\rangle
+\end{equation*}
+for $\langle\cdot,\cdot\rangle$ the inner product on some vector space $V$
+housing $v$. We see $\partial f / \partial x_i$ are smooth coefficient
+functions, and that since $f: U \to \mathbb{R}^n$ is smooth, $\mathrm{d}f: U \to
+\mathcal{L}(\mathbb{R}^n, \mathbb{R})$.
+
+Let $U \subset \mathbb{R}^n$ be open and $\omega : U \to
+\mathcal{L}(\mathbb{R}^n, \mathbb{R})$, then there are functions $f_1, \ldots
+f_n : U \to \mathbb{R}^n$ where
+\begin{equation}
+  \omega_x(v) = f_i(x) v_i
+\end{equation}
+for all $x \in U$, $v = v_i e_i$. The coefficient functions $f_i$ are calculated
+via
+\begin{equation}
+  f_i(x) = \omega_x(e_i).
+\end{equation}
+We call $\omega$ a \textbf{differential 1-form} on $U$ if $f_i : U \to
+\mathbb{R}$ are of class $C^\infty$ for all $i$. The set of all 1-forms is
+denoted by $\Omega^1(U)$, which has the structure of a real vector space. One
+can canonically multiply a 1-form $\omega \in \Omega^1(U)$ with a smooth
+function $f\in C^\infty(U)$ by performing
+\begin{equation*}
+  (f\omega)_x (v) = f(x) \omega_x(v).
+\end{equation*}
+
+\begin{lemma}
+  Let $\omega$ be a 1-form and $U \subset \mathbb{R}^N$ be open. Then there
+  exists a smooth vector field $X_\omega : U \to \mathbb{R}^n$ where
+  \begin{equation*}
+    \omega_x (v) = \langle X_\omega (x), v\rangle.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Since $F_\omega = f_i e_i$, $\langle F_\omega(x), v\rangle = f_i(x) \langle
+  e_i, v\rangle = f_i(x) v_i = \omega_x(v)$. \qed
+\end{proof}
+
+\begin{lemma}
+  Let $\omega \in \Omega^1(U)$, $x_i : U \to \mathbb{R}$, $x_i(p_1, \ldots, p_n)
+  = p_i$. Then $\omega = f_i\ \mathrm{d}x_i$ and $f_i(x) = \omega_x (e_i)$.
+\end{lemma}
+
+\begin{proof}
+  Since
+  \begin{equation*}
+    \mathrm{d}x_i(x)(v) = \frac{\partial x_i}{\partial x_j}(x)v_j = v_i,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \omega_x(v) = f_i(x) v_i = f_i(x)\; \mathrm{d}x_i(x)(v),
+  \end{equation*}
+  and since $v$ was arbitrary, $\omega_x = f_i(x)\; \mathrm{d}x_i$. \qed
+\end{proof}
+
+\begin{example}
+  Suppose $\omega \in \Omega^1(\mathbb{R}^2)$ and $\omega = 3xy\; \mathrm{d}x +
+  y^3\; \mathrm{d}y$, and we take $p = (7,3)$. Then since
+  \begin{equation*}
+    \omega_p(e_1) = 3\cdot p_1\cdot p_2\; \mathrm{d}x(e_1) + p_2^3\; \mathrm{d}y(e_1) = 3\cdot7\cdot1 + 27\cdot 0 = 63,
+  \end{equation*}
+  while $\omega_p(e_2) = 27$ by a similar argument. So $\omega_p((1, -2)) = 63 -
+  2\cdot27=9$ for example.\marginnote{A 1-form eats a vector and spits out a
+  number. Sometimes it can be regarded as a functional (eats a function and
+  spits out a number).}
+\end{example}
+
+A differential 1-form $\omega$ is \textbf{exact} if there exists some $f \in
+C^\infty(U)$ where
+\begin{equation}
+  \omega = \mathrm{d}f.
+\end{equation}
+
+For $U \subset \mathbb{R}^n$ open and $c:[a,b] \to U$ be smooth and $\omega \in
+\Omega^1(U)$. The \textbf{line integral} of $\omega$ along $c$ is
+\begin{equation}
+  \int_c \omega = \int_a^b \omega_{c(t)} \left(c'(t)\right)\; \mathrm{d}t.
+\end{equation}
+If $c$ is piecewise smooth, we can still define the integral.
+
+For $c:[a,b] \to \mathbb{R}^n$ a smooth curve and $\phi : [\alpha,\beta] \to
+[a,b]$ be a smooth bijective map, then $\tilde{c} = c\circ \phi : [\alpha,
+\beta] \to \mathbb{R}^n$ is a \textbf{orientation preserving reparameterisation}
+if $\phi' > 0$, otherwise it is orientation reversing.
+
+\begin{proposition}
+  For $\omega \in \Omega^1(U)$, $c:[a,b] \to U$, $\tilde{c} = c\circ \phi :
+  [\alpha, \beta] \to U$ orientation preserving,\sidenote{If orientation
+  reversing, then there would be an extra minus sign.}
+  \begin{equation*}
+    \int_c \omega = \int_{\tilde{c}} \omega.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  \begin{align*}
+    \int_{\tilde{c}} \omega = \int_\alpha^\beta \omega_{\tilde c}(\tilde{c}')\; \mathrm{d}t
+      &= \int_\alpha^\beta \omega_{c\circ\phi} \left((c\circ\phi)'\right)\; \mathrm{d}t\\
+      &=\int_\alpha^\beta \omega_{c\circ\phi} \left((c'\circ\phi)\right)\phi'\; \mathrm{d}t\\
+      &=\int_a^b \omega_{c} \left(c'\right)\; \mathrm{d}t = \int_c \omega.
+  \end{align*}
   \qed
 \end{proof}
+
+\begin{lemma}
+  For $f \in C^\infty(U)$, $c:[a,b] \to U$, then
+  \begin{equation*}
+    \int_c \mathrm{d}f = f(c(b)) - f(c(a)).
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{align*}
+    \int_c \mathrm{d}f = \int_a^b \left[Df(c(t))\right](c'(t))\; \mathrm{d}t = \int_a^b (f\circ c)'(t)\; \mathrm{d}t = f(c(b)) - f(c(a)).
+  \end{align*}
+  \qed
+\end{proof}
+
+\begin{proposition}
+  Let $U\subset\mathbb{R}^n$ be open and path connected, then the following are
+  equilvalent:
+  \begin{enumerate}
+    \item $\omega \in \Omega^1(U)$ is exact,
+    \item $\int_c \omega$ depends only on the end points (i.e. path
+    independence),
+    \item $\oint_c \omega = 0$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{itemize}
+    \item 1) implies 2) by previous lemma.
+    \item 2) implies 3). Consider $c$ with $c(a) = c(b) = p \in U$, and $c_p(t)
+    = p$ for all $t$. Then since $c_p'(t) = 0$, $\int_{c_p} \omega = 0$ and so
+    $\oint_c \omega = 0$ since we assumed path independence.
+    \item 3) implies 2). For $c = c_1 \cup (-c_2)$,
+    \begin{equation*}
+      0 = \oint_c \omega = \int_{c_1} \omega + \int_{-c_2} \omega = \int_{c_1} \omega - \int_{c_2} \omega,
+    \end{equation*}
+    which implies path independence.
+    \item 2) implies 1). Choosing $p \in U$, $f: U \to \mathbb{R}$ via $f(q) =
+    \int_c \omega$, $c(0) = p$, $c(1) = q$, then $f$ is well-defined by 2).
+    Choose $h \in \mathbb{R}^n$ where $h + q \in U$, let
+    \begin{equation*}
+      \gamma : [0, 1] \to I, \quad \gamma(t) = q + th.
+    \end{equation*}
+    Then
+    \begin{equation*}
+      f(q+th) - f(q) = \int_\gamma \omega = \int_0^1 \omega_\gamma(\gamma')\; \mathrm{d}t \int_0^1 \omega_{q+th}(h)\; \mathrm{d}t.
+    \end{equation*}
+    Now introduce vector field $X_\omega$, an by lemma,
+    \begin{align*}
+      f(q+th) - f(q) - \omega_q(h) &= \int_0^1 \left(\omega_{q+th}(h) - \omega_q(h)\right)\; \mathrm{d}t\\
+        & =\int_0^1 \langle X_\omega (q+th) - X_\omega (q), h\rangle \; \mathrm{d}t\\
+        & \leq \int_0^1 \left\| X_\omega (q+th) - X_\omega (q)\right\|\; \mathrm{d}t \cdot \|h\|.
+    \end{align*}
+    The right hand side has $R(h) / \|h\| \to 0$ as $h\to 0$ since $X_\omega$ is
+    continuous, so $f$ is differentiable, and
+    \begin{equation*}
+      \omega_q(h) = Df(q)(h) = \mathrm{d}f_q (h),
+    \end{equation*}
+    and since $q$ and $h$ are arbitrary, $\omega = \mathrm{d}f$.
+  \end{itemize}
+  \qed
+\end{proof}
+
+\begin{proposition}
+  If $\omega \in \Omega^1(U)$ is exact and $\omega = f_i\; \mathrm{d}x_i$, then
+  \begin{equation*}
+    \frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}
+  \end{equation*}
+  for all $i$ and $j$.
+\end{proposition}
+
+\begin{proof}
+  Since
+  \begin{equation*}
+    \omega = \mathrm{d}f = \frac{\partial f}{\partial x_i}\; \mathrm{d}x_i,
+  \end{equation*}
+  we have $f_i = \partial f/ \partial x_i$, so then since $f$ is differentiable,
+  \begin{equation*}
+    \frac{\partial f_i}{\partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial^2 f_j}{\partial x_i}.
+  \end{equation*}
+  \qed
+\end{proof}
+
+$\omega \in \Omega^1(U)$ is \textbf{closed} if for $\omega = f_i\;
+\mathrm{d}x_i$, $\partial f_i / \partial x_j = \partial f_j / \partial x_i$. We
+see that exactness implies closed, but the converse is generally not true.
+
+Note that, in $\mathbb{R}^3$, $\omega \in \Omega^1(U)$ is closed if $\nabla
+\times X_\omega = 0$.
 
 %-------------------------------------------------------------------------------
 
