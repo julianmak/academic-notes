@@ -228,6 +228,12 @@
 \newcommand{\qed}{\hfill$\blacksquare$}
 \newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
 
+\newcommand{\highlight}[1]{\mathchoice%
+  {\colorbox{black!10}{$\displaystyle#1$}}%
+  {\colorbox{black!10}{$\textstyle#1$}}%
+  {\colorbox{black!10}{$\scriptstyle#1$}}%
+  {\colorbox{black!10}{$\scriptscriptstyle#1$}}}%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % some extra formatting (hacked from Patrick Farrell's notes)
 %  https://courses.maths.ox.ac.uk/node/view_material/4915
@@ -403,7 +409,7 @@ $\mathsf{A}$. The \textbf{column rank} is defined similarly.
     \mathsf{B} = \mathsf{XAY} = \begin{pmatrix}\mathsf{I}_r & 0 \\ 0 & 0 \end{pmatrix},
   \end{equation*}
   where $r$ is the row rank of $\theta$. The transpose of $\mathsf{B}$ has the
-  same rank, although that is now the column rank of $\mathsf{B}^T$.
+  same rank, although that is now the column rank of $\mathsf{B}^T$. \qed
 \end{proof}
 
 We define the \textbf{nullity} of $\mathsf{A}$ to be the dimension of the
@@ -421,12 +427,12 @@ kernel, i.e., the dimension of the solution set $\mathsf{A}\boldsymbol{x} =
 
 \begin{proof}
   If $\mathsf{A}$ is invertible then the corresponding linear map $\theta$ is an
-  isomorphism, and we have the result by a previous corollary. {\color{red}reference back}
+  isomorphism, and we have the result by a previous corollary. {\color{red}reference back} \qed
 \end{proof}
 
 %-------------------------------------------------------------------------------
 
-\section{Determinants}
+\section{Trace and determinant}
 
 %-------------------------------------------------------------------------------
 
@@ -440,7 +446,7 @@ Let $V$ be a vector space, and $\theta:V \to V$ be a linear map. Then
 $\boldsymbol{v}\in V-\{\boldsymbol{0}\}$ is an \textbf{eigenvector} of $\theta$
 if
 \begin{equation}
-  \theta(\boldsymbol{v}) = \lambda \boldsymbol{v},
+  \highlight{\theta(\boldsymbol{v}) = \lambda \boldsymbol{v}},
 \end{equation}
 where $\lambda$ is the corresponding \textbf{eigenvalue}. The subset
 \begin{equation}
@@ -458,9 +464,192 @@ $\mathsf{B} = \mathsf{Y}^{-1}\mathsf{AY}$.
 
 \begin{theorem}
   If $\mathsf{A}$ corresponds to the linear map $\theta:V\to V$, then the roots
-  of the \textbf{characteristic polynomial} $|\lambda\mathsf{I} - \mathsf{A}| =
-  0$ are the eigenvalues of $\theta$. This is independent of the basis of $V$.
+  of the \textbf{characteristic polynomial} $\highlight{|\lambda\mathsf{I} -
+  \mathsf{A}| = 0}$ are the eigenvalues of $\theta$. This is independent of the
+  basis of $V$.
 \end{theorem}
+
+\begin{proof}
+  Let $\boldsymbol{v}$ be an eigenvector, so that $\boldsymbol{v}=\sum_i
+  v_i\boldsymbol{e}_i$. If $\lambda$ is the corresponding eigenvalue, and
+  $\textsf{A}$ is the representation of $\theta$ in the basis
+  $\{\boldsymbol{e}_i\}$, then
+  \begin{equation*}
+    \mathsf{A}\boldsymbol{v} = \lambda\boldsymbol{v} \quad \Leftrightarrow \quad (\lambda\mathsf{I} - \mathsf{A})\boldsymbol{v} = \boldsymbol{0}.
+  \end{equation*}
+  Since $\boldsymbol{v}$ is non-trivial by definition of it being an
+  eigenvector, then $\lambda\mathsf{I} - \mathsf{A}$ is singular, so
+  $|\lambda\mathsf{I} - \mathsf{A}| = 0$.
+  
+  For basis independence, we know that
+  \begin{align*}
+    |\lambda\mathsf{I} - \mathsf{Y}^{-1}\mathsf{A}\mathsf{Y}| &= |\lambda\mathsf{Y}^{-1}\mathsf{I}\mathsf{Y} - \mathsf{Y}^{-1}\mathsf{A}\mathsf{Y}| \\
+      & = |\mathsf{Y}^{-1}(\lambda\mathsf{I}- \mathsf{A})\mathsf{Y}|\\
+      & = |\mathsf{Y}^{-1}| \cdot |\lambda\mathsf{I}- \mathsf{A}| \cdot |\mathsf{Y}|,
+  \end{align*}
+  but by the property that $|\mathsf{Y}^{-1}| \cdot |\mathsf{Y}| = 1$, we have
+  $|\lambda\mathsf{I} - \mathsf{Y}^{-1}\mathsf{A}\mathsf{Y}| =
+  |\lambda\mathsf{I}- \mathsf{A}| = 0$. \qed
+\end{proof}
+
+\begin{example}
+  For
+  \begin{equation*}
+    \mathsf{A} = \begin{pmatrix}2 & 2 \\ 0 & 4\end{pmatrix}, \quad \lambda\mathsf{I} - \mathsf{A} = \begin{pmatrix}\lambda - 2 & -2 \\ 0 & \lambda - 4\end{pmatrix}
+  \end{equation*}
+  and the eigenvalues satisfy\sidenote{Could have done this with the trace and
+  determinant also for a $2\times2$ matrix.} the quadratic
+  $(\lambda-2)(\lambda-4) = 0$, so $\lambda=2, 4$. For $\lambda=2$, the
+  eigenvector satisfies
+  \begin{equation*}
+    \begin{pmatrix}0 & -2 \\ 0 & -2\end{pmatrix}\begin{pmatrix}v_1 \\ v_2 \end{pmatrix} = \boldsymbol{0},
+  \end{equation*}
+  which implies $v_2 = 0$ but $v_1$ is undetermined; we could choose for
+  simplicity for the eigenvector to be
+  \begin{equation*}
+   \boldsymbol{v}_{\lambda=2} = \begin{pmatrix}1 \\ 0 \end{pmatrix}.
+  \end{equation*}
+  For $\lambda = 4$, we result in $v_1 = v_2$, so we could choose
+  \begin{equation*}
+   \boldsymbol{v}_{\lambda=4} = \begin{pmatrix}1 \\ 1 \end{pmatrix}.
+  \end{equation*}
+\end{example}
+
+Notice for the above that if we take $\mathsf{Y}$ to be the matrix whose column
+vectors are the eigenvectors, i.e.
+\begin{equation*}
+  \mathsf{Y} = \begin{pmatrix}1 & 0 \\ 1 & 1\end{pmatrix} \quad \Rightarrow \quad \mathsf{Y}^{-1} = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix},
+\end{equation*}
+then notice that 
+\begin{equation*}
+  \mathsf{Y}^{-1}\mathsf{AY} = \begin{pmatrix}1 & 0 \\ 1 & 1\end{pmatrix}\begin{pmatrix}2 & 2 \\ 0 & 4\end{pmatrix}\begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix} = \begin{pmatrix}2 & 0 \\ 0 & 4\end{pmatrix},
+\end{equation*}
+which is just the \textbf{diagonal} matrix with the eigenvalues on the main
+diagonal. This is called \textbf{diagonalisation}.
+
+\begin{theorem}
+  Let $\mathsf{A}$ be a $n\times n$ matrix. The matrix $\mathsf{A}$ is
+  \textbf{diagonalisable} if there exists a non-singular $\mathsf{Y}$ such that
+  $\mathsf{A}$ is similar to a diagonal matrix $\mathsf{D}$, i.e.
+  $\highlight{\mathsf{D} = \mathsf{Y}^{-1}\mathsf{AY}}$ or
+  $\highlight{\mathsf{A} = \mathsf{YD}\mathsf{Y}^{-1}}$. This is equivalent to
+  the condition that the eigenvectors of $\mathsf{A}$ has full span.
+\end{theorem}
+
+Notice we do not require $\mathsf{A}$ to be non-singular, nor that the
+eigenvalues have to be distinct. For example,
+\begin{equation*}
+  \begin{pmatrix}1 & 0 \\ 0 & 0\end{pmatrix}, \quad \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}
+\end{equation*}
+are respectively singular and have repeated eigenvalues, but are both trivially
+diagonal (so diagonalisable by $\mathsf{I}$). On the other hand,
+\begin{equation*}
+  \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix}
+\end{equation*}
+has eigenvalues $\lambda = \pm \zi$, so it is definitely not diagonalisable over
+the reals\sidenote{This one is actually not diagonalisable over $\mathbb{C}$
+either, since it is \textbf{nilpotent} (of index 2; $\mathsf{A}^2 = 0$ here).}.
+
+\begin{example}
+  For
+  \begin{equation*}
+    \mathsf{A} = \begin{pmatrix}3 & 0 \\ 1 & 3\end{pmatrix},
+  \end{equation*}
+  we have $\lambda=3$ of multiplicity 2, but additionally only one eigenvector
+  $(1,0)^T$, so the span of the eigenspace is only dimension 1, and matrix is
+  not diagonalisable.
+\end{example}
+
+\begin{example}
+  For
+  \begin{equation*}
+    \mathsf{A} = \begin{pmatrix}0 & -2 & 2 \\ 0 & 2 & 0 \\ -1 & -1 & 3\end{pmatrix},
+  \end{equation*}
+  can show that the eigenvalues are $\lambda=1$ and $\lambda=2$ twice. For
+  eigenvector corresponding to $\lambda=1$ can be chosen to be
+  \begin{equation*}
+    \boldsymbol{v}_1 = \begin{pmatrix}2 \\ 0 \\ 1\end{pmatrix}.
+  \end{equation*}
+  For $\lambda=2$, we reduce down to $v_1 + v_2 - v_3 = 0$, so we could take
+  \begin{equation*}
+    \boldsymbol{v}_2 = \begin{pmatrix}1 \\ 0 \\ 1\end{pmatrix}, \quad \boldsymbol{v}_3 = \begin{pmatrix}0 \\ 1 \\ 1\end{pmatrix},
+  \end{equation*}
+  which are linearly independent of each other, so the eigenspace has full span,
+  and the transformation matrix could be
+  \begin{equation*}
+    \mathsf{Y} = \begin{pmatrix}2 & 0 & 1 \\ 1 & 0 & 1 \\ 0 & 1 & 1\end{pmatrix}.
+  \end{equation*}
+  Notice we could have made a different choice for $\boldsymbol{v}_{2,3}$, and
+  that
+  \begin{equation*}
+    \mathsf{Y} = \begin{pmatrix}2 & 0 & 1 \\ 1 & 0 & 1 \\ 2 & -1 & 1\end{pmatrix}
+  \end{equation*}
+  would have also worked.
+\end{example}
+
+There are at least two notable uses for this:
+\begin{example}
+  \begin{enumerate}
+    \item If we have the system of ODEs
+    \begin{equation*}
+      \frac{\mathrm{d}}{\mathrm{d}t}\boldsymbol{x} = \mathsf{A}\boldsymbol{x}
+    \end{equation*}
+    where $\mathsf{A}$ is constant and diagonalisable with $\mathsf{A} =
+    \mathsf{YD}\mathsf{Y}^{-1}$, then the solutions are
+    \begin{equation*}
+      \boldsymbol{x} = \mathsf{Y}\begin{pmatrix}\ex^{\lambda_1 t} \\ \vdots \\ \ex^{\lambda_n t}\end{pmatrix}
+    \end{equation*}
+    up to multiplicative constants (which are specified by the initial
+    conditions). This is because
+    \begin{equation*}
+      \frac{\mathrm{d}}{\mathrm{d}t}\boldsymbol{x} = \mathsf{YD}\mathsf{Y}^{-1}\boldsymbol{x} \quad \Rightarrow \frac{\mathrm{d}}{\mathrm{d}t} \mathsf{Y}^{-1}\boldsymbol{x} = \mathsf{D}\mathsf{Y}^{-1}\boldsymbol{x},
+    \end{equation*}
+    because $\mathsf{Y}$ is constant in time so commutes with the derivative.
+    Then calling $\boldsymbol{y} = \mathsf{Y}^{-1}\boldsymbol{x}$, we just have
+    a set of trivial constant ODEs to solve, then we invert to get
+    $\boldsymbol{x} = \mathsf{Y}\boldsymbol{y}$ which is known. 
+    
+    In other words, we choose a convenient basis where our problem is diagonal,
+    solve the problem there (which is easy), and then transform it back into the
+    original basis. This kind of problem occurs occasionally in quantum
+    mechanics, where you might want to solve the \textbf{time-independent
+    Schr\"odinger equation}
+    \begin{equation*}
+      \zi\hbar\frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle = \mathsf{H}|\psi(t)\rangle
+    \end{equation*}
+    where $\mathsf{H}$ would be matrix representation of the relevant
+    Hamiltonian of the system\sidenote{And has additional properties that make
+    the eigenvalues and eigenvectors have certain properties; more later when we
+    talk about \emph{Hermitian}/\emph{self-adjoint} matrices.}, and
+    $|\psi(t)\rangle$ would be the vector representation of the \textbf{state}.
+    The eigenvalues correspond usually to an energy, and the eigenvectors the
+    energy states.
+    
+    \item Suppose we have some system that is governed by
+    \begin{equation*}
+      \boldsymbol{x}_{n+1} = \mathsf{A}\boldsymbol{x}_n,
+    \end{equation*}
+    such as a \textbf{Markov chain} with discrete states, and so $\mathsf{A}$ is
+    a matrix detailing the transition probabilities between states (with all
+    positive entries that are strictly less than 1, since these are supposed to
+    describe probabilities). If $\mathsf{A}$ is diagonalisable, then the
+    numerics becomes `easy', in that to find $\boldsymbol{x}_{n+1}$ from initial
+    data $\boldsymbol{x}_0$, we do
+    \begin{align*}
+      \boldsymbol{x}_n &= \mathsf{A}^n\boldsymbol{x}_0 \\ 
+        &= (\mathsf{YD}\mathsf{Y}^{-1})^n \boldsymbol{x}_0 \\
+        &= (\mathsf{YD}\mathsf{Y}^{-1})(\mathsf{YD}\mathsf{Y}^{-1})\cdots(\mathsf{YD}\mathsf{Y}^{-1}) \boldsymbol{x}_0 \\
+        &= \mathsf{YD}(\mathsf{Y}^{-1}\mathsf{Y})\mathsf{D}\cdots(\mathsf{Y}^{-1}\mathsf{Y})\mathsf{D}\mathsf{Y}^{-1} \boldsymbol{x}_0 \\
+        &= \mathsf{YD}^n\mathsf{Y}^{-1} \boldsymbol{x}_0,
+    \end{align*}
+    by associativity, and noting that $D^n$ is essentially trivial to
+    compute.\sidenote{In the context of a Markov chain, the transition matrix
+    have eigenvalues with magnitude less than or equal to 1 by the
+    \emph{Perron--Frobenius theorem}, so we have no blow up. This is not
+    necessarily true for population models such as the \emph{Leslie model},
+    since the entries are positive but do not have to be strictly less than 1.}
+  \end{enumerate}
+\end{example}
 
 %-------------------------------------------------------------------------------
 
@@ -468,15 +657,52 @@ $\mathsf{B} = \mathsf{Y}^{-1}\mathsf{AY}$.
 
 %-------------------------------------------------------------------------------
 
-\section{Symmetric and Hermitian matrices}
-
-%-------------------------------------------------------------------------------
-
 \section{Orthogonal matrices}
+
+Recall that two vectors are orthogonal to each other if
+$\boldsymbol{u}\cdot\boldsymbol{v} = \boldsymbol{u}^T\boldsymbol{v} = 0$, the
+latter interpreted in terms of a matrix multiplication of a row vector with a
+column vector. 
+
+Analogously, a matrix is called \textbf{orthogonal} if the columns are
+orthogonal to each other. However, a more useful form of orthogonality might be
+the following:
+\begin{theorem}
+  A matrix $\mathsf{P}$ is orthogonal if and only if $\mathsf{P}^{-1} =
+  \mathsf{P}^T$.\sidenote{So orthogonal matrices are great, because a transpose
+  is much easier to compute than the inverse.}
+\end{theorem}
+
+\begin{proof}
+  Let $\boldsymbol{e}_i$ be the $i^{\textnormal{th}}$ column of $\mathsf{P}$,
+  then $\mathsf{PP}^T = (\boldsymbol{e}_i^T \boldsymbol{e}_j) = (\delta_{ij}) =
+  \mathsf{I}$, as required. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
 \section{Symmetric matrices}
+
+A matrix is \textbf{symmetric} if $\highlight{\mathsf{P} = \mathsf{P}^T}$.
+
+\begin{lemma}
+  Let $\mathsf{A}$ be a real symmetric matrix. Then the eigenvalues are all
+  real, and the eigenvectors are mutual orthogonal to each other.
+\end{lemma}
+
+\begin{proof}
+asdf
+\end{proof}
+
+\begin{theorem}
+  Let $\mathsf{A}$ be a real symmetric matrix. If it is diagonalisable, then the
+  similarity matrix is orthogonal, i.e. $\mathsf{A} = \mathsf{PD}\mathsf{P}^{-1}
+  = \mathsf{PD}\mathsf{P}^T$.
+\end{theorem}
+
+%-------------------------------------------------------------------------------
+
+\section{Hermitian matrices}
 
 %-------------------------------------------------------------------------------
 
