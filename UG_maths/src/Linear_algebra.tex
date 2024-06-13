@@ -509,7 +509,7 @@ exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
   \begin{equation*}
     \As = \begin{pmatrix}2 & 2 \\ 0 & 4\end{pmatrix}, \quad \lambda\Is - \As = \begin{pmatrix}\lambda - 2 & -2 \\ 0 & \lambda - 4\end{pmatrix}
   \end{equation*}
-  and the eigenvalues satisfy\sidenote{Could have done this with the trace and
+  and the eigenvalues satisfy\marginnote{Could have done this with the trace and
   determinant also for a $2\times2$ matrix.} the quadratic
   $(\lambda-2)(\lambda-4) = 0$, so $\lambda=2, 4$. For $\lambda=2$, the
   eigenvector satisfies
@@ -558,7 +558,7 @@ diagonal (so diagonalisable by $\Is$). On the other hand,
   \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix}
 \end{equation*}
 has eigenvalues $\lambda = \pm \zi$, so it is definitely not diagonalisable over
-the reals\sidenote{This one is actually not diagonalisable over $\mathbb{C}$
+the reals\marginnote{This one is actually not diagonalisable over $\mathbb{C}$
 either, since it is \textbf{nilpotent} (of index 2; $\As^2 = 0$ here).}.
 
 \begin{example}
@@ -628,12 +628,12 @@ There are at least two notable uses for this:
       \zi\hbar\frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle = \mathsf{H}|\psi(t)\rangle
     \end{equation*}
     where $\mathsf{H}$ would be matrix representation of the relevant
-    Hamiltonian of the system\sidenote{And has additional properties that make
-    the eigenvalues and eigenvectors have certain properties; more later when we
-    talk about \emph{Hermitian}/\emph{self-adjoint} matrices.}, and
-    $|\psi(t)\rangle$ would be the vector representation of the \textbf{state}.
-    The eigenvalues correspond usually to an energy, and the eigenvectors the
-    energy states.
+    Hamiltonian of the system\marginnote{The Hamiltonian normally has additional
+    properties that make the eigenvalues and eigenvectors have certain
+    properties; more later when we talk about
+    \emph{Hermitian}/\emph{self-adjoint} matrices.}, and $|\psi(t)\rangle$ would
+    be the vector representation of the \textbf{state}. The eigenvalues
+    correspond usually to an energy, and the eigenvectors the energy states.
     
     \item Suppose we have some system that is governed by
     \begin{equation*}
@@ -653,7 +653,7 @@ There are at least two notable uses for this:
         &= \Ys \Ds^n \Ys^{-1} \xb_0,
     \end{align*}
     by associativity, and noting that $D^n$ is essentially trivial to
-    compute.\sidenote{In the context of a Markov chain, the transition matrix
+    compute.\marginnote{In the context of a Markov chain, the transition matrix
     have eigenvalues with magnitude less than or equal to 1 by the
     \emph{Perron--Frobenius theorem}, so we have no blow up. This is not
     necessarily true for population models such as the \emph{Leslie model},
@@ -677,7 +677,7 @@ Analogously, a matrix is called \textbf{orthogonal} if the columns are
 orthogonal to each other. However, a more useful form of orthogonality might be
 the following:
 \begin{theorem}
-  A matrix $\As$ is orthogonal if and only if $\As^{-1} = \As^T$.\sidenote{So
+  A matrix $\As$ is orthogonal if and only if $\As^{-1} = \As^T$.\marginnote{So
   orthogonal matrices are great, because a transpose is much easier to compute
   than the inverse.}
 \end{theorem}
@@ -693,24 +693,104 @@ the following:
 
 A matrix is $\As$ is \textbf{symmetric} if $\highlight{\As = \As^T}$.
 
-\begin{lemma}\label{thm:real_sym_eigen}
+\begin{theorem}\label{thm:real_sym_eigen}
   Let $\As$ be a real symmetric matrix. Then the eigenvalues are all real, and
-  the eigenvectors are mutual orthogonal to each other.
-\end{lemma}
-
-\begin{proof}
-asdf
-\end{proof}
+  the eigenvectors are mutual orthogonal to each other. \qedwhite
+\end{theorem}
 
 \begin{theorem}
   Let $\As$ be a real symmetric matrix. If it is diagonalisable, then the
   similarity matrix is orthogonal, i.e. $\As = \Ps \Ds \Ps^{-1} = \Ps \Ds
-  \Ps^T$.
+  \Ps^T$. \qedwhite
 \end{theorem}
+
+The theorems are special cases of those given in \S\ref{sec:hermitian}, so we
+defer the proof for later.
+
+\begin{example}
+  Diagonalise
+  \begin{equation*}
+    \As = \begin{pmatrix}-1 & 1 & -1 \\ 1 & -1 & -1 \\ -1 & -1 & -1\end{pmatrix}.
+  \end{equation*}
+  
+  Can show the eigenvalues are $1$, $-2$ and $-2$, and that
+  \begin{equation*}
+    \Ps = \begin{pmatrix}1 & 1 & 1 \\ 1 & 0 & -2 \\ -1 & 1 & 1\end{pmatrix}
+  \end{equation*}
+  is one possible choice, leading to $\Ds = \mbox{diag}(1, -2, -2)$.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
-\section{Hermitian matrices}
+\section{Rotations}
+
+Denote the set of $n\times n$ orthogonal matrices over $\mathbb{R}$ by
+$\mbox{O}(n)$, and $\mbox{SO}(n)$ the subset of $\mbox{O}(n)$ where the
+corresponding matrices have determinant $+1$. These turn out to form a group
+under matrix multiplication, and are known as the \textbf{orthogonal} and
+\textbf{special orthogonal} groups of dimension $n$
+respectively.\marginnote{These are actually \textbf{Lie groups}, which play an
+important role in mathematical physics.}
+
+\begin{theorem}
+  Every element of $\mbox{SO}(3)$ represent a rotation about an arbitrary axis
+  in $\mathbb{R}^3$. \qedwhite
+\end{theorem}
+
+\begin{corollary}
+  The characteristic polynomial
+  \begin{equation*}
+    \Delta(\lambda) = \lambda^3 - (1+2\cos\theta)\lambda^2 + (1+2\cos\theta)\lambda - 1
+  \end{equation*}
+  tells us the angle of rotation $\theta$ (via $\cos\theta$, up to a sign) of a
+  rotation about any axis.
+\end{corollary}
+
+\begin{example}
+  Find the matrix which represents a rotation in $\mathbb{R}^3$ about
+  $(1,1,0)^T$ through an angle of $\pi/2$.
+  
+  Note that we have
+  \begin{align*}
+    \mathsf{R}_x(\theta) = \begin{pmatrix}1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos\theta\end{pmatrix}&, \quad
+    \mathsf{R}_y(\theta) = \begin{pmatrix}\cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta\end{pmatrix}, \\
+    \mathsf{R}_z(\theta) = &\begin{pmatrix}\cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1\end{pmatrix}
+  \end{align*}
+  are the rotation matrices about the $x$, $y$ and $z$ axis respectively by an
+  angle $\theta$. Then idea is that the axis is represented by a vector that we
+  can normlalise, and we rotate that onto a standard axis (essentially a
+  co-ordinate transformation), do the rotation by the desired angle (which we
+  know the matrix of), and then undo rotation (or the co-ordinate
+  transformation).
+  
+  We can take the $z$ axis for definiteness, and we want $\Ps:
+  (1,1,0)^T/\sqrt{2} \mapsto (0,0,1)^T$. This is supposed to be a rotation, so
+  $\Ps^{-1}$ exists and $\Ps^{-1}:(0,0,1)^T \mapsto (1,1,0)^T/\sqrt{2}$, or
+  \begin{equation*}
+    \Ps^{-1} = \begin{pmatrix}\cdot & \cdot & 1/\sqrt{2} \\ \cdot & \cdot & 1/\sqrt{2} \\ \cdot & \cdot & 0\end{pmatrix}.
+  \end{equation*}
+  The column vectors should be mutually orthogonal to each other, and we can
+  choose them to be orthonormal, and we could consider the simple choice
+  \begin{equation*}
+    \Ps^{-1} \stackrel{!?}{=} \begin{pmatrix}0 & -1/\sqrt{2} & 1/\sqrt{2} \\ 0 & 1/\sqrt{2} & 1/\sqrt{2} \\ 1 & 0 & 0\end{pmatrix}.
+  \end{equation*}
+  Notice however that $|\Ps^{-1}|=-1$, so to make sure $\Ps\in\mbox{SO}(3)$, we
+  can simply multiply the bottom row by $-1$. The resulting $\Ps$ is then
+  \begin{equation*}
+    \Ps = \begin{pmatrix}0 & 1/\sqrt{2} & 1/\sqrt{2} \\ 0 & -1/\sqrt{2} & 1/\sqrt{2} \\ 1 & 0 & 0\end{pmatrix},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \As = \Ps^{-1} \mathsf{R}_z(\pi/2) \Ps = \begin{pmatrix}1/2 & 1/2 & 1/\sqrt{2} \\ 1/2 & 1/2 & -1/\sqrt{2} \\ -1/\sqrt{2} & 1/\sqrt{2} & 0\end{pmatrix}
+  \end{equation*}
+  will do the job. Can brute force check that that $|\As|=1$, $\As^T = \As$, and
+  the only solution to $\As\xb = \xb$ is $\xb = a(1, 1, 0)^T$.\marginnote{The
+  rotation axis is kept fixed by the rotation about that axis.}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Hermitian matrices}\label{sec:hermitian}
 
 {\color{red}remember to introduce somewhere star being the Hermitian transpose}
 
@@ -719,12 +799,13 @@ A matrix over $\mathbb{C}$ is \textbf{Hermitian} if $\highlight{\As = \As^* =
 the definition of a symmetric matrix.
 
 A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^* =
-\As^{-1}}$.\sidenote{These are used a lot in quantum mechanics.} Again, if $\As$
-is actually real, then this reduces to the definition of an orthogonal matrix.
+\As^{-1}}$.\marginnote{Unitary matrixes are used a lot in quantum mechanics.}
+Again, if $\As$ is actually real, then this reduces to the definition of an
+orthogonal matrix.
 
 \begin{theorem}
   Let $\As$ be a Hermitian matrix. Then the eigenvalues are all real, and the
-  eigenvectors are mutual orthogonal to each other.\sidenote{Compare this with
+  eigenvectors are mutual orthogonal to each other.\marginnote{Compare this with
   Theorem \ref{thm:real_sym_eigen}. In quantum mechanics the Hamiltonians are
   usually (but not always) chosen to be Hermitian, so the eigenvalues are all
   real and observable.}
@@ -779,7 +860,7 @@ is actually real, then this reduces to the definition of an orthogonal matrix.
 
 %-------------------------------------------------------------------------------
 
-\section{Rotations}
+\section{Diagonalising quadratic forms}
 
 %-------------------------------------------------------------------------------
 
