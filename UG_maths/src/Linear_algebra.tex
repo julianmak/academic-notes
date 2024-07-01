@@ -346,6 +346,74 @@ multiplication $\times$ operation satisfies the following axioms:
 The usual rationals $\mathbb{Q}$, reals $\mathbb{R}$ and complex numbers
 $\mathbb{C}$ are common fields.
 
+A set $V$ is a \textbf{vector space} over a field $\mathbb{F}$ if, for $\vb, \ub \in V$ and $\lambda, \mu \in \mathbb{F}$,
+\begin{itemize}
+  \item $V$ form an abelian group under addition $+$
+  \item for all $\lambda\vb \in V$
+  \item $(\lambda + \mu)\vb = \lambda \vb + \mu \vb$
+  \item $\lambda(\ub + \vb) = \lambda \ub + \lambda \vb$
+  \item $\lambda (\mu \vb) = (\lambda \mu) \vb$
+  \item there exists an identity element $1$ where $1\vb = \vb$.
+\end{itemize}
+Some examples are
+\begin{itemize}
+  \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{C}$
+  \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{R}^n$ is the Eucliean $n$-space
+  \item $\mathbb{F} = \mathbb{R}$ and $V = C[0, 1]$ the set of continuous
+  functions defined over the interval $[0, 1]$
+  \item $\mathbb{F} = \mathbb{R}$ and $V$ the solutions to the ODE $y'' - y' + y
+  = 0$
+  \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{R}[t]$, the set of
+  polynomials in $t$ with coefficients in $\mathbb{R}$
+\end{itemize}
+
+\begin{lemma}
+  If $V$ is a vector space over $\mathbb{F}$, then for all $\vb \in V$, we have
+  $0\vb = \boldsymbol{0}$.
+\end{lemma}
+
+\begin{proof}
+  We have $0\vb = (0 + 0)\vb = 0\vb + 0\vb$, so subtracting accordingly leads to
+  the above result. \qed
+\end{proof}
+
+\begin{lemma}
+  As above, but for all $\lambda \in \mathbb{F}$, we have $\lambda
+  \boldsymbol{0} = \boldsymbol{0}$. \qedwhite
+\end{lemma}
+
+\begin{lemma}
+  For all $\vb\in V$, $(-1)\vb = -\vb$, the additive inverse of $\vb$.
+\end{lemma}
+
+\begin{proof}
+  $\boldsymbol{0} = 0\vb = (1 + (-1))\vb = \vb + (-1)\vb$, so that $(-1)\vb =
+  -\vb$. \qed
+\end{proof}
+
+Let $U \subseteq V$, then $U$ is a \textbf{subspace} of $V$ over $\mathbb{F}$ if $U$ forms a vector space under the same addition and scalar multiplication as $V$.
+
+Instead of checking that a given subspace $U$ really satisfies all the vector
+space axioms, the follow theorem reduces the amount of work required.
+
+\begin{theorem}
+  $U$ is a subspace of $V$ if and only if $U \neq \emptyset$, and for all $\ub,
+  \vb \in U$ and $\lambda \in \mathbb{F}$, we have $\ub + \vb \in U$ and
+  $\lambda \vb \in U$.
+\end{theorem}
+
+\begin{proof}
+  These conditions are obviously necessary for $U$ to be a vector space.
+  Conversely, if $\ub, \vb \in U$, then $\ub$, $-\vb = (-1)\vb \in U$ by above
+  lemma.s Since $\ub - \vb \in U$, $U \neq \emptyset$, and $U$ is a group under
+  addition. The condition $\lambda \vb in U$ ensures that $U$ is closed. Since
+  the relevant axioms hold in $V$, they also hold in $U$. \qed
+\end{proof}
+
+\begin{corollary}
+  Let $U$ and $V$ be subspaces of $W$, then $U \cap V$ is a subspace of $W$.
+\end{corollary}
+
 %-------------------------------------------------------------------------------
 
 \section{Bases}
@@ -475,7 +543,7 @@ $\lambda$.
 Clearly if $\As$ is the corresponding matrix to $\theta$ then the eigenvalues
 and eigenvectors would correspond accordingly.
 
-Two $n\times n$ matrices $\As$ and $Bs$ are called \textbf{similar} if there
+Two $n\times n$ matrices $\As$ and $\Bs$ are called \textbf{similar} if there
 exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
 
 \begin{theorem}
