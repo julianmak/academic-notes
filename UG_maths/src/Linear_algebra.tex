@@ -425,13 +425,67 @@ We say the vectors $\{\vb_i\}$ are \textbf{linearly independent} if
 only has trivial solutions $\lambda_i = 0$ for all $i$, if $\vb_i \neq \vb_j$
 for $i\neq j$.
 
-(examples)
+\begin{example}
+  \begin{enumerate}
+    \item Show
+    \begin{equation*}
+      S = \left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}0 \\ 1\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 0\\ 1\end{pmatrix}\right\}
+    \end{equation*}
+    are linearly independent.
+    
+    We have $a+2c = 0$, $b=0$, and $a+b+c=0$. This ends up reducing down
+    accordingly to $a=b=c=0$, so $S$ is linearly independent.
+    
+    \item Shown
+    \begin{equation*}
+      S = \left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}0 \\ 1\\ 1\end{pmatrix}, \begin{pmatrix}1 \\ 1\\ 2\end{pmatrix}\right\}
+    \end{equation*}
+    is linearly dependent.
+    
+    Note that the third vector is the sum of the first and second vector.
+    
+    \item Show that $S=\{\sin nx\ |\ n\in\mathbb{N}\}$ is linearly
+    independent.
+    
+    Note that we have the following orthogonality rule:\marginnote{Essentially
+    from compound angle formula.}
+    \begin{equation*}
+      \int_{-\pi}^{\pi} \sin px \sin qx\, \mathrm{d}x = \begin{cases}\pi, & p = q,\\0, & p\neq q.\end{cases}
+    \end{equation*}
+    Suppose there exists some $\{b_i\}$ where $\sum_{k=1}^N b_k\sin kx = 0$ then
+    we have, for some $p\in \{1, \ldots N\}$,
+    \begin{equation*}
+      \sum_{k=1}^N b_k \int_{-\pi}^\pi \sin px \sin kx\, \mathrm{d}x = 0,
+    \end{equation*}
+    so by the orthogonality condition, then $b_p \pi = 0$, and hence $b_p=0$ for
+    arbitrary $p$, and so we have linear independence.\marginnote{This is one
+    step towards saying sines and cosines forms the Fourier basis, which is
+    important for the theorem of \emph{Fourier transforms}.}
+  \end{enumerate}
+\end{example}
 
 The \textbf{span} of $\{\vb_i\}$ is defines as the set containing all linear
 combinations of the \textbf{spanning set} $\{\vb_i\}$, i.e.
 \begin{equation}
   \mbox{Span}(\{\vb_i\}) = \left\{ \sum_{i=1}^n \lambda_i \vb_i \ |\ \lambda_i \in \mathbb{F} \right\}.
 \end{equation}
+
+\begin{example}
+  \begin{enumerate}
+    \item $S = \{\eb_1, \eb_2, (2, 3, 0)\}$ spans only the $xy$ plane, because
+    the third vector is not linearly independent of the other two.
+    
+    \item Does $S=\{\sin nx\ |\ n\in\mathbb{N}\}$ span $C^\infty(\mathbb{R})$?
+    
+    Suppose a function $f\in \mbox{Span}(S)$, then if $S$ spans
+    $C^\infty(\mathbb{R})$, we should have, for all $x\in \mathbb{R}$,
+    \begin{equation*}
+      f(x) = \sum_{k=1}^n b_k \sin kx.
+    \end{equation*}
+    Here $f(0)=0$, but note that $\cos(x)\in C^\infty(\mathbb{R})$, but $\cos 0
+    =1$, so $g\not\in \mbox{Span}(S)$, so the answer is no by a counter-example.
+  \end{enumerate}
+\end{example}
 
 The set $\{\vb_i\}$ is a \textbf{basis} of some vector space $U$ if the spanning
 set is linearly independent, and spans $U$.
