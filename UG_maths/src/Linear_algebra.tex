@@ -490,6 +490,74 @@ combinations of the \textbf{spanning set} $\{\vb_i\}$, i.e.
 The set $\{\vb_i\}$ is a \textbf{basis} of some vector space $U$ if the spanning
 set is linearly independent, and spans $U$.
 
+\begin{lemma}
+  Let $S = \{\vb_1, \ldots \vb_n\}$ be a basis for a non-trivial $V$ over
+  $\mathbb{F}$. Then every non-zero element of $V$ can be expressed
+  \emph{uniquely} by a linear combination of elements of $S$.
+\end{lemma}
+
+\begin{proof}
+  Let $\vb \neq \boldsymbol{0} \in V$. Since $S$ is a spanning set, we have $\vb
+  = \sum_{k=1}^n \lambda_k \vb_k$ for some constants $\lambda_i \in \mathbb{F}$.
+  Suppose $\vb$ has a different representation, i.e. $\vb = \sum_{k=1}^n \mu_k
+  \vb_k$ for $\mu_k \in \mathbb{F}$, then we must have
+  \begin{equation*}
+    \sum_{k=1}^n (\lambda_k - \mu_k)\vb_k = 0,
+  \end{equation*}
+  but since $S$ is linearly independent, we must have $\lambda_k = \mu_k$, and
+  so we have a unique representation. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $A = \{\ub_1, \ldots \ub_m\}$ and $B = \{\vb_1, \ldots \vb_n\}$ be bases of
+  $V$. Then $n=m$.
+\end{theorem}
+
+\begin{proof}
+  The $n$ or $m=0$ case is trivial. Without loss of generality, assume $0 < m
+  \leq n$. Since $B$ is a basis for $V$, the first element of $A$ could be
+  represented as $\ub_1 = \sum_{k=1}^n \lambda_k \vb_k$. Since $\ub_1 \neq
+  \boldsymbol{0}$, the $\lambda$ are not all zero. Without loss of generality,
+  suppose $\lambda_1 \neq 0$, then
+  \begin{equation*}
+    \vb_1 = \frac{1}{\lambda_1}(\ub_1 - \lambda_2\vb_2 \ldots - \lambda_n \vb_n),
+  \end{equation*}
+  so $\vb_1 \in \mbox{Span}(\{\ub_1, \vb_2, \ldots \vb_n\})$. The spanning set
+  here is linearly independent, since if it wasn't, then there exists some
+  $\mu_i$ where
+  \begin{equation*}
+    \mu_1 \ub_1 + \mu_2 \vb_2 + \ldots \mu_n \vb_n = 0,
+  \end{equation*}
+  and following the argument above, we can assume $\mu_1 \neq 0$ without loss of
+  generality since $B$ is linearly independent, so $\ub_1 \in
+  \mbox{Span}(\{\vb_2, \ldots \vb_n \}$, but by lemma, the representation of
+  $\ub_1$ is unique, and since we assumed $\lambda_1 \neq 0$, we get a
+  contradiction. 
+  
+  Note also that
+  \begin{equation*}
+    \mbox{Span}(\{\ub_1, \vb_1, \ldots \vb_n\}) = \mbox{Span}(\{\ub_1, \vb_2, \ldots \vb_n\}) = V,
+  \end{equation*}
+  so $\{\ub_1, \vb_2, \ldots \vb_n\}$ serves as a basis for $V$. We can then
+  continue the argument above for $\vb_2, \ldots \vb_n$, and if $m<n$, we reach
+  the conclusion that
+  \begin{equation*}
+    C = \{\ub_1, \ldots \ub_m, \vb_{m+1} \ldots \vb_n\}
+  \end{equation*}
+  is a basis for $V$. However, since $A$ is also a basis of $V$, is $\vb_n \in
+  \mbox{Span}(A)$, then $C$ would not be linearly independent, and we have a
+  contradiction. So $m<n$ is false, and $m=n$ is the only possibility. \qed
+\end{proof}
+
+If a basis for a vector space $V$ has $n$ elements, then the vector space
+\textbf{dimension} $\mbox{dim}(V) = n$.
+
+\begin{corollary}
+  Let $V$ be a $n$-dimensional vector space over $\mathbb{F}$, and $A = \{\eb_1,
+  \ldots \eb_r\}$ be a subset of $V$ which is linearly independent. Then $A$ can
+  be extended to a basis $\{\eb_1, \ldots \eb_n\}$ of $V$, where $r \leq n$.
+\end{corollary}
+
 %-------------------------------------------------------------------------------
 
 \section{Sums and direct sums}
