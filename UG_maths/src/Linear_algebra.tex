@@ -552,15 +552,135 @@ set is linearly independent, and spans $U$.
 If a basis for a vector space $V$ has $n$ elements, then the vector space
 \textbf{dimension} $\mbox{dim}(V) = n$.
 
-\begin{corollary}
+\begin{corollary}\label{cor:extend}
   Let $V$ be a $n$-dimensional vector space over $\mathbb{F}$, and $A = \{\eb_1,
   \ldots \eb_r\}$ be a subset of $V$ which is linearly independent. Then $A$ can
   be extended to a basis $\{\eb_1, \ldots \eb_n\}$ of $V$, where $r \leq n$.
 \end{corollary}
 
+\begin{proof}
+  Let $B = \{\vb_1, \ldots \vb_n \}$ be a basis of $V$. If $\mbox{Span}(A) = V$
+  then we are done, otherwise there exists $\eb_{r+1} \in B$ such that
+  $\eb_{r+1} \not\in \mbox{Span}(A)$.
+  
+  Suppose $\lambda_1\eb_1 + \ldots + \lambda_{r+1}\eb_{r+1} = \boldsymbol{0}$
+  for some $\lambda_i \in \mathbb{F}$. If $\lambda_{r+1} \neq 0$ then $\eb_{r+1}
+  \in \mbox{Span}(A)$, which is a contradiction, so $\lambda_{r+1} = 0$, hence
+  $A \cup \{\eb_{r+1}\}$ is a linearly independent set. We continue as necessary
+  until we get $\{\eb_1, \ldots \eb_n\}$. \qed
+\end{proof}
+
+\begin{corollary}
+  Let $V$ be a vector space over $\mathbb{F}$ with finite dimensions, and $U$ a
+  subspace of $V$. Then $\mbox{dim}(U) \leq \mbox{dim}(V)$, and if
+  $\mbox{dim}(U) = \mbox{dim}(V)$, then $U = V$.
+\end{corollary}
+
+\begin{proof}
+  Assume $U$ is non-trivial, so there exists non-zero $\eb_1 \in U$. If
+  $\mbox{Span}(\eb_1) = U$ then we are done, but otherwise there exists $\eb_2
+  \in U - \mbox{Span}(\eb_1)$, and by previous theorem, $\{\eb_1, \eb_2\}$ is a
+  linearly independent set. We can continue as necessary for $r \leq n$, and by
+  previous corollary we can continue until a basis of $U$ is obtained. If
+  $\mbox{dim}(U) = \mbox{dim}(V)$ then $r=n$, so $U=V$. qed
+\end{proof}
+
+\begin{corollary}
+  Let $A = \{\eb_1, \ldots \eb_r\}$ be a subset of vector space $V$ over
+  $\mathbb{F}$. There exists a subset which is a basis of $\mbox{Span}(A)$, and
+  hence $\mbox{dim}(\mbox{Span}(A)) \leq r$.
+\end{corollary}
+
+\begin{proof}
+  If $A$ is linearly independent it is a basis, so $\mbox{dim}(\mbox{Span}(A)) =
+  r$. Otherwise, there exists non-trivial $\lambda_i \in \mathbb{F}$ such that
+  $\sum_{i=1}^n \lambda_i \eb_i = \boldsymbol{0}$. Assume $\lambda_r \neq 0$,
+  then $\eb_r \in \mbox{Span}(A - \{\eb_r\})$. If $\mbox{Span}(A - \{\eb_r\})$
+  is linearly independent then it is a basis and $\mbox{dim}(\mbox{Span}(A -
+  \{\eb_r\}) = r-1 < r$ as. Otherwise continue as necessary. \qed
+\end{proof}
+
+\begin{example}
+  \begin{enumerate}
+    \item Find a subset of
+    \begin{equation*}
+      S = \left\{\begin{pmatrix}1 \\ -1\\ 2\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ 1\end{pmatrix}, \begin{pmatrix}0 \\ 1\\ -1\end{pmatrix}\right\}
+    \end{equation*}
+    which is a basis of $\mbox{Span}(S)$.
+    
+    Notice that the second vector is a linear combination of the other two, so
+    we could discard that to get $S'$ which serves as a basis for
+    $\mbox{Span}(S)$.
+    
+    \item Extend $S'$ to make it a basis for $\mathbb{R}^3$.
+    
+    Note that for $\eb_i$, only $\eb_1$ is not in $\mbox{Span}(S')$, so we can
+    augment $S'$ with $\eb_1$.
+  \end{enumerate}
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \section{Sums and direct sums}
+
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and
+$V$ is
+\begin{equation}
+  \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
+\end{equation}
+
+\begin{lemma}
+  If $U$ and $V$ are subspaces of $W$, then $U+V$ is also a subspace of $W$.
+\end{lemma}
+
+\begin{proof}
+  $U+V$ is non-empty since $\boldsymbol{0} + \boldsymbol{0} = \boldsymbol{0} \in
+  U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
+  \begin{equation*}
+    \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
+  \end{equation*}
+  for all $\lambda \in \mathbb{F}$. Also,
+  \begin{equation*}
+    (\ub+\vb) + (\ub'+\vb') = (\ub + \ub') + (\vb + \vb') \in U+V,
+  \end{equation*}
+  so $U+V$ is also closed, and thus a subspace.
+\end{proof}
+
+The following theorem is useful for determining dimensions of spaces.
+
+\begin{theorem}
+  Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
+  \begin{equation}
+    \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots
+  \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1,
+  \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and
+  $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
+  
+  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s,
+  \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists
+  non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
+  \begin{equation*}
+    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \boldsymbol{0}.
+  \end{equation*}
+  Then not all of $\nu_i$ is zero, since $\{\eb_1,
+  \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of
+  $U$ and hence linearly independent (and similarly for the other case). Then
+  $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and
+  hence in $U$, so much be in $U \cap V$. Then
+  \begin{equation*}
+    \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
+  \end{equation*}
+  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots
+  \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r,
+  \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots
+  \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads
+  to the result. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
