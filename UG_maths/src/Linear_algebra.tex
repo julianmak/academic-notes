@@ -648,7 +648,7 @@ $V$ is
 
 The following theorem is useful for determining dimensions of spaces.
 
-\begin{theorem}
+\begin{theorem}\label{thm:subspace_dim}
   Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
   \begin{equation}
     \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
@@ -681,6 +681,61 @@ The following theorem is useful for determining dimensions of spaces.
   \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads
   to the result. \qed
 \end{proof}
+
+\begin{example}
+  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$,
+  $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
+  \begin{equation*}
+    U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
+  \end{equation*}
+    
+  We see the spanning sets of $U$ and $V$ are linearly independent, hence
+  $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be
+  expressed as
+  \begin{equation*}
+    \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
+  \end{equation*}
+  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads
+  to
+  \begin{equation*}
+    U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
+  \end{equation*}
+  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we
+  should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked
+  directly.
+\end{example}
+
+The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\boldsymbol{0}\}$.
+
+\begin{theorem}
+  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct
+  sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all
+  $\wb = \ub + \vb \in W$.
+\end{theorem}
+
+\begin{proof}
+  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to
+  shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
+  \begin{equation*}
+    \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
+  \end{equation*}
+  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are
+  just the zero vector, and we have uniqueness.
+  
+  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb =
+  \wb + \boldsymbol{0}_V = \boldsymbol{0}_U + \wb$ for the respective zero
+  vectors, but the above is only true if $\wb = \boldsymbol{0}$, and hence $U
+  \cap V = \{\boldsymbol{0}\}$ and we have a direct sum. \qed
+\end{proof}
+
+\begin{example}
+  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U
+  \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
+  
+  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V =
+  \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V
+  = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
