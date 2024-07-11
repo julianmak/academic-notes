@@ -488,7 +488,12 @@ combinations of the \textbf{spanning set} $\{\vb_i\}$, i.e.
 \end{example}
 
 The set $\{\vb_i\}$ is a \textbf{basis} of some vector space $U$ if the spanning
-set is linearly independent, and spans $U$.
+set is linearly independent, and spans $U$. For
+\begin{equation}
+  \vb = \sum_{i=1}^n v_i \vb_i,
+\end{equation}
+we say $\vb$ has \textbf{co-ordinates} $(v_1, \ldots, v_n)$ with respect to the
+basis $\{\vb_i\}$.
 
 \begin{lemma}
   Let $S = \{\vb_1, \ldots \vb_n\}$ be a basis for a non-trivial $V$ over
@@ -737,6 +742,13 @@ The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, w
   = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
 \end{example}
 
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times
+V}$ is the \textbf{external direct sum}, which is a vector space with the
+definition that the ordered pairs satisfy
+\begin{equation*}
+  (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
+\end{equation*}
+
 %-------------------------------------------------------------------------------
 
 \section{Inner products}
@@ -752,6 +764,71 @@ The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, w
 %===============================================================================
 
 \chapter{Linear maps}
+
+A \textbf{linear map} $\theta : U \to V$ for vector spaces over $\mathbb{F}$ is
+a function that satisfies
+\begin{enumerate}
+  \item $\theta(\ub + \vb) = \theta(\ub) + \theta(\vb)$ for all $\ub, \vb \in U$,
+  \item $\theta(\lambda \ub) = \lambda \theta(\ub)$ for all $\ub \in U$,
+  $\lambda \in \mathbb{F}$.
+\end{enumerate}
+
+Note that $\theta$ is a \emph{homomorphism}, respecting scalar multiplication.
+
+\begin{lemma}
+  \item The composition of linear maps is linear.
+\end{lemma}
+
+\begin{proof}
+  We have
+  \begin{align*}
+    \phi \circ \theta(\ub + \vb) = \phi(\theta(\ub + \vb)) &= \phi(\theta(\ub) + \theta(\vb)) \\
+      & = \phi(\theta(\ub)) + \phi(\theta(\vb)) \\
+      & = \phi \circ \theta(\ub) + \phi \circ \theta(\vb),
+  \end{align*}
+  and
+  \begin{align*}
+    \phi \circ \theta(\lambda\ub) = \phi(\theta(\lambda\ub)) = \phi(\lambda\theta(\ub)) = \lambda\phi(\theta(\ub)) = \lambda \phi \circ \theta(\ub).
+  \end{align*}
+  \qed
+\end{proof}
+
+Suppose $\theta : U \to V$ is a linear map, then we define\marginnote{Kernel is
+the set things that get sent to zero, while the image is the set of things that
+gets mapped by $\theta$.}
+\begin{itemize}
+  \item \textbf{kernel} of $\theta$ as
+  \begin{equation}
+    \highlight{\mbox{Ker}(\theta) = \{\ub \in U\ |\ \theta(\ub) = \boldsymbol{0}\}},
+  \end{equation}
+  \item \textbf{image} of $\theta$ as
+  \begin{equation}
+    \highlight{\mbox{Im}(\theta) = \{\theta(\ub) \ |\ \theta(\ub) \in U\}}.
+  \end{equation}
+\end{itemize}
+
+\begin{lemma}
+  The kernel and image of $\theta$ are subspaces of $U$ and $V$ respectively.
+\end{lemma}
+
+\begin{proof}
+  Suppose $\ub, \vb \in \mbox{Ker}(\theta)$, then note that
+  \begin{equation*}
+    \boldsymbol{0} = \theta(\ub) - \theta(\vb) = \theta(\ub - \vb)
+  \end{equation*}
+  since $\theta$ is a homomorphism, so that $\ub - \vb \in \mbox{Ker}(\theta)$,
+  while
+  \begin{equation*}
+    \boldsymbol{0} = \lambda \boldsymbol{0} = \lambda \theta(\ub) = \theta(\lambda\ub)
+  \end{equation*}
+  by property of a linear map, so $\lambda\ub \in \mbox{Ker}(\theta)$. So we
+  have closure and therefore the kernel is a subspace of $U$.
+  
+  Suppose $\boldsymbol{a}, \boldsymbol{b} \in \mbox{Im}(\theta)$, then there
+  exists $\boldsymbol{p}, \boldsymbol{q} \in U$ where $\theta(\boldsymbol{p}) =
+  \boldsymbol{a}$ and $\theta(\boldsymbol{q}) = \boldsymbol{b}$. Then similar
+  manipulations shows the image is closed, and is therefore a subspace of $V$. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
