@@ -228,6 +228,12 @@
 \newcommand{\qed}{\hfill$\blacksquare$}
 \newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
 
+\newcommand{\highlight}[1]{\mathchoice%
+  {\colorbox{black!10}{$\displaystyle#1$}}%
+  {\colorbox{black!10}{$\textstyle#1$}}%
+  {\colorbox{black!10}{$\scriptstyle#1$}}%
+  {\colorbox{black!10}{$\scriptscriptstyle#1$}}}%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % some extra formatting (hacked from Patrick Farrell's notes)
 %  https://courses.maths.ox.ac.uk/node/view_material/4915
@@ -288,7 +294,7 @@
   real analysis, touching on metric spaces, tangent spaces, vector fields,
   manifolds, and differential forms.
   \item[]
-  \item \TODO diagrams, notation (bold vs not bold)
+  \item \TODO diagrams, notation (bold vs not bold), highlighting of important bits
 \end{itemize}
 
 \par
@@ -2213,16 +2219,59 @@ if $\phi' > 0$, otherwise it is orientation reversing.
   \qed
 \end{proof}
 
-$\omega \in \Omega^1(U)$ is \textbf{closed} if for $\omega = f_i\;
-\mathrm{d}x_i$, $\partial f_i / \partial x_j = \partial f_j / \partial x_i$. We
-see that exactness implies closed, but the converse is generally not true.
+$\omega \in \Omega^1(U)$ is \textbf{closed} if for $\omega = f_i\; \mathrm{d}x_i$, $\partial f_i / \partial x_j = \partial f_j / \partial x_i$. We see that exactness implies closed, but the converse is generally not true (but see Poincar\'e's lemma below). Note that, in $\mathbb{R}^3$, $\omega \in \Omega^1(U)$ is closed if $\nabla \times X_\omega = 0$.
 
-Note that, in $\mathbb{R}^3$, $\omega \in \Omega^1(U)$ is closed if $\nabla
-\times X_\omega = 0$.
+A subset $U\subset \mathbb{R}^3$ is \textbf{star-like} if there exists $\boldsymbol{p} \in  U$ such that for all $\boldsymbol{q} \in U$, the straight line segment joining $\boldsymbol{p}$ and $\boldsymbol{q}$ is entirely in $U$. The same subset $U$ is \textbf{convex} if every straight line segment between any two points in $U$ are in $U$.\marginnote{So a star shape would be star-like but not convex, because there a centre point can be reached by any other point, but two points on two different arms are not joined by a single straight line. A ball would be convex (and also star-like).}
+
+\begin{lemma}[Poincar\'e's lemma]
+  For $U \subset \mathbb{R}^n$ that is star-like, a closed $\omega \in \Omega^1(U) $ implies $\omega$ is exact. \qedwhite
+\end{lemma}
+
+For $U \subset \mathbb{R}^n$ open, $\boldsymbol{c}_{1,2} : [a, b] \to U$ be two curves with the same endpoints $\boldsymbol{x}, \boldsymbol{y} \in U$, then $\boldsymbol{c}_1$ and $\boldsymbol{c}_2$ are \textbf{homotopic} iff there exists some continuous $F: [a, b] \times [0, 1] \to U$ with\marginnote{Pictorially, two curves are homotopic if it can be deformed into another keeping the same end points.}
+\begin{itemize}
+  \item $F(s, 0) = \boldsymbol{c}_1(s)$, $F(s, 1) = \boldsymbol{c}_2(s)$ for all $s \in [a,b]$,
+  \item $F(a, t) = \boldsymbol{x}$, $F(b,t) = \boldsymbol{y}$ for all $t \in [0, 1]$
+\end{itemize}
+
+\begin{corollary}
+  If $\boldsymbol{c}_{1,2}$ are homotopic with the same end points, then by path equivalence we have
+  \begin{equation}
+    \omega \in \Omega^1(U)\textnormal{ closed}\quad \Leftrightarrow \quad \int_{\boldsymbol{c}_1} \omega = \int_{\boldsymbol{c}_2} \omega.
+  \end{equation}
+  \qedwhite
+\end{corollary}
+
+For $U \subset \mathbb{R}^n$ open, $\boldsymbol{c}_{1,2} : [a, b] \to U$ be closed curves. The $\boldsymbol{c}_{1,2}$ are \textbf{freely homotopic} if there is a continuous map $F: [a, b] \times [0, 1] \to U$ with
+\begin{itemize}
+  \item $F(s, 0) = \boldsymbol{c}_1(s)$, $F(s, 1) = \boldsymbol{c}_2(s)$ for all $s \in [a,b]$,
+  \item $F(a, t) = F(b,t)$ for all $s \in [a,b]$ and $t \in [0, 1]$
+\end{itemize}
+
+\begin{corollary}
+  For $U\subset \mathbb{R}^n$ and $\boldsymbol{c}_{1,2}$ are closed curves, $\omega \in \Omega^1(U)$ closed, then if $\boldsymbol{c}_{1,2}$ are freely homotopic, then
+  \begin{equation*}
+    \int_{\boldsymbol{c}_1} \omega = \int_{\boldsymbol{c}_2} \omega.
+  \end{equation*}
+  \qedwhite
+\end{corollary}
 
 %-------------------------------------------------------------------------------
 
 \section{Differential $k$-forms}
+
+Recall that the determinant function
+\begin{equation}
+  \mbox{det} : \mathbb{R}^n \times \ldots \times \mathbb{R}^n = (\mathbb{R}^n)^n \to \mathbb{R}, \qquad (\boldsymbol{v}_1, \ldots \boldsymbol{v}_n) \to \mbox{det}[\boldsymbol{v}_1, \ldots \boldsymbol{v}_n],
+\end{equation}
+and that this function is multi-linear and alternating (to mean swapping any two entries introduces a minus sign in the output). 
+
+Let $V$ be a real vector field of dimension $n$. An \textbf{alternative $k$-form} is a map $\boldsymbol{\alpha} : V^k \to \mathbb{R}$ where $\boldsymbol{\alpha}$ is multi-linear and alternating in all its entries. The set of all $k$-forms is denoted $\highlight{\Lambda^k(V)}$, which is a real vector space.
+
+For $U\subset \mathbb{R}^n$ open, a map $\boldsymbol{\omega} : U \to \Lambda^k(\mathbb{R}^n)$ is a \textbf{differentiable $k$-form} if all the coefficient functions of $\boldsymbol{\omega}$
+\begin{equation}
+  f_{i_1, \ldots i_k}(\boldsymbol{p}) = \omega_p(\boldsymbol{e}_{i_1}, \ldots \boldsymbol{e}_{i_k})
+\end{equation}
+are smooth.
 
 %-------------------------------------------------------------------------------
 
