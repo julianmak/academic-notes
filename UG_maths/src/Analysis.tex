@@ -294,7 +294,7 @@
   real analysis, touching on metric spaces, tangent spaces, vector fields,
   manifolds, and differential forms.
   \item[]
-  \item \TODO diagrams, notation (bold vs not bold), highlighting of important bits
+  \item \TODO diagrams, notation (bold vs not bold), highlighting of important bits, probably unbold things (to have $k$-forms and vectors agreeing in notation)
 \end{itemize}
 
 \par
@@ -2259,19 +2259,89 @@ For $U \subset \mathbb{R}^n$ open, $\boldsymbol{c}_{1,2} : [a, b] \to U$ be clos
 
 \section{Differential $k$-forms}
 
+\marginnote{\color{red}Notation consistent (?) up to here: roman are vectors, greek are forms. Move the notation note further up at some point.}
+
 Recall that the determinant function
 \begin{equation}
-  \mbox{det} : \mathbb{R}^n \times \ldots \times \mathbb{R}^n = (\mathbb{R}^n)^n \to \mathbb{R}, \qquad (\boldsymbol{v}_1, \ldots \boldsymbol{v}_n) \to \mbox{det}[\boldsymbol{v}_1, \ldots \boldsymbol{v}_n],
+  \mbox{det} : \mathbb{R}^n \times \ldots \times \mathbb{R}^n = (\mathbb{R}^n)^n \to \mathbb{R}, \qquad (v_1, \ldots v_n) \to \mbox{det}[v_1, \ldots v_n],
 \end{equation}
 and that this function is multi-linear and alternating (to mean swapping any two entries introduces a minus sign in the output). 
 
-Let $V$ be a real vector field of dimension $n$. An \textbf{alternative $k$-form} is a map $\boldsymbol{\alpha} : V^k \to \mathbb{R}$ where $\boldsymbol{\alpha}$ is multi-linear and alternating in all its entries. The set of all $k$-forms is denoted $\highlight{\Lambda^k(V)}$, which is a real vector space.
+Let $V$ be a real vector field of dimension $n$. An \textbf{alternating $k$-form} is a map $\alpha : V^k \to \mathbb{R}$ where $\alpha$ is multi-linear and alternating in all its entries. The set of all $k$-forms is denoted $\highlight{\Lambda^k(V)}$, which is a real vector space.
 
 For $U\subset \mathbb{R}^n$ open, a map $\boldsymbol{\omega} : U \to \Lambda^k(\mathbb{R}^n)$ is a \textbf{differentiable $k$-form} if all the coefficient functions of $\boldsymbol{\omega}$
 \begin{equation}
   f_{i_1, \ldots i_k}(\boldsymbol{p}) = \omega_p(\boldsymbol{e}_{i_1}, \ldots \boldsymbol{e}_{i_k})
 \end{equation}
 are smooth.
+
+Note that since $\Lambda^1(\mathbb{R}^n) = \mathcal{L}(\mathbb{R}^n, \mathbb{R})$, differentiable 1-forms agree with the earlier definition. Also, if $\alpha \in \Lambda^k(V)$ is alternating, then if any $v_i = v_j$, we have $\alpha(v_1, \ldots v_k) = 0$ by the anti-symmetry property.
+
+For a collection of 1-forms $\alpha_1, \ldots, \alpha_k \in \Lambda^1(V)$, the \textbf{wedge product} is defined as
+\begin{equation}
+  \highlight{\alpha_1 \wedge \ldots \wedge \alpha_k  \in \Lambda^k(V), \qquad \alpha_1 \wedge \ldots \wedge \alpha_k(v_1, \ldots v_k) = \mbox{det}(\alpha_i(v_j))}
+\end{equation}
+for all indices $i,j$ spanning from $1$ to $k$.\marginnote{Recalling that a 1-form eats a vector to get a number, and $(\alpha_i(v_j))$ are the entries of a matrix.} Note that elements of $\mathcal{L}(V, \mathbb{R})$ are elements of the dual space $V^*$ of linear forms on $V$. For every basis $\{v_1, \ldots, v_n\}$ of $V$ there is a dual basis $\{v_1^*, \ldots v_n^*\}$ of $V^*$ satisfying $v_i^* (v_j) = \delta_{ij}$.
+
+\begin{proposition}
+  A basis for $\Lambda^k(V)$ is the collection of $v_{i_1}^* \wedge \ldots \wedge v_{i_k}^* \in \Lambda^k(V)$ for strictly ascending indices, and where $\{v_1^*, \ldots v_n^*\}$ is a basis of $V^* = \mathcal{L}(V, \mathbb{R})$. Further, $\mbox{dim}\ \Lambda^k = {}^n C_k$ ($n$ choose $k$).
+\end{proposition}
+
+\begin{proof}
+  We only need to consider wedge products of forms with strictly increasing indices because of the anti-symmetry property. Note that we have, by construction,
+  \begin{equation*}
+    v_{i_1}^* \wedge \ldots \wedge v_{i_k}^* (v_{j_1}, \ldots v_{j_k}) = \begin{cases}1, & i_m = j_m \\ 0, & \textnormal{otherwise}\end{cases},
+  \end{equation*}
+  so if
+  \begin{equation*}
+    \alpha = \sum (a_{i_1},\ldots a_{i_k})(v_{i_1}^* \wedge \ldots \wedge v_{i_k}^*) = 0
+  \end{equation*}
+  then this implies $a_{i_j} = 0$ for all $j$, and so $v_{i_1}^* \wedge \ldots \wedge v_{i_k}^*$ are linear independent if indices are strictly increasing.
+  
+  Let $\omega \in \Lambda^k(V)$ and consider the $k$-form
+  \begin{equation*}
+    \eta = \sum \omega(v_{i_1}, \ldots v_{i_k}) v_{i_1}^* \wedge \ldots \wedge v_{i_k}^*.
+  \end{equation*}
+  By construction, $\omega = \eta$ when being evaluate at all tuples $(v_{i_1}, \ldots v_{i_k})$ with increasing indices, and so all of $v_{i_1}^* \wedge \ldots \wedge v_{i_k}^*$ with increasing indices span $\Lambda^k(V)$, and thus we have a basis. \qed
+\end{proof}
+
+The wedge product operator extends naturally to alternating $k$-forms, since all $k$-forms can be expanded as a wedge product of 1-forms. It is also associative.
+
+The set of differential $k$-forms on open $U\subset \mathbb{R}^n$ is denoted by $\highlight{\Omega^k(U)}$, which has a structure of a real vector space. The set of differential 0-forms is identified as $C^\infty(U)$. Then, we note that the wedge product is a map
+\begin{equation}
+  \wedge\ :\ \Omega^k(U) \times \Omega^l(U) \to \Omega^{k+l}(U).
+\end{equation}
+Note that wedging with $f\in C^\infty(U)$ gives $f\wedge \omega = f\omega$.
+
+\begin{example}
+  Let
+  \begin{equation*}
+    \omega = x\ \mathrm{d}x \wedge \mathrm{d}y + x^2 z\ \mathrm{d}y \wedge \mathrm{d}z \in \Omega^2(\mathbb{R}^3),
+  \end{equation*}
+  while
+  \begin{equation*}
+    \eta = z^2\ \mathrm{d}x + y^3\ \mathrm{d}y - \mathrm{d}z \in \Omega^1(\mathbb{R}^3).
+  \end{equation*}
+  We have that
+  \begin{align*}
+    \omega_{(1,0,0)}(e_1, e_2 + e_3) 
+      &= (1\ \mathrm{d}x \wedge \mathrm{d}y + 0\ \mathrm{d}y \wedge \mathrm{d}z)(e_1, e_2 + e_3) \\
+      &= \left|\begin{matrix}\mathrm{d}x\ e_1  & \mathrm{d}x\ (e_2 + e_3)\\ \mathrm{d}y\ e_1  & \mathrm{d}y\ (e_2 + e_3)\end{matrix}\right|\\
+      &= \left|\begin{matrix}1  & 0 + 0\\ 0  & 1 + 0\end{matrix}\right| = 1.
+  \end{align*}
+  For $\omega\wedge\eta$, we note that the only result has to be a 3-form, and in $\mathbb{R}^3$ the basis 3-form is $\mathrm{d}x \wedge \mathrm{d}y \wedge \mathrm{d}z$ (since all others vanish by anti-symmetry, consistent with observation that $\mbox{dim}\ \Omega^3(\mathbb{R}^3) = {}^3C_3 = 1$), so we have
+  \begin{equation*}
+    \omega\wedge\eta = (-x + x^2 z^3)\ \mathrm{d}x \wedge \mathrm{d}y \wedge \mathrm{d}z.
+  \end{equation*}
+\end{example}
+
+\begin{lemma}
+ For $\omega \in \Omega^k(U)$ and $\eta \in \Omega^l(U)$, $\highlight{\omega \wedge \eta = (-1)^{k\cdot l}\ \eta \wedge \omega}.$
+\end{lemma}
+
+\begin{proof}
+  \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
