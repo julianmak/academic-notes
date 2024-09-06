@@ -2095,13 +2095,12 @@ function $f\in C^\infty(U)$ by performing
     \omega_p(e_1) = 3\cdot p_1\cdot p_2\; \mathrm{d}x(e_1) + p_2^3\; \mathrm{d}y(e_1) = 3\cdot7\cdot1 + 27\cdot 0 = 63,
   \end{equation*}
   while $\omega_p(e_2) = 27$ by a similar argument. So $\omega_p((1, -2)) = 63 -
-  2\cdot27=9$ for example.\marginnote{A 1-form eats a vector and spits out a
-  number. Sometimes it can be regarded as a functional (eats a function and
-  spits out a number).}
+  2\cdot27=9$ for example.
 \end{example}
 
 A differential 1-form $\omega$ is \textbf{exact} if there exists some $f \in
 C^\infty(U)$ where
+\marginnote{A 1-form eats a vector and spits out a number. Sometimes it can be regarded as a functional (eats a function and spits out a number). Eactness is like a function (0-form) having a primitive when we are talking about integration.}
 \begin{equation}
   \omega = \mathrm{d}f.
 \end{equation}
@@ -2340,8 +2339,102 @@ Note that wedging with $f\in C^\infty(U)$ gives $f\wedge \omega = f\omega$.
 \end{lemma}
 
 \begin{proof}
-  \qed
+  By linearity, we only need to consider $\omega = f\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k}$ and $\eta = g\ \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l}$ with no overlapping indices (since then $\omega \wedge \eta = \eta \wedge \omega = 0$ by definition). \marginnote{Note the ordering in the second line requires $k$ swaps, and there are $l$ of them to do in the third line.}In that case,
+  \begin{align*}
+    \omega \wedge \eta
+      &= fg\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} \wedge \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l} \\
+      &= (-1)^k fg\ \mathrm{d}x_{j_1} \wedge \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} \wedge \ldots \wedge \mathrm{d}x_{j_l} \\
+      &= (-1)^{k\cdot l} fg\ \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l} \wedge \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k}\\
+      &= (-1)^{k\cdot l} \eta \wedge \omega,
+  \end{align*}
+  as required. \qed
 \end{proof}
+
+Let $U \subset \mathbb{R}^n$ be open and $\omega \in \Omega^k(U)$ be given by
+\begin{equation*}
+  \omega = \sum (f_{i_1}, \ldots f_{i_k})\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k}.
+\end{equation*}
+The \textbf{exterior derivative} of $\omega$ is given by
+\begin{equation}
+  \highlight{\mathrm{d}\omega = \sum \mathrm{d}(f_{i_1}, \ldots f_{i_k}) \wedge \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} \in \Omega^{k+1}(U)}.
+\end{equation}
+This could be seen as an extension of the ordinary differential $\mathrm{d}f$ when $f \in C^\infty (U) = \Omega^0(U)$.
+
+\begin{example}
+  Let $\omega = xyz\ \mathrm{d}x + yz\ \mathrm{d}y + (x+z)\ \mathrm{d}z$. We have
+  \begin{align*}
+    \mathrm{d}\omega 
+      &= (yz\ \mathrm{d}x + xz\ \mathrm{d}y + xy\ \mathrm{d}z) \wedge \mathrm{d}x \\
+      & \qquad + (z\ \mathrm{d}y + y\ \mathrm{d}z)\wedge \mathrm{d}y + (\mathrm{d}x + \mathrm{d}z)\wedge \mathrm{d}z\\
+      &= (-xz)\ \mathrm{d}x \wedge \mathrm{d}y + (1-xy)\ \mathrm{d}x \wedge \mathrm{d}z - y\ \mathrm{d}y \wedge \mathrm{d}z
+  \end{align*}
+  after collecting terms accordingly. Since $\omega$ is a 1-form, $\mathrm{d}\omega$ is correctly a 2-form as it should be.
+\end{example}
+
+\begin{example}
+  For $\omega = f_i\ \mathrm{d}x_i$ on $U\subset \mathbb{R}^n$, since $\mathrm{d}f_i = \partial f_i / \partial x_j\ \mathrm{d}x_j$, we have
+  \begin{equation}
+    \mathrm{d}\omega = \frac{\partial f_i}{\partial x_j}\ \mathrm{d}x_j \wedge \mathrm{d}x_i = \sum_{k<l} \left(\frac{\partial f_k}{\partial x_l} - \frac{\partial f_l}{\partial x_k} \right)\ \mathrm{d}x_l \wedge \mathrm{d}x_k.
+  \end{equation}
+\end{example}
+
+Note that $\mathrm{d}\omega = 0$ iff $\omega$ is closed, and since every exact 1-form is closed, we have $\mathrm{d}(\mathrm{d}f) = 0$ for all $f \in C^\infty(U)$ where $\mathrm{d}f = \omega$.
+
+\begin{proposition}
+  For $\omega, \eta \in \Omega^k(U)$, the exterior derivative $\mathrm{d}\ :\ \Omega^k(U) \to \Omega^{k+1}(U)$ has the following properties:
+  \begin{enumerate}
+    \item For $\lambda, \mu \in \mathbb{R}$, we have linearity where
+    \begin{equation}
+      \highlight{\mathrm{d}(\lambda \omega + \mu \eta) = \lambda\ \mathrm{d}\omega + \mu\ \mathrm{d}\eta}.
+    \end{equation}
+    
+    \item We have the (graded) product rule
+    \begin{equation}
+      \highlight{\mathrm{d}(\omega \wedge \eta) = \mathrm{d}\omega \wedge \eta + (-1)^k\ \omega \wedge \mathrm{d}\eta}.
+    \end{equation}
+    
+    \item $\highlight{\mathrm{d}(\mathrm{d}\omega) = 0}$\sidenote{This is a useful property for defining \textbf{de Rham cohomology}.}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By definition.
+    
+    \item By linearity, we only need to prove this for $\omega = \sum_i f\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} = f\ \mathrm{d}x_I$ and $\eta = g\ \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l} = g\ \mathrm{d}x_J$,
+    \begin{align*}
+      \mathrm{d}(\omega \wedge \eta) 
+        &= \mathrm{d}\ fg\ (\mathrm{d}x_I \wedge \mathrm{d}x_J) \\
+        &= g\ \mathrm{d}f \wedge \mathrm{d}x_I \wedge \mathrm{d}x_J + f\ \mathrm{d}g \wedge \mathrm{d}x_I \wedge \mathrm{d}x_J\\
+        &= \mathrm{d}f \wedge \mathrm{d}x_I \wedge g\ \mathrm{d}x_J + (-1)^k f\ \mathrm{d}x_I \wedge \mathrm{d}g \wedge \mathrm{d}x_J\\
+        &= \mathrm{d}(f\ \mathrm{d}x_I) \wedge \eta + (-1)^k\ \omega \wedge \mathrm{d}(g\ \mathrm{d}x_J)\\
+        &= \mathrm{d}\omega \wedge \eta + (-1)^k\ \omega \wedge \mathrm{d}\eta,
+    \end{align*}
+    with appropriate uses of the reverse product rule.
+    
+    \item We have, noting that we must have $\mathrm{d}^2 f = 0$ and $\mathrm{d}(1) = 0$,
+    \begin{align*}
+      \mathrm{d}^2 (\omega \wedge \eta) 
+        &= \mathrm{d}(\mathrm{d}f \wedge \mathrm{d}x_I)\\
+        &= \mathrm{d}^2 f \wedge \mathrm{d}x_I - \mathrm{d}f \wedge \mathrm{d}^2 x_I\\
+        &= -\mathrm{d}f \wedge \mathrm{d}(1\ \mathrm{d}x_I)\\
+        &= -\mathrm{d}f \wedge d(1) \wedge \mathrm{d}x_I = 0.
+    \end{align*}
+    \qed
+  \end{enumerate}
+\end{proof}
+
+Just like for 1-forms, $\omega \in \Omega^k(U)$ is \textbf{exact} if there exist some $\eta \in \Omega^{k+1}(U)$ where $\mathrm{d}\omega = \eta$. The $k$-form $\omega$ is \textbf{closed} if $\mathrm{d}\omega = 0$.
+
+\begin{theorem}
+  If $U \subset \mathbb{R}^n$ is open and star-like, then $\omega \in \Omega^k(U)$ closed iff $\omega$ is exact. \qedwhite.
+\end{theorem}
+
+Let $U \subset \mathbb{R}^n$ and $V \subset \mathbb{R}^m$ be open, and there is some smooth mapping $\phi\ :\ U \to V$. For $\omega \in \Omega^k(V)$, the \textbf{pullback} of $\omega$ with respect to $\phi$, denoted $\highlight{\phi^* \omega \in \Omega^k(U)}$ is defined as\marginnote{Note there are pullbacks of forms, but there is in general no pullbacks of vectors unless an inverse of $\phi$ is assumed.}
+\begin{equation}
+  \left.\phi^* \omega \right|_p (v_1, \ldots v_k) = \left.\omega\right|_{\phi(p)}\ (D\phi(p)(v_1), \ldots D\phi(p)(v_k))
+\end{equation}
+for all points $p\in U$, $(v_1, \ldots v_l) \in (\mathrm{R}^m)^k$.
 
 %-------------------------------------------------------------------------------
 
