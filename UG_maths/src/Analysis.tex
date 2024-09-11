@@ -2401,10 +2401,10 @@ Note that $\mathrm{d}\omega = 0$ iff $\omega$ is closed, and since every exact 1
   \begin{enumerate}
     \item By definition.
     
-    \item By linearity, we only need to prove this for $\omega = \sum_i f\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} = f\ \mathrm{d}x_I$ and $\eta = g\ \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l} = g\ \mathrm{d}x_J$,
+    \item By linearity, we only need to prove this for $\omega = \sum_i f\ \mathrm{d}x_{i_1} \wedge \ldots \wedge \mathrm{d}x_{i_k} = f\ \mathrm{d}x_I$ and $\eta = \sum_j g\ \mathrm{d}x_{j_1} \wedge \ldots \wedge \mathrm{d}x_{j_l} = g\ \mathrm{d}x_J$,
     \begin{align*}
       \mathrm{d}(\omega \wedge \eta) 
-        &= \mathrm{d}\ fg\ (\mathrm{d}x_I \wedge \mathrm{d}x_J) \\
+        &= \mathrm{d}(fg)\ \mathrm{d}x_I \wedge \mathrm{d}x_J \\
         &= g\ \mathrm{d}f \wedge \mathrm{d}x_I \wedge \mathrm{d}x_J + f\ \mathrm{d}g \wedge \mathrm{d}x_I \wedge \mathrm{d}x_J\\
         &= \mathrm{d}f \wedge \mathrm{d}x_I \wedge g\ \mathrm{d}x_J + (-1)^k f\ \mathrm{d}x_I \wedge \mathrm{d}g \wedge \mathrm{d}x_J\\
         &= \mathrm{d}(f\ \mathrm{d}x_I) \wedge \eta + (-1)^k\ \omega \wedge \mathrm{d}(g\ \mathrm{d}x_J)\\
@@ -2430,11 +2430,127 @@ Just like for 1-forms, $\omega \in \Omega^k(U)$ is \textbf{exact} if there exist
   If $U \subset \mathbb{R}^n$ is open and star-like, then $\omega \in \Omega^k(U)$ closed iff $\omega$ is exact. \qedwhite.
 \end{theorem}
 
-Let $U \subset \mathbb{R}^n$ and $V \subset \mathbb{R}^m$ be open, and there is some smooth mapping $\phi\ :\ U \to V$. For $\omega \in \Omega^k(V)$, the \textbf{pullback} of $\omega$ with respect to $\phi$, denoted $\highlight{\phi^* \omega \in \Omega^k(U)}$ is defined as\marginnote{Note there are pullbacks of forms, but there is in general no pullbacks of vectors unless an inverse of $\phi$ is assumed.}
+Let $U \subset \mathbb{R}^n$ and $V \subset \mathbb{R}^m$ be open, and there is some smooth mapping $\phi\ :\ U \to V$. For $\omega \in \Omega^k(V)$, the \textbf{pullback} of $\omega$ with respect to $\phi$, denoted $\highlight{\phi^* \omega \in \Omega^k(U)}$ is defined as\marginnote{Note there are pullbacks of forms, but there is in general no pullbacks of vectors unless an inverse of $\phi$ is assumed. Pullback is akin to finding a Jacobian for doing integration when we do co-ordinate transformations.}
 \begin{equation}
   \left.\phi^* \omega \right|_p (v_1, \ldots v_k) = \left.\omega\right|_{\phi(p)}\ (D\phi(p)(v_1), \ldots D\phi(p)(v_k))
 \end{equation}
 for all points $p\in U$, $(v_1, \ldots v_l) \in (\mathrm{R}^m)^k$.
+
+\begin{proposition}
+  For $U \subset \mathbb{R}^n$, $V \subset \mathbb{R}^m$ and smooth $\phi\ :\ U \to V$,
+  \begin{enumerate}
+    \item The pullback is linear, where for $\omega_{1,2} \in \Omega^k(V)$,
+    \begin{equation}
+      \highlight{\phi^* (\omega_1 + \omega_2) = \phi^* \omega_1 + \phi^* \omega_2}.
+    \end{equation}
+    
+    \item For $f\in \Omega^0(V) = C^\infty(V)$ and $\omega \in \Omega^k(V)$,
+    \begin{equation}
+      \highlight{\phi^* (f\omega) = (\phi^* f) \circ (\phi^* \omega) = (f \circ \phi) \circ (\phi^* \omega)}.
+    \end{equation}
+    
+    \item The appropriate chain rule with pullback of a 1-form is
+    \begin{equation}
+      \highlight{\phi^* (\mathrm{d}f) = \mathrm{d}(f \circ \phi) = \frac{\partial (f\circ\phi)}{\partial x_i}\ \mathrm{d}x_i}.
+    \end{equation}
+    
+    \item For $\alpha_i \in \Omega^1(V)$, we have
+    \begin{equation}
+      \highlight{\phi^*(\alpha_1 \wedge \ldots \wedge \alpha_k) = \phi^* \alpha_1 \wedge \ldots \wedge \phi^* \alpha_k}.
+    \end{equation}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By definition.
+    
+    \item Note that
+    \begin{align*}
+      \left.\phi^* (f\omega)\right|_p (v_1, \ldots, v_k) 
+        &= \left.f\omega\right|_{\phi(p)}(D\phi(p) v_1, \ldots, D\phi(p) v_k)\\
+        &= f(\phi(p)) \circ \left.\omega\right|_{\phi(p)}(D\phi(p) v_1, \ldots, D\phi(p) v_k)\\
+        &= \left.(f \circ \phi)\right|_p \circ \left.\phi^*\omega\right|_{p}.
+    \end{align*}
+    
+    \item Applying the standard chain rule in reverse, we have
+    \begin{align*}
+      \left.\phi^* (\mathrm{d}f)\right|_p v
+        &= \left.\mathrm{d}f\right|_{\phi(p)}(D\phi(p) v)\\
+        &= \left.Df\right|_{\phi(p)}(D\phi(p) v)\\
+        &= \left.D(f \circ \phi)\right|_p (v)\\
+        &= \left.\mathrm{d} (f \circ \phi)\right|_p (v).
+    \end{align*}
+    
+    \item By definition,
+    \begin{align*}
+      \left.\phi^*(\alpha_1 \wedge \ldots \wedge \alpha_k)\right|_p (v_1, \ldots v_k) 
+        &= (\alpha_1 \wedge \ldots \wedge \alpha_k) (D\phi(p) v_1, \ldots D\phi(p) v_k)\\
+        &= \mbox{det}\left[
+          \begin{matrix} 
+            \left.\alpha_1\right|_{\phi(p)}(D\phi(p)v_1) & \ldots & \left.\alpha_1\right|_{\phi(p)}(D\phi(p)v_k) \\ 
+            \vdots & \ddots & \vdots\\
+            \left.\alpha_k\right|_{\phi(p)}(D\phi(p)v_1) & \ldots & \left.\alpha_k\right|_{\phi(p)}(D\phi(p)v_k)
+          \end{matrix}\right]\\
+        &= \mbox{det}\left[
+          \begin{matrix} 
+            \left.\phi^*\alpha_1\right|_{p}(v_1) & \ldots & \left.\phi^*\alpha_1\right|_{p}(v_k) \\ 
+            \vdots & \ddots & \vdots\\
+            \left.\phi^*\alpha_k\right|_{p}(v_1) & \ldots & \left.\phi^*\alpha_k\right|_{p}(v_k)
+          \end{matrix}\right]\\
+        &= \left.\phi^* \alpha_1 \wedge \ldots \wedge \phi^* \alpha_k\right|_{\phi(p)} (v_1, \ldots v_k).
+    \end{align*}
+  \end{enumerate}
+  \qed
+\end{proof}
+
+Note that the last property generalises to $k$-forms. Also, if $\psi\ :\ V \to W$ is another map and now $\omega\in\Omega^k(W)$ (the end space), then the chain of pullbacks satisfy the usual function composition as $\phi^* (\psi^* \omega) = (\psi \circ \phi)^* \omega$.
+
+\begin{example}
+  To show that the pullback is akin to getting the Jacobian correction for integration when doing a co-ordinate transformation, start with the 2-form in Cartesian co-ordinates as $\omega = \mathrm{d}x \wedge \mathrm{d}y$. Transforming into polar co-ordinates, we use the map $\phi\ :\ (0,\infty) \times (0, 2\pi) \to \mathbb{R}^2$ with $(r,\theta) \mapsto (r\cos\theta, r\sin\theta)$. Then
+  \begin{equation*}
+    \phi^*(\mathrm{d}x = \mathrm{d}(x \circ \phi) = \mathrm{d}\phi_1 = \cos\theta\ \mathrm{d}r - r\sin\theta\ \mathrm{d}\theta,
+  \end{equation*}
+  since $x\circ\phi$ picks out the first component of $\phi = (r\cos\theta, r\sin\theta)$. Similarly,
+  \begin{equation*}
+    \phi^*(\mathrm{d}y = \mathrm{d}(y \circ \phi) = \mathrm{d}\phi_2 = \sin\theta\ \mathrm{d}r + r\cos\theta\ \mathrm{d}\theta,
+  \end{equation*}
+  and by linearity of pullbacks on the wedged forms,
+  \begin{align*}
+    \phi^* (\mathrm{d}x \wedge \mathrm{d}y)
+      &= \phi^* \mathrm{d}x \wedge \phi^* \mathrm{d}y\\
+      &= (\cos\theta\ \mathrm{d}r - r\sin\theta\ \mathrm{d}\theta) \wedge (\sin\theta\ \mathrm{d}r + r\cos\theta\ \mathrm{d}\theta)\\
+      &= r\ \mathrm{d}r\wedge\mathrm{d}\theta,
+  \end{align*}
+  as expected.
+\end{example}
+
+\begin{proposition}
+  The pullback is commutes with the exterior derivative: for $\omega \in \Omega^k(V)$ and $\phi\ :\ U \to V$,
+  \begin{equation}
+    \highlight{\mathrm{d}(\phi^*\omega) = \phi^*\mathrm{d}\omega}.
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  By linearity, we only need to show it for $\omega = f\ \mathrm{d}x_I$. Let $\phi = (\phi_1, \ldots, \phi_m)$, so $\phi^*(\mathrm{d}x_j) = \mathrm{d}\phi_j$. Then
+  \begin{align*}
+    \mathrm{d}(\phi^*\omega) 
+      &= \mathrm{d}(\phi^*(f\ \mathrm{d}x_I))\\
+      &= \mathrm{d}((f\circ\phi) \mathrm{d}\phi_I)\\
+      &= \mathrm{d}(f\circ\phi)\wedge \phi_I + (f\circ\phi) \mathrm{d}(\mathrm{d}\phi_I)
+  \end{align*}
+  by the definition of the exterior derivative (since $f\circ\phi$ is just a function), and the last term is zero since we have $\mathrm{d}^2=0$. Observe also that
+  \begin{align*}
+    \phi^(\mathrm{d}\omega) 
+      &= \phi^*(\mathrm{d}f\wedge\ \mathrm{d}x_I + 0)\\
+      &= \phi^*\mathrm{d}f \wedge \phi^*\mathrm{d}x_I\\
+      &= \mathrm{d}(f\circ\phi) \wedge \mathrm{d}\phi_I
+  \end{align*}
+  by reverse chain rule, so we have commutativity between the exterior derivative and the pullback.
+\end{proof}
+
+Differential forms play an important role in integration, as will be demonstrated now.
 
 %-------------------------------------------------------------------------------
 
