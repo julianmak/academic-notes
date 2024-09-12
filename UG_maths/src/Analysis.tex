@@ -2556,9 +2556,115 @@ Differential forms play an important role in integration, as will be demonstrate
 
 \section{Integration in $\mathbb{R}^n$}
 
+A subset $A \subset \mathbb{R}^n$ is of \textbf{measure zero} if, for all $\epsilon > 0$, there exists a countable set of rectangles $Q_i$ such that
+\begin{equation*}
+  A \subset \bigcup_{i=1} Q_i, \qquad \sum_i \mbox{vol}(Q_i) < \epsilon.
+\end{equation*}
+
+\begin{example}
+  Let $A = \mathbb{R} \times \{0\} \subset \mathbb{R}^2$. Intuitively this has no area, which is the relevant measure in $\mathbb{R}^2$. Formally, define the rectangles as
+  \begin{equation*}
+    Q_i = [i-1, i+1] \times \left[-\frac{\epsilon}{2^{|i|}}, \frac{\epsilon}{2^{|i|}}\right], \qquad i\in \mathbb{Z},
+  \end{equation*}
+  which has area $2(2/2^{|i|})\epsilon$. $A$ is in the countably infinite union of the above rectangles, yet the area is (accounting for the symmetry of $|i|$ in the geometric sum)
+  \begin{equation*}
+    2\cdot 4 \epsilon \sum_{i=0}^\infty \frac{1}{2^i} = 12\epsilon,
+  \end{equation*}
+  which can me made arbitrarily small.
+\end{example}
+
+By similar arguments, every $k$-manifold in $\mathbb{R}^n$ with $k<n$ has measure zero.
+
+\begin{proposition}
+  \begin{enumerate}
+    \item For $A \subset B \subset \mathbb{R}^n$, if $B$ has measure zero, then $A$ has measure zero.
+    \item If all $A_i \subset \mathbb{R}^n$ has measure zero then their union also has measure zero.
+    \item Rectangles $Q_i$ are not of measure zero.
+  \end{enumerate}
+  \qedwhite
+\end{proposition}
+
+\begin{theorem}
+  Let $Q\subset \mathbb{R}^n$ be a rectangle and $f\ :\ Q \to \mathbb{R}$ be bounded. Then $f$ is Riemann integrable iff the set $D \subset Q$ of points in which $f$ is not continuous is of measure zero. \qedwhite
+\end{theorem}
+
+\begin{theorem}[Fubini's theorem]
+  Let $f\ :\ Q \to \mathbb{R}$ be bounded and $Q = A \times B$. We write $f(x,y)$ for $x\in A$ and $y\in B$. For all $x$, we define
+  \begin{equation*}
+    f_x\ :\ B \to \mathbb{R}, \qquad f_x(y) = f(x,y).
+  \end{equation*}
+  Since $f_x$ is bounded, we consider $g, h\ :\ A\to\mathbb{R}$ defined as
+  \begin{equation*}
+    g(x) = \int_B^{\textnormal{lower}} f_x(y)\; \mathrm{d}y, \qquad h(x) = \int_B^{\textnormal{upper}} f_x(y)\; \mathrm{d}y.
+  \end{equation*}
+  If $f$ is integrable on $Q$, then $g, h$ are integrable over $A$, and\marginnote{It's really saying when can we pull integrals apart as
+  \begin{align*}
+    \int_Q f(x,y)\; \mathrm{d}Q 
+      &= \int_A \int_B f(x,y)\; \mathrm{d}y\; \mathrm{d}x\\
+      &= \int_B \int_A f(x,y)\; \mathrm{d}x\; \mathrm{d}y.
+  \end{align*}
+  This one is the weaker version of Fubini's theorem; there is a stronger one when $f$ is \textbf{Lebesque integrable}.}
+  \begin{equation}
+    \int_A g(x)\; \mathrm{d}x = \int_A h(x)\; \mathrm{d}x = \int_Q f\; \mathrm{d}x.
+  \end{equation}
+  \qedwhite.
+\end{theorem}
+
+Let $A \subset \mathbb{R}^n$ and $f\ :\ A \to \mathbb{R}$ be bounded. Let the \textbf{extension} of $f$ from $A \subset Q$ to $Q \subset \mathbb{R}^n$ where $Q$ is a rectangle be defined as
+\begin{equation*}
+  f_A\ :\ \mathbb{R}^n \to \mathbb{R}, \qquad f_A(x) = \begin{cases}f(x) & x \in A, \\ 0, & x \not\in A. \end{cases}
+\end{equation*}
+If $f$ is integrable, then $\int_A f\; \mathrm{d}x = \int_Q f_A\; \mathrm{d}x$.
+
+\begin{proposition}[Transformation rule]\label{thm:transform}
+  For $U, V\subset \mathbb{R}^n$ be open and bounded, $\phi\ :\ U\ to V$ be smooth, and $f\ :\ V \to \mathbb{R}$ integrable. then $f\circ\phi\ :\ U\to\mathbb{R}$ is integrable and\marginnote{Note the similarity of this with the pullback; see below.}
+  \begin{equation}
+    \highlight{\int_V f\; \mathrm{d}x = \int_U (f\circ\phi)\ |\mbox{det}\ D\phi|\; \mathrm{d}y}.
+  \end{equation}
+  \qedwhite
+\end{proposition}
+
+For open $U \subset \mathbb{R}$, and $\omega \in \Omega^n(U)$, we have
+\begin{equation}
+  \highlight{\int_U \omega = \int_U \omega(e_1, \ldots, e_n)}
+\end{equation}
+where $e_i$ are the basis vectors. In component form, we have
+\begin{equation}
+  \int_U \omega = \int_U f\; \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_n = \int f(x)\; \mathrm{d}x.
+\end{equation}
+
+For the $\phi$ mapping above, $\phi\ :\ U \to V$ is \textbf{orientation preserving} if $\mbox{det}\ D\phi > 0$ for all $x \in U$, and is \textbf{orientation reversing} if $\mbox{det}\ D\phi > 0$.
+
+\begin{proposition}
+  For smooth $\phi\ :\ U \to V$ and $\omega \in \Omega^n(U)$, we have
+  \begin{equation*}
+    \int_V \omega = \pm \int_U \phi^*\omega
+  \end{equation*}
+  where we take the plus sign is $\phi$ is orientation preserving.
+\end{proposition}
+
+\begin{proof}
+  Let $\phi = (\phi_1, \ldots \phi_n)$ and $\omega = f\; \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_n$. Then
+  \begin{align*}
+    \phi^*\omega 
+      &= (f\circ\phi)(\mathrm{d}\phi_1 \wedge \ldots \wedge \mathrm{d}\phi_n)\\
+      &= (f\circ\phi)\left(\frac{\partial \phi_1}{\partial x_i}\mathrm{d}x_i \wedge \ldots \wedge \frac{\partial \phi_n}{\partial x_i}\mathrm{d}x_i\right)\\
+      &= \sum_{\sigma\in S_n} (f\circ\phi) \left(\frac{\partial \phi_1}{\partial x_{\sigma(1)}} \cdots \frac{\partial \phi_n}{\partial x_{\sigma(n)}} \right)\mathrm{d}x_{\sigma(1)} \wedge \ldots \wedge \mathrm{d}x_{\sigma(n)}\\
+      &= \sum_{\sigma\in S_n} (f\circ\phi) \mbox{sgn}(\sigma) \left(\frac{\partial \phi_1}{\partial x_{\sigma(1)}} \cdots \frac{\partial \phi_n}{\partial x_{\sigma(n)}} \right)\mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_n\\
+      &= (f\circ\phi)\ \mbox{det}\ D\phi\ \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_n,
+  \end{align*}
+  so
+  \begin{equation*}
+    \int_U \phi^*\omega = \int_U (f\circ\phi)\ \mbox{det}\ D\phi = \pm \int_V f\; \mathrm{d}x = \pm \int_V \omega
+  \end{equation*}
+  by the transformation rule (Proposition \ref{thm:transform}). \qed
+\end{proof}
+
 %===============================================================================
 
 \chapter{Differential forms on oriented manifolds}
+
+Let $M \subset \mathbb{R}^n$
 
 %-------------------------------------------------------------------------------
 
