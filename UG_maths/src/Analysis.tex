@@ -2525,8 +2525,8 @@ Note that the last property generalises to $k$-forms. Also, if $\psi\ :\ V \to W
   as expected.
 \end{example}
 
-\begin{proposition}
-  The pullback is commutes with the exterior derivative: for $\omega \in \Omega^k(V)$ and $\phi\ :\ U \to V$,
+\begin{proposition}\label{thm:commute}
+  The pullback commutes with the exterior derivative: for $\omega \in \Omega^k(V)$ and $\phi\ :\ U \to V$,
   \begin{equation}
     \highlight{\mathrm{d}(\phi^*\omega) = \phi^*\mathrm{d}\omega}.
   \end{equation}
@@ -2662,9 +2662,197 @@ For the $\phi$ mapping above, $\phi\ :\ U \to V$ is \textbf{orientation preservi
 
 %===============================================================================
 
-\chapter{Differential forms on oriented manifolds}
+\chapter{Differential forms on manifolds}
 
-Let $M \subset \mathbb{R}^n$
+%-------------------------------------------------------------------------------
+
+\section{Oriented manifolds}
+
+Let $M \subset \mathbb{R}^n$ be a $k$-manifold, so all points $p \in M$ are contained in an open set $U \subset \mathbb{R}^n$. Let $h$ be a diffeomorphism given by
+\begin{equation*}
+  h\ :\ (U \cap M) \subset V \cap (\mathbb{R}^k \times \{0\}).
+\end{equation*}
+The restriction of $h$ to $U \cap M$ maps the set essentially to an open set in $\mathbb{R}^k$. Let $U_0 = U \cap M$ and $V_0 \subset \mathbb{R}^k$ be defined by $h(U_0) = V_0 \times \{0\}$, so $h$ restricts to a bijection $h_0\ :\ U_0 \to V_0$ between an open set $U_0$ of $p \in M$ and $V_0 \subset \mathbb{R}^k$. Then the \textbf{local parameterisation of a co-ordinate system} is defined as the inverse of the restricted mapping $h_0$, i.e.
+\begin{equation}
+  \phi = h_0^{-1}\ :\ V_0 \to U_0.
+\end{equation}
+
+\begin{example}
+  The stereographic projection from $N = (0, 0, 1)$ and $S = (0, 0, -1)$ of the unit $S^2$ can be used to introduce two co-ordinate systems
+  \begin{equation*}
+    \phi_N : \mathbb{R}^2 \to S^2 \setminus \{N\}, \qquad \phi_S : \mathbb{R}^2 \to S^2 \setminus \{S\}
+  \end{equation*}
+  with
+  \begin{equation}
+    \phi_N(x_1, x_2) = \left(\frac{2x_1}{x_1^2 + x_2^2 + 1}, \frac{2x_2}{x_1^2 + x_2^2 + 1}, \frac{x_1^2 + x_2^2 - 1}{x_1^2 + x_2^2 + 1}\right)
+  \end{equation}
+  and
+  \begin{equation}
+    \phi_N(x_1, x_2) = \left(\frac{2x_1}{x_1^2 + x_2^2 + 1}, \frac{2x_2}{x_1^2 + x_2^2 + 1}, \frac{1 - x_1^2 - x_2^2}{x_1^2 + x_2^2 + 1}\right).
+  \end{equation}
+  Their images overlap in all of $S^2 \setminus \{N, S\}$, and a co-ordinate transformation
+  \begin{equation*}
+    \phi_S^{-1} \circ \phi_N\ :\ \mathrm{R}^2 \setminus \{0\} \to \mathrm{R}^2 \setminus \{0\}, \quad (x_1, x_2) \mapsto \left(\frac{x_1}{x_1^2 + x_2^2}, \frac{x_2}{x_1^2 + x_2^2}\right)
+  \end{equation*}
+  happens to be an orientation reversing diffeomorphism.
+\end{example}
+
+A $k$-manifold $M \subset \mathbb{R}^n$ is \textbf{orientable} if there is a family of local parameterisations $\{ \phi_\alpha\ :\ V_\alpha \to U_\alpha \subset M\}$ covering $M$ such that
+\begin{equation*}
+  \phi_\alpha^{-1} \circ \phi_\beta\: \ \phi_\alpha^{-1}(U\alpha \cap U_\beta) \to \phi_\alpha^{-1}(U\alpha \cap U_\beta)
+\end{equation*}
+are all orientation preserving. Such a choice would be called an \textbf{orientation}, the individual $\phi_\alpha$ are the \textbf{oriented local parameterisations}, and the who set of such $\phi_\alpha$ is called an \textbf{atlas}.
+
+\begin{example}
+  For the example above the stereographic projection happens to be orientation reversing, we can instead define $\psi_N = \phi_N$ and $\psi_s(x_1, x_2) = \phi_S(x_2, x_1)$, and their compositions are then individually orientation preserving, so there is an atlas for $S^2$, and thus $S^2$ is orientable.
+\end{example}
+
+Let $W$ be a real $k$-vector space. Any choice of ordered basis $(v_1, \ldots, v_k)$ of $W$ defines an orientation on $W$, in the sense that, for any other basis $(w_1, \ldots w_k)$, we have the transformation matrix $A = (a_{ij})$ with $w_i = a_{ij}v_j$, and if $|A| > 0$ then the two basis have the same orientation. Note that in this sense real vector spaces only have two orientations. The standard orientation of $\mathbb{R}^n$ would be that associated with the standard basis.
+
+Let $M \subset \mathbb{R}^n$ be an oriented $k$-manifold. Let $p \in M$ be in the image of the local parameterisation $\phi\ :\ V \to U \subset{M}$ (so $p = \phi(x)$ for some $x\in V$). Recall that a basis of the tangent space $T_p(M)$ is
+\begin{equation*}
+  \{\left.D\phi\right|_x (e_1), \ldots, \left.D\phi\right|_x (e_k)\} = \left\{\left.\frac{\partial \phi}{\partial x_1}\right|_x, \ldots, \left.\frac{\partial \phi}{\partial x_k}\right|_x\right\}.
+\end{equation*}
+The standard basis then induces an orientation on the tangent space. If $\psi\ :\ V' \to U' \subset M$ with $p = \psi(y)$, then we get the basis
+\begin{equation*}
+  \left\{\left.\frac{\partial \psi}{\partial y_1}\right|_y, \ldots, \left.\frac{\partial \psi}{\partial y_k}\right|_y\right\},
+\end{equation*}
+and this choice induces the same orientation as the standard one if the transformation matrix has positive determinant.
+
+A $(n-1)$-manifold $M \subset \mathbb{R}^n$ is called a \textbf{hypersurface} if there are two distinct unit normals at any point $p \in M$. For a unit vector $n(p)$ at $p\in M$ of an oriented hypersurface, it is said to be \textbf{positive oriented} if, for any oriented basis $(v_1, \ldots v_{n-1})$ of $T_p(M)$, $(n(p), v_1, \ldots v_{n-1})$ has the same orientation as the standard basis.
+
+\begin{lemma}
+  A hyperspace $M \subset \mathbb{R}^n$ is oriented iff there is a well-defined unit normal field $N\ :\ M \to \mathbb{R}^n$, i.e. $N \circ \phi_\alpha$ is smooth for all possible local parameterisations indexed by $\alpha$.
+\end{lemma}
+
+\begin{example}
+  For $M \subset \mathbb{R}^3$,
+  \begin{equation*}
+    N(p) = \frac{D\phi(e_1) \times D\phi(e_2)}{\| D\phi(e_1) \times D\phi(e_2)\|}
+  \end{equation*}
+  is well-defined for sufficiently smooth $\phi$.
+\end{example}
+
+If we have a smooth map $f\ :\ \mathbb{R}^n \to \mathbb{R}^k$ and $y \in \mathbb{R}^k$ is a regular value, then recall that $f^{-1}(y)$ is a $(n-k)$-manifold. For $k=1$ and $c\in\mathbb{R}$ regular, $M = f^{-1}(c)$ is a hyperspace in $\mathbb{R}^n$, and a global unit normal vector field is given by
+\begin{equation}
+  N\ :\ M \to \mathbb{R}, \qquad p \mapsto \frac{\left.\nabla f\right|_p}{\|\left.\nabla f\right|_p\|},
+\end{equation}
+since $T_p(M) = \mbox{ker}(\left.Df\right|_p)$ and $\left.Df\right|_p(v) = \langle \left.\nabla f\right|_p, v\rangle$.
+
+%-------------------------------------------------------------------------------
+
+\section{Differential forms}
+
+Let $M \subset \mathbb{R}^n$ be a $k$-manifold. A \textbf{differential $l$-form} $\omega \in \Omega^l(M)$ assigns to every $p \in M$ an alternative $l$-form $\omega_p \in \Lambda^k(T_p(M))$, and for all $v_1, \ldots, v_m\ :\ M \to \mathbb{R}^n$,
+\begin{equation}
+  f\ :\ M\to\mathbb{R}, \qquad p \mapsto \omega_p(v_1(p), \ldots v_l(p))
+\end{equation}
+is smooth.
+
+Note that
+\begin{enumerate}
+  \item for $\{\phi_\alpha\ :\ V_\alpha \to U_\alpha\}$ be an atlas on $M$, then $\omega_p \in \Lambda^k(T_p(M))$ is smooth iff the component functions
+  \begin{equation}
+    f_{i_1, \ldots i_l}^\alpha\ :\ V_\alpha \to \mathbb{R}, \qquad x \mapsto \omega_{\phi_\alpha(x)}\left(\left.\frac{\partial \phi_\alpha}{\partial x_1}\right|_x, \ldots, \left.\frac{\partial \phi_\alpha}{\partial x_l}\right|_x\right)
+  \end{equation}
+  are smooth for all index $\alpha$ and $1 \leq i_1 \leq \ldots \leq i_l \leq k$.
+  
+  \item denoting $\omega_\alpha = \phi_\alpha^* \omega$ as the family of pullbacks of $\omega$ with respect to $\phi_\alpha$, since all pullbacks are obtained from a global $l$-form on $M$, the local family of $l$-forms $\{\omega_\alpha\}$ satisfy the \textbf{compatibility condition}
+  \begin{equation}
+    \highlight{\omega_\beta = (\phi_\alpha^{-1} \circ \phi_b)^* \omega_\alpha}
+  \end{equation}
+  for all transformations indexed by $\alpha$ and $\beta$.
+  
+  \item converse to the above, every family $\{\omega_\alpha\}$ satisfying the compatibility condition unique determines an $l$-form on $M$.
+\end{enumerate}
+
+Let $M \subset \mathbb{R}^n$ be a $k$-manifold with atlas $\{\phi_\alpha\ :\ V_\alpha \to U_\alpha\}$. The \textbf{exterior derivative} $\highlight{\mathrm{d}\ :\ \Omega^l(M) \to \Omega^{l+1}(M)}$ is defined as $\mathrm{d}\omega \in \Omega^{l+1}(M)$ being the global $(l+1)$-form uniquely determined by
+\begin{equation}
+  \highlight{\{\mathrm{d}\omega_\alpha\}, \qquad \mathrm{d}\omega_\alpha \in \Omega^{l+1}(V_\alpha)}
+\end{equation}
+for all index $\alpha$ of the components making up the atlas (and the collection of $V_\alpha$ covers $M$).
+
+Note that $\mathrm{d}\omega$ is well-defined, since $\{\mathrm{d}\omega_\alpha\}$ satisfies the compatibility condition
+\begin{equation*}
+  \mathrm{d}\omega_\beta = \mathrm{d}((\phi_\alpha^{-1} \circ \phi_b)^* \omega_\alpha) = (\phi_\alpha^{-1} \circ \phi_b)^*\mathrm{d}\omega_\alpha
+\end{equation*}
+since the pullback is commutes with the exterior derivative (cf. Proposition~\ref{thm:commute}).
+
+Let $\omega \in \Omega^l(M)$, $M$ an oriented $k$-manifold, and $\phi\ :\ V \to U$ be an oriented local parameterisation such that $\omega_p = 0$ for all $p \not\in U$ (cf. the extension of the form defined previously). The \textbf{integral of a differential form} is defined by
+\begin{equation}
+  \highlight{\int_M \omega = \int_V \phi^*\omega_p, \qquad \phi^*\omega_p \in \Omega^k(V)}.
+\end{equation}
+This definition is independent of the local parameterisation, because for $\phi_\alpha\ :\ V_\alpha \to U_\alpha$ and $\phi_\beta\ :\ V_\beta \to U_\beta$ be two oriented parameterisations with $\omega_p=0$ for all $p \not\in U_\alpha \cap U_\beta$,
+\begin{equation*}
+  \phi_\beta^{-1} \circ \phi_\alpha\ :\ \phi_\alpha^{-1}(U_\alpha \cap U_\beta) \to \phi_\beta^{-1}(U_\alpha \cap U_\beta)
+\end{equation*}
+is an orientation preserving diffeomorphism, so
+\begin{align*}
+  \int_{V_\beta} \phi_\beta^* \omega
+    &= \int_{\phi_\beta^{-1}(U\alpha \cap U_\beta} \phi_\beta^* \omega\\
+    &= \int_{\phi_\alpha^{-1}(U\alpha \cap U_\beta} (\phi_\beta^{-1} \circ \phi_\alpha)^*(\phi_\beta^* \omega)\\
+    &= \int_{\phi_\alpha^{-1}(U\alpha \cap U_\beta} \phi_\alpha^* \omega\\
+    &= \int_{V_\alpha} \phi_\alpha^* \omega.
+\end{align*}
+
+\begin{theorem}
+  Let $M \subset \mathbb{R}^n$ be a $k$-manifold with an atlas $\{\phi_\alpha\ :\ V_\alpha \to U_\alpha\}$. Then there exists a family $\{f_\alpha\}$ of smooth functions $f_\alpha\ :\ M \to [0, 1]$ such that
+  \begin{enumerate}
+    \item for all $p \in M$, there exists some $N(r; p)$ with $r>0$ such that only finitely many functions $f_\alpha$ are non-zero in it;
+    \item $\{o \in M\ |\ f_\alpha(p) \neq 0\} \subset U_\alpha$ for all index $\alpha$;
+    \item $\sum_\alpha f_\alpha \equiv 1$ on $M$, and the sum is finite at each point.
+  \end{enumerate}
+  Such a family of $\{f_\alpha\}$ is called a \textbf{partition of unity} sub-ordinated to $\{\phi_\alpha\}$. \qedwhite
+\end{theorem}
+
+Let $M \subset \mathbb{R}^n$ be an oriented $k$-manifold with an oriented atlas $\{\phi_\alpha\ :\ V_\alpha \to U_\alpha\}$, and $\{f_\alpha\}$ is a sub-ordinated partition of unity. Then for $\omega \in \Omega^l(M)$,
+\begin{equation}
+  \highlight{\int\omega = \sum_\alpha \int_M f_\alpha \omega}.
+\end{equation}
+Again, this definition is independent of the choice of partition of unity, since for $\{g_\beta\}$ another partition of unity,
+\begin{align*}
+  \int_M \omega
+    &= \sum_\alpha \int_M f_\alpha \omega = \sum_\alpha \int (\sum_\beta g_\beta) f_\alpha \omega\\
+    &= \sum_{\alpha, \beta} \int g_\beta f_\alpha \omega = \sum_\beta \int (\sum_\alpha f_\alpha) g_\beta \omega\\
+    &= \sum_\beta \int_M g_\beta \omega = \int_M \omega.
+\end{align*}
+
+\begin{example}
+  Suppose we take the manifold to a cylinder $M \subset \mathbb{R}^3$, with $M = \{(x,y,z)\ |\ x^2 + y^2 = 1,\ -1<z<1\}$. Then two possible (global) parameterisations are
+  \begin{equation*}
+    \phi_1\ :\ (-\pi, \pi) \times (-1, 1) \to U_1,\qquad (\theta, z) \mapsto (\cos\theta, \sin\theta, z)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \phi_2\ :\ (0, 2\pi) \times (-1, 1) \to U_1,\qquad (\theta, z) \mapsto (\cos\theta, \sin\theta, z),
+  \end{equation*}
+  where we are only missing a set of measure zero in $M$ (so for integration purposes it doesn't matter). Let the inclusion map be $\iota\: \ M \to \mathbb{R}$, $(x,y,z) \mapsto (x,y,z)$, and define the 2-form (related to the surface element)
+  \begin{equation*}
+    \omega = -\frac{y}{x^2 + y^2}\ \mathrm{d}x\wedge\mathrm{d}z + \frac{x}{x^2 + y^2}\ \mathrm{d}y\wedge\mathrm{d}z.
+  \end{equation*}
+  We then have, using the first parameterisation $\phi_1$,
+  \begin{align*}
+    \int \iota^* \omega = \int_{U_1} \iota^* \omega = \int_{V_1} \phi_1^* \iota^* \omega = \int_{V_1} (\iota \circ \phi_1)^* \omega = \int_{V_1} \phi_1^* \omega,
+  \end{align*}
+  and since
+  \begin{align*}
+    \phi_1^* \omega 
+      &= -\frac{\sin\theta}{\cos^2\theta + \sin^2\theta}((-\sin\theta\ \mathrm{d}\theta)\wedge \mathrm{d}z) \\
+      &\qquad + \frac{\cos\theta}{\cos^2\theta + \sin^2\theta}((\cos\theta\ \mathrm{d}\theta)\wedge \mathrm{d}z)\\
+      &= \mathrm{d}\theta \wedge \mathrm{d}z,
+  \end{align*}
+  we have \marginnote{We are basically integrating for the surface area here after a change of co-ordinates (which should be $4\pi$).}
+  \begin{align*}
+    \int \iota^* \omega
+      &= \int_{V_1} \mathrm{d}\theta \wedge \mathrm{d}z\\
+      &= \int_{-\pi}^\pi \int_{-1}^1 (\mathrm{d}\theta \wedge \mathrm{d}z)(e_1, e_2)\ \mathrm{d}z\mathrm{d}\theta\\
+      &= \int_{-\pi}^\pi \int_{-1}^1 \mbox{det}\begin{pmatrix} \mathrm{d}\theta(e_1) & \mathrm{d}\theta(e_2)\\ \mathrm{d}z(e_1) & \mathrm{d}z(e_2)\end{pmatrix}\ \mathrm{d}z\mathrm{d}\theta\\
+      &= \int_{-\pi}^\pi \int_{-1}^1 \mbox{det}\begin{pmatrix} 1 & 0\\ 0 & 1\end{pmatrix}\ \mathrm{d}z\mathrm{d}\theta\\
+      &= 4\pi.
+  \end{align*}
+  
+  Can check that $\phi_2^*(\omega) = \mathrm{d}\theta \wedge \mathrm{d}z$, and while the limits of the $\theta$ part goes from $0$ to $2\pi$, the integrand is just a constant so gives the same answer, as it should.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
