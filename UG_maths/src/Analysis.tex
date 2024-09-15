@@ -2588,7 +2588,7 @@ By similar arguments, every $k$-manifold in $\mathbb{R}^n$ with $k<n$ has measur
   Let $Q\subset \mathbb{R}^n$ be a rectangle and $f\ :\ Q \to \mathbb{R}$ be bounded. Then $f$ is Riemann integrable iff the set $D \subset Q$ of points in which $f$ is not continuous is of measure zero. \qedwhite
 \end{theorem}
 
-\begin{theorem}[Fubini's theorem]
+\begin{theorem}[Fubini's theorem]\label{thm:fubini}
   Let $f\ :\ Q \to \mathbb{R}$ be bounded and $Q = A \times B$. We write $f(x,y)$ for $x\in A$ and $y\in B$. For all $x$, we define
   \begin{equation*}
     f_x\ :\ B \to \mathbb{R}, \qquad f_x(y) = f(x,y).
@@ -2806,7 +2806,7 @@ is an orientation preserving diffeomorphism, so
 \end{theorem}
 
 Let $M \subset \mathbb{R}^n$ be an oriented $k$-manifold with an oriented atlas $\{\phi_\alpha\ :\ V_\alpha \to U_\alpha\}$, and $\{f_\alpha\}$ is a sub-ordinated partition of unity. Then for $\omega \in \Omega^l(M)$,
-\begin{equation}
+\begin{equation}\label{eq:part_unity}
   \highlight{\int\omega = \sum_\alpha \int_M f_\alpha \omega}.
 \end{equation}
 Again, this definition is independent of the choice of partition of unity, since for $\{g_\beta\}$ another partition of unity,
@@ -2857,6 +2857,137 @@ Again, this definition is independent of the choice of partition of unity, since
 %-------------------------------------------------------------------------------
 
 \section{Stokes' theorem}
+
+Let the $k$-dimensional half space be defined as $H^k = \{(x_1, \ldots x_l) \in \mathbb{R}^k\ | \ x_1 \leq 0\}$. A subset $M \subset \mathbb{R}^n$ is a \textbf{$k$-manifold with boundary} if, for all $p \subset U \subset M$ on which there exists a diffeomorphism $h\ :\ U \to U' \subset \mathbb{R}^k \times \mathbb{R}^{n-k}$, with $h(U \cap M) = U' \cap (H^k \times \{0\})$. \marginnote{Here $H^k$ intuitively has a boundary at $x_1 = 0$, and if the image of the map $h$ defined by the intersection is non-empty, then the image should have a boundary.} The \textbf{boundary points} are defined to be $\{p \in M\ |\ h(p) \in \partial H_k \times \{0\}\}$, and the set of boundary points is the \textbf{boundary} of $M$, denoted $\partial M$.
+
+Every chart $h\ :\ U \to U'$ restricted to $U_0 = U \cap M$ can be interpreted as a bijective map $h_0\ :\ U_0 \to V_0 \subset H^k \subset \mathbb{R}^k$. The inverse map $\phi\ :\ V_0 \to U_0 \subset M$ is called a local parameterisation or co-ordinate system of $M$, and the set of local parameterisations that covers $M$ is an atlas similar to how it was defined before.
+
+\begin{proposition}
+  If $M$ is a $k$-manifold with boundary then $\partial M$ is a $(k-1)$-manifold without a boundary.
+\end{proposition}
+
+\begin{proof}
+  Let $M \subset \mathbb{R}^n$ be a $k$-manifold with boundary, and $\{\phi_\alpha\}$ an atlas of $M$. We seek an atlas of $\partial M$. Let $B = \{\alpha\ |\ U_\alpha \cap \partial \neq \emptyset\}$. For $\alpha \in B$, we note that
+  \begin{equation*}
+    V_\alpha \cap \partial H_k = \{(0, x_2, \ldots x_k) \in V_\alpha\}.
+  \end{equation*}
+  Let $W_\alpha = \{(x_2, \ldots, x_k)\ |\ (0, x_2, \ldots, x_k) \in V_\alpha\} \subset \mathbb{R}^{k-1}$ be an open set. Then $\psi_\alpha\ :\ W_\alpha \to \partial M$ with $\psi_\alpha(x_2, \ldots, x_k) = \phi_\alpha(0, x_2, \ldots, x_k)$ defines at atlas for $\partial M$ in the usual way. $\partial M$ by construction is solely contained within $H^{k-1}$, so has no boundary. \qed
+\end{proof}
+
+\begin{proposition}
+  For $M \subset \mathbb{R}^n$ be a $k$-manifold with boundary, $\{\phi_\alpha\}$ an oriented atlas of $M$, and $B = \{\alpha\ |\ U_\alpha \cap \partial \neq \emptyset\}$. Then the induced atlast is
+  \begin{equation*}
+    \{\psi_\alpha\ :\ W_\alpha \to Z_\alpha \subset \partial M\}
+  \end{equation*}
+  with $\mbox{det}\left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x > 0$ for all $\beta \in B$, $x \in \psi_\alpha^{-1}(Z_\alpha \cap Z_\beta)$. the atlas $\{\psi_\alpha\}$ defines an \textbf{induced orientation} on $\partial M$.
+\end{proposition}
+
+\begin{proof}
+  Let $\alpha, \beta \in B$, and assume $\phi_\alpha(x) = p \in \partial M$, $x=(0, x') \subset \mathbb{R} \times \mathbb{R}^{k-1}$. The mapping $ \left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x\ :\ \mathbb{R}^k\to\mathbb{R}^k$ defines a vector space isomorphism with $\partial H^k = \{0\} \times \mathbb{R}^{k-1}$ as the invariant subspace, i.e.
+  \begin{equation*}
+    \left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x(\partial H^k) = \partial H^k.
+  \end{equation*}
+  Let $\left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x(e_1) = \lambda_1 e_1 + \lambda_j e_j$ (with sum implied going from $1$ to $k$). We cannot have vanishing $e_q$ component so $\lambda_1 \neq 0$. Taking $c(t) = (c_1(t), \ldots c_k(t))$, we have
+  \begin{equation*}
+    c(t) = (\psi_\beta^{-1} \circ \psi_\alpha) (x + te_1).
+  \end{equation*}
+  For $t < 0$, $c_1(t) < 0$, we have $\lambda_1 = c_1'(0) \geq 0$, so
+  \begin{equation*}
+    \left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x = \begin{pmatrix} \lambda_1 & \begin{matrix} 0 & \ldots & 0\end{matrix} \\ \begin{matrix} \vdots \\ \lambda_k \end{matrix} & \left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_{x'} \end{pmatrix}
+  \end{equation*}
+  By construction, $\mbox{det}\left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_{x'} > 0$ and $\lambda_1 > 0$, so $\mbox{det}\left.D(\psi_\beta^{-1} \circ \psi_\alpha)\right|_x > 0$, and $\{\psi_\alpha\}$ is an oriented atlas for $\partial M$. \qed
+\end{proof}
+
+\begin{theorem}[Generalised Stokes' theorem]
+  Let $M \subset \mathbb{R}^n$ be an oriented $k$-manifold with boundary, and $\iota\ :\ \partial M \to M,\ p \mapsto p$ the inclusion map. For $\omega \in \Omega^{k-1}(M)$, we have
+  \begin{equation}\label{thm:stokes}
+    \highlight{\int_M \mathrm{d}\omega = \int_{\partial M} \iota^* \omega},
+  \end{equation}
+  where $\partial M$ carries the induced orientation.
+\end{theorem}
+\marginnote{This generalises the usual fundamental theorem of calculus (for a line), Green's theorem and the usual Stokes' theorem in $\mathbb{R}^2$ and $\mathbb{R}^3$, and the divergence theorem in $\mathbb{R}^n$.}
+
+For the (reasonably long) proof, we drop the inclusion map for convenience. Also, $\mathrm{d}x_1 \wedge \ldots \wedge \widehat{\mathrm{d}x_i} \wedge \ldots \wedge \mathrm{d}x_k$ will denote that we omit $\mathrm{d}x_i$ in the wedge product.
+
+\begin{proof}
+  We do the proof in three parts.
+  \begin{enumerate}
+    \item Consider the case where $M = H^k \subset \mathbb{R}^k$ with the standard orientation from $\mathbb{R}^k$, and take without loss of generality
+    \begin{equation*}
+      \omega = f_i \mathrm{d}x_1 \wedge \ldots \wedge \widehat{\mathrm{d}x_i} \wedge \ldots \wedge \mathrm{d}x_k \in \Omega^{k-1}(M).
+    \end{equation*}
+    Assume that $f_i$ has compact support (i.e. it is zero for sufficient large co-ordinates values). Then
+    \begin{align*}
+      \mathrm{d}\omega
+        &= \frac{\partial f_i}{\partial x_i}\ \mathrm{d}x_i \wedge \mathrm{d}x_1 \wedge \ldots \wedge \widehat{\mathrm{d}x_i} \wedge \ldots \wedge \mathrm{d}x_k\\
+        &= (-1)^{i-1} \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_k \in \Omega^{k}(M).
+    \end{align*}
+    $\partial M$ in this case is equal to $\partial H^K$, with the induced orientation. Consider an oriented local parameterisation $\phi\ :\ \mathbb{R}^{k-1} \to \partial H^k$ where
+    \begin{equation*}
+      \phi(y_1, \ldots, y_{k-1}) = (0, y_1, \ldots, y_{k-1}).
+    \end{equation*}
+    Denote the component functions of $\phi$ by $\phi_1, \ldots, \phi_k$ then $\phi_1(y) = 0$, $\phi_j(y) = y_{j-1}$, so the pullback by $\phi$ is
+    \begin{equation*}
+      \phi^* \omega = (f_i \circ \phi)\ \mathrm{d}\phi_1 \wedge \ldots \wedge \widehat{\mathrm{d}\phi_i} \wedge \ldots \wedge \mathrm{d}\phi_k.
+    \end{equation*}
+    There are two separate cases to consider, where $i=1$ and $i \geq 2$. For the former, we note that we have
+    \begin{align*}
+      \mathrm{d}\omega = \frac{\partial f_1}{\partial x_1}\ \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_k, \qquad \phi^* \omega = (f_1 \circ \phi)\ \mathrm{d}y_1 \wedge \ldots \wedge \mathrm{d}y_{k-1}.
+    \end{align*}
+    So
+    \begin{align*}
+      \int_{H^k}\mathrm{d}\omega
+        &= \int_{H^k} \frac{\partial f_1}{\partial x_1}\ \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_k\\
+        &= \int_{\mathbb{R}^k}\int_{(-\infty, 0]} \frac{\partial f_1}{\partial x_1}\ \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_k(e_1, \ldots, e_k)\\
+        &= \int_{\mathbb{R}^k}\int_{(-\infty, 0]} \left.\frac{\partial f_1}{\partial x_1}\right|_{(x_1, \ldots, x_k)}\ \mathrm{d}x_1 \ldots \mathrm{d}x_k\\
+        &= \int_{\mathbb{R}^k}f_1(0, x_2, \ldots, x_k)\ \mathrm{d}x_2 \ldots \mathrm{d}x_k,
+    \end{align*}
+    where the last line follows from the usual fundamental theorem of calculus. Then we have\marginnote{Remember the use of a pullback is effectively a co-ordinate transformation, and there is one less component here because $\mathrm{d}\omega$ raises the form's degree by 1.}
+    \begin{align*}
+      \int_{H^k}\omega 
+        &= \int_{\mathbb{R}^{k-1}} \phi^*\omega\\
+        &= \int_{\mathbb{R}^{k-1}}(f_1 \circ \phi)\ \mathrm{d}y_1 \wedge \ldots \wedge \mathrm{d}y_{k-1}\\
+        &= \int_{\mathbb{R}^{k-1}} f_1(0, y_2, \ldots, y_{k-1})\ \mathrm{d}y_1 \wedge \ldots \wedge \mathrm{d}y_{k-1}(e_1, \ldots, e_{k-1})\\
+        &= \int_{\mathbb{R}^{k-1}} f_1(0, y_2, \ldots, y_{k-1})\ \mathrm{d}y_1 \ldots \mathrm{d}y_{k-1},
+    \end{align*}
+    and we have the left and right hand side as required (up to relabelling of co-ordinates).
+    
+    If $i\geq 2$, then by construction $\phi^*\omega = 0$ since $\mathrm{d}\phi_1 = 0$, so the right hand side is trivially zero. On the other hand,
+    \begin{align*}
+      \int_{H^k}\mathrm{d}\omega
+        &= \int_{H^k} (-1)^{i-1} \frac{\partial f_i}{\partial x_i}\ \mathrm{d}x_1 \wedge \ldots \wedge \mathrm{d}x_k\\
+        &= (-1)^{i-1} \int_\mathbb{R} \cdots \int_{(-\infty, 0]} \ldots \int_\mathbb{R} \left.\frac{\partial f_i}{\partial x_i}\right|_{(x_1, \ldots, x_k)}\ \mathrm{d}x_i \mathrm{d}x_1 \ldots \mathrm{d}x_k\\
+        &= (-1)^{i-1} \int_\mathbb{R} \ldots \int_{(-\infty, 0]} \left[\left.f_i\right|_{(x_1, \ldots, x_k)}\right]^{+\infty}\ \mathrm{d}x_1 \ldots \mathrm{d}x_k\\
+        &=0
+    \end{align*}
+    by Fubini's theorem (to split the integrals; Theorem \ref{thm:fubini}) and that $f_i$ has compact support. By linearity this holds for arbitrary $\omega \in \Omega^{k-1}(H^k)$ with compact support.
+    
+    \item Going beyond the half-space, consider $M \subset \mathbb{R}^n$ being an oriented $k$-manifold, and $\omega \in \Omega^{k-1}(M)$ is supported only on an oriented local parameterisation $\phi\ :\ V \to U$, where $V \subset H^k$, $U \subset M$ (i.e., $\omega = 0$ outside $U$). The result follows directly from the fact that the exterior derivative and the pullback commute and from the previous case of the Stokes theorem proved for the half-space $H^k$:
+    \begin{align*}
+      \int_M \mathrm{d}\omega
+        &= \int_U \mathrm{d}\omega = \int_V \phi^* (\mathrm{d}\omega) = \int_V \mathrm{d}(\phi^* \omega) \\
+        & = \int_{H^k} \mathrm{d}(\phi^* \omega) = \int_{\partial H_k} \phi^* \omega = \int_{\partial H_k \cap V} \phi^* \omega\\
+        &= \int_{\partial M} \omega.
+    \end{align*}
+  \end{enumerate}
+  
+  \item Suppose now $\omega$ has compact support throughout $M$, not just in $U$. Let $\{\phi_\alpha\}$ be an atlas, and $\{f_\alpha\}$ a sub-ordinated partition of unity. Then recalling that, for a partition of unity we are allowed to swap the ordering of summation and integral from \eqref{eq:part_unity},
+  \begin{align*}
+    \int_M \mathrm{d}\omega
+      &= \int_M \mathrm{d}\left((\sum_\alpha f_\alpha)\omega\right) = \sum_\alpha \int_M \mathrm{d}(f_\alpha \omega)\\
+      &= \sum_\alpha \int_{\partial M} f_\alpha \omega = \int_{\partial M} \left(\sum_\alpha f_\alpha\right) \omega \\
+      &= \int_{\partial M}\omega.
+  \end{align*}
+  \qed
+\end{proof}
+
+\begin{corollary}
+  If $M$ is an oriented manifold with no boundary, then for all $\omega \in \Omega^{k-1}(M)$
+  \begin{equation*}
+    \int_M \mathrm{d}\omega = 0.
+  \end{equation*}
+  \qed
+\end{corollary}
 
 %===============================================================================
 
