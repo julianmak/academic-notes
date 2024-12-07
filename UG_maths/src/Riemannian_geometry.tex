@@ -399,9 +399,78 @@ since $Df(x) : \mathbb{R}^n \to \mathbb{R}^k$ This can be regarded as a \textbf{
   since $AA^T = I$ and $C = C^T$. Since $C$ was arbitrary, $Df$ is surjective, thus $0$ is a regular value and $\mbox{SO}(n)$ is a $n^2 - n(n+1)/2 = n(n-1)/2$ dimensional manifold.
 \end{example}
 
+\begin{example}
+  Let $M$ and $N$ be manifolds, then the claim is that $M\times N = \{(x,y)\ |\ x\in M,\ y\in N\}$ is a $(m+n)$-manifold. 
+  
+  Let $(U_\alpha, \phi_\alpha)$ be an atlas for $M$ and $(\tilde{U}_\beta, \tilde{\phi}_\beta)$ be an atlas for $N$. Then $(U_\alpha \times \tilde{U}_\beta, \psi_{\alpha\beta} = \phi_\alpha \times \tilde{\phi}_\beta)$ is an atlast for $M\times N$. The co-ordinates changes
+  \begin{equation*}
+    \left(\psi_{\alpha\beta}^{-1} \circ \psi_{\gamma\delta}\right)(u,v) = \left(\phi_\alpha^{-1}\circ \tilde{\phi}_\gamma (u), \phi_\beta^{-1}\circ \tilde{\phi}_\delta (v)\right)
+  \end{equation*}
+  are clearly differentiable. 
+  
+  To show the Hausdorff property, let $(x,y) \neq (z,w)$ on $M\times N$. Choosing appropriate open neighbourhoods $U_{x,z} \subset M$ and $\tilde{U}_{y,w} \subset N$, we note individually they do not intersect if $x\neq z$ and $y\neq w$, since $M$ and $N$ are manifolds. By construction, $U_x \times \tilde{U}_y \subset M\times N$ and $U_z \times \tilde{U}_w \subset M\times N$ are open neighbourhoods of $(x,y)$ and $(w,z)$, and they have empty intersections, so we have the Hausdorff property.
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \section{Differentiable maps, tangent vectors, and differentials}
+
+Let $M$ and $N$ be $m$- and $n$-manifolds. A function $f:M\to N$ is \textbf{differentiable at $x\in M$} if there are co-ordinate charts
+\begin{equation*}
+  \phi: U\to V\subset \mathbb{R}^m,\ x\in U\subset M, \qquad \tilde{\phi}: \tilde{U}\to \tilde{V}\subset \mathbb{R}^n,\ f(x)\in \tilde{U}\subset N,
+\end{equation*}
+such that
+\begin{equation}
+  \tilde{\phi}\circ f \circ \phi^{-1}: \phi\left( U\cap f^{-1}(\tilde{U})\right) \to \tilde{V}
+\end{equation}
+is differentiable at $\phi(x) \in V \subset \mathbb{R}^m$. The function $f$ is \textbf{differentiable} if it is differentiable for all $x \in M$. Note that the definition is independent of co-ordinate choice, since the co-ordinate changes are differentiable.
+
+Differentiable maps $c:(a,b) \to M$ are called \textbf{curves}.
+
+Let $M$ be a manifold and $x\in M$, and $D(M, x) = \{f: M\to \mathbb{R}\ |\ f\textnormal{ differentiable at } x \}$. Let $c:(a,b) \to M$ be a curve with $c(t_0) = x$. The \textbf{directional derivative} of $f\in D(M,x)$ along $c$ at $x = c(t_0)$ is denoted by
+\begin{equation}
+  \highlight{c'(t_0)(f) = \lim_{t\to 0} \frac{f\left(c(t_0+t)\right) - f(c(t_0))}{t} = \left.\frac{\mathrm{d}}{\mathrm{d}t}\right|_{t=t_0}(f\circ c)(t)}
+\end{equation}
+
+\begin{remark}
+  $D(M,x)$ is an algebra over $\mathbb{R}$ (a vector space over $\mathbb{R}$ and $fg \in D(M, x)$ for $f,g \in D(M,x)$). The directional derivative along $c$ at $x=c(t_0)$ has the following properties:
+  \begin{enumerate}
+    \item $c'(t_0)(\lambda f + \mu g) = \lambda c'(t_0)(f) + \mu c'(t_0)g$ for $\lambda, \mu \in \mathbb{R}$,
+    \item $c'(t_0)(fg) = g(x)c'(t_0)(f) + f(x)c'(t_0)(g)$.
+  \end{enumerate}
+  A map $D(M,x)\to \mathbb{R}$ with the above properties is called a \textbf{linear derivative} of the algebra $D(M,x)$.
+\end{remark}
+
+\begin{example}
+  Note that different curves $c_{1,2}:\mathbb{R}\to M$ with $c_1(0) = c_2(0) = x$ can define the same directional derivative at $x$. For example, let $c_{1,2} :\mathbb{R} \to \mathbb{R}^2$ with $c_1(t) = (t,0)$ and $c_2(t) = (t, t^2)$. The directional derivatives of some $f$ at some point corresponding to $t=0$ are clearly the same, since $c_1'(0) = c_2'(0) = (1,0)$.
+\end{example}
+
+One can generally check that if $c_{1,2}(a,b) \to M$ and $c_1(t_0) = c_2(t_0) = x$ with $c_1'(t_0) = c_2'(t_0)$, then $c_{1,2}'$ as directional derivatives are linear derivations iff there is a co-ordinate chart $\phi:U\to V\subset{R}^n$, $x\in U\subset M$ such that $(\phi\circ c_1)'(t_0) = (\phi\circ c_2)'(t_0)$ as ordinary vectors in $\mathbb{R}^n$. This is again independent of co-ordinate choice.
+
+Let $M$ be a manifold, $x\in M$. A \textbf{tangent vector} of $M$ at $x$ is the directional derivative $c'(t_0):D(M, x) \to \mathbb{R}$ of a curve $c:(a,b)\to M$ with $c(t_0) = x$. The set of all tangent vectors defines the \textbf{tangent space} $T_x(M)$ at $x\in M$.
+
+Let $M$ be a manifold and $\phi : U \to V \subset \mathbb{R}^n$, $U \subset M$ be a co-ordinate chart. For $\phi(x_1, \ldots, x_n)$ where each $x_i$ is the co-ordinate component of $\phi$, and $c_i:(-\epsilon, \epsilon) \to U$, $t\mapsto \phi^{-1}\left(\phi(p) + te_i\right)$, clearly we have $c_i(0) = p$, and so we define the \textbf{co-ordinate tangent vectors} to be
+\begin{equation}
+  \highlight{\left.\frac{\partial}{\partial x_i}\right|_p = c_i'(0) \in T_p(M)},
+\end{equation}
+where
+\begin{equation}
+  \highlight{\left.\frac{\partial}{\partial x_i}\right|_p = \left.\frac{\partial}{\partial t}\right|_0 (f\circ c_i)(t) = \left.\frac{\partial}{\partial t}\right|_0 (f\circ \phi^{-1})(\phi(p) + te_i) = \frac{\partial(f\circ \phi^{-1})}{\partial x_i}\left(\phi(p)\right)}.
+\end{equation}
+
+\begin{proposition}
+  Let $M$ be a $n$-manifold, then $T_p(M)$ carries the structure of a $n$-vector space.
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item We first aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ associated with a co-ordinate chart forms a spanning set of $T_p(M)$.
+    
+    \item We aim to show that the space is closed.
+    
+    \item We aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ are linearly independent, and thus we have a basis.
+  \end{enumerate}
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
