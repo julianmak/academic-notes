@@ -464,13 +464,57 @@ where
 
 \begin{proof}
   \begin{enumerate}
-    \item We first aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ associated with a co-ordinate chart forms a spanning set of $T_p(M)$.
+    \item We first aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ associated with a co-ordinate chart forms a spanning set of $T_p(M)$. Let $c:(a,b) \to M$ be a curve with $c(t_0)=p$. We show that $c'(t_0):D(M,p) \to \mathbb{R}$ is a linear combination of $\{\left.\partial / \partial x_i\right|_p\}$. Note that we have
+    \begin{equation*}
+      c'(t_0)(f) = (f\circ c)'(t_0) = \left((f\circ \phi^{-1}) \circ (\phi \circ c)\right)'(t_0).
+    \end{equation*}
+    Here, $f\circ \phi^{-1} : \mathbb{R}^n \to \mathbb{R}$, while $\phi\circ c = (c_1, \ldots c_n) = (x_1 \circ c, \ldots x_n \circ c): \mathbb{R}^n \to \mathbb{R}$. By the chain rule,
+    \begin{align*}
+      c'(t_0)(f) &= \left\langle \nabla(f\circ \phi^{-1})[(\phi\circ c)(t_0)], (c_1'(t_0), \ldots c_n'(t_0)) \right\rangle\\
+        &= \frac{\partial (f\circ \phi^{-1})}{\partial x_i}(\phi(p))\cdot c_i'(t_0)\\
+        &= \left.\frac{\partial}{\partial x_i}\right|_p(f)\cdot c_i'(t_0),
+    \end{align*}
+    hence our tangent vector is a linear combination of $\{\left.\partial / \partial x_i\right|_p(f)\}$, and hence we have a spanning set.
     
-    \item We aim to show that the space is closed.
+    \item We aim to show that the space is closed. Let $c:(-\epsilon, \epsilon) \to M$, $c(t) = \phi^{-1}(\phi(p) + (\alpha_i e_i)t)$; note that $c(0) = p$. Let 
+    \begin{equation*}
+      (c_1(t), \ldots c_n(t)) = (\phi\circ c)(t) = \phi(p) + t(\alpha_1, \ldots \alpha_n),
+    \end{equation*}
+    then $c_i'(0) = \alpha_i$, and so we have
+    \begin{equation*}
+      c'(0)(f) = c_i'(0)\left.\frac{\partial}{\partial x_i}\right|_p(f) = \alpha_i \left.\frac{\partial}{\partial x_i}\right|_p(f),
+    \end{equation*}
+    so a linear combinations of the spanning set are still tangent vectors.
     
-    \item We aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ are linearly independent, and thus we have a basis.
+    \item We aim to show that $\{\left.\partial / \partial x_i\right|_p\}$ are linearly independent, and thus we have a basis. Suppose we have some
+    \begin{equation*}
+      \alpha_i\left.\frac{\partial}{\partial x_i}\right|_p = 0: D(M,p) \to \mathbb{R};\quad f\mapsto 0.
+    \end{equation*}
+    We aim to show that all $\alpha_i = 0$. Choose $\phi\in C^\infty(M)$ with $\psi \equiv 1$ near $p\in M$ and $\psi\equiv 0$ outside $U$. Let $f_i = \psi\cdot x_i : M\to \mathbb{R}$, and so
+    \begin{equation*}
+      f_i(q) = \begin{cases}x_i(q), & q\in U,\\ 0, & q\not\in U,\end{cases}
+    \end{equation*}
+    and $f_i \in D(M,q)$. But then
+    \begin{equation*}
+      \alpha_i\left.\frac{\partial}{\partial x_i}\right|_p(f_j) = \alpha_i \frac{(f_j \circ \phi^{-1})}{\partial x_i}(\phi(p)),
+    \end{equation*}
+    and $f_j \circ \phi^{-1}$ is the projection to the $j^{\tiny\textnormal{th}}$ co-ordinate near $\phi(p) \in  \mathbb{R}^n$, with $(a_1, \ldots a_n) \mapsto a_j$. So
+    \begin{equation*}
+      \alpha_i\left.\frac{\partial}{\partial x_i}\right|_p(f_j) = \alpha_i \delta_{ij} = \alpha_j = 0
+    \end{equation*}
+    for all $j$ by assumption, and we thus have linear independence and therefore a basis for the $n$-vector space. \qed
   \end{enumerate}
 \end{proof}
+
+If a manifold $M \subseteq \mathbb{R}^N$, then we can identify the abstract tangent vectors $c'(0) \in T_p(M)$, $c'(0) : D(M,p) \to \mathbb{R}$ with classical tangent vectors $\tau'(0) \in \mathbb{R}^N$ via
+\begin{equation*}
+  \tau'(0) = (c'(0)(y_1), \ldots c'(0)(y_N)),
+\end{equation*}
+with $y_i$ the restriction of the $i^{\tiny\textnormal{th}}$ co-ordinate function (i.e. $(a_1, \ldots a_n) \mapsto a_i$) to $M$.
+
+\begin{lemma}
+
+\end{lemma}
 
 %-------------------------------------------------------------------------------
 
