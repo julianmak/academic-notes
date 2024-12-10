@@ -725,6 +725,97 @@ Here $Z = [X, Y]$ is the \textbf{Lie bracket} of $X$ and $Y$ and is a vector fie
 
 \chapter{Riemannian manifolds}
 
+Let $M$ be a differentiable manifold. A \textbf{Riemannian metric} $g = \{g_p\}_{p\in M}$ is a family of inner products
+\begin{equation}
+  \highlight{g_p : T_p(M) \times T_p(M) \to \mathbb{R}, \quad p \mapsto g_p(X(p), Y(p)) \in \mathbb{R}},
+\end{equation}
+\marginnote{Or the metric is a $(2,0)$-tensor which eats two vectors and spits out a number.}which depends smoothly on $p\in M$, is differentiable and is symmetric. We often use the notation
+\begin{equation}
+  \langle v, w\rangle_p = g_p(v, w), \quad v,w\in T_p(M).
+\end{equation}
+The pair $(M,g)$ is then called a \textbf{Riemannian manifold}.
+
+\begin{example}
+  $M = \mathbb{R}^n$ is a differentiable manifold with one global co-ordinate chart, which is just the identity. $T_p(\mathbb{R}^n)$ can be cannonically identified with pairwise disjoint copies of $\mathbb{R}^n$ via
+  \begin{equation*}
+    c:(-\epsilon, \epsilon) \to \mathbb{R}^n, \quad c(0) = p, \quad c'(0)\in T_p(\mathbb{R}^n)
+  \end{equation*}
+  but also $c'(0) = (c_1'(0), \ldots c_n'(0)) \in \mathbb{R}^n$. If one wants to stress the pairwise disjointness of the different $T_p(\mathbb{R}^n) \cong \mathbb{R}^n$, we would use $\{p\} \times T_p(\mathbb{R}^n)$.
+  
+  A Reimannian metric $g_p : T_p(\mathbb{R}^n) \times T_p(\mathbb{R}^n) \to \mathbb{R}$ is given by the standard inner product $g_p(u,v) = v_i w_i$, which gives the standard Euclidean geometry.
+\end{example}
+
+\begin{example}
+  Let $M \subset \mathbb{R}^3$ be a surface, then $T_p(M)$ can be canonically identifies with a two-dimensional subspace in $\mathbb{R}^3$. $T_p(M)$ inherits a natural inner product from $\mathbb{R}^3$, namely the first fundamental form (which is just that from the dot product). This inner produce defines a Riemannian metric on $M$. 
+  
+  For example, if $M = S^2$, then at $p=(0,0,1)$, we have $v=(v_1, v_2, 0)$ and $w=(w_1, w_2, 0) \in T_p(S^2)$, and $g_p(v,w) = v_1 w_1 + v_2 w_2$.
+\end{example}
+
+Let $(M, g)$ be a Riemannian manifold. The \textbf{length} of a tangent vector $v \in T_p(M)$ is defined as
+\begin{equation}
+  \highlight{\|v\|_p = g_p(v, v) = \sqrt{\langle v, v \langle_p}}.
+\end{equation}
+Suppose $\phi: U\to V\subset \mathbb{R}^n$ be a co-ordinate chart with $\phi= (x_1, \ldots x_n)$, then we can introduce functions that are components of the metric given by
+\begin{equation}
+  \highlight{g_{ij} : U \to \mathbb{R}, \quad g_{ij}(p) = g_p \left(\left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p\right), \quad 1\leq i,j \leq n}.
+\end{equation}
+Note that $g_{ij} = g_{ji}$ since the metric is symmetric.
+
+\begin{remark}
+  In the special case of a parameterised surface $M \subset \mathbb{R}^3$, the component functions $g_{ij}$ of the associated co-ordinate chart coincide with the coefficients of the first fundamental form as $g_{11} = E$, $g_{12} = g_{21} = F$, $g_{22} = G$.
+\end{remark}
+
+\begin{example}
+  The $n$-dimensional (real) hyperbolic space has different models of the geometry
+  \begin{enumerate}
+    \item \textbf{Hyperboloid model}. Consider the indefinite symmetric form $\eta$ on $\mathbb{R}^{n+1}$ given by
+    \begin{equation*}
+      \eta(y, z) = y_i z_i - y_{n+1}z_{n+1}
+    \end{equation*}
+    Define $\mathbb{W}^n = \{y\in \mathbb{R}^{n+1}\ |\ \eta(y, y)=-1, y_{n+1} > 0 \}$; see Fig.~\ref{fig:hyerpoloid}.\marginnote{cf. spacetime, where the signature is $(-, +, + ,+)$. The lightcone would be where $\eta(y,y) = 0$.} We can think of $\mathbb{W}^n$ as a $n$-submanifold of $\mathbb{R}^{n+1}$ and identify $T_p(\mathbb{W}^n)$ with a $n$-subspace of $\mathbb{R}^{n+1}$. We define
+    \begin{marginfigure}
+      \includegraphics{hyperboloid}
+      \caption{Illustration of the $\mathbb{W}^2$.}
+      \label{fig:hyperboloid}
+    \end{marginfigure}
+    \begin{equation*}
+      g_p(v, w) = \eta(v, w), \quad v,w \in T_p(\mathbb{W}^n).
+    \end{equation*}
+    For $n=2$, an almost global co-ordinate chart of $\mathbb{W}^2$ is given by
+    \begin{align*}
+      \phi^{-1} &: (0, 2\pi) \times (0,\infty) \to \mathbb{W}^2,\\
+      (x_1, x_2) &\mapsto (\cos x_1 \sinh x_2, \sin x_1 \sinh x_2, \cosh x_2),
+    \end{align*}
+    since the image of $\phi^{-1}$ covers $\mathbb{W}^2$ except the curve obtained by intersection of $\mathbb{W}^2$ with the half-plane $\{x_1 \geq 0,\ x_2 = 0\}$. If we let $p = \phi^{-1}(x_1, x_2)$, then with the chart, we have
+    \begin{align*}
+      \left.\frac{\partial}{\partial x_1}\right|_p &= (-\sin x_1 \sinh x_2, \cos x_1 \sinh x_2, 0), \\
+      \left.\frac{\partial}{\partial x_2}\right|_p &= (\cos x_1 \cosh x_2, \sin x_1 \cosh x_2, \sinh x_2),
+    \end{align*}
+    so that
+    \begin{equation*}
+      (g_{ij})(p) = \begin{pmatrix} g_{11} & g_{12} \\ g_{21} & g_{22} \end{pmatrix} = \begin{pmatrix} \sinh^2 x_2 & 0 \\ 0 & 1 \end{pmatrix},
+    \end{equation*}
+    so the metric is positive definite.
+    
+    \item \textbf{Poincar\'e's ball model}. Let $\mathbb{B}^n = \{p \in \mathbb{R}^n\ |\ \|p\|<1\}$ where $\|\cdot\|$ is the standard Eucliean norm. Since $\mathbb{B}^n \subset \mathbb{R}^n$ is open, the tangent space $T_p(\mathbb{B}^n)$ can be canonically identified with $\mathbb{R}^n$. The metric on this ball however we take to be
+    \begin{equation*}
+      g_p (v_1, v_2) = \frac{4}{(1-\|p\|^2)^2} \langle v_1, v_2 \rangle
+    \end{equation*}
+    where $\langle \cdot, \cdot\rangle$ is the standard Euclidean inner product. The distance gets progressively larger as we approach the boundary. See Fig.~\ref{escher} for a rendering of $\mathbb{B}^2$, where we distance can be in units of fish, and the distance is increasingly stretched out as we approach the boundary of the disc.
+    \begin{marginfigure}
+      \includegraphics{escher}
+      \caption{Computer rendering of M. C. Escher's \emph{Circle Limit III} and \emph{Circle Limit I}. From website of Douglas Dunham (UoM Duluth).}
+      \label{fig:escher}
+    \end{marginfigure}
+    
+    \item \textbf{Upper half plane model}. Similar to above, $\mathbb{H}^n = \{p \in \mathbb{R}^n\ |\ x_n > 0\}$. Again, $T_p(\mathbb{H}^n)$ can be identified with $\mathbb{R}^n$. The metric we choose here is
+    \begin{equation*}
+      g_p(v_1, v_2) = \frac{\langle v_1, v_2\rangle}{x_n^2},
+    \end{equation*}
+    and distance is increasingly stretched out as we approach the boundary of the half-plane; see Fig.~\ref{fig:escher} for a rendering of $\mathbb{H}^2$.
+  \end{enumerate}
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \section{Integration on Riemannian manifolds}
