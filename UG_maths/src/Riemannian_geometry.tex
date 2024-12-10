@@ -622,10 +622,104 @@ There is a canonical \textbf{footpoint projection} $\pi: T(M) \to M$ with $\pi(v
 \end{proposition}
 
 \begin{proof}
-  \qed
+  Let $(U_\alpha, \phi_\alpha)_{\alpha \in A}$ be an atlas for $M$. Let $\phi_\alpha (x_1^\alpha, \ldots x_n^\alpha) : U_\alpha \to V_\alpha \subset \mathbb{R}^n$. We construct an atlas of $T(M)$ by choosing, for every $\alpha \in A$, the subset
+  \begin{equation*}
+    \tilde{U}_\alpha = \bigcup_{p\in U_\alpha} T_p(M) \subset T(M)
+  \end{equation*}
+  and bijective maps
+  \begin{align*}
+    \psi_\alpha &: \tilde{U}_\alpha \to V_\alpha \times \mathbb{R}^n,\\
+    \psi_\alpha\left(\beta_i \left.\frac{\partial}{\partial x_i^\alpha}\right|_p\right) &= \left(\phi_\alpha(p), \beta_1, \ldots \beta_n\right) = \left(\phi_\alpha(p), \beta\right),
+  \end{align*}
+  where $\beta \in \mathbb{R}^n$ and $\beta_i \partial / \partial x_i^\alpha|_p \in T_p(M)$. The inverse map $\psi_\alpha^{-1}$ is
+  \begin{equation*}
+    \psi^{-1}(x, \beta) = \beta_i \left.\frac{\partial}{\partial x_i^\alpha}\right|_{\phi^{-1}_\alpha(x)}, \quad x=\phi_x(p).
+  \end{equation*}
+  
+  Clearly $\bigcup_{\alpha\in A} \tilde{U}_\alpha = T(M)$ as $\bigcup_{\alpha\in A} U_\alpha = T(M)$. For the co-ordinate changes, 
+  \begin{equation*}
+    \psi_\gamma \circ \psi^{-1}_\alpha(x, \beta) = \psi_\gamma\left(\left.\frac{\partial}{\partial x_i^\alpha}\right|_p\right) = \psi_\gamma \left(\beta_i \left(\frac{\partial(x_j^\gamma \circ \phi^{-1}_\alpha)}{\partial x_i}(x)\left.\frac{\partial}{\partial x_j^\gamma}\right|_p\right)\right).
+  \end{equation*}
+  By swapping the order of summation, we have
+  \begin{align*}
+    \psi_\gamma \circ \psi^{-1}_\alpha(x, \beta) 
+      &= \psi_\alpha \left(\beta_i \left(\frac{\partial(x_j^\gamma \circ \phi^{-1}_\alpha)}{\partial x_i}(x)\left.\frac{\partial}{\partial x_j^\gamma}\right|_p\right)\right) \\
+      &= \left( \left(\phi_\gamma \circ \phi^{-1}_\alpha\right)(x), \beta \left(\frac{\partial(x_j^\gamma \circ \phi^{-1}_\alpha)}{\partial x_i}(x)\right) \right)_{1\leq i,j\leq n}.
+  \end{align*}
+  Thus co-ordinate changes are differentiable, and so we have an atlas. We assume the Hausdorff property, and so $T(M)$ is a $2n$-manifold. \qed
 \end{proof}
 
-A \textbf{vector field} $X$ is a differentiable map $X: M \to T(M)$ such that $X(p) \in T_p(M)$. The space of vector fields on $M$ is denoted $\mathcal{X}(M)$, and carries the structure of an infinite dimensional real vector space.
+A \textbf{vector field} $X$ is a differentiable map $X: M \to T(M)$ such that $X(p) \in T_p(M)$. The space of vector fields on $M$ is denoted $\mathcal{X}(M)$, and carries the structure of an infinite dimensional real vector space. 
+
+Note that if $X \in \mathcal{X}(M)$, then $(\pi \circ X)(p) = p$ for all $p\in M$. Locally, every vector field $X$ can be written with respect to a co-ordinate chart $\phi = (x_1, \ldots x_n) : U \to V \subset \mathbb{R}^n$ as
+\begin{equation}
+  X(p) = f_i(p) \left.\frac{\partial}{\partial x_1}\right|_p
+\end{equation}
+for all $p \in U$. Here the $f_i : U \to \mathbb{R}$ are differential functions, and are called \textbf{component functions} of $X$ (since $\partial/\partial x_i$ is a basis for the tangent space associated with the co-ordinate choice).
+
+\begin{example}
+  Let $S^2$ be the unit 2-sphere and $X(u) = (2u_3 - u_2, u_1, -2u_2)$ be a vector field. First, notice that the (outward) normal vector on $S^2$ would be $n = (u_1, u_2, u_3)$, and with the standard inner product we have
+  \begin{equation*}
+    \langle X(u), n\rangle = 2u_3 u_1 - u_1 u_2 + u_1 u_2 - 2u_2 u_3 = 0,
+  \end{equation*}
+  so $X(u) \in T_u(S^2)$ and $X \in \mathcal{X}(S^2)$ is a well-defined vector field on $S^2$. A co-ordinate chart $(U, \phi)$ of $S^2$ would be the spherical co-ordinates (but using latitude instead of co-latitude)
+  \begin{align*}
+    \phi^{-1} &: (-\pi/2, \pi/2) \times (0, 2\pi) \to S^2,\\
+    (x_1, x_2) &\mapsto (\cos x_1 \cos x_2, \cos x_1 \sin x_2, \sin x_1).
+  \end{align*}
+  Let $p = \phi^{-1}(x_1, x_2)$, then
+  \begin{align*}
+    \left.\frac{\partial}{\partial x_1}\right|_p &= (-\sin x_1 \cos x_2, -\sin x_1 \sin x_2, \cos x_1),\\
+    \left.\frac{\partial}{\partial x_2}\right|_p &= (-\cos x_1 \sin x_2, \cos x_1 \cos x_2, 0),
+  \end{align*}
+  while
+  \begin{equation*}
+    X(p) = (2\sin x_1 - \cos x_2 \sin x_2, \cos x_1 \cos x_2, 2\cos x_1 \cos x_2).
+  \end{equation*}
+  For $X(p) = \beta_i \partial / \partial x_i |p$, we should have
+  \begin{align*}
+    \beta_1 (-\sin x_1 \cos x_2) + \beta_2 (-\cos x_1 \sin x_2) &= 2\sin x_1 - \cos x_2 \sin x_2,\\
+    \beta_1 (-\sin x_1 \sin x_2) + \beta_2 (\cos x_1 \cos x_2) &= \cos x_1 \cos x_2,\\
+    \beta_1 \cos x_1 &= -2 \cos x_1 \cos x_2,
+  \end{align*}
+  so by inspection, $\beta_1 = -2\cos x_2$ and $\beta_2 = 1 - 2\tan x_1 \sin x_2$.
+\end{example}
+
+Recall that a tangent vector $v\in T_p(M)$ differentiates a function $f \in D(M, p)$ in the direction $v$ through $v(t)$. Similar, given a vector field $X \in \mathcal{X}(M)$, $f\in C^\infty(M)$, $X(f) \in C^\infty$ is defined as
+\begin{equation}
+  \left(X(f)\right)(p) = X(p)(f) \in \mathbb{R}.
+\end{equation}
+Locally, if $X = g_i \partial / \partial x_i|p (f)$ with respect to $U, \phi)$, we can write
+\begin{equation}
+  \left(X(f)\right)(p) = g_i(p) \left.\frac{\partial}{\partial x_i}\right|p (f) = g_i(p) \left.\frac{\partial f}{\partial x_i}\right|p = g_i(p) \frac{\partial (f\circ \phi^{-1})}{\partial x_i}(\phi(p)).
+\end{equation}
+
+Let $X, Y \in \mathcal{X}(M)$, then there is a $Z \in \mathcal{X}(M)$ such that, for all $f \in C^\infty(M)$,
+\begin{equation}
+  \highlight{Z(f) = X(Y(f)) - Y(X(f)) = \left[X, Y\right](f)}.
+\end{equation}
+Here $Z = [X, Y]$ is the \textbf{Lie bracket} of $X$ and $Y$ and is a vector field.\marginnote{Note the similarities of this to the commutator, and similarities but subtle differences with the Poisson bracket.} If we have a co-ordinate system, then we have
+\begin{equation*}
+  X = a_i \frac{\partial}{\partial x_i}, \quad Y = b_i \frac{\partial}{\partial x_i}, \quad Z = \left(a_i \frac{\partial b_j}{\partial x_i} - b_i \frac{\partial a_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}.
+\end{equation*}
+(Act this on a $f$ and use the fact that $f$ is differentiable and derivative operations can be swapped.)
+
+\begin{proposition}
+  The Lie bracket satisfies the following properties:
+  \begin{enumerate}
+    \item anti-symmetry, $[X,Y] = -[Y, X]$
+    \item distributive, for real scalars $a,b$, $[aX + bY, Z] = a[X,Z] + b[Y, Z]$
+    \item Jacobi identity,\marginnote{Note the cyclic permutations. The Lie bracket can be thought of as a derivative where $[X, Y] = \mathcal{L}_X Y$ (the \textbf{Lie derivative} of $Y$ along $X$), and then the Jacobi identity is basically the equivalent product rule, since $\mathcal{L}_X[Y,Z] = [X, [Y, Z]] = [[X, Y], Z] + [Y, [X, Z]] = [\mathcal{L}_X Y, Z] + [Y, \mathcal{L}_X Z]$.}
+      \begin{equation*}
+        [[X,Y], Z] + [[Y, Z], X] + [[Z, X], Y] = 0
+      \end{equation*}
+    \item for $f,g\in C^\infty(M)$,
+      \begin{equation*}
+        [fX + gY] = fg [X, Y] + f(X(g))\cdot Y - g(Y(f))\cdot X.
+      \end{equation*}
+  \end{enumerate}
+\end{proposition}
+
 
 %===============================================================================
 
