@@ -801,7 +801,7 @@ Note that $g_{ij} = g_{ji}$ since the metric is symmetric.
     \begin{equation*}
       g_p (v_1, v_2) = \frac{4}{(1-\|p\|^2)^2} \langle v_1, v_2 \rangle
     \end{equation*}
-    where $\langle \cdot, \cdot\rangle$ is the standard Euclidean inner product. The distance gets progressively larger as we approach the boundary. See Fig.~\ref{escher} for a rendering of $\mathbb{B}^2$, where we distance can be in units of fish, and the distance is increasingly stretched out as we approach the boundary of the disc.
+    where $\langle \cdot, \cdot\rangle$ is the standard Euclidean inner product. The distance gets progressively larger as we approach the boundary. See Fig.~\ref{fig:escher} for a rendering of $\mathbb{B}^2$, where we distance can be in units of fish, and the distance is increasingly stretched out as we approach the boundary of the disc.
     \begin{marginfigure}
       \includegraphics{escher}
       \caption{Computer rendering of M. C. Escher's \emph{Circle Limit III} and \emph{Circle Limit I}. From website of Douglas Dunham (UoM Duluth).}
@@ -815,6 +815,104 @@ Note that $g_{ij} = g_{ji}$ since the metric is symmetric.
     and distance is increasingly stretched out as we approach the boundary of the half-plane; see Fig.~\ref{fig:escher} for a rendering of $\mathbb{H}^2$.
   \end{enumerate}
 \end{example}
+
+Let $V_{1,2}$ be two vector spaces with inner products $\langle\cdot,\cdot\rangle_{1,2}$. An isomorphism $T: V_1 \to V_2$ is called a \textbf{linear isometry} if
+\begin{equation}
+  \langle v_1, v_2 \rangle_1 = \langle T(v_1), T(v_2) \rangle_2
+\end{equation}
+for all $v_{1,2} \in V_1$.
+
+Let $(M_1, g_1)$ and $(M_2, g_2)$ be two Riemannian manifolds. A bijective differentiable map $f: M_1 \to M_2$ with differentiable inverse $f^{-1}: M_2 \to M_1$ is called a \textbf{diffeomorphism}. A diffeomorphism $f$ above is called an \textbf{isometry} if $Df(p) : T_p(M_1) \to T_{f(p)}(M_2)$ is a linear isometry, i.e.
+\begin{equation}
+  \langle (Df(p))(v), (Df(p))(w)\rangle_{2, f(p)} = \langle v,w\rangle_{1, p}
+\end{equation}
+for all $v,w \in T_p(M_1)$.
+
+\begin{remark}
+  It is in face sufficient to check this for $v=w$, since
+  \begin{equation*}
+    \langle v,w\rangle_p = \frac{1}{4}\left(\|v+w\|^2_p - \|v-w\|^2_p\right).
+  \end{equation*}
+\end{remark}
+
+\begin{example}
+  \begin{enumerate}
+    \item Let $f: \mathbb{W}^2 \to \mathbb{B}^2$ as above. We can map each point $p$ on the hyperboloid onto the a point on the disk that intersects the straight line through $p$ and $(0,0,-1)$ (e.g. the trough at $(0,0,1) \in \mathbb{W}^2$ is mapped to the origin), and vice-versa. Can do it in a way that preserves the inner product, so is an isometry.
+    
+    \item For $\mathbb{B}^2, \mathbb{H}^2 \subset \mathbb{R}^2 \cong \mathbb{C}$, we can show that
+    \begin{equation*}
+      f: \mathbb{H}^2 \to \mathbb{B}^2, \quad f(z) = \frac{z-\mathrm{i}}{z+\mathrm{i}}
+    \end{equation*}
+    is an isometry.\marginnote{Note that this $f$ is a M\"obius map.} We see that $f$ is a diffeomorphism with
+    \begin{equation*}
+      f^{-1} = \frac{z+1}{\mathrm{i}z - \mathrm{i}}.
+    \end{equation*}
+    Let $z=x+\mathrm{i}y \in \mathbb{H}^2$, $v = v_1 + \mathrm{i}v_2 \in T_z(\mathbb{H}^2)$. Then
+    \begin{equation*}
+      g_z^{\mathbb{H}^2}(v, v) = \frac{v_1^2 + v_2^2}{y^2}.
+    \end{equation*}
+    Let $c(t) = z + tv$ represent $v$, namely $c(0) = z$, $c'(0) = v$, so
+    \begin{align*}
+      (Df(z))(v) = (f\circ c)'(0)
+        &= \left.\frac{\mathrm{d}}{\mathrm{d}t}\right|_{t=0} \left(\frac{c(t) - \mathrm{i}}{c(t) + \mathrm{i}}\right)\\
+        &= \frac{c'(0)(z+\mathrm{i}) - c'(0)(z-\mathrm{i})}{(z+\mathrm{i})^2}\\
+        &= \frac{2\mathrm{i}}{(z+1)^2}v \in T_z(\mathbb{B}^2).
+    \end{align*}
+    Here,
+    \begin{equation*}
+      g_z^{\mathbb{B}^2}(w, w)
+        = \frac{4\left|\cfrac{2\mathrm{i}}{(z+1)^2}\right|^2}{\left(1-\left|\cfrac{z-\mathrm{i}}{z+\mathrm{i}}\right|^2\right)^2}\langle v,v\rangle 
+        = \frac{16\langle v,v\rangle}{(|z+\mathrm{i}|^2 - |z-\mathrm{i}|^2)^2} = \frac{\langle v,v\rangle}{y^2},
+    \end{equation*}
+    and hence $f$ is an isometry.
+  \end{enumerate}
+\end{example}
+
+\begin{lemma}
+  Let $(M_1, g_1)$ and $(M_2, g_2)$ be two Riemannian manifolds and $f: M_1 \to M_2$ a diffeomorphism. Let $\phi: M_1 \to V \subset \mathbb{R}^n$ be a global co-ordinate chart with $\phi = (x_1, \ldots x_n)$, then $\psi = \phi \circ f^{-1} : M_2 \to V$ is a global co-ordinate chart of $M_2$. For $\psi = (y_1, \ldots y_n)$, i.e. $y_i = x_i \circ f$, $f$ is an isometry if
+  \begin{equation*}
+    \left\langle \left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p \right\rangle_{1,p} = \left\langle \left.\frac{\partial}{\partial y_i}\right|_{f(p)}, \left.\frac{\partial}{\partial y_j}\right|_{f(p)} \right\rangle_{2, f(p)}
+  \end{equation*}
+  for all $p \in M_1$.
+\end{lemma}
+
+\begin{proof}
+  First of all, we have
+  \begin{equation*}
+    (Df(p))\left(\left.\frac{\partial}{\partial x_i}\right|_p\right)(h) = \left.\frac{\partial}{\partial x_i}\right|_p (h\circ f) = \frac{\partial (h\circ f\phi^{-1})}{\partial x_i}(\phi(p)).
+  \end{equation*}
+  Noting that we have
+  \begin{equation*}
+    f\circ \phi^{-1} = \psi^{-1}, \quad \psi(f(p)) = \phi\circ f^{-1}(f(p)) = \phi(p),
+  \end{equation*}
+  then
+  \begin{equation*}
+    (Df(p))\left(\left.\frac{\partial}{\partial x_i}\right|_p\right)(h) = \frac{\partial (h\circ \psi^{-1})}{\partial x_i}(\psi(f(p))) = \left.\frac{\partial}{\partial y_i}\right|_{f(p)}.
+  \end{equation*}
+  $h$ is arbitrary, so
+  \begin{equation*}
+    (Df(p))\left(\left.\frac{\partial}{\partial x_i}\right|_p\right) = \left.\frac{\partial}{\partial y_i}\right|_{f(p)}.
+  \end{equation*}
+  
+  Now, assuming that
+  \begin{equation*}
+    \left\langle \left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p \right\rangle_{1,p} = \left\langle \left.\frac{\partial}{\partial y_i}\right|_{f(p)}, \left.\frac{\partial}{\partial y_j}\right|_{f(p)} \right\rangle_{2, f(p)}
+  \end{equation*}
+  Let $v \in T_p(M_1)$, then
+  \begin{equation*}
+    v = a_i \left.\frac{\partial}{\partial x_i}\right|_p \quad \Rightarrow \quad Df(p)(v) = a_i \left.\frac{\partial}{\partial y_i}\right|_{f(p)},
+  \end{equation*}
+  which implies
+  \begin{align*}
+    \langle Df(p)(v), Df(p)(v)\rangle_{2, f(p)} 
+      &= \left\langle a_i \left.\frac{\partial}{\partial y_i}\right|_{f(p)}, a_j \left.\frac{\partial}{\partial y_j}\right|_{f(p)}\right\rangle_{2, f(p)}\\
+      &= a_i a_j\left\langle \left.\frac{\partial}{\partial y_i}\right|_{f(p)}, \left.\frac{\partial}{\partial y_j}\right|_{f(p)}\right\rangle_{2, f(p)}\\
+      &= a_i a_j\left\langle \left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p\right\rangle_{1, p}\\
+      &= \left\langle a_i \left.\frac{\partial}{\partial x_i}\right|_p, a_j\left.\frac{\partial}{\partial x_j}\right|_p\right\rangle_{1, p}\\
+      &= \langle v, v\rangle_{1, p},
+  \end{align*}
+  and hence $Df(p)$ is a linear isometry and so $f$ is an isometry. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
