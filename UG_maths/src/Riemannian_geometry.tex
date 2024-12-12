@@ -918,6 +918,83 @@ for all $v,w \in T_p(M_1)$.
 
 \section{Integration on Riemannian manifolds}
 
+Let $(M,g)$ be a $n$-Riemannanian manifold and $\phi = (x_1, \ldots x_n) : U \to V \subset \mathbb{R}^n$ be a co-ordinate chart. Recall that
+\begin{equation*}
+  g_{ij}(p) = \left\langle \left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p\right\rangle : U \to \mathbb{R}, \quad 1\leq i,j\leq n.
+\end{equation*}
+Let $f: M \to \mathbb{R}$ be a function with support in $U$ only, and $\phi$ as above. Then we define the integral to be
+\begin{equation}
+  \highlight{\int_M f\; \mathrm{d}(\mbox{vol}) = \int_U f\; \mathrm{d}(\mbox{vol}) = \int_V \left(f\circ \phi^{-1}\right)(x) \cdot \sqrt{\mbox{det}(g_{ij} \circ \phi^{-1}(x)}\; \mathrm{d}x}.
+\end{equation}
+
+To show that this definition is co-ordinate independent, let $F = \psi \circ \psi^{-1}$, $\psi = (y_1, \ldots y_n) : U \to V'$ be another co-ordinate chart, so $F$ is the change of co-ordinates. The transformation rule states that if $F: V \to V'$ is a diffeomorphism, then we need a Jacobian factor for the integral as
+\begin{equation}
+  \int_V' h(y)\; \mathrm{d}y = \int_V (h\circ F)(x) |\mbox{det}DF(x)|\; \mathrm{d}x.
+\end{equation}
+for some function $h$. Recall that
+\begin{equation*}
+  \left.\frac{\partial}{\partial x_i}\right|_p = \frac{\partial y_j}{\partial x_i}(p)\left.\frac{\partial}{\partial y_j}\right|_p,
+\end{equation*}
+so the metric is
+\begin{align*}
+  \tilde{g}_{ij}(p) 
+    &= \left\langle \left.\frac{\partial}{\partial x_i}\right|_p, \left.\frac{\partial}{\partial x_j}\right|_p\right\rangle\\
+    &=\frac{\partial y_k}{\partial x_i}(p) \frac{\partial y_l}{\partial x_i}(p) \left\langle \left.\frac{\partial}{\partial y_k}\right|_p, \left.\frac{\partial}{\partial y_l}\right|_p\right\rangle\\
+    &=\left(\frac{\partial y_k}{\partial x_i}(p)\right)(g_{kl}'(p)) \left(\frac{\partial y_l}{\partial x_j}(p)\right)^T
+\end{align*}
+for $p\in M$, where $g_{kl}'$ is the metric expressed in the $y$ co-ordinates. Let $x = \phi(p)$, then since $F_j = y_j \circ \phi^{-1}$, we have
+\begin{equation*}
+  DF(x) = \left(\frac{\partial (y_i \circ \phi^{-1})}{\partial x_j}(x)\right) = \left(\frac{\partial y_i}{\partial x_j}(p)\right),
+\end{equation*}
+so then $(g_{ij}(p)) = (DF(x))^T (g'_{ij}(p)) (DF(x))$, and since the transpose does not alter the determinant,
+\begin{equation*}
+  \sqrt{\mbox{det}g_{ij}(p)} = |\mbox{det}DF| \sqrt{\mbox{det}g_{ij}'(p)}.
+\end{equation*}
+Thus
+\begin{equation*}
+  \int_V (f\circ \phi^{-1})\sqrt{\mbox{det}(g_{ij} \circ \phi^{-1})}\; \mathrm{d}x = \int_V (f\circ \psi^{-1} \circ F)\sqrt{\mbox{det}(g'_{ij} \circ \psi^{-1} \circ F)} |\mbox{det}DF|\; \mathrm{d}x.
+\end{equation*}
+If we then define the function $h$ above to be $h = f \circ \psi^{-1}\sqrt{\mbox{det}(g_{ij}'\circ \psi^{-1})}$, then by the transformation rule we have that
+\begin{equation*}
+  \int_V (f\circ \phi^{-1})\sqrt{\mbox{det}(g_{ij} \circ \phi^{-1})}\; \mathrm{d}x = \int_{V'} (f\circ \psi^{-1})\sqrt{\mbox{det}(g_{ij}' \circ \psi^{-1})}\; \mathrm{d}y,
+\end{equation*}
+and we have co-ordinate independence as claimed.
+
+Let $(M,g)$ be a Riemanninan manifold with a global co-orindate chart $\phi = (x_1, \ldots x_n) : M \to \mathbb{R}^n$. The \textbf{volume} of $A \subset M$ is
+\begin{equation}
+  \highlight{\mbox{vol}(A) = \int_M \mathbb{1}_A\; \mathrm{d}(\mbox{vol}) = \int_A\; \mathrm{d}(\mbox{vol} = \int_{\phi(A)}\sqrt{\mbox{det}(g_{ij} \circ \phi^{-1})}\; \mathrm{d}x},
+\end{equation}
+where $\mathbb{1}_A$ is the indicator function supported over $A$.
+
+\begin{example}
+  Recall that $\mathbb{H}^2 = \{z\ |\ \mbox{Im}(z)>0\}$ with $\langle v,w\rangle = (v_1 w_1 + v_2 w_2) / y^2$ for $z=x+\mathrm{i}y$ has the global chart $\phi : \mathbb{H}^2 \to \mathbb{R}^2$ with $x+\mbox{i}y \mapsto (x,y)$. Then
+  \begin{align*}
+      g_{11}(z) = \left\langle \left.\frac{\partial}{\partial x_1}\right|_z, \left.\frac{\partial}{\partial x_1}\right|_z \right\rangle = \frac{1}{y^2} = g_{22}(z),\quad g_{12}(z) = g_{21}(z) = 0.
+  \end{align*}
+  For what would be visually the rectangular strip $A = \{z\in \mathbb{H}^2\ |\ 0 < a \leq y \leq b,\ -n \leq x \leq n\}$, we would have
+  \begin{equation*}
+    \mbox{vol}(A) = \int_{-n}^n \int_a^b \sqrt{\mbox{det}g_{ij}}\; \mathrm{d}y\; \mathrm{d}x = 2n\left(\frac{1}{a} - \frac{1}{b}\right),
+  \end{equation*}
+  as opposed to $2n(b-a)$ under the usual metric.
+\end{example}
+
+Let $M$ be a differentiable manifold. A \textbf{partition of unity} on $M$ is some $\{\psi_\alpha \in C^\infty(M)\}_{\alpha\in A}$, $\psi_\alpha : M \to [0, 1]$ such that
+\begin{itemize}
+  \item for all $p\in M$, there exists an open neighbourhood $U_p \subset M$ with $\left.\psi_\alpha\right|_{U_p} \neq 0$ for finite many $\alpha \in A$,
+  \item $\sum_{\alpha \in A} \psi_\alpha = 1$.
+\end{itemize}
+Let $\{U_\alpha\}_{\alpha \in A}$ be an open cover of $M$. A partition of unity $\{\psi_\alpha\}_{\alpha \in A}$ is \textbf{subordinated} to $\{U_\alpha\}$ if, for all $\alpha \in A$, $\mbox{supp} \psi_\alpha \subset U_\alpha$.\marginnote{$\mbox{supp}$ is support rather than supremum.}
+
+\begin{theorem}
+  Let $M$ be a manifold and $\{U_\alpha, \phi_\alpha\}_{\alpha \in A}$ be a countable atlas of $M$. Then there exists a partition of unity $\{\psi_\alpha\}$ subordinated to $\{U_\alpha\}$. \qedwhite
+\end{theorem}
+
+Let $(M,g)$ be a Riemannian manifold with countable atlas $\{U_\alpha, \phi_\alpha\}_{\alpha \in A}$ and subordinated partition of unity $\{\psi_\alpha\}$. For any $f: M\to \mathbb{R}$, we define the \textbf{integral} of $f$ as
+\begin{equation}
+  \highlight{\int_M f\; \mathrm{d}(\mbox{vol}) = \sum_{\alpha \in A} \int_M f\psi_\alpha\; \mathrm{d}(\mbox{vol})}.
+\end{equation}
+This definition is independent of atlas and partition of unity.
+
 %-------------------------------------------------------------------------------
 
 \section{Riemannian manifolds as metric spaces}
