@@ -999,13 +999,255 @@ This definition is independent of atlas and partition of unity.
 
 \section{Riemannian manifolds as metric spaces}
 
+Let $(M,g)$ be a Riemannian manifold, $c:[a,b] \to M$ be a differentiable curve. The \textbf{length} of $c$ is
+\begin{equation}
+  \highlight{L(c) = \int_a^b \|c'(t)\|_{c(t)}\; \mathrm{d}t}.
+\end{equation}
+If $c$ is piecewise smooth with cusps, then just chop it up in the the bits that can be integrated accordingly and then sum it up, i.e.
+\begin{equation}
+  L(c) = \sum_{i=0}^{n-1} \int_{t_i}^{t_{i+1}} \|c'(t)\|_{c(t)}\; \mathrm{d}t.
+\end{equation}
+
+\begin{theorem}
+  Let $c: [0,T] \to M$ be a differentiable curve and $\gamma : [0, S]$ be an orientation preserving re-parameterisation of $c$ (i.e. there exists a strictly monotonic differentiable function $\phi:[0,T] \to [0,S]$ with $\phi(0)=0$, $\phi(T) = S$ such that $\gamma = c\circ \phi$. Then $L(c) = L(\gamma)$.
+\end{theorem}
+
+\begin{proof}
+  For $f \in D(M, \gamma(s))$,
+  \begin{equation*}
+    \gamma'(s)(f) = (f\circ \gamma)'(s) = (f\circ c\circ \phi)'(s).
+  \end{equation*}
+  By the chain rule, we have
+  \begin{equation*}
+    (f\circ c\circ \phi)'(s) = (f\circ c)'(\phi(s))\cdot \phi'(s) = \phi'(s)c'(\phi(s))(f)
+  \end{equation*}
+  so that $\phi'(s) c'(\phi(s)) = \gamma'(s)$. Since $\phi$ was assumed to be orientation preserving and monotonic,
+  \begin{align*}
+    L(\gamma) 
+      &= \int_0^S \|\gamma'(s)\|_{\gamma(s)}\; \mathrm{d}s \\
+      &= \int_0^S \phi'(s)\|c'(\phi(s))\|_{c(\phi(s))}\; \mathrm{d}s \\
+      &= \int_0^T \|c'(t)\|_{c(t)}\; \mathrm{d}s = L(c)
+  \end{align*}
+  since $t = \phi(s)$. \qed
+\end{proof}
+Note the result is true even if re-parameterisation is orientation reversing, as there will be two minus signs arising in that case.
+
+A differentiable curve $c: [a,b] \to M$ is \textbf{parameterised by arc length} if $\|c'(t)\|_{c(t)} = 1$ for all $t \in [a,b]$.
+
+\begin{lemma}
+  For an arc length parameterised curve $c:[a,b] \to M$, $L(c|_{[a,t]}) = t-a$ for all $t\in [a,b]$. (Just use the definition.) \qedwhite
+\end{lemma}
+
+\begin{proposition}
+  Every differentiable curve $c:[a,b] \to M$ with $c'(t) \neq 0$ for all $t\in [a,b]$ has an arc length re-parameterisation $\gamma : [0, L(\gamma)] \to M$.
+\end{proposition}
+
+\begin{proof}
+  Let $\ell : [a,b] \to [0, L(\gamma)]$, $\ell(t) = L(c|_{[a,t]}) = \int_a^t \|c'(s)\|_{c(s)}\; \mathrm{d}s$. Clearly $\ell$ is differentiable and $\ell'(t) = \|c'(t)\|_{c(t)} > 0$, so $\ell$ is strictly monotonically increasing and hence bijective. Since $\ell(\ell^{-1}(s)) = s$,
+  \begin{equation*}
+    \ell'(\ell^{-1}(s))\cdot (\ell^{-1})'(s) = 1,
+  \end{equation*}
+  which implies
+  \begin{equation*}
+   (\ell^{-1})'(s) = \frac{1}{\|c'(\ell^{-1}(s))\|_{c(\ell^{-1}(s))}}.
+  \end{equation*}
+  Let $\gamma = c \circ \ell^{-1} : [0, L(\gamma)] \to M$, then
+  \begin{equation*}
+    \|\gamma'(s)\| = (\ell^{-1})'(s) \|c'(\ell^{-1}(s))\|_{\ell(\ell^{-1}(s))} = 1,
+  \end{equation*}
+  and hence we have an arc length re-parameterisation.
+\end{proof}
+
+\begin{example}
+  For $c : [a,b] \to \mathbb{H}^2$,  $c(t) = \mathrm{i}t$, then
+  \begin{equation*}
+    L(c) = \int_a^b \|c'(t)\|_{c(t)}\; \mathrm{d}t = \int_a^b \frac{|\mathrm{i}|}{t}\; \mathrm{d}t = \log \frac{b}{a}.
+  \end{equation*}
+  We show that for any other curve $\gamma:[0,T] \to \mathbb{H}^2$ with $\gamma(0)=a\mathrm{i}$, $\gamma(T)=b\mathrm{i}$, $L(\gamma) \geq L(c)$.\marginnote{This is related to the fact this $c(t)$ is a \textbf{geodesic} in $\mathbb{H}^2$, and has the property that it is distance minimising.} Let $\gamma(t) = x(t) + \mathrm{i}y(t)$, then since $y(t)>0$,
+  \begin{align*}
+    L(\gamma) = \int_0^T \|\gamma'(t)\|_{\gamma(t)}\; \mathrm{d}t
+      &= \int_0^T \frac{\sqrt{(x')^2 + (y')^2}}{y}\; \mathrm{d}t\\
+      &\geq \int_0^T \frac{\sqrt{(y')^2}}{y}\; \mathrm{d}t = \int_0^T \frac{|y'|}{y}\; \mathrm{d}t\\
+      &\geq \int_0^T \frac{y'}{y}\; \mathrm{d}t = \log \frac{y(T)}{y(0)} = \log \frac{b}{a} = L(c).
+  \end{align*}
+\end{example}
+
+Let $(M,g)$ be a connected Riemannian manifold (i.e. for every $p,q\in M$, there is some $c : [a,b] \to M$ with $c(a)=p$, $c(b)=q$. We define a \textbf{distance function} $d_g : M\times M \to [0, \infty)$ as
+\begin{equation}
+  d_g(p,q) = \inf\{ L(c)\ |\ c\textnormal{ piecewise differentiable},\ c(a) = p,\ c(b) = q\}.
+\end{equation}
+The distance function should satisfy
+\begin{itemize}
+  \item $d_g(p,q) = 0$ iff $p=q$
+  \item $d_g(p,q) = d(q,p)$
+  \item $d_g(p_1, p_3) \leq d_g(p_1, p_2) + d_g(p_2, p_3)$
+\end{itemize}
+For a space equipped with a distance function $d_g$, $(X,d)$ is called a \textbf{metric space}.
+
+\begin{example}
+  Let $M = \mathbb{R}^2 \setminus \{0\}$ equipped with the standard Riemannian metric. Taking two points $p$ and $q=-p$, we see there is no curve $c:[a,b]\to \mathbb{R}^2\{0\}$ such that $L(c) = d_g(q-p)$ since such a curve passes through zero, which is not in the manifold.
+\end{example}
+
+Give $c:[a,b] \to M$ with $L(c) = d_g(c(a), c(b))$, $c$ is called a \textbf{distance realising} curve.
+
+Let $(X, d)$ be a metric space. A subset $A \subset X$ is called \textbf{compact} if for all sequence $(x_n)_{n\in\mathbb{N}} \in A$, there is a sub-sequence $(x_{n_j})_{j\in\mathbb{N}}$ such that $d(x_{n_j}, x_\infty) \to 0$ as $j\to\infty$. The metric space here is \textbf{complete} if every Cauchy sequence in $X$ is convergent, i.e. for all $(x_n)_{n\in\mathbb{N}} \in X$ and $\epsilon>0$, there exists some $N$ where $d(x_n, x_m) < \epsilon$ for all $n,m\in\mathbb{N}$, with limit point $x_\infty \in X$ where $d(x_n, x_\infty)\to 0$.
+
+\begin{example}
+  $\mathbb{R} \setminus \{0\}$ is not complete since $(1/n)_{n\in \mathbb{N}}$ is a Cauchy sequence but its limit is not in the space.
+\end{example}
+
 %===============================================================================
 
 \chapter{Levi-Civita connection and parallel transport}
 
+We aim to differentiate a vector field $X: M\to T(M)$ along a curve $c$. As an example, we consider directional derivatives of a vector field in $\mathbb{R}^n$. By identifying $T_p(\mathbb{R}^n) \cong \mathbb{R}^n$, a vector field of $X$ on $\mathbb{R}^n$ can be considered as a map $X:\mathbb{R}^n \to \mathbb{R}^n$, i.e. $X = a_i(\partial / \partial x_i)$, so
+\begin{equation*}
+  X(p) = a_i(p) \left.\frac{\partial}{\partial x_i}\right|_p \cong (a_i(p))_i \in \mathbb{R}^n.
+\end{equation*}
+For a tangent vector $v \in T_p(\mathbb{R}^n)$, we can naturally define the derivative of $x$ in the direction of $v$ by
+\begin{equation}
+  \highlight{\nabla_v X = v(a_j)(\partial / \partial x_j)|_p},
+\end{equation}
+since
+\begin{align*}
+  \nabla_v X = DX(p)(v) 
+    &= \lim_{t\to 0} \frac{X(p+tv) - X(p)}{t} \\
+    &= \left(\lim_{t\to 0} \frac{a_i(p+tv) - a_i(p)}{t}\right)_i\\
+    &= (v(a_i))_i \\
+    &= v(a_j)\boldsymbol{e}_j \\
+    &= v(a_j) \left.\frac{\partial}{\partial x_j}\right|_p.
+\end{align*}
+Here, $\nabla_v X \in T_p(\mathbb{R}^n)$ is called the \textbf{covariant derivative} of $X$ in the direction of $v$. Note that we define $\nabla_X Y \in \mathcal{X}(\mathbb{R}^n)$, with
+\begin{equation}
+  \highlight{\nabla_X Y(p) = \nabla_{X(p)}Y(p) \in T_p(\mathbb{R}^n)}.
+\end{equation}
+The \textbf{torsion} is defined as
+\begin{equation}
+  \highlight{T(X,Y) = \nabla_X Y - \nabla_Y X -  [X, Y]},
+\end{equation}
+and described how tangent spaces twist around a curve.
+
+\begin{proposition}
+  For $X,Y: \to \mathbb{R}^n \to \mathbb{R}^n$, $v,w\in T_p(\mathbb{R}^n)$, $\alpha,\beta\in \mathbb{R}$, $f\in C^\infty(\mathbb{R}^n)$, we have
+  \begin{enumerate}
+    \item linearity in vector field, $\nabla_v (X+Y) = \nabla_v X + \nabla_v Y$
+    \item product rule, $\nabla_v (fX) = v(f)\cdot X(p) + f(p)\nabla_v X$
+    \item linearity in directional vector, $\nabla_{\alpha v+\beta w} X = \alpha \nabla_v X + \beta\nabla_w X$
+    \item Riemannian property, $v(\langle X, Y\rangle) = \langle \nabla_v X, Y(p)\rangle + \langle X(p), \nabla_v Y\rangle$
+    \item torsion freeness, $\nabla_X Y - \nabla_Y X = [X, Y]$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item For $X = (a_i)_i$, $Y = (b_i)_i$,
+    \begin{equation*}
+      \nabla_v (X+Y) = v(a_i + b_i)\boldsymbol{e}_i = v(a_i)\boldsymbol{e}_i + v(b_i)\boldsymbol{e}_i = \nabla_v X + \nabla_v Y.
+    \end{equation*}
+    
+    \item As above,
+    \begin{align*}
+      \nabla_v(fX) = v(fa_i)\boldsymbol{e}_i 
+        &= v(f)a_i(p)\boldsymbol{e}_i + f(p)v(a_i)\boldsymbol{e}_i\\
+        &= v(f) X(p) + f(p) \nabla_v X.
+    \end{align*}
+    
+    \item Also as above,
+    \begin{align*}
+      \nabla_{\alpha v+\beta w} X = (\alpha v + \beta w)a_i\boldsymbol{e}_i
+        &= \alpha v(a_i)\boldsymbol{e}_i + \beta w(a_i)\boldsymbol{e}_i\\
+        &= \alpha \nabla_v X + \beta \nabla_w Y.
+    \end{align*}
+    
+    \item For $\langle X, Y\rangle = a_i b_i$, we have
+    \begin{equation*}
+      \langle \nabla_v X, Y(p)\rangle = \langle v(a_i)\boldsymbol{e}_i, b_j(p)\boldsymbol{e}_j \rangle = v(a_i) b_i(p).
+    \end{equation*}
+    Similarly, we have
+    \begin{equation*}
+      \langle \nabla_v X(p), \nabla_v Y\rangle = v(b_i) a_i(p),
+    \end{equation*}
+    so their sum would be
+    \begin{equation*}
+      v(a_i) b_i(p) + v(b_i)a_i(p) = v(a_i b_i)(p) = v\langle X(p), Y(p)\rangle.
+    \end{equation*}
+    
+    \item We have
+    \begin{equation*}
+      (\nabla_X Y)(p) = X(p)(b_i)\boldsymbol{e}_i = a_j(p) \frac{\partial b_i}{\partial x_j}(p)\left.\frac{\partial}{\partial x_i}\right|_p,
+    \end{equation*}
+    while
+    \begin{equation*}
+      (\nabla_Y X)(p) = Y(p)(a_i)\boldsymbol{e}_i = b_j(p) \frac{\partial a_i}{\partial x_j}(p)\left.\frac{\partial}{\partial x_i}\right|_p,
+    \end{equation*}
+    so
+    \begin{align*}
+      (\nabla_X Y)(p) - (\nabla_Y X)(p) 
+        &= \left(a_j(p) \frac{\partial b_i}{\partial x_j}(p) - b_j(p) \frac{\partial a_i}{\partial x_j}(p)\right)\left.\frac{\partial}{\partial x_i}\right|_p\\
+        &=[X, Y](p).
+    \end{align*}
+    \qed
+  \end{enumerate}
+\end{proof}
+
+Since
+\begin{equation*}
+  (\nabla_X Y)(p) = \lim_{t\to 0}\frac{Y(p + tX(p)) - Y(p)}{t},
+\end{equation*}
+we also have the following:
+\begin{enumerate}
+  \item $\nabla_X (Y+Z) = \nabla_X Y +\nabla_X Z$,
+  \item $\nabla_X (fY) = [X(f)]Y + f\nabla_X Y$,
+  \item $\nabla_{fX + gY} Z = f \nabla_X Z + g\nabla_Y Z$,
+  \item $X(\langle Y,Z\rangle) = \langle \nabla_X Y, Z\rangle + \langle Y, \nabla_X Z\rangle$,
+  \item $\nabla_X Y - \nabla_Y X = [X, Y]$.
+\end{enumerate}
+
+Let $M$ be a differentiable manifold, and $\mathcal{X}(M)$ be the space of all vector fields on $M$. A map $\nabla: \mathcal{X}(M) \times \mathcal{X}(M) \to \mathcal{X}(M)$ satisfying the first three properties above is called an \textbf{covariant derivative} (or \textbf{affine connection}).\marginnote{An affine connection `connects' nearby tangent spaces, allowing the notion of derivative to make sense.}
+
+\begin{theorem}[Fundamental theorem of Riemannian geometry]
+  Let $(M,g)$ be a Riemannian manifold. Then there exists a unique covariant derivative $\nabla$ satisfying the Riemannian and torison freeness property (i.e. all properties above), and this connection is called the \textbf{Levi-Civita connection}.
+\end{theorem}
+  
+\begin{proof}
+
+  For uniqueness, note that since $\nabla$ is Riemannian, we have
+  \begin{align*}
+    X\langle Y,Z\rangle &= \langle \nabla_X Y, Z\rangle + \langle Y, \nabla_X Z\rangle,\\
+    Y\langle Z,X\rangle &= \langle \nabla_Y Z, X\rangle + \langle Z, \nabla_Y X\rangle,\\
+    Z\langle X,Y\rangle &= \langle \nabla_Z X, Y\rangle + \langle X, \nabla_Z Y\rangle,
+  \end{align*}
+  so that (with torsion freeness and properties of the inner product)
+  \begin{align*}
+    X\langle Y,Z\rangle + Y\langle Z,X\rangle - Z\langle X,Y\rangle
+      &= \langle \nabla_X Y, Z\rangle + [\langle Y, \nabla_X Z\rangle - \langle \nabla_Z X, Y\rangle] \\
+      +& [\langle \nabla_Y Z, X\rangle - \langle X, \nabla_Z Y\rangle] \\
+      +& \langle Z, [Y,X] + \nabla_X Y\rangle\\
+      &= \langle \nabla_X Y, Z\rangle + \langle Y, \nabla_X Z - \nabla_Z X\rangle\\
+      +& \langle X, \nabla_Y Z - \nabla_Z Y\rangle\\
+      +& \langle Z, [Y,X]\rangle + \langle Z, \nabla_X Y\rangle\\
+      &= 2\langle \nabla_X Y, Z\rangle + \langle Y, [X,Z]\rangle\\
+      +& \langle X, [Y,Z]\rangle + \langle Z, [Y,X]\rangle,
+  \end{align*}
+  which provides an explicit construction for $\nabla_X Y$ via
+  \begin{align*}
+    \langle \nabla_X Y, Z\rangle = 
+      &\frac{1}{2}( X\langle Y, Z\rangle + Y\langle Z,X \rangle - Z\langle X,Y \rangle \\
+      &-\langle Y, [X,Z]\rangle - \langle X, [Y,Z]\rangle - \langle Z, [Y,X]\rangle).
+  \end{align*}
+  
+  For existence, we check that the above construction satisfies the properties. Clearly we have linearity since the inner product and Lie bracket are linear. The expression above satisfies the product rule, torsion freeness and Riemannian property follows essentially by brute force calculation. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Christoffel symbols}
+
+Let $(M,g)$ be a Riemannian manifold, and $\nabla$ the Levi-Civita connection on $(M,g)$. For $\phi = (x_1, \ldots x_n): U\to V \subset \mathbb{R}^n$ a co-ordinate chart, we have
+\begin{equation}
+  \highlight{\left(\nabla_{\left.\frac{\partial}{\partial x_i}\right|_p} \frac{\partial}{\partial x_j}\right)(p) = \Gamma_{ij}^k \left.\frac{\partial}{\partial x_k}\right|_p},
+\end{equation}
+where $\Gamma{ij}^k : U\to\mathbb{R}$ are the \textbf{Christoffel symbols} of the covariant derivative with respect to $\phi$.
 
 %-------------------------------------------------------------------------------
 
