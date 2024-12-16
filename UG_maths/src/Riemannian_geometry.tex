@@ -1230,11 +1230,11 @@ Let $M$ be a differentiable manifold, and $\mathcal{X}(M)$ be the space of all v
       +& \langle X, [Y,Z]\rangle + \langle Z, [Y,X]\rangle,
   \end{align*}
   which provides an explicit construction for $\nabla_X Y$ via
-  \begin{align*}
+  \begin{equation}\begin{aligned}\label{eq:covariant}
     \langle \nabla_X Y, Z\rangle = 
       &\frac{1}{2}( X\langle Y, Z\rangle + Y\langle Z,X \rangle - Z\langle X,Y \rangle \\
       &-\langle Y, [X,Z]\rangle - \langle X, [Y,Z]\rangle - \langle Z, [Y,X]\rangle).
-  \end{align*}
+  \end{aligned}\end{equation}
   
   For existence, we check that the above construction satisfies the properties. Clearly we have linearity since the inner product and Lie bracket are linear. The expression above satisfies the product rule, torsion freeness and Riemannian property follows essentially by brute force calculation. \qed
 \end{proof}
@@ -1247,11 +1247,71 @@ Let $(M,g)$ be a Riemannian manifold, and $\nabla$ the Levi-Civita connection on
 \begin{equation}
   \highlight{\left(\nabla_{\left.\frac{\partial}{\partial x_i}\right|_p} \frac{\partial}{\partial x_j}\right)(p) = \Gamma_{ij}^k \left.\frac{\partial}{\partial x_k}\right|_p},
 \end{equation}
-where $\Gamma{ij}^k : U\to\mathbb{R}$ are the \textbf{Christoffel symbols} of the covariant derivative with respect to $\phi$.
+where $\Gamma{ij}^k : U\to\mathbb{R}$ are the \textbf{Christoffel symbols} of the covariant derivative with respect to $\phi$. Observing that $[\partial / \partial x_i, \partial / \partial x_j] = 0$, with Eq.~\eqref{eq:covariant},
+\begin{align*}
+  \left\langle \nabla_{\left.\frac{\partial}{\partial x_i}\right|_p} \frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_l} \right\rangle(p)
+    &= \frac{1}{2} \left[ \frac{\partial}{\partial x_i}\left\langle \frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_l}\right\rangle + \frac{\partial}{\partial x_j}\left\langle \frac{\partial}{\partial x_i}, \frac{\partial}{\partial x_l}\right\rangle - \frac{\partial}{\partial x_l}\left\langle \frac{\partial}{\partial x_i}, \frac{\partial}{\partial x_j}\right\rangle \right](p)\\
+    &= \frac{1}{2}(g_{jl,i} + g_{il,j} - g_{ij,l})(p)
+\end{align*}
+where $g_{jl,i} = \partial g_{jl} / \partial x_i$. Since $(g_{ij})$ is symmetric and invertible by construction, we denote the entries of $(g_{ij})^{-1}$ by $g^{ij}$, and we thus have the equation
+\begin{equation*}
+  \Gamma_{ij}^k g_{kl} = \frac{1}{2}(g_{jl,i} + g_{il,j} - g_{ij,l}),
+\end{equation*}
+so that
+\begin{equation}
+  \highlight{\Gamma_{ij}^k = \frac{1}{2}(g_{jl,i} + g_{il,j} - g_{ij,l})g^{kl}}.
+\end{equation}
+
+\begin{remark}
+  \begin{itemize}
+    \item $g_{lm} = g_{ml}$ implies that $g^{lm} = g^{ml}$.
+    \item $\Gamma_{ij}^k = \Gamma_{ji}^k$ be the fact that $g_{ij}$ is symmetric.
+  \end{itemize} 
+\end{remark}
+
+\begin{example}
+  Recall that for $\mathbb{H}^2$ we have $\langle v,w\rangle_z = \langle v, w\rangle / y^2$, $z=x + \mathrm{i}y$, and that
+  \begin{equation*}
+    g_{ij}(z) = \frac{1}{y^2}I \quad \Rightarrow \quad g^{ij}(z) = y^2 I.
+  \end{equation*}
+  The metric has no off-diagonal terms, and any $g_{ij,1}$ is going to be zero since there is no $x$ dependence. For example,
+  \begin{align*}
+    \Gamma_{11}^1 &= \frac{1}{2}(g_{1l,1} + g_{1l,1} - g_{11,l})g^{l1} &= \frac{1}{2}(g_{11,1} + g_{11,1} - g_{11,1})g^{11} &= 0,\\
+    \Gamma_{11}^2 &= \frac{1}{2}(g_{1l,1} + g_{1l,1} - g_{11,l})g^{l2} &= \frac{1}{2}(g_{12,1} + g_{12,1} - g_{11,2})g^{22} &= -\frac{1}{2}\left(-2\frac{1}{y^3}\right)y^2 = \frac{1}{y}
+  \end{align*}
+  and so forth. To summarise, there should be eight entries, and
+  \begin{equation*}
+    \Gamma_{11}^1 = \Gamma_{12}^2 = \Gamma_{21}^2 = \Gamma_{22}^1 = 0, \quad
+   -\Gamma_{11}^2 = \Gamma_{12}^1 = \Gamma_{21}^1 = \Gamma_{22}^2 = -\frac{1}{y}. 
+  \end{equation*}
+  Then note that
+  \begin{align*}
+    \nabla_{\frac{\partial}{\partial x}}\frac{\partial}{\partial x} &= \Gamma_{11}^1 \frac{\partial}{\partial x} + \Gamma_{11}^2 \frac{\partial}{\partial y} = +\frac{1}{y}\frac{\partial}{\partial y} \\
+    \nabla_{\frac{\partial}{\partial y}}\frac{\partial}{\partial y} &= \Gamma_{22}^1 \frac{\partial}{\partial x} + \Gamma_{22}^2 \frac{\partial}{\partial y} = -\frac{1}{y}\frac{\partial}{\partial y},
+  \end{align*}
+  while by the torison-free property and that $[\partial / \partial x, \partial / \partial y] = 0$,
+  \begin{align*}
+    \nabla_{\frac{\partial}{\partial x}}\frac{\partial}{\partial y} &= \Gamma_{12}^1 \frac{\partial}{\partial x} + \Gamma_{12}^2 \frac{\partial}{\partial y} = -\frac{1}{y}\frac{\partial}{\partial x} \\
+    \nabla_{\frac{\partial}{\partial y}}\frac{\partial}{\partial x} &= \left[\frac{\partial}{\partial y}, \frac{\partial}{\partial x}\right] + \nabla_{\frac{\partial}{\partial y}}\frac{\partial}{\partial x} =-\frac{1}{y}\frac{\partial}{\partial x}.
+  \end{align*}
+  
+  Let $X(z) = y(\partial / \partial y)|_z$ be a vector field (and note that $\|X(z)\|_z = 1$ in the present metric). We have
+  \begin{align*}
+    (\nabla_X X)(z) 
+      &= y\left( \nabla_{\frac{\partial}{\partial y}} \left( y\frac{\partial}{\partial y} \right) \right)(z)\\
+      &= y\left[\frac{\partial y}{\partial y}\frac{\partial}{\partial y} + y \nabla_{\frac{\partial}{\partial y}} \frac{\partial}{\partial y} \right](z)\\
+      &= y\left( 1\frac{\partial}{\partial y} - y \frac{1}{y}\frac{\partial}{\partial y}\right)(z) = 0.
+  \end{align*}
+  The covariant derivative of $X$ in the direction $X$ vanishes, which is perhaps not that surprising.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
 \section{Parallel transport}
+
+Let $(M,g)$ be a Riemannian manifold, $\nabla$ the Levi-Civita connection, $c[a,b] \to M$ a curve, $X \in \mathcal{X}(M)$, then $\nabla_{c'(t)} X \in T_{c(t)}(M)$ only depends on $X$ along $c$, i.e. if $\tilde{X} \in \mathcal{X}(M)$ with $\tilde{X}(c(t)) = X(c(t))$ for all $t \in [a,b]$ then $\nabla_{c'(t)}X = \nabla_{c'(t)} \tilde{X}$.
+
+Let $c:[a,b] \to M$ be a differentiable curve on a Riemannian manifold. A map $X:[a,b] \to T(M)$ with $X(t) \in T_{c(t)}(M)$ is called a \textbf{vector field along $c$}. The space of all such vector fields is denoted by $\mathcal{X}_c(M)$.
 
 %-------------------------------------------------------------------------------
 
