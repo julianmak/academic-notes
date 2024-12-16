@@ -1313,6 +1313,60 @@ Let $(M,g)$ be a Riemannian manifold, $\nabla$ the Levi-Civita connection, $c[a,
 
 Let $c:[a,b] \to M$ be a differentiable curve on a Riemannian manifold. A map $X:[a,b] \to T(M)$ with $X(t) \in T_{c(t)}(M)$ is called a \textbf{vector field along $c$}. The space of all such vector fields is denoted by $\mathcal{X}_c(M)$.
 
+\begin{example}
+  For $c:[a,b] \to M$ a curve, then $t\mapsto c'(t)$ is a vector field along $c$.
+\end{example}
+
+\begin{proposition}
+  Let $\nabla$ be the Levi-Civita connection of $(M,g)$, $c:[a,b] \to M$ a curve. Then there is a unique map called the \textbf{covariant derivative} along $c$
+  \begin{equation}
+    \frac{\mathrm{D}}{\mathrm{d}t} : \mathcal{X}_c(M) \to \mathcal{X}_c(M)
+  \end{equation}
+  satisfying
+  \begin{enumerate}
+    \item $(\mathrm{D} / \mathrm{d}t) (aX + bY) = a (\mathrm{D}X / \mathrm{d}t) + b (\mathrm{D}Y / \mathrm{d}t)$ for $a,b\in \mathbb{R}$,
+    \item $(\mathrm{D} / \mathrm{d}t) (fX) = f'X + f (\mathrm{D}X / \mathrm{d}t)$ for $f\in C^\infty([a,b])$,
+    \item for $\tilde{X} \in \mathcal{X}(M)$ a local extension of $X$, i.e. there exists $t_0 \in[a,b]$ where $\tilde{X}(c(t)) = X(t)$ for all $t \in [t_0 - \epsilon, t_0 + \epsilon]$ for some $\epsilon > 0$, we have
+    \begin{equation}
+      \frac{\mathrm{D}X}{\mathrm{d}t}(t_0) = \nabla_{c'(t_0)} \tilde{X}.
+    \end{equation}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  To proof uniqueness, let $\phi = (x_1, \ldots x_n) : U \to V \subset \mathbb{R}^n$ be a co-ordinate chart with $c([t_0 - \epsilon, t_0 + \epsilon]) \subset U$, $X \in \mathcal{X}_c(M)$. Then, locally,
+  \begin{equation*}
+    X(t) = a_i(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)},
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \frac{\mathrm{D}X}{\mathrm{d}t}(t) = a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) \frac{\mathrm{D}}{\mathrm{d}t}\left(\frac{\partial}{\partial x_i} \circ c\right)(t).
+  \end{equation*}
+  Note that $(\partial / \partial x_i \circ c) \in \mathcal{X}_c(M)$ and is a natural extension of $X$, so
+  \begin{equation*}
+    \frac{\mathrm{D}X}{\mathrm{d}t}(t) = \left(a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) \nabla_{c'(t)} \frac{\partial}{\partial x_i}\right)(t) \in T_{c(t)}(M),
+  \end{equation*}
+  and hence we have uniqueness. Since above is an explicit construction, we can check that it satisfies all the desired properties, so we also have existence. \qed
+\end{proof}
+
+\begin{example}
+  Let $M\subset \mathbb{R}^3$ be a surface, $\mathrm{D}/\mathrm{d}t$ the covariant derivative along a curve $c$, and $X\in \mathcal{X}_c(t)$ with $X(t) = [a_i(t)]_i \in \mathbb{R}^3 \cong T_{c(t)}(\mathbb{R}^3)$. Then
+  \begin{equation*}
+    \frac{\mathrm{D}X}{\mathrm{d}t}(t) = \pi_{c(t)}[a_i'(t)]_i \in T_{c(t)}(M)
+  \end{equation*}
+  where $\pi_{c(t)}$ is the orthogonal projection onto $M$. In particular, if $c(t) \in M$, then $c(t) \in T_{c(t)}(M)$, and
+  \begin{equation*}
+    \frac{\mathrm{D}c'}{\mathrm{d}t}(t) = \pi_{c(t)}[c_i''(t)]_i.
+  \end{equation*}
+  For $\mathrm{D}c' / \mathrm{d}t \equiv 0$, this is equivalent to $c''(t)$ being normal to $T_{c(t)}(M)$.\marginnote{This is the condition revisited later that $c$ is a \textbf{geodesic}.}
+\end{example}
+
+A vector field $X:[a,b] \to T(M)$ along $c$ is called \textbf{parallel along $c$} iff $\mathrm{D}X / \mathrm{d}t \equiv 0$.\marginnote{A geodesic is defined to be a curve whose tangent vectors remain parallel if they are transported along it. Requires the notion of an affine connection.}
+
+\begin{theorem}
+  Let $c:[a,b] \to M$ be a curve on a Riemannian manifold $(M,g)$ and $v\in T_{c(a)}(M)$. Then there exists a unique parallel vector field $X \in \mathcal{X}_c(M)$ with $X(a) = v$. Also, for $\mbox{dim}M = n$, the space of all parallel vector fields in $\mathcal{X}_c(M)$ is a $n$-vector space over $\mathbb{R}$.
+\end{theorem}
+
 %-------------------------------------------------------------------------------
 
 \section{Geodesics}
