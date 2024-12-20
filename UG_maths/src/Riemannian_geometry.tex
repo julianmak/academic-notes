@@ -1344,7 +1344,7 @@ Let $c:[a,b] \to M$ be a differentiable curve on a Riemannian manifold. A map $X
   \end{equation*}
   Note that $(\partial / \partial x_i \circ c) \in \mathcal{X}_c(M)$ and is a natural extension of $X$, so
   \begin{equation*}
-    \frac{\mathrm{D}X}{\mathrm{d}t}(t) = \left(a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) \nabla_{c'(t)} \frac{\partial}{\partial x_i}\right)(t) \in T_{c(t)}(M),
+    \frac{\mathrm{D}X}{\mathrm{d}t}(t) = a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) \nabla_{c'(t)} \frac{\partial}{\partial x_i} \in T_{c(t)}(M),
   \end{equation*}
   and hence we have uniqueness. Since above is an explicit construction, we can check that it satisfies all the desired properties, so we also have existence. \qed
 \end{proof}
@@ -1367,9 +1367,127 @@ A vector field $X:[a,b] \to T(M)$ along $c$ is called \textbf{parallel along $c$
   Let $c:[a,b] \to M$ be a curve on a Riemannian manifold $(M,g)$ and $v\in T_{c(a)}(M)$. Then there exists a unique parallel vector field $X \in \mathcal{X}_c(M)$ with $X(a) = v$. Also, for $\mbox{dim}M = n$, the space of all parallel vector fields in $\mathcal{X}_c(M)$ is a $n$-vector space over $\mathbb{R}$.
 \end{theorem}
 
+\begin{proof}
+  For simplicity, assume there exists a co-ordinate chart $\phi = (x_1, \ldots x_n): U\to V \subset \mathbb{R}^n$ with $c([a,b]) \subset U$. Let
+  \begin{equation*}
+     X(t) = a_i \left.\frac{\partial}{\partial x_i}\right|_{c(t)} \in \mathcal{X}_c(M),
+  \end{equation*}
+  and $(\phi \circ c) = (c_1(t), \ldots c_n(t)): \mathbb{R} \to \mathbb{R}^n$, then
+  \begin{equation*}
+    c'(t) = c_i'(t)\left.\frac{\partial}{\partial x_i}\right|_{c(t)}.
+  \end{equation*}
+  So we have
+  \begin{align*}
+    \frac{\mathrm{D}X}{\mathrm{d}t}(t) 
+      &= a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) \nabla_{c'(t)} \frac{\partial}{\partial x_i}\\
+      &= a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) c_j'(t) \nabla_{\left.\frac{\partial}{\partial x_j}\right|_{c(t)}} \frac{\partial}{\partial x_i}\\
+      &= a_i'(t) \left.\frac{\partial}{\partial x_i}\right|_{c(t)} + a_i(t) c_j'(t) \Gamma_{ij}^k(c(t)) \left.\frac{\partial}{\partial x_k}\right|_{c(t)}\\
+      &= \left[a_k'(t) + a_i(t) c'_j(t) \Gamma_{ij}^k(c(t)) \right]\left.\frac{\partial}{\partial x_k}\right|_{c(t)}.
+  \end{align*}
+  Since $\partial / \partial x_j$ form a basis, if $\mathrm{D}X / \mathrm{d}t \equiv 0$, this implies that we have
+  \begin{equation*}
+    a(t) = A(t) a(t), \quad A(t) = [A_{ki}(t)] = \left[ -c_j'(t) \Gamma_{ij}^k(c(t))\right]
+  \end{equation*}
+  for all $t$ and $k$. The theory of ODEs tells us that there is a unique solution throughout the domain for any choice fo initial conditions. For $v = \alpha_i (\partial / \partial x_i)|_{c(a)} \in T_{c(a)}(M)$, this proves uniqueness and existent of the parallel vector field
+  \begin{equation*}
+    X = a_i \left(\frac{\partial}{\partial x_i} \circ c\right), \quad X(a) = v.
+  \end{equation*}
+  Since parallel vector fields form a real vector space and are uniquely determined by their initial vector $v \in T_{c(a)}(M)$, we have
+  \begin{equation*}
+    \mbox{dim}\left\{X \in X_c(M)\ \middle|\  \frac{\mathrm{D}X}{\mathrm{d}t} \equiv 0\right\} = \mbox{dim} T_{c(a)}(M) = n.
+  \end{equation*}
+  \qed
+\end{proof}
+
+\begin{example}
+  For $c(t) = \mathrm{i}y + t$ in the hyperbolic plane with $g_z(v,w) = \langle v,w\rangle / y^2$, $z=x + \mathrm{i}y$, recall we have the Christoffel symbols from before:
+  \begin{equation*}
+    \Gamma_{11}^1 = \Gamma_{12}^2 = \Gamma_{21}^2 = \Gamma_{22}^1 = 0, \quad
+   -\Gamma_{11}^2 = \Gamma_{12}^1 = \Gamma_{21}^1 = \Gamma_{22}^2 = -\frac{1}{y}. 
+  \end{equation*}
+  The vector field $X(t) = a_1(t) (\partial/\partial x)|_{c(t)} + a_2(t) (\partial/\partial y)|_{c(t)}$ is parallel along $c$ with $X(0) = (\partial / \partial y)|_{\mathrm{i}y}$, and we have
+  \begin{equation*}
+    c_1'(t) = \frac{\mathrm{d}}{\mathrm{d}t} \mbox{Re}(c) = 1, \quad
+    c_2'(t) = \frac{\mathrm{d}}{\mathrm{d}t} \mbox{Im}(c) = 0.
+  \end{equation*}
+  Using the notation as in the theorem, we have $A_{ki}(t) = -c_j' \Gamma_{ij}^k(c) = -\Gamma_{i1}^k(c)$, so
+  \begin{equation*}
+    a'(t) = -\left[\begin{matrix}\Gamma_{11}^1 & \Gamma_{12}^1 \\ \Gamma_{11}^2 & \Gamma_{12}^2\end{matrix}\right] a(t) = \left[\begin{matrix}0 & 1/y \\ -1/y & 0\end{matrix}\right] a(t), \quad a(0) = \begin{pmatrix}0\\ 1\end{pmatrix}.
+  \end{equation*}
+  If we can find solutions to the system, then the solution corresponds to $\mathrm{D}X / \mathrm{d}t = 0$ and we have our parallel vector field along $c$. By the usual theory of differential equations, we have
+  \begin{equation*}
+    a(t) = \mathrm{e}^{At}\begin{pmatrix}0\\ 1\end{pmatrix} = \left(\sum_k \frac{t^k}{k!}\left[\begin{matrix}0 & 1/y \\ -1/y & 0\end{matrix}\right] \right)\begin{pmatrix}0\\ 1\end{pmatrix}.
+  \end{equation*}
+  Note that
+  \begin{align*}
+    \left[\begin{matrix}0 & 1/y \\ -1/y & 0\end{matrix}\right]^{2k} 
+      &= \left[\begin{matrix}-1/y^2 & 0 \\ 0 & -1/y^2\end{matrix}\right]^{k}
+       = \left[\begin{matrix}(-1)^k/y^{2k} & 0 \\ 0 & (-1)^k/y^{2k}\end{matrix}\right],\\
+    \left[\begin{matrix}0 & 1/y \\ -1/y & 0\end{matrix}\right]^{2k+1} 
+      &= \left[\begin{matrix}0 & (-1)^k/y^{2k+1} \\ (-1)^k/y^{2k+1} & 0\end{matrix}\right]^{2k+1},
+  \end{align*}
+  so we have
+  \begin{equation*}
+    a(t) = \sum_k \left(\frac{t^k}{k!}\left[\begin{matrix}(-1)^k/y^{2k} & (-1)^k/y^{2k+1} \\ (-1)^k/y^{2k+1} & (-1)^k/y^{2k}\end{matrix}\right] \right)\begin{pmatrix}0\\ 1\end{pmatrix} = \begin{pmatrix}\sin t/y\\ \cos t/y\end{pmatrix}.
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    X(t) = \left(\sin\frac{t}{y}\right) \left.\frac{\partial}{\partial x}\right|_{\mathrm{i}y+t} + \left(\cos\frac{t}{y}\right) \left.\frac{\partial}{\partial y}\right|_{\mathrm{i}y+t}
+  \end{equation*}
+  has $X(0) = (\partial / \partial y)|_{\mathrm{i}y}$ and $X(t)$ is parallel along $c$.
+\end{example}
+
+Let $(M,g)$ be a Riemannian manifold, $c:[a,b] \to M$ a curve. The \textbf{parallel transport} is a linear map $\rho_c : T_{c(a)}(M) \to T_{c(b)}(M)$, and for $c \in T_{c(a)}(M)$, we have $\rho_c(v) = X(b)$, where $X \in \mathcal{X}_c(M)$ is the unique parallel vector field along $c$ with $X(a) = v$.\marginnote{Transport along a vector field preserving the parallelism with respect to the connection.}
+
+The parallel transport along a curve $c$ yields a linear isomorphism $\rho_c :T_p(M) \to T_q(M)$ where $p=c(a)$ and $q=c(b)$, i.e., a connection between two disjoint tangent spaces. Note the parallel transport is defined via the Levi-Civita connection, and hence the Levi-Civita connection induces a connection between disjoint tangent spaces along curves connecting their footpoints. On the other hand, the isomorphism $\rho_c$ depends in general on a curve $c$, i.e., if $\gamma:[\alpha, \beta] \to M$ with $\gamma(\alpha) = c(a)$ and $\gamma(\beta) = c(b)$, it is not necessarily true that $\rho_c = \rho_\gamma$.
+
+\begin{proposition}
+  The parallel transport $\rho_c T_p(M) \to T_q(M)$ is a linear isometry, i.e.
+  \begin{equation*}
+    g_p(v_1, v_2) = g_q( \rho_c(v_1), \rho_c(v_2) )
+  \end{equation*}
+  for all $v_{1,2} \in T_p(M)$.
+\end{proposition}
+
+\begin{proof}
+  For $X,Y \in \mathcal{X}_c(M)$, assume there is a global co-ordinate chart $\phi = (x_1, \ldots x_n): U\to V$ with $c([a,b]) \subset U$. Then
+  \begin{equation*}
+    X(t) = a_j(t) \left.\frac{\partial}{\partial x_j}\right|_{c(t)}, \quad Y(t) = b_j(t) \left.\frac{\partial}{\partial x_j}\right|_{c(t)},
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} \langle X, Y\rangle = \frac{\mathrm{d}}{\mathrm{d}t} \left( a_j b_k \left[ \left\langle \frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k} \right\rangle \circ c \right] \right).
+  \end{equation*}
+  The Riemannian property implies that
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} \left( \left\langle \frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k} \right\rangle \circ c \right) = \left\langle \nabla_{c'(t)}\frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k}  \right\rangle + \left\langle \frac{\partial}{\partial x_j}, \nabla_{c'(t)}\frac{\partial}{\partial x_k}  \right\rangle.
+  \end{equation*}
+  Together, this implies
+  \begin{align*}
+    \frac{\mathrm{d}}{\mathrm{d}t} \langle X, Y\rangle
+      &= (a_j' b_k + a_j b_k') \left[ \left\langle \frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k} \right\rangle \circ c \right]\\
+      +& a_j b_k \left(\left\langle \nabla_{c'(t)}\frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k}  \right\rangle + \left\langle \frac{\partial}{\partial x_j}, \nabla_{c'(t)}\frac{\partial}{\partial x_k}  \right\rangle\right)\\
+      &= \left\langle a_j' \left.\frac{\partial}{\partial x_j}\right|_{c(t)} + a_j \nabla_{c'(t)} \frac{\partial}{\partial x_j}, b_k \left.\frac{\partial}{\partial x_k}\right|_{c(t)} \right\rangle\\
+      +& \left\langle a_j \left.\frac{\partial}{\partial x_j}\right|_{c(t)}, b_k' \left.\frac{\partial}{\partial x_k}\right|_{c(t)} + b_k \nabla_{c'(t)}\frac{\partial}{\partial x_k} \right\rangle\\
+      &= \left\langle \frac{\mathrm{D}}{\mathrm{d}t} \left(a_j \frac{\partial}{\partial x_j} \circ c\right), Y \right\rangle + \left\langle X, \frac{\mathrm{D}}{\mathrm{d}t} \left(b_k \frac{\partial}{\partial x_k} \circ c\right) \right\rangle\\
+      &= \left\langle \frac{\mathrm{D}X}{\mathrm{d}t}, Y \right\rangle + \left\langle X, \frac{\mathrm{D}Y}{\mathrm{d}t} \right\rangle = 0.
+  \end{align*}
+  Since $X$ and $Y$ are parallel, $\langle X, Y\rangle$ is the constant function, so
+  \begin{equation*}
+    \langle \rho_c X(a), \rho_c X(a) \rangle = \langle X(b), Y(b)\rangle = \langle X(a), Y(a) \rangle,
+  \end{equation*}
+  and we therefore have an isometry. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Geodesics}
+
+Let $(M,g)$ be a Riemannian manifold. A  curve $c:[a,b] \to M$ is a \textbf{geodesic} if $c'$ is parallel along the curve $c$ for all $t$, i.e.,
+\begin{equation}
+  \highlight{\frac{\mathrm{D}}{\mathrm{d}t} c'(t) \equiv 0}
+\end{equation}
+for all $t\in[a,b]$, and $\mathrm{D}/\mathrm{d}t$ denotes the covariant derivative along $c$.
 
 %-------------------------------------------------------------------------------
 
