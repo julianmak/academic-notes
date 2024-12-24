@@ -1265,7 +1265,7 @@ so that
 \begin{remark}
   \begin{itemize}
     \item $g_{lm} = g_{ml}$ implies that $g^{lm} = g^{ml}$.
-    \item $\Gamma_{ij}^k = \Gamma_{ji}^k$ be the fact that $g_{ij}$ is symmetric.
+    \item $\Gamma_{ij}^k = \Gamma_{ji}^k$ since $g_{ij}$ is symmetric.\marginnote{The Christoffel symbols are not always symmetric by construction: in this case these originate from a metric connection so is symmetric.}
   \end{itemize} 
 \end{remark}
 
@@ -1489,9 +1489,163 @@ Let $(M,g)$ be a Riemannian manifold. A  curve $c:[a,b] \to M$ is a \textbf{geod
 \end{equation}
 for all $t\in[a,b]$, and $\mathrm{D}/\mathrm{d}t$ denotes the covariant derivative along $c$.
 
+\begin{lemma}
+  Let $c:[a,b] \to M$ be a geodesic. Then $c$ is parameterised proportional to arc length.
+\end{lemma}
+
+\begin{proof}
+  We just need to prove that there exists $k>0$ where $\|c'(t)\| = k$ for all $t \in [a,b]$. Note that we have
+  \begin{equation*}
+    \|c'\|^2 = k^2 \quad \Leftrightarrow \quad \langle c', c'\rangle \quad \Leftrightarrow \quad \frac{\mathrm{d}}{\mathrm{d}t} \langle c', c'\rangle = 0.
+  \end{equation*}
+  But
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t} \langle c', c'\rangle = \left\langle \frac{\mathrm{D}}{\mathrm{d}t}c', c'\right\rangle + \left\langle c', \frac{\mathrm{D}}{\mathrm{d}t}c'\right\rangle = 0
+  \end{equation*}
+  since we have a geodesic, so we have what we need. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $(M,g)$ be a Riemannian manifold. Then for all $v \in T_p(M)$, there exists some $\epsilon > 0$ and a unique geodesic $c:(-\epsilon, \epsilon) \to M$ where $c(0) = p$ and $c'(0) = v$.
+\end{theorem}
+
+\begin{proof}
+  Let $v\in T_p(M)$ and $\phi = (x_1, \ldots x_n): U \to V$ be a local chart, and $p\in U$. Then $v = v_i (\partial/\partial x_i)|_p$. Let $c:(-\epsilon, \epsilon) \to U$ be some curve with $c(0) = p$ and $(\phi \circ c)(t) = (c_1(t), \ldots c_n(t))$. Then $c'(t) = c_i'(t) (\partial/\partial x_i)|_{c(t)}$. Then
+  \begin{align*}
+    \left(\frac{\mathrm{D}}{\mathrm{d}t} c'\right)(t) 
+      &= c_i'' \left.\frac{\partial}{\partial x_i}\right|_c + c_i' \nabla_{c'}\frac{\partial}{\partial x_i}(c(t))\\
+      &= c_i'' \left.\frac{\partial}{\partial x_i}\right|_c + c_i' c_j' \left( \nabla_{\frac{\partial}{\partial x_j}} \frac{\partial}{\partial x_i}\right) (c(t))\\
+      &= \left[c_k'' + c_i' c_j' \Gamma_{ij}^k (c(t))\right] \left.\frac{\partial}{\partial x_k}\right|_c.
+  \end{align*}
+  For a geodesic the above is equal to zero, and since $\partial / \partial x_k$ is a basis, we have the \textbf{geodesic equations}
+  \begin{equation*}
+    c_k'' + c_i' c_k' \Gamma_{ij}^k(c(t)) = 0, \qquad c_k(0) = x_k(p), \quad c_k'(0) = v_k
+  \end{equation*}
+  for all $k$. This is a system of second order ODEs, and by the theory of ODEs there exists a unique solution in a neighbourhood $(-\epsilon, \epsilon)$, and so we have existence and uniqueness. \qed
+\end{proof}
+
+Let $c:[a,b] \to M$ be a differentiable curve. A differentiable map $F: (-\epsilon, \epsilon \times [a,b] \to M$ is called the (differentiable) \textbf{variation} of $c$ if $F(0,t) = c(t)$ for all $t\in [a,b]$. The variation is called \textbf{proper} if we have $F(s,a) = c(a)$ and $F(s,b) = c(b)$.\marginnote{End points are pinned and only the interior can be varied.} The \textbf{variational vector field} $X$ of a variation $F$ of $c$ is
+\begin{equation}
+  \highlight{X(t) = \frac{\partial F}{\partial s}(0, t)}.
+\end{equation}
+If $F$ is proper then $X(a) = X(b) = 0$ since $s \mapsto F(s,a)$ and $s\mapsto F(s, b)$ are constant maps. The \textbf{length} and \textbf{energy} is given by
+\begin{equation}
+  \highlight{ \ell(s) = \int_a^b \left\| \frac{\partial F}{\partial t}(s,t) \right\|\; \mathrm{d}t }
+\end{equation}
+and
+\begin{equation}
+  \highlight{ E(s) = \frac{1}{2}\int_a^b \left\| \frac{\partial F}{\partial t}(s,t) \right\|^2\; \mathrm{d}t }.
+\end{equation}
+
+\begin{lemma}{Symmetry lemma}
+  Let $W\subset \mathbb{R}^2$ be open and $F: W\to M$ be the variation. Let $\mathrm{D}/\mathrm{d}t$ denote the covariant derivative along $t\mapsto F(s,t)$ and $\mathrm{D}/\mathrm{d}s$ denote the same but along $s\mapsto F(s,t)$. Then
+  \begin{equation}
+    \frac{\mathrm{D}}{\mathrm{d}t} \frac{\partial F}{\partial s} = \frac{\mathrm{D}}{\mathrm{d}s} \frac{\partial F}{\partial t}.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  Without loss of generality, assume that there is a co-ordinate chart $\phi = (x_1, \ldots x_n) : U \to V \subset \mathbb{R}^n$, $U \subset M$ and $F(W) \subset U$. Let $(\phi\circ F)(s,t) = (\alpha_1 (s,t), \ldots a_n(s,t))$, then
+  \begin{align*}
+    \frac{\mathrm{D}}{\mathrm{d}t} \frac{\partial F}{\partial s}
+      &= \frac{\mathrm{D}}{\mathrm{d}t} \left(\frac{\partial \alpha_j}{\partial s}\frac{\partial}{\partial x_j}\right)\\
+      &= \frac{\partial^2 \alpha_j}{\partial t\partial s}\frac{\partial}{\partial x_j} + \frac{\partial \alpha_j}{\partial s}\nabla_{\frac{\partial \alpha_k}{\partial t}\frac{\partial}{\partial x_k}}\frac{\partial}{\partial x_j}\\
+      &= \frac{\partial^2 \alpha_j}{\partial t\partial s}\frac{\partial}{\partial x_j} + \frac{\partial \alpha_k}{\partial t}\frac{\partial \alpha_j}{\partial s} \left(\nabla_{\frac{\partial}{\partial x_j}}\frac{\partial}{\partial x_k} + \left[\frac{\partial}{\partial x_j}, \frac{\partial}{\partial x_k}\right]\right)\\
+      &= \frac{\mathrm{D}}{\mathrm{d}s} \frac{\partial F}{\partial t}
+  \end{align*}
+  by the torsion definition, but also that the connection is torsion free. \qed
+\end{proof}
+
+\begin{theorem}[First variational formula for length]
+  Let $F$ be a variation of $c$ with $c'(t) \neq 0$ for all $t\in[a,b]$, and $X$ be the variational vector field. Let $\ell(s)$ denote the associated length, then
+  \begin{equation}
+    \highlight{ \ell'(0) = \int_a^b \frac{1}{\|c'(t)\|} \left[ \frac{\mathrm{d}}{\mathrm{d}t}\left\langle X(t), c'(t)\right\rangle - \left\langle X(t), \frac{\mathrm{D}}{\mathrm{d}t}c'(t)\right\rangle\right] \; \mathrm{d}t }
+  \end{equation}
+  If $c$ is parameterised by proportional to arc length, then $\|c'(t)\| = k$, and
+  \begin{equation}
+    k\ell'(0) = \left\langle X(b), c'(b)\right\rangle - \left\langle X(a), c'(a)\right\rangle - \int_a^b \left\langle X(t), \frac{\mathrm{D}}{\mathrm{d}t}c'(t)\right\rangle \; \mathrm{d}t.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Recall that an equivalent condition for a connection $\nabla$ to be Riemannian is that
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t}\left\langle Y, Z\right\rangle = \left\langle \frac{\mathrm{D}}{\mathrm{d}t}Y, Z\right\rangle + \left\langle Y, \frac{\mathrm{D}}{\mathrm{d}t}Z\right\rangle.
+  \end{equation*}
+  Then since
+  \begin{equation*}
+    \ell(s) = \int_a^b \left\| \frac{\partial F}{\partial t}(s,t) \right\|\; \mathrm{d}t = \int_a^b \left\langle \frac{\partial F}{\partial t}, \frac{\partial F}{\partial t} \right\rangle^{1/2} \; \mathrm{d}t
+  \end{equation*}
+  we have
+  \begin{align*}
+    \ell'(0)
+      &= \left.\frac{\mathrm{d}}{\mathrm{d}s}\right|_{s=0} \int_a^b (\cdots)\; \mathrm{d}t \\
+      &= \int_a^b \left.\frac{\partial}{\partial s}\right|_{s=0} (\cdots)\; \mathrm{d}t \\
+      &= \int_a^b \frac{1}{2}\frac{1}{\|\partial F / \partial t|_{s=0}\|}2 \left\langle \frac{\mathrm{D}}{\mathrm{d}s}\left.\frac{\partial F}{\partial t}\right|_{s=0}, \left.\frac{\partial F}{\partial t}\right|_{s=0} \right\rangle\; \mathrm{d}t\\
+      &= \int_a^b \frac{1}{\|c'(t)\|}\left\langle \frac{\mathrm{D}}{\mathrm{d}s}\left.\frac{\partial F}{\partial t}\right|_{s=0}, c'(t) \right\rangle\; \mathrm{d}t\\
+      &= \int_a^b \frac{1}{\|c'(t)\|}\left\langle \frac{\mathrm{D}}{\mathrm{d}s}X, c'(t) \right\rangle\; \mathrm{d}t\\
+      &= \int_a^b \frac{1}{\|c'(t)\|} \left[\frac{\mathrm{d}}{\mathrm{d}t}\left\langle X, c'(t) \right\rangle - \left\langle X, \frac{\mathrm{D}}{\mathrm{d}s}c'\right\rangle\right]\; \mathrm{d}t.
+  \end{align*}
+  \qed
+\end{proof}
+
+\begin{lemma}
+  Let $c:[a,b] \to M$ be a differentiable curve, and $X$ a vector field along $c$, with $X(a) = X(b) = 0$. Then there exists a proper variation $F$ with $X$ as its variational vector field. \qedwhite
+\end{lemma}
+
+\begin{theorem}
+  Let $c:[a,b] \to M$ be a differentiable curve. It is a geodesic iff $c$ is parameterised proportional to arc length, and $\ell'(0) = 0$ for any proper variation of $c$. \marginnote{Or, as we might expect intuitively, geodesics are locally length minimising.}
+\end{theorem}
+
+\begin{proof}
+  If $c$ is a geodesic then clearly it has to be parameterised proportional to arc length, so $\|c'(t)\| = k > 0$ assuming $c$ is non-singular. By the first variational formula for length,
+  \begin{equation*}
+    \ell'(0) = \int_a^b \frac{1}{k}\left[\frac{\mathrm{d}}{\mathrm{d}t} \left\langle X, c'(t) \right\rangle - 0\right] \; \mathrm{d}t = \frac{1}{k}\left[ \left\langle X, c'(t) \right\rangle \right]_a^b = 0
+  \end{equation*}
+  since $X$ is a proper variational vector field and using the above lemma.
+  
+  Suppose now $\ell'(0)$ ad $\|c'\| = k > 0$. If $c$ is not a geodesic, then $\mathrm{D}c'/\mathrm{d}t (t_0) \neq 0$ for some $t_0 \in [a,b]$. By continuity, we assume $t_0 \in(a,b)$. We choose a smooth function $\phi$ where $\phi:[a,b] \to [0,1]$ with $\phi(a) = \phi(b) = 0$, $\phi(t_0) = 1$, $\phi(t) \geq 0$, and we define a vector field along $c$ by
+  \begin{equation*}
+    X(t) = \phi(t) \frac{\mathrm{D}c'}{\mathrm{d}t}.
+  \end{equation*}
+  Since $X(a) = X(b) = 0$, $X$ can represent the variational vector field of a proper variation, and $X(t) \neq 0$ by the lemma. Then, by the hypothesis,
+  \begin{align*}
+    0 &= k \ell'(0) \\
+      &= -\int_a^b \left\langle X(t), \frac{\mathrm{D}}{\mathrm{d}t}c'(t)\right\rangle \; \mathrm{d}t\\
+      &= -\int_a^b \phi(t) \left\| \frac{\mathrm{D}c'}{\mathrm{d}t}\right\|^2\; \mathrm{d}t < 0,
+  \end{align*}
+  so we have a contradiction, and $c$ is a geodesic. \qed
+\end{proof}
+
 %-------------------------------------------------------------------------------
 
 \section{Geodesic flow}
+
+\begin{lemma}[Scaling lemma]
+  Let $c:[a,b] \to M$ be a geodesic and $k>0$. Let $\gamma: [a/k, b/k] \to M$ with $\gamma(t) = c(kt)$ for all $t$. Then $\gamma$ is also a geodesic, and $\gamma'(t) = kc'(kt)$.\marginnote{Note the reparameterisation is still in terms of an \textbf{affine} parameter (and all scale factors in the geodesic equations drop out).}
+\end{lemma}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    \gamma'(t)(f) = \frac{\mathrm{d}}{\mathrm{d}t} (f\circ \gamma)(t) = \frac{\mathrm{d}}{\mathrm{d}t} (f\circ c)(kt) = k(f\circ c)'(kt) = kc'(kt)(f),
+  \end{equation*}
+  so that $\gamma'(t) = kc'(kt)$ for all $f \in D(M, \gamma(t))$.
+  
+  Let $\phi = (x_1, \ldots x_n): U\to V\subset\mathbb{R}^n$ be a chart with $\gamma(t) = c(kt) \in U$. Let $(\phi\circ \gamma) = (\gamma_1, \ldots \gamma_n)$ and $(\phi\circ c) = (c_1, \ldots c_n)$, then
+  \begin{align*}
+    \frac{\mathrm{D}}{\mathrm{d}t} \gamma'\\
+      &= \nabla_{\gamma'}\gamma' \\
+      &= \left(\gamma_l'' + \gamma_i'\gamma_j' \Gamma_{ij}^l(\gamma)\right) \left.\frac{\partial}{\partial x_l}\right|_{\gamma}\\
+      &=\left( k^2 c''_l(kt) + k^2 c_i'(kt)c_j'(kt) \Gamma_{ij}^l(c(kt)) \right) \left.\frac{\partial}{\partial x_l}\right|_{\gamma}\\
+      &= k^2 \frac{\mathrm{D}}{\mathrm{d}t} c' = 0,
+  \end{align*}
+  so $\gamma$ is a geodesic.
+\end{proof}
+
+\begin{corollary}
+  For $(p,v) \in T(M)$, let $c_v : I_v \to M$ denote the unique geodesic with maximal interval $I_v \in \mathbb{R}$ such that $c_v(0) = p$, $c_v'(0) = v$. Let $I_v = (a,b)$ and $k>0$, then $I_{kv} = (a/k, b/k)$ with $c_{kv}(t) = c_v(kt)$, and we can extend to cover $\mathbb{R}$ for $k\to 0$.
+\end{corollary}
 
 %===============================================================================
 
