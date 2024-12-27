@@ -1647,6 +1647,69 @@ and
   For $(p,v) \in T(M)$, let $c_v : I_v \to M$ denote the unique geodesic with maximal interval $I_v \in \mathbb{R}$ such that $c_v(0) = p$, $c_v'(0) = v$. Let $I_v = (a,b)$ and $k>0$, then $I_{kv} = (a/k, b/k)$ with $c_{kv}(t) = c_v(kt)$, and we can extend to cover $\mathbb{R}$ for $k\to 0$.
 \end{corollary}
 
+\begin{theorem}
+  Let $X$ be a smooth vector field on an open set $V \subset M$ with $p\in V$. Then there exists an open set $V_0 \subset V$, $p\in V_0$, $\delta > 0$ and smooth $\phi: (-\delta, \delta) \times V_0 \to V$ such that the curve $t\mapsto \phi(t,q)$ is the unique trajectory of $X$ with $\phi(0,q) = q$ for all $q\in V_0$, i.e.,
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}t}\phi(p, q) = X(\phi(t,q)).
+  \end{equation*}
+  \qedwhite
+\end{theorem}
+
+Here, $\phi(t) = \phi(t, q)$ is called the \textbf{flow} of $X$ in $V$.
+
+\begin{lemma}
+  Let $M$ be a Riemannian manifold. There exists a unique vector field $G \in T(M)$ whose trajectories are of the form $t\mapsto (\gamma(t), \gamma'(t))$ where $\gamma$ is a geodesic on $M$. \qedwhite
+\end{lemma}
+
+The vector field $G$ is called the \textbf{geodesic field} on $T(M)$, and its flow is the \textbf{geodesic flow}.
+
+\begin{proposition}
+  Give $p\in M$, there exists a neighbourhood $V$ of $p\in M$, $\delta>0$, $\epsilon_1 > 0$, and the differentiable map $\gamma:(-\delta, \delta) \times M \to U$ with $U = \{(q,v)\in T(M), q\in V, \|v\| < \epsilon_1\}$ such that $t\mapsto \gamma(t,q,v)$ is the unique geodesic of $M$, with $\gamma(0, q, v) = q$, $\mathrm{d}/\mathrm{d}t \gamma(t,q,v)|_{t=0} = v$ for all $q\in V$, $v\in T_p(M)$ and $\|v\| < \epsilon_1$.
+\end{proposition}
+
+The geodesic $\gamma(t,q,v)$ is defined for $|t|<\delta$ and $\|v\|<\epsilon_1$. Using the rescaling lemma, letting $k=\delta/2$, we have $\gamma(t,q, (\delta/2) v)$ with $t < \delta/k = 2$. Note also $\|(\delta/2)v\| = |\delta/2|\cdot \|v\| < (\delta /2)\epsilon_1$. Taking $\epsilon < (\delta/2)\epsilon_1$, the above proposition may have $\gamma$ and $U$ replaced by
+\begin{equation*}
+  \gamma:(-2, 2) \times \tilde{U} \to M, \qquad \tilde{U} = \{(q,v) \in T(M), q\in V_1, \|v\|<\epsilon\}.
+\end{equation*}
+
+Let $p\in M$, and $\tilde{U}$ be the open set of $T(M)$ given as above. The \textbf{exponential map} at $p$ is given by
+\begin{equation}
+  \highlight{\exp_p (v) = c_v(1) = \gamma(1, p, v)},
+\end{equation}
+where $\gamma$ is a geodesic as above. Note that $\exp_p : B_\epsilon(0_p) \subset T_p(M) \to M$ with $B_\epsilon(0_p) = \{v\in T_p(M)\ |\ \|v\|<\epsilon\}$ is the appropriate ball of radius $\epsilon$, with $\epsilon$ given as above. The exponential map may or may not be defined on the whole of $T_p(M)$ in this case.
+
+\begin{example}
+  For $S^2 = \{x\in \mathbb{R}^3\ |\ \|x\|=1\}$, recall all geodesics are parts of great circles. Let $p=(0,0,1)$ be the norther pole. For $v_0 \in T_p(S^2)$ with $\|v_0\|=1$, the geodesic $c_{v_0}$ is given by
+  \begin{equation*}
+    c_{v_0}(t) = (\cos t) p + (\sin t)v_0
+  \end{equation*}
+  from a previous example. Indeed, $c_{v_0}(0) = p$ and $c'_{v_0} = v$ for $t\in\mathbb{R}$, so $\exp_p(v_0) = c_{v_0}(1)$ in this case. For arbitrary $v\in T_p(M)$, $v = t v_0$, and for $\|v_0\|=1$, we have
+  \begin{equation*}
+    \exp_p(v) = \exp_p(tv_0) = c_{tv_0}(1) = c_{v_0}(t),
+  \end{equation*}
+  thus the exponential map is in face well defined on the whole of $T_p(S^2)$ for this case.
+\end{example}
+
+\begin{example}
+  Suppose we remove the south pole $p=(0,0,-1)$. Using the same arguments as in the previous example, we see the maximal geodesic $c_{v_0}(t)$ is only defined on $t\in(-\pi, \pi)$. Thus $\exp_p$ is only given on $B_\pi(0,p) = \{v\in T_p(M)\ |\ \|v\|<\pi\}$, since $t\in(-\pi, \pi)$ means $v = tv_0 \in (-\pi v_0, \pi v_0)$.
+\end{example}
+
+\begin{proposition}
+  Let $(M,g)$ be a Riemannian manifold, and $p\in M$. Then there exists $\epsilon > 0$ such that $\exp_p : B_\epsilon(0_p) \to \exp_p(B_\epsilon(0_p))$ is a diffeomorphism.
+\end{proposition}
+
+\begin{proof}
+  We have
+  \begin{align*}
+    \mathrm{d}(\exp_p)(v) = \left.\frac{\mathrm{d}}{\mathrm{d}t}\exp_p(tv)\right|_{t=0} = \left.\frac{\mathrm{d}}{\mathrm{d}t}(c_{tv}(1))\right|_{t=0} = \left.\frac{\mathrm{d}}{\mathrm{d}t}(c_v(t))\right|_{t=0} = c'_v(0) = v,
+  \end{align*}
+  so that $\mathrm{d}(\exp_p) = \mbox{Id}$ on $T_p(M)$. By the inverse function theorem, the exponential map is a local diffeomorphism. \qed
+\end{proof}
+
+\begin{lemma}[Gauss' lemma]
+  Let $(M,g)$ be a Riemannina manifold, and $p\in M$. Let $\epsilon > 0$ be small enough that $\exp_p$ is a diffeomorphism. Then the readial geodesic $t \mapsto \exp_p(tv)$ for $t\geq 0$ intersects the hypersurface $A_\delta = \{\exp_p(w)\ |\ \|w\|=\delta, 0 < \delta < \epsilon\}$ orthogonally.
+\end{lemma}
+
 %===============================================================================
 
 \chapter{Curvature}
