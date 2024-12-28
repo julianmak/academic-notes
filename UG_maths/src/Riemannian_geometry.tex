@@ -1594,7 +1594,7 @@ and
 \end{lemma}
 
 \begin{theorem}
-  Let $c:[a,b] \to M$ be a differentiable curve. It is a geodesic iff $c$ is parameterised proportional to arc length, and $\ell'(0) = 0$ for any proper variation of $c$. \marginnote{Or, as we might expect intuitively, geodesics are locally length minimising.}
+  Let $c:[a,b] \to M$ be a differentiable curve. It is a geodesic iff $c$ is parameterised proportional to arc length, and $\ell'(0) = 0$ for any proper variation of $c$. \marginnote{Or, as we might expect intuitively, geodesics can be locally length minimising (we have only shown it is an extrema at the moment).}
 \end{theorem}
 
 \begin{proof}
@@ -1707,8 +1707,127 @@ where $\gamma$ is a geodesic as above. Note that $\exp_p : B_\epsilon(0_p) \subs
 \end{proof}
 
 \begin{lemma}[Gauss' lemma]
-  Let $(M,g)$ be a Riemannina manifold, and $p\in M$. Let $\epsilon > 0$ be small enough that $\exp_p$ is a diffeomorphism. Then the readial geodesic $t \mapsto \exp_p(tv)$ for $t\geq 0$ intersects the hypersurface $A_\delta = \{\exp_p(w)\ |\ \|w\|=\delta, 0 < \delta < \epsilon\}$ orthogonally.
+  Let $(M,g)$ be a Riemannian manifold, and $p\in M$. Let $\epsilon > 0$ be small enough that $\exp_p$ is a diffeomorphism. Then the readial geodesic $t \mapsto \exp_p(tv)$ for $t\geq 0$ intersects the hypersurface $A_\delta = \{\exp_p(w)\ |\ \|w\|=\delta, 0 < \delta < \epsilon\}$ orthogonally.
 \end{lemma}
+\marginnote{Or, any sufficiently small sphere centred on a point in a Riemannian manifold is perpendicular to every geodesic through that point.}
+
+\begin{proof}
+  Let $w\in T_p(M)$, $\|w\| = \delta$ and $c_w: [0,1]\to M$ with $c_w(t) = \exp_p (tw)$ be the corresponding radial geodesic. Let $v:(-\alpha, \alpha) \to T_p(M)$, $\|v\|=\delta$ for all $s \in (-t, t)$, $v(0) = w$. The for any $0 < b \leq 1$, $F:(-\alpha, \alpha) \times [0, b] \to M$ with $F(s,t) = \exp_p(t v(s))$ is a variation of $c_w$. Since $t\mapsto F(s,t) = \exp_p (t v(s)) = c_{v(s)}(t)$ are geodesics, they are parameterised by arc length. So $\|\partial F/\partial (s,t)\| = \|v(s)\| = \delta$, therefore
+  \begin{equation*}
+    \ell(s) = \int_a^b \left\| \frac{\partial F}{\partial t}(s,t)\right\|\; \mathrm{d}t = b\delta
+  \end{equation*}
+  and thus $\ell'(0) = 0$. By the first variational formula for length,
+  \begin{equation*}
+    0 = c\ell'(0) = \left\langle \frac{\partial F}{\partial s}(0,b), c_w'(0) \right\rangle - 0 - 0,
+  \end{equation*}
+  which implies
+  \begin{equation*}
+    \left\langle \frac{\partial F}{\partial s}(0,b), c_v'(b) \right\rangle = 0,
+  \end{equation*}
+  and hence we have orthogonal intersection. \qed
+\end{proof}
+
+\begin{corollary}
+  Let $(M,g)$, $p\in M$ and $\epsilon > 0$ as above, and $B_\epsilon(p) = \exp_p(B_\epsilon(0_p))$. Let $c:[0,1] \to B_\epsilon(p)$ be a geodesic with $c(0) = p$. If $\gamma:[0,1] \to M$ is a differentiable curve joining $c(0)$ and $c(1)$, then $\ell(c) \leq \ell(\gamma)$. If equality holds, then $\gamma([0,1]) = c([0,1])$.
+\end{corollary}
+
+\begin{proof}
+  Suppose $\gamma([0,1]) \subset B_\epsilon(p)$. As the exponential map is a diffeomorphism, $\gamma$ is the image of a unique curve $\beta$ on $B_\epsilon(0_p) \subset T_p(M)$. Expression $\beta$ is polar co-ordinates, we have $\beta(s) = r(s) v(s)$, $\|v(s)\|=1$, and this is allowed since $\beta \in T_p(M)$ is in Euclidean space. We assume that $r(s) > 0$ on $(0,1]$ or $r(s) = 0$, because we are only interested in showing $\ell(c) \leq \ell(\gamma)$.
+  
+  If $F(s,t) = \exp_p(t v(s))$, then
+  \begin{equation*}
+    \gamma(s) = \exp_p(\beta(s)) = \exp_p(r(s) v(s)) = F(s, r(s)),
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \gamma' = \frac{\partial F}{\partial s}(s, r(s)) + \frac{\partial F}{\partial t}(s, r(s)) r'(s).
+  \end{equation*}
+  By Gauss' lemma, we have $\langle \partial F / \partial s, \partial F / \partial t \rangle = 0$. Also, we have
+  \begin{equation*}
+    \frac{\partial F}{\partial t} = \frac{\mathrm{d}}{\mathrm{d}t} \exp_p (t v(s)) = \frac{\mathrm{d}}{\mathrm{d}t} \tilde{c}'_{v(t)}(t),
+  \end{equation*}
+  thus $\|\partial F / \partial t (s,r(s))\| = \|v(s)\| = 1$. So
+  \begin{equation*}
+    \|\gamma'(s)\| = \sqrt{ \left\|\frac{\partial F}{\partial s}(s,r(s))\right\|^2 + |r'(s)|^2} \geq |r'(s)|,
+  \end{equation*}
+  and therefore
+  \begin{equation*}
+    \ell(\gamma) = \int_\delta^1 \|\gamma'(s)\|\; \mathrm{d}s \geq \int_\delta^1 |r'(s)|\; \mathrm{d}s \geq \left|\int_\delta^1 r'(s)\; \mathrm{d}s\right| = r(1) - r(\delta).
+  \end{equation*}
+  As $\delta \to 0$, we have $\ell(\gamma) \geq r(1) - 0$. Note that $c(1) = \gamma(1) = \exp_p(r(1) v(1)) = c_{v(1)}(r(1))$, so
+  \begin{equation*}
+    \ell(c) = \int_{r(0)=0}^{r(1)} \left\|c'_{v(1)}(t) \right\|\; \mathrm{d}t = \int_0^{r(1)} \; \mathrm{d}t = r(1),
+  \end{equation*}
+  and thus $\ell(\gamma) \geq \ell(c)$. We have equality iff $\partial F / \partial s (s,r(s)) = 0$, $r$ monotone and $v(s) = v = \textnormal{const}$, i.e. $\gamma(s) = \exp_p(r(s)v)$ is a geodesic.
+  
+  If $\gamma([0,1])$ is not contained in $B_\epsilon(p)$, then let $t_1$ be the first time such that $\gamma(t_1) \in \partial B_\epsilon(p)$, which would imply that $\ell(\gamma) \geq \ell_{[0,t_1]}(\gamma) \geq \epsilon > \ell(c)$. \qed
+\end{proof}
+
+As a consequence, for all $p\in M$, there exists some $\epsilon > 0$ such that for all $q \in B_\epsilon(p)$ there is a unique curve connecting $p$ and $q$, satisfying $\ell(c) = d_g(p,q)$. Thus $B_\epsilon(p)$ coincides with
+\begin{equation*}
+  B_\epsilon = \{q\in M\ |\ d_g(p,q) < \epsilon\} \subset (M,g),
+\end{equation*}
+and geodesics are length minimising at least locally. A geodesic $c:[a,b] \to M$ is called \textbf{minimal} if $\ell(c) = d_g(c(a), c(b))$. A geodesic $c:\mathbb{R}\to M$ is also called minimal if all its restrictions to $[a,b]$ are minimal.
+
+A Riemannian manifold $(M,g)$ is called \textbf{geodesically complete} if every geodesic $c:[a,b] \to M$ can be extended to a geodesic $\tilde{c}: \mathbb{R} \to M$.
+
+\begin{example}
+  Every arc of great circles in $S^2$ with angle less than or equal to $\pi$ is minimal. $S^2$ is geodesically complete, but $S^2 \setminus (0,0,1)$ is not.
+\end{example}
+
+\begin{theorem}
+  Let $(M,g)$ be a Riemannian manifold that is geodesically complete. then any two points $p,q \in M$ can be joined by a minimal geodesic.
+\end{theorem}
+
+\begin{proof}
+  Let $r = d_g(p,q)$. We choose $0<\epsilon<r$ such that $\exp_p: B_\epsilon(0_p) \to B_\epsilon(p)$ is a diffeomorphism. Let $0<\delta<\epsilon$. Since
+  \begin{equation*}
+    S_\delta(0_p) = \{v\in T_p(M)\ |\ \|v\| = \delta\} \subset B_\epsilon(0_p)
+  \end{equation*}
+  is compact and the exponential map is continuous, the image $S_\delta(p) = \exp_p(S_\delta(0_0))$ is also compact. Therefore, there exists a point $q' \in S_\delta(p)$ which is closest to $p$, i.e.
+  \begin{equation*}
+    d_g(p, p') = \inf_{x\in \partial S_\delta(p)} d_g(x,q).
+  \end{equation*}
+  Let $q' = \exp_p(\delta v)$, $v\in T_p(M)$ and $\|v\|=1$. By geodesic completeness, the geodesic $c$ with $c(0) = 0$, $c'(0) = v$ is defined for all $\mathbb{R}$. Since $e$ is the arc length, and geodesics are parameterised by arc length, we aim to show that $c(r) = q$ and $r = \ell(c) = d_g(p,q)$, so then $c:[0, r]\to M$ is a minimal geodesic connection $p$ and $q$.
+  
+  Let $A = \{t\in[0, r]\ |\ d_g(c(t), q) = r-t\}$. Then we have:
+  \begin{enumerate}
+    \item $\delta \in A$. Then
+    \begin{equation*}
+      r = d_g(p,q) = \delta + \inf_{x\in\partial S_\delta(p)}d_g(x,q) = \delta + d_g(q', q) =\delta + d_g(c(\delta), q),
+    \end{equation*}
+    so $d_g(c(\delta), q) = r - \delta$.
+    
+    \item $t_0 = \sup A$ and $t_0 \in A$. Clearly $t_0 \geq \delta$. That $t_0 \in A$ implies that $d_g(c(t_0), q) = r - t_0$. Let $(t_j) \in A$ and $t_j \to t_0$ be some sequence. By continuity, $c(t_j) \to c(t_0)$. We have
+    \begin{equation*}
+      d_g(c(t_0), q) = \lim_{j\to\infty} d_g(c(t_j), q) = \lim_{j\to\infty}(r - t_j) = r - t_0,
+    \end{equation*}
+    so that $t_0 = \max A$.
+    
+    \item $t_0 = r$. Suppose $t_0 < r$. Let $z=c(t_0$. Choose $\epsilon' > 0$ such that $\exp_z: B_{\epsilon'}(0_p) \to B_\epsilon(z)$ is a diffeomorphism, and $\epsilon'$ small enough that $q\not\in B_{\epsilon'}(z)$. Choose $0 < \delta' < \epsilon'$ and $q'' \in S_{\delta'}(z)$ such that
+    \begin{equation*}
+      d_g(q'', q) = \inf_{x\in S_{\delta'}(z)}d_g(x,q).
+    \end{equation*}
+    By a similar argument, $r - t_0 - \delta' = d_g(q'', q)$, so that $d_g(q'',q) = r - (t_0 + \delta')$. By the triangle inequality,
+    \begin{align*}
+      d_g(p, q'')
+        &\geq d_g(p,q) - d(q, q'')\\
+        &= r - (r - (t_0 + \delta') = t_0 + \delta'.
+    \end{align*}
+    But $d_g(p, q'') = t_0 + \delta$, so the curve connecting $p$ and $q''$ is continuous of the minimal geodesic $c$ by uniqueness of geodesics. So $(t_0 + \delta') \in A$, contradicting $t_0 = \max A$, hence $r = t_0$.
+  \end{enumerate}
+  Together, these imply that $c(r) = q$ and $r=\ell(c) = d_g(p,q)$ as required. \qed
+\end{proof}
+
+\begin{theorem}[Hopf--Rinow theorem]
+  Let $(M,g)$ be a Riemannian manifold. Then the following statements are equivalent:
+  \begin{itemize}
+    \item $(M,g)$ is geodesically complete,
+    \item every closed and bounded subset of $(M,g)$ is compact,
+    \item $(M, d_g)$ is a complete metric space.
+  \end{itemize}
+  \qedwhite
+\end{theorem}
 
 %===============================================================================
 
@@ -1732,7 +1851,7 @@ where $\gamma$ is a geodesic as above. Note that $\exp_p : B_\epsilon(0_p) \subs
 
 %-------------------------------------------------------------------------------
 
-\section{Second variational formular for length}
+\section{Second variational formula for length}
 
 
 
