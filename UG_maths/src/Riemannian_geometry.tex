@@ -1833,6 +1833,105 @@ A Riemannian manifold $(M,g)$ is called \textbf{geodesically complete} if every 
 
 \chapter{Curvature}
 
+Recall that the Gaussian curvature $K$ of a surface depends only on the first fundamental form, i.e. the metric. This measures the deviation of the surface from the Euclidean space, which has $K = 0$.
+
+Let $(M,g)$ be a Riemannian manifold of dimension $n$. Let $\Sigma$ be a two-dimensional vector subspace of $T_p(M)$, and $\sigma = \Sigma \cap B_\epsilon(0_p)$. Then $\exp_p(\sigma)$ is a two-dimensional Riemannian surface with metric $g|_\sigma$. Therefore we can calculate its Gaussian curvature. Denoting this by $K(p, \Sigma)$, we call this the \textbf{sectional curvature}.
+
+Let $\nabla$ be the Levi-Civita connection on $(M,g)$. The \textbf{Riemann curvature tensor} is a map $\highlight{R: \mathcal{X}(M) \times \mathcal{X}(M) \times \mathcal{X}(M) \to \mathcal{X}(M)}$ with\marginnote{Note the below can be defined with different positions and signs, and is a matter of convention.}
+\begin{equation}
+  \highlight{R(X,Y)Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X,Y]} Z}.
+\end{equation}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Given $f,g,h \in C^\infty(M)$, $X, Y, Z \in \mathcal{X}(M)$,
+    \begin{equation*}
+      \left[R(fX, gY)(hZ)\right](p) = f(p)g(p)h(p) \left[R(X,Y)Z\right](p),
+    \end{equation*}
+    which implies that $R$ is determined by the tangent vectors $X(p)$, $Y(p)$ and $Z(p)$. We have then $R_p: T_p(M) \times T_p(M) \times T_p(M) \to T_p(M)$, and this is a tri-linear map.
+    
+    \item Suppose $M=\mathbb{R}^n$, and we take $Z = (z_1,\ldots z_n)$. So
+    \begin{equation*}
+      \nabla_X Z = (X(z_1), \ldots X(z_n)), \quad \nabla_Y Z = (Y(z_1), \ldots Y(z_n)),
+    \end{equation*}
+    and that
+    \begin{align*}
+      R(X,Y)Z 
+        &= (XY(z_1) - YX(z_1), \ldots) - \nabla_{[X,Y]}Z\\
+        &= \nabla_{[X,Y]}Z - \nabla_{[X,Y]}Z = 0,
+    \end{align*}
+    so $R$ measures how much $M$ deviates from being Euclidean or `flat space'.
+    
+    \item In local co-ordinates, denoting $\partial_i = \partial / \partial x_i$, we have
+    \begin{equation*}
+      R(\partial_i, \partial_j) \partial_k = \nabla_{\partial_i} \nabla_{\partial_j} - \nabla_{\partial_j}\nabla_{\partial_i} - 0,
+    \end{equation*}
+    so $R$ measures the non-commutativity of $\nabla$.
+  \end{enumerate}
+\end{remark}
+
+\begin{proposition}
+  We have the following properties:
+  \begin{enumerate}
+    \item $R(X,Y) Z = -R(Y,X) Z$,
+    \item $R(X,Y) Z + R(Y,Z) X + R(Z,X) Y = 0$,
+    \item $\langle R(X,Y)Z, W\rangle = -\langle R(X,Y)W, Z\rangle$,
+    \item $\langle R(X,Y)Z, W\rangle = -\langle R(Z,W)X, Y\rangle$.
+  \end{enumerate}
+\end{proposition}
+
+Suppose we choose a co-ordinate system. Then
+\begin{equation*}
+  R(\partial_i, \partial_j)\partial_k = R_{ijk}^l \partial_l,
+\end{equation*}
+and so
+\begin{equation*}
+  \langle R(\partial_i, \partial_j)\partial_k, \partial_l \rangle = R_{ijk}^m g_{ml} = R_{ijkl},
+\end{equation*}
+and so by the above proposition, we have
+\begin{equation}
+  \highlight{R_{ijkl} = -R_{ijlk} = -R_{jikl} = R_{klij}}.
+\end{equation}
+
+\begin{example}
+  Recall the upper half-plane model of the hyperbolic plane is
+  \begin{equation*}
+    \mathbb{H}^2 = \{x_1 + \mathrm{i}x_2\ |\ x_2>0\}, \quad \langle v,w\rangle_z = \frac{\langle v,w\rangle}{x_2^2}, \quad z = x_1 + \mathrm{i}x_2.
+  \end{equation*}
+  To calculate $R$, note we only need to calculate $R_{1111}$, $R_{1112}$, $R_{1122}$, $R_{1212}$, $R_{1222}$ and $R_{2222}$. Since $R_{ijkk} = R_{iikl} = 0$, the only non-zero component is $R_{1212}$. Recall that
+  \begin{align*}
+    \nabla_{\partial_1}\partial_1 &= \frac{1}{x_2}\partial_2,\\
+    \nabla_{\partial_1}\partial_2 = \nabla_{\partial_2}\partial_1 &= -\frac{1}{x_2}\partial_1,\\
+    \nabla_{\partial_2}\partial_2 &= -\frac{1}{x_2}\partial_2,
+  \end{align*}
+  and that $[\partial_i, \partial_j] = 0$, so
+  \begin{align*}
+    R_{1212} 
+      &= \langle R(\partial_1, \partial_2)\partial_1, \partial_2 \rangle\\
+      &= \langle \nabla_{\partial_1}\nabla_{\partial_2}\partial_1 - \nabla_{\partial_2}\nabla_{\partial_1}\partial_1 - 0, \partial_2\rangle\\
+      &= \langle -\nabla_{\partial_1} (x_2^{-1} \partial_1) - \nabla_{\partial_2} (x_2^{-1} \partial_2), \partial_2\rangle\\
+      &= \langle -\partial_1(x_2^{-1}) \partial_1 - x_2^{-1}\nabla_{\partial_1} \partial_1 - \partial_2(x_2^{-1}) \partial_2 - x_2^{-1} \nabla_{\partial_2}\partial_2, \partial_2\rangle\\
+      &= \langle 0 - x_2^{-1}\partial_2 + x_2^{-2} \partial_2 + x_2^{-2}\partial_2, \partial_2 \rangle\\
+      &= g_{22} / x_2^2 \\
+      &= 1 / x_2^4.
+  \end{align*}
+  So the space `bends' the most when near the line $x_2=0$, and progressively becomes `flat' as we move away.
+  
+  Noting that
+  \begin{equation*}
+    (g^{ml}) = \begin{pmatrix} x_2^2 & 0 \\ 0 & x_2^2\end{pmatrix},
+  \end{equation*}
+  we have
+  \begin{equation*}
+    R_{121}^2 = -R_{211}^2 = -R_{122}^1 = R_{212}^1 = \frac{1}{x_2^2},
+  \end{equation*}
+  so
+  \begin{align*}
+    R(\partial_1, \partial_2)\partial_1 = +\frac{1}{x_2}\partial_2, &\quad  R(\partial_1, \partial_2)\partial_2 = -\frac{1}{x_2}\partial_1,\\
+    R(\partial_2, \partial_1)\partial_1 = -\frac{1}{x_2}\partial_2, &\quad  R(\partial_2, \partial_2)\partial_2 = +\frac{1}{x_2}\partial_1.
+  \end{align*}
+\end{example}
+
 %-------------------------------------------------------------------------------
 
 \section{Sectional curvature}
