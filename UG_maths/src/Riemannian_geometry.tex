@@ -1936,9 +1936,77 @@ and so by the above proposition, we have
 
 \section{Sectional curvature}
 
+Let $\Sigma$ be a two-dimensional subspace of $T_p(M)$, and let $v_{1,2} \in \Sigma$ be two linearly independent vectors. We want to know the Riemann curvature tensor restricted onto $\Sigma$, i.e. $R|_\Sigma$. For this, it is enough to know $\langle R(v_1, v_2)v_2, v_1\rangle$, since we have a basis and a tri-linear map, and that the properties of $R$ imply all other evaluations are zero.
+
+\begin{proposition}
+  The \textbf{sectional curvature}
+  \begin{equation}
+    \highlight{K(p, \Sigma) = \frac{\langle R(v_1, v_2)v_2, v_1\rangle}{\|v_1\|^2 \|v_2\|^2 - \langle v_1, v_2\rangle^2}}
+  \end{equation}
+  is independent of the choice of basis, for $p\in M$ and $\Sigma$ a two-dimensional subspace of $T_p(M)$.
+\end{proposition}
+
+\begin{proof}
+  The passage from one basis $\{v_1, v_2\}$ to another on $\Sigma$ uses a combination of $\{v_2, v_1\}$, $\{\lambda v_1, v_2\}$ and $\{v_1 + \lambda v_2, v_2\}$, and all of these operations leave $K(p, \Sigma)$ invariant by definition of the sectional curvature. \qed
+\end{proof}
+
+Note that knowing the sectional curvature for all possible two-dimensional subspaces $\Sigma \subset T_p(M)$ determines the Riemann curvature tensor $R|_p$ completely.
+
+\begin{example}
+  Consider the hyperbolic space $\mathbb{H}^3$ with the upper-half space model
+  \begin{equation*}
+    \mathbb{H}^3 = \{ (x_1, x_2, x_3) \in \mathbb{R}^3 \ |\ x_3>0\}, \quad \langle v,w\rangle_x = \frac{\langle v,w\rangle}{x_3^2},
+  \end{equation*}
+  and note that
+  \begin{equation*}
+    (g_{ij}) = \mbox{diag}\left(\frac{1}{x_3^2}, \frac{1}{x_3^2}, \frac{1}{x_3^2}\right).
+  \end{equation*}
+  Can show that
+  \begin{align*}
+    \nabla_{\partial_1} \partial_1 &= \nabla_{\partial_2} \partial_2 = -\nabla_{\partial_3}\partial_3 = \frac{1}{x_3}\partial_3,\\
+    \nabla_{\partial_1} &= \nabla_{\partial_2}\partial_1 = 0,\\
+    \nabla_{\partial_1}\partial_3 &= \nabla_{\partial_3}\partial_1 = -\frac{1}{x_3}\partial_1,\\
+    \nabla_{\partial_2}\partial_3 &= \nabla_{\partial_3}\partial_2 = -\frac{1}{x_3}\partial_2.
+  \end{align*}
+  
+  Taking $\Sigma = \mbox{span}\{\partial_1, \partial_3\}$, we have
+  \begin{align*}
+    K(x, \Sigma) 
+      &= \frac{\langle R(\partial_1, \partial_3)\partial_3, \partial_1\rangle}{\|\partial_1\|^2 \|\partial_3\|^2 - 0}\\
+      &= \frac{1}{g_{11}^2 g_{33}^2} \langle \nabla_{\partial_1}\nabla_{\partial_3} \partial_3 - \nabla_{\partial_3}\nabla_{\partial_1}\partial_3 - 0, \partial_1 \rangle\\
+      &= x_3^4 \left\langle \nabla_{\partial_1}\left(-\frac{1}{x_3}\partial_3\right) + \nabla_{\partial_3}\left(\frac{1}{x_3}\partial_1\right) \right\rangle\\
+      &= x_3^4 \left\langle \frac{1}{x_3^2}\partial_1 - \frac{1}{x_3^2}\partial_1 - \frac{1}{x_3^2}\partial_1\right\rangle\\
+      &= -x_3^2 g_{11} \\
+      &= -1.
+  \end{align*}
+  Observe that
+  \begin{equation*}
+    N = \exp_p(\Sigma) = \{(u, x_2, v)\ |\ u\in\mathbb{R},\ v>0\} \cong \mathbb{H}^2,
+  \end{equation*}
+  and hence the curvature of $N$ is $-1$, consistent with what we know about $\mathbb{H}^2$.
+  
+  Doing the same for $\Sigma = \mbox{span}\{\partial_1, \partial_2\}$ and $\Sigma = \mbox{span}\{\partial_2, \partial_3\}$ gives the same curvature value of $-1$. In the former case, $N = \exp_p(\Sigma)$ is a semi-sphere with the equator on the ideal boundary, with pole at $x$, and isometric also to $\mathbb{H}^2$. It can be shown that $\mathbb{H}^n$ for $n\in\mathbb{N}$ all have constant sectional curvature.
+\end{example}
+
+\begin{proposition}
+  Let $(M,g)$ be a Riemannian manifold, and it has constant sectional curvature iff
+  \begin{equation}
+    \langle R_p(v_1, v_2)v_3, v_4\rangle = K_0(\langle v_1, v_2\rangle \langle v_3, v_4\rangle - \langle v_1, v_3 \rangle \rangle v_2, v_4\rangle)
+  \end{equation}
+  for $K_0 = K(\Sigma, p)$ for all $p\in M$, $\Sigma \subset T_p(M)$ two-dimensional. \qedwhite
+\end{proposition}
+
 %-------------------------------------------------------------------------------
 
 \section{Ricci and scalar curvature}
+
+\begin{lemma}
+  Let $V$ be a $n$-dimensional vector space with inner product $\langle\cdot,\cdot\rangle$ and $T: V\to V$ a linear map. The \textbf{trace} of $T$
+  \begin{equation}
+    \highlight{\mbox{tr}(T) = \sum_{i=1}^n \langle T v_i, v_i\rangle}
+  \end{equation}
+  where $\{v_i\}$ is an orthonormal basis in $V$, is independent of the choice of basis. \qedwhite
+\end{lemma}
 
 %-------------------------------------------------------------------------------
 
