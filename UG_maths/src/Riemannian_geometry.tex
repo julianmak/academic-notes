@@ -2008,13 +2008,103 @@ Note that knowing the sectional curvature for all possible two-dimensional subsp
   where $\{v_i\}$ is an orthonormal basis in $V$, is independent of the choice of basis. \qedwhite
 \end{lemma}
 
+Let $v,w \in T_p(M)$, then
+\begin{equation}
+  R_p(\cdot, v)w: T_p(M)\to T_p(M), \qquad u\mapsto R_p(u,v)w
+\end{equation}
+is a linear map. The \textbf{Ricci curvature tensor} is the trace part of the Riemann curvature tensor, i.e. $\highlight{\mbox{Ric}_p: T_p(M)\times T_p(M) \to \mathbb{R}}$ with
+\begin{equation}
+  \highlight{\mbox{Ric}_p(v,w) = \mbox{tr}(R_p(\cdot, v)w) = \sum_i \langle R_p(v_i, w)w, v_i\rangle},
+\end{equation}
+and is bilinear. The \textbf{Ricci curvature} is then defined by
+\begin{equation}
+  \highlight{\mbox{Ric}_p(v) = \mbox{Ric}_p(v, v) = \sum_i \langle R_p(v_i, v)v, v_i\rangle}.
+\end{equation}
+It is sufficient to determine this for unit vectors.
+
+\begin{lemma}
+  The Ricci curvature is a bilinear symmetric form.
+\end{lemma}
+
+\begin{proof}
+  Bilinearity follows from the properties of the Riemann tensor $R|_p$, via
+  \begin{align*}
+    \mbox{Ric}_p(w,v)
+      &= +\sum_i \langle R_p(v_i, w)v, v_i\rangle\\
+      &= +\sum_i \langle R_p(v, v_i)v_i, w\rangle\\
+      &= -\sum_i \langle R_p(v, v_i)w, v_i\rangle\\
+      &= +\sum_i \langle R_p(v_i, v)w, v_i\rangle\\
+      &= \mbox{Ric}_p(v,w).
+  \end{align*}
+  \qed
+\end{proof}
+
+A Riemannian manifold is called an \textbf{Einstein manifold} if there exists a $c\in\mathbb{R}$ such that
+\begin{equation}
+  \mbox{Ric}_p(v,w) = c\langle v,w\rangle.
+\end{equation}
+This is equivalent to the Ricci curvature begin constant ($\mbox{Ric}_p(v) = c$ for all $p\in M$, $v\in T_p(M)$ and $\|v\|=1$).
+
+\begin{lemma}\label{lem:lin-algebra}
+  Let $V$ be a $n$-dimensional vector space with an inner product $\langle\cdot,\cdot\rangle$ and a linear symmetry form $q: V\times V\to\mathbb{R}$, $q(v,w) = q(w,v)$. Then there exists a unique linear map $T: V\to V$ such that $q(v,w) = \langle Tv, w\rangle$. \qed
+\end{lemma}
+
+So there also exists a linear map $T: T_p(M)\to T_p(M)$ such that $\mbox{Ric}_p(v,w) =\langle Tv,w\rangle$.\marginnote{So the Ricci curvature tensor is much easier to deal with since it can be represented with linear algebra.} Let $T$ be such a linear map, then the \textbf{scalar curvature} at $p$ is
+\begin{equation}
+  \highlight{S(p) = \mbox{tr}(T) = \sum_i \langle Tv_i,v\rangle = \sum_i \mbox{Ric}_p(v_i, v_i)}.
+\end{equation}
+
 %-------------------------------------------------------------------------------
 
-\section{Isometric immersions}
+\section{Isometric immersions and the second fundamental form}
 
-%-------------------------------------------------------------------------------
+Let $\overline{M}$ be a Riemannian manifold, and $f: \overline{M} \to M$ be a differentiable immersion of a differentiable manifold, i.e. $f$ is differentiable and $\mathrm{d}_p f$ is injective. So $\mbox{dim}(\overline{M}) > \mbox{dim}(M)$.
 
-\section{The second fundamental form}
+Suppose $\mbox{dim}(\overline{M}) = k = n+m$, and $\mbox{dim}(M) = n$. The metric on $\overline{M}$ induces a metric on $M$ given by
+\begin{equation}
+  \langle v_1, v_2\rangle = \langle \mathrm{d}_p f(v_1), \mathrm{d}_p f(v_2)\rangle
+\end{equation}
+for $v_{1,2}\in T_p(M)$. With this metric, $f$ becomes an isometry. We identify $M$ with $f(M)$, and so $M \subset \overline{M}$.
+
+Let $p\in M \subset \overline{M}$, and we choose a local chart of $\overline{M}$ at $p$ where $\phi : \overline{U} \to V\subset \mathbb{R}^{n+m}$, $U = \overline{U} \cap \overline{M}$, such that $\phi: U\to V \cap (\mathbb{R}^n \times \{0\})$ is a chart of $M$ at $p$ (note that $\phi$ is a diffeomorphism). If we have a vector field on $U$, then we get a vector field on $V \cap (\mathbb{R}^n \times \{0\})$ by using $\mathrm{d}\phi$. Since we are in $\mathbb{R}^n$, we can extend this vector field to $V$; this in turn will give us a vector field on $\overline{U}$ via $\mathrm{d}\phi^{-1}$, which is an extension of the vector field on $U$. Hence, locally, every vector field on $M$ can be extended to a vector field on $\overline{M}$.
+
+As above, suppose we split $T_p(\overline{M})$ into $T_p(M) \bigoplus (T_p(M))^\perp$, where
+\begin{equation}
+  (T_p(M))^\perp = \{ v\in T_p(\overline{M})\ |\ \langle v,w\rangle=0,\ w\in T_p(M)\}.
+\end{equation}
+We write $v= v^T + v^N$ for tangent and normal respectively, and we have $v\in T_p(\overline{M})$, $v^t\in T_p(M)$ and $v^N \in (T_p(M))^\perp$.
+
+Let $\overline{\nabla}$ be the Levi-Civita connection on $T_p(\overline{M})$. If $X$ and $Y$ are local vector fields on $M$ and $\overline{X}$ and $\overline{Y}$ are their extensions to $\overline{M}$, we define
+\begin{equation}
+  \nabla_X Y = \left(\overline{\nabla}_{\overline{X}}\overline{Y}\right)^\perp.
+\end{equation}
+$\nabla$ here is in fact the Levi-Civita connection on $M$ relative to the induced metric, and is independent of the extension.
+
+\begin{proposition}
+  The mapping $B:\mathcal{X}(U) \times \mathcal{X}(U) \to (\mathcal{X}(U))^\perp$ wit h $B(X,Y) = \overline{\nabla}_{\overline{X}}\overline{Y} - \nabla_Y X$ is well-defined, bilinear and symmetric.
+\end{proposition}
+
+\begin{proof}
+  $B$ is well-defined because we have independence from the choice of extension $\overline{X}$ and $\overline{Y}$. $V$ is bilinear by the property of the connection. We note that
+  \begin{align*}
+    B(X,Y) 
+      &= \overline{\nabla}_{\overline{X}}\overline{Y} - \nabla_Y X\\
+      &= \overline{\nabla}_{\overline{Y}}\overline{X} + [\overline{X}, \overline{Y}] - \overline{\nabla}_Y X - [X,Y]\\
+      &= \overline{\nabla}_{\overline{Y}}\overline{X} - \overline{\nabla}_Y X\\
+      &= B(Y,X)
+  \end{align*}
+  because $[\overline{X}, \overline{Y}] = [X, Y]$ on $U\subset M$, and hence $B$ is symmetric. \qed
+\end{proof}
+
+Since $B$ being bilinear means $B(X,Y)(p)$ depends only on $X(p)$ and $Y(p)$. Let $\eta \in (T_p(M))^\perp$, then $H_\eta: T_p(M) \times T_p(M) \to \mathbb{R}$ with $H_\eta(u,v) = \langle B(u,v), \eta\rangle$ is bilinear and symmetric by construction. The quadratic form
+\begin{equation}
+  \highlight{\mbox{II}_p: T_p(M)\times T_p(M) \to \mathbb{R}, \quad \mbox{II}_p(u) = H_\eta(u,u)}
+\end{equation}
+is called the \textbf{second fundamental form} along $\eta$. From Lemma \ref{lem:lin-algebra}, there exists a linear map $S_\eta: T_p(M) \to T_p(M)$ such that $H_\eta(u,v) = \langle S_\eta(u), v\rangle$.
+
+\begin{proposition}
+
+\end{proposition}
 
 %-------------------------------------------------------------------------------
 
