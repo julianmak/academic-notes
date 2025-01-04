@@ -2081,7 +2081,7 @@ Let $\overline{\nabla}$ be the Levi-Civita connection on $T_p(\overline{M})$. If
 $\nabla$ here is in fact the Levi-Civita connection on $M$ relative to the induced metric, and is independent of the extension.
 
 \begin{proposition}
-  The mapping $B:\mathcal{X}(U) \times \mathcal{X}(U) \to (\mathcal{X}(U))^\perp$ wit h $B(X,Y) = \overline{\nabla}_{\overline{X}}\overline{Y} - \nabla_Y X$ is well-defined, bilinear and symmetric.
+  The mapping $B:\mathcal{X}(U) \times \mathcal{X}(U) \to (\mathcal{X}(U))^\perp$ with $\highlight{B(X,Y) = \overline{\nabla}_{\overline{X}}\overline{Y} - \nabla_Y X}$ is well-defined, bilinear and symmetric.
 \end{proposition}
 
 \begin{proof}
@@ -2103,14 +2103,260 @@ Since $B$ being bilinear means $B(X,Y)(p)$ depends only on $X(p)$ and $Y(p)$. Le
 is called the \textbf{second fundamental form} along $\eta$. From Lemma \ref{lem:lin-algebra}, there exists a linear map $S_\eta: T_p(M) \to T_p(M)$ such that $H_\eta(u,v) = \langle S_\eta(u), v\rangle$.
 
 \begin{proposition}
-
+  Let $u,v\in T_p(M)$ and $\eta\in (T_p(M))^\perp$. Let $N$ be a local extension of $\eta$ normal to $M$. Then\marginnote{$S_\eta$ is the \textbf{shape operator}, for reasons that will become apparent later.}
+  \begin{equation}
+    S_\eta(u) = (-\overline{\nabla}_u N)^T,
+  \end{equation}
+  with $H_\eta(u,v) = \langle (-\overline{\nabla}_u N)^T, v\rangle$ and $\mbox{II}_\eta(u) = \langle (-\overline{\nabla}_u N)^T, u\rangle$.
 \end{proposition}
+
+\begin{proof}
+  Let $v\in T_p(M)$ and $X$ and $Y$ are local extensions of $u$ and $v$ that are tangent to $M$. We can choose $Y$ such that $\langle N, Y\rangle =0$, and therefore
+  \begin{equation*}
+    \langle \overline{\nabla}_X N, Y\rangle + \langle N, \overline{\nabla}_X Y\rangle = 0.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \langle S_\eta(u), v\rangle
+      &= H_\eta(u,v)\\
+      &= \langle B(u,v), \eta\rangle\\
+      &= \langle B(X,Y), N\rangle(p)\\
+      &= \langle \overline{\nabla}_X Y - \nabla_X Y, N\rangle(p)\\
+      &= \langle \overline{\nabla}_X Y, N\rangle(p) - \langle \nabla_X Y, N\rangle(p).
+  \end{align*}
+  The second term is zero by orthogonality. Continuing, we have
+  \begin{align*}
+    \langle S_\eta(u), v\rangle
+      &= -\langle \overline{\nabla}_X N, Y\rangle(p)\\
+      &= -\langle \overline{\nabla}_u N, v \rangle\\
+      &= \langle (-\overline{\nabla}_u N)^T + (\nabla_u N)^\perp, v\rangle.
+  \end{align*}
+  The second term is zero because one of the constituents is by definition orthogonal to $v\in T_p(M)$. So we have
+  \begin{equation*}
+    \langle S_\eta(u) - (-\overline{\nabla}_u N)^T, v\rangle = 0
+  \end{equation*}
+  and thus $S_\eta(u) = (-\overline{\nabla}_u N)^T$. \qed
+\end{proof}
+
+\begin{theorem}[Gauss' theorem]
+  Let $p\in M$ and $u,v \in T_p(M)$ be orthonormal. Denoting $K(u,v)$ to be the sectional curvature of $M$ at $p$ in $\mbox{span}\{u,v\}$ and $\overline{K}(u,v)$ the corresponding curvature of $\overline{M}$, we have
+  \begin{equation}
+    \highlight{K(u,v) - \overline{K}(u,v) = \langle B(u,u), B(v,v)\rangle - |B(u,v)|^2}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Let $X$ and $Y$ be local orthogonal extensions of $u$ and $v$ to $M$, and $\overline{X}$ and $\overline{Y}$ be extensions of $X$ and $Y$ to $\overline{M}$. Then, by definition,
+  \begin{equation*}
+    K(u,v) = \langle R(u,v)v, u\rangle = \langle \nabla_X \nabla_Y Y - \nabla_Y \nabla_X Y - \nabla_{[X,Y]} Y, X\rangle(p)
+  \end{equation*}
+  and $\overline{K}(u,v)$ is the same but with everything extended. Since $X(p) = \overline{X}(p)$, we have
+  \begin{equation*}
+    \langle \overline{\nabla}_{[\overline{X}, \overline{Y}]} Y - \nabla_{[X,Y]}Y, X \rangle = \langle (\nabla_{[\overline{X}, \overline{Y}]} \overline{Y})^\perp, X\rangle = 0.
+  \end{equation*}
+  We choose a local orthonormal frame $\{E_1, \ldots E_m\}$ to $M$ with $m = \mbox{dim}(\overline{M}) - \mbox{dim}(M)$. We have $B(X,Y) \in (\mathcal{X}(M))^\perp$, so
+  \begin{equation*}
+    B(X,Y) = H_i(X,Y)E_i = \overline{\nabla}_{\overline{X}} \overline{Y} - \nabla_X Y,
+  \end{equation*}
+  but also
+  \begin{equation*}
+    H_{E_i} = \langle B(X,Y), E_i \rangle = H_i(X,Y),
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \overline{\nabla}_{\overline{X}} \overline{\nabla}_{\overline{Y}} \overline{Y} = \overline{\nabla}_{\overline{X}}\left(B(Y,Y) + \nabla_Y Y\right) = \overline{\nabla}_{\overline{X}} \left(H_i(Y,Y) E_i + \nabla_Y Y\right).
+  \end{equation*}
+  At $p$, we have
+  \begin{align*}
+    \langle \overline{\nabla}_{\overline{X}} \overline{\nabla}_{\overline{Y}} \overline{Y}, X \rangle
+      &= H_i(Y,Y) \langle \overline{\nabla}_{\overline{X}} E_i, X\rangle + (\cdots) \langle E_i, X\rangle + \langle \overline{\nabla}_{\overline{X}} \overline{\nabla}_{\overline{Y}} Y, X \rangle\\
+      &= H_i(Y,Y) \left(\langle (\overline{\nabla}_{\overline{X}} E_i)^T, X\rangle + \langle (\overline{\nabla}_{\overline{X}} E_i)^\perp, X\rangle\right) + 0 + \langle \overline{\nabla}_{\overline{X}} \overline{\nabla}_{\overline{Y}} Y, X \rangle\\
+      &= H_i(X,X) H_i(Y,Y) + \langle \nabla_X \nabla_Y Y, X \rangle.
+  \end{align*}
+  A similar manipulation gives
+  \begin{align*}
+    \langle \overline{\nabla}_{\overline{Y}} \overline{\nabla}_{\overline{X}} \overline{Y}, X \rangle = H_i(X,Y) H_i(X,Y) + \langle \nabla_X \nabla_Y Y, X \rangle,
+  \end{align*}
+  so $K(u,v) - \overline{K}(u,v) = H_i(X,X) H_i(Y,Y) - H_i(X,Y)H_i(X,Y)$, and we have the desired result. \qed
+\end{proof}
+
+Now, $S_\eta$ is a self-adjoint operator ($\langle S_\eta(u), v\rangle = \langle u, S_\eta(v)\rangle$, so there exists an orthonormal basis $\{e_1,\ldots e_n\}$ of $T_p(M)$ made up of eigenvectors of $S_\eta$, i.e. $H_\eta(e_i, e_i) = \langle S_\eta(e_i), e_i\rangle = \lambda_i$ are zero otherwise, since the resulting eigenvectors are orthogonal. Then we have
+\begin{equation}
+  \highlight{K(e_i, e_j) - \overline{K}(e_i, e_j) = \lambda_i\lambda_j}.
+\end{equation}
+
+\begin{proposition}
+  Let $M \subset (\overline{M}, g)$. Then if every geodesic on $M$ starting at $p \in M$ is a geodesic of $\overline{M}$ iff $H_\eta \equiv 0$ for all $\eta\in (T_p(M))^\perp$.
+\end{proposition}
+
+\begin{proof}
+  Let $\gamma$ be a geodesic of $M$, $\gamma(0)=0$, $\gamma'(0) = u\in T_p(M)$. Also let $\eta \in (T_p(M))^\perp$, $N$ a local extension of $\eta$ normal to $T_p(M)$, and $X$ a local extension of $\gamma'$ tangent to $M$. Then $\langle X,N\rangle=0$ implies that
+  \begin{equation*}
+    H_\eta(u,u) = \langle S_\eta(u), u\rangle = \langle (-\nabla_X N)^T,X\rangle(p).
+  \end{equation*}
+  Note that we have
+  \begin{equation*}
+    \langle \overline{\nabla}_X N, X\rangle = X\langle N,X\rangle - \langle N, \overline{\nabla}_X, X\rangle = - \langle N, \overline{\nabla}_X, X\rangle
+  \end{equation*}
+  and
+  \begin{equation*}
+    \langle \nabla_X N, X\rangle = \langle (\overline{\nabla}_X N)^\perp + (\overline{\nabla}_X N)^T, X\rangle = \langle (\overline{\nabla}_X N)^T, X\rangle,
+  \end{equation*}
+  so then
+  \begin{equation*}
+    H_\eta(u,u) = \langle N, \overline{\nabla}_X X\rangle \equiv 0
+  \end{equation*}
+  for a geodesic since $\overline{\nabla}_X X \equiv 0$. \qed
+\end{proof}
+
+Let $(\overline{M},g)$ be a Riemannian manifold, $p\in\overline{M}$, and $\epsilon$ small enough such that $\exp_p: B_\epsilon(0_p) \to B_\epsilon(0_p)$ is a diffeomorphism. Let $\Sigma$ be a two-dimensional subspace of $T_p(\overline{M})$, and $\sigma = B_\epsilon(0_p) \cap \Sigma$. Let $M = \exp_p(\sigma)$, then every geodesic of $M$ is a geodesic of $\overline{M}$ since we have a diffeomorphism, and so by above proposition it follows that $H_\eta \equiv 0$. Then by Gauss' theorem, we have $K(p, \Sigma) = \overline{K}(p, \Sigma)$, and since $M$ is a two-dimensional manifold, the section curvature is thus exactly the Gaussian curvature of $M$.
+
+\begin{example}
+  Let $\overline{M} = \mathbb{R}^{n+1}$ and $M = S^n$ (so we are expecting the curvature to be $1$). Let $N(p) = -p\in\mathbb{R}^{n+1}$, $\|p\|=1$ be the inward pointing normal. Then since $\langle N, N,\rangle = 1$, $\langle \overline{\nabla}_X N, N\rangle = 0$ for all $x \in T_p(S^n)$, so
+  \begin{equation*}
+    \overline{\nabla}_X N = (\overline{\nabla}_X N)^T = -S_N(x)
+  \end{equation*}
+  by definition of the shape operator. Let $c$ be a curve in $S^n$ with $c(0) = p$ and $c'(0) = x$, then
+  \begin{equation*}
+    \overline{\nabla}_X N = \left.\frac{\mathrm{d}}{\mathrm{d}t}N(c(t))\right|_{t=0} = \left.\frac{\mathrm{d}}{\mathrm{d}t}(-c(t))\right|_{t=0} = x,
+  \end{equation*}
+  and so $S_N(x) = x$ and the shape operator is in fact the identity. This means every vector on $T_p(S^n)$ is an eigenvector with eigenvalue $1$, so by Gauss' theorem, since $\overline{K}(e_i, e_j) = 0$ as $\mathbb{R}^{n+1}$ is flat, we have
+  \begin{equation*}
+    K(e_i, e_j) + 0 = \lambda_i \lambda_j = 1,
+  \end{equation*}
+  and so for all two dimensional $\Sigma \subset T_p(S^n)$ we have $K(p, \Sigma) = 1$, as expected.\marginnote{It we were dealing with $S^n(r)$ then $K(p, \Sigma) = 1/r^2$.}
+\end{example}
+
+\begin{example}
+  Let $\overline{M} = \mathbb{H}^3$ in the half-space model and $M=\{x_3 \in \mathbb{H}^3\ |\ x_3 = 1\}$ (a two-dimensional sub-``plane''), with $(g_{ij}) = \mbox{diag}(1/x_3^2, 1/x_3^2, 1/x_3^2)$. Let $\phi^{-1}(u,v) = (u,v,1)$ be a chart so that $\partial_u = (1, 0, 0)$, $\partial_v = (0, 1, 0)$, and $\eta = (0,0,1)$ is a normal vector. Note $\|\eta\| = 1$ since $\eta\in M$ and $x_3 = 1$. On $M$, we have
+  \begin{align*}
+    \nabla_{\partial_u} \eta &= \nabla_{\partial_1} \partial_3 = -\frac{1}{x_3}\partial_1 = -\partial_u,\\
+    \nabla_{\partial_v} \eta &= \nabla_{\partial_2} \partial_3 = -\frac{1}{x_3}\partial_2 = -\partial_v,
+  \end{align*}
+  so the shape operator is such that
+  \begin{equation*}
+    S_\eta(\partial_u) = -\partial_u, \qquad S_\eta(\partial_v) = -\partial_v,
+  \end{equation*}
+  and the shape operator is again the identity but with eigenvalue $-1$. So by Gauss' theorem,
+  \begin{equation*}
+    K(p,\Sigma) - \overline{K}(p, \Sigma) = K - (-1) = (-1)^2,
+  \end{equation*}
+  and so $K(p, \Sigma) = 0$. \marginnote{If we are working in the sphere model of $\mathbb{H}^3$ then the sub-``plane'' $M$ would be a ``sphere'', but it will have zero curvature. We call this the \textbf{horosphere}.}
+\end{example}
+
+\begin{lemma}
+  Let $W\subset \mathbb{R}^2$ be open and $F : W\to M$ with $(s,t)\mapsto F(s,t)$ be differentiable. Let $\mathrm{D}/\mathrm{d}t$ and $\mathrm{D}/\mathrm{d}s$ denote the covariant derivatives along the curves $t\to F(s,t)$ and $s\to F(s,t)$ respectively. Let $Z:W \to T(M)$ be a vector field satisfying $Z(s,t) \in T_{F(s,t)}(M)$, then
+  \begin{equation}
+    \highlight{\frac{\mathrm{D}}{\mathrm{d}s} \frac{\mathrm{D}}{\mathrm{d}t} Z - \frac{\mathrm{D}}{\mathrm{d}t} \frac{\mathrm{D}}{\mathrm{d}s} Z = R\left.\left(\frac{\partial F}{\partial s}, \frac{\partial F}{\partial t} \right)Z\right|_{(s,t)}}.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  Assume the vector fields $\partial F / \partial s$ and $\partial F / \partial t$ have local extensions $X$ and $Y$ where
+  \begin{equation*}
+    X(F(s,t)) = \frac{\partial F}{\partial s}(s,t), \qquad Y(F(s,t)) = \frac{\partial F}{\partial t}(s,t).
+  \end{equation*}
+  By the symmetry lemma and for $p = F(s,t)$,
+  \begin{equation*}
+    [X,Y](p) = (\nabla_X Y -\nabla_Y X)(p) = \left(\frac{\mathrm{D}}{\mathrm{d}s} \frac{\partial F}{\partial t} - \frac{\mathrm{D}}{\mathrm{d}t} \frac{\partial F}{\partial s}\right)(p) = 0.
+  \end{equation*}
+  Assume $Z$ has a local extension $\tilde{Z}$, then
+  \begin{align*}
+    R\left.\left(\frac{\partial F}{\partial s}, \frac{\partial F}{\partial t} \right)Z\right|_{(s,t)}
+      &= R(X,Y) \tilde{Z}|_p\\
+      &= (\nabla_X \nabla_Y - \nabla_Y \nabla_X - 0)\tilde{Z}|_p\\
+      &= \left.\left(\frac{\mathrm{D}}{\mathrm{d}s} \frac{\mathrm{D}}{\mathrm{d}t}  - \frac{\mathrm{D}}{\mathrm{d}t} \frac{\mathrm{D}}{\mathrm{d}s}\right) Z\right|_{(s,t)}.
+  \end{align*}
+  \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
 \section{Second variational formula for length}
 
+Let $F:(-\epsilon, \epsilon) \times [a,b]$ be a proper variation of a geodesic $c:[a,b]$, parameterised so that $\|c'(0)\|=1$, and $X(t) = \partial F / \partial s (0,t)$ its variational vector field. Also, let
+\begin{equation}
+  X^\perp = X - \langle X,c'\rangle c'
+\end{equation}
+be the component of $X$ normal to $c'$. Let $\ell:(-\epsilon, \epsilon) \to [0, \infty)$ be the associated length. Then
+\begin{equation}
+  \highlight{\ell''(0) = \int_a^b \left[ \left\|\frac{\mathrm{D}X^\perp}{\mathrm{d}t} \right\|^2 - K(\mbox{span}\{c', X^\perp\}) \left|X^\perp\right|^2 \right]\; \mathrm{d}t},
+\end{equation}
+where $K$ is the section curvature. If $c'$ is parallel to $X^\perp$, we set $K=0$.
 
+\begin{theorem}[Bonnet--Myers theorem]
+  Let $(M,g)$ be a connected and complete Riemannian manifold of dimension $n$. Suppose there exists $r$ where the Ricci curvature $\mbox{Ric}(v) \geq (n-1)/r^2$ for all $v\in T_p(M)$ if $\|v\|=1$, then the diameter of $M$ is bounded above as
+  \begin{equation}
+    \highlight{\mbox{diam}(M) = \sup_{p,q\in M} \{d(p,q)\} \leq \pi r}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  We do proof by contradiction and assume there exists $p,q \in M$ such that $d(p,q) > \pi r$. 
+  
+  The completeness of $M$ implies there there is a minimal geodesic $c:[0,\ell] \to M$ with $\hat{\ell} = d(p,q)$, $c(0) = p$, $c(\ell)=q$ and $\|c'\|=1$ by the Hopf--Rinow theorem. We choose an orthonormal basis $\{v_1 = c'(0), v_2, \ldots v_n\}$ of $T_p(M)$ and $\{V_1, \ldots V_n\}$ the unique parallel vector fields along $c$ with
+  \begin{equation*}
+    V_i(0) = v_i \in T_p(M), \quad V_i(t) \in T_{c(t)}(M), \quad \frac{\mathrm{D}}{\mathrm{d}t} V_i = 0
+  \end{equation*}
+  where $\mathrm{D}/\mathrm{d}t$ denotes the covariant derivative along $c$. Note also
+  \begin{equation*}
+    \langle V_i(t), V_j(t)\rangle = \langle v_i, v_j\rangle \delta_{ij}.
+  \end{equation*}
+  We are going to construct a proper variation of $c$ denoted $F:(-\epsilon, \epsilon) \times [0, \ell] \to M$ with length function $\ell:(-\epsilon, \epsilon) \to M$ satisfying $\ell(0) = L(c) = \hat{\ell}$, $\ell'(0) = 0$, $\ell''(0) < 0$ (because the first and second variational formula for length, and that $c$ is assumed to be a geodesic). As a result, $\ell$ has a local minimum at zero, so there are curves joining $p$ and $q$ with shorter length than $c$, which contributes to a contradiction.
+  
+  We choose $X_i(t) = (\sin t\pi / \hat{\ell})V_i(t)$, with $X_1,\ldots X_n : [0, \hat{\ell}] \to T(M)$ as the vector fields along $c$ with $X_i(0) = X_i(\hat{\ell}) = 0$. For $i\geq 2$, $X_i(t)$ are orthogonal to $c'(t) (=v_1)$ since we have assumed an orthonormal basis and appropriate vector field extensions, so $X_i$ may be considered as a variational vector field of a proper variation $F = (F_i)$ with length function satisfying
+  \begin{equation*}
+    \hat{\ell} = \ell(0) = L(c), \qquad \ell'(0) = 0.
+  \end{equation*}
+  This implies that
+  \begin{equation*}
+    \ell''(0) = \int_0^{\hat{\ell}} \left[ \left\|\frac{\mathrm{D}X_i}{\mathrm{d}t} \right\|^2 - K(\mbox{span}\{c', X_i\}) \left|X_i\right|^2 \right]\; \mathrm{d}t.
+  \end{equation*}
+  Now,
+  \begin{equation*}
+    \frac{\mathrm{D}X_i}{\mathrm{d}t} = \frac{\pi}{\hat{\ell}}\cos\frac{t\pi}{\hat{\ell}} V_i(t) + \sin\frac{t\pi}{\hat{\ell}} \frac{\mathrm{D}V_i}{\mathrm{d}t} = \frac{\pi}{\hat{\ell}}\cos\frac{t\pi}{\hat{\ell}} V_i(t)
+  \end{equation*}
+  since $X_i$ is the parallel transport of $V_i$ and $V_i$ is orthonormal. So
+  \begin{equation*}
+    \ell''(0) = \int_0^{\hat{\ell}} \left[ \frac{\pi^2}{\hat{\ell}^2}\cos^2\frac{t\pi}{\hat{\ell}} - K(\mbox{span}\{c', V_i\}) \sin^2\frac{t\pi}{\hat{\ell}} \right]\; \mathrm{d}t,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \sum_{i=2}^n \ell''(0) = \int_0^{\hat{\ell}} \left[ \frac{\pi^2}{\hat{\ell}^2}(n-1)\cos^2\frac{t\pi}{\hat{\ell}} - \sum_{i=2}^n K(\mbox{span}\{c', V_i\}) \sin^2\frac{t\pi}{\hat{\ell}} \right]\; \mathrm{d}t.
+  \end{equation*}
+  Now, $\hat{\ell} = d(p,q) > \pi r$ by assumption, so $1/r^2 > \pi^2 / \hat{\ell}^2$, and that the sum of the sectional curvatures here happen to coincide with the Ricci curvature (from definition of the sectional curvature and we are dealing with an orthonormal basis). Thus
+  \begin{align*}
+    \sum_{i=2}^n \ell''(0)
+      &= \int_0^{\hat{\ell}} \left[ \frac{\pi^2}{\hat{\ell}^2}\cos^2\frac{t\pi}{\hat{\ell}} \sum_{i=2}^n \mbox{Ric}(v) \sin^2\frac{t\pi}{\hat{\ell}} \right]\; \mathrm{d}t\\
+      &\leq \int_0^{\hat{\ell}} \left((n-1)\frac{\pi^2}{\hat{\ell}^2}\cos^2\frac{t\pi}{\hat{\ell}} \frac{n-1}{r^2} \sin^2\frac{t\pi}{\hat{\ell}} \right)\; \mathrm{d}t\\
+      &\leq (n-1)\frac{\pi^2}{\hat{\ell}^2}\int_0^{\hat{\ell}} \left(\cos^2\frac{t\pi}{\hat{\ell}} - \sin^2\frac{t\pi}{\hat{\ell}} \right)\; \mathrm{d}t = 0
+  \end{align*}
+  by the double angle formulae. So there exists some direction $i\geq 2$ such that the length function is a local maximum, leading to a contradiction.
+  
+  Clearly $M$ is bounded and complete means $M$ is compact, so the supremum of the distance is realisable. \qed
+\end{proof}
+
+\begin{example}
+  Recall that $S^n(r)$ has constant sectional curvature $1/r^2$ from an example above, and it is Riemannanian, connected and complete. Let $q \in s^n(r)$, $v\in T_p(S^n)$, and $\|v'\|=1$. We can always choose an orothonormal basis where
+  \begin{equation*}
+    K(\mbox{span}\{v, v_i\}) = \frac{\langle R(v_i, v)v, v_i\rangle}{1 - 0},
+  \end{equation*}
+  implying that
+  \begin{equation*}
+    \mbox{Ric}(v) = \sum_{i=2} \langle R(v_i, v)v, v_i\rangle \geq \frac{n-1}{r^2}
+  \end{equation*}
+  and so $\mbox{diam}(S^n(r)) \leq \pi r$. In fact $\mbox{diam}(S^n) = \pi r$, and thus the sphere could be regarded as the ``biggest'' manifold we can have.
+\end{example}
+
+\begin{example}
+ Let $\mathbb{T}^n = \mathbb{R}^n / \mathbb{Z}^n$ be the $n$-torus with an arbitrary Riemannina metric. Then we prove that the Ricci curvature of $\mathbb{T}^n$ cannot be strictly positive, i.e., $\mbox{Ric}_p(v) \leq 0$ for all $p\in \mathbb{T}^n$, $v\in T_p(M)$ and $\|v\|_p=1$. This also implies the sectional curvature for $\mathbb{T}^n$ cannot be strictly positive.
+ 
+ The metric $g$ on $\mathbb{T}^n$ may be lifted to a metric $\tilde{g}$ on $\mathbb{R}^n$ via
+ \begin{equation*}
+  \tilde{g}_p(v,w) = g_{\pi(p)}(D\pi(p) v, D\pi(p) w),
+ \end{equation*}
+ where $\pi :\mathbb{R}^n \to \mathbb{T}^n$ is a canonical projection. The metric $\tilde{g}$ is locally isometric to $g$, and $\mathbb{Z}^n$ acts on $\mathbb{R}^n$ by isometries with respective to $\tilde{g}$, so assuming $\mbox{Ric}(v) \geq c > 0$, we also have $\mbox{Ric}_{\tilde{g}}(v) \geq c > 0$. But $(\mathbb{R}^n, \tilde{g})$ is Riemannian and its Ricci curvature is bounded below, hence Bonnet--Myers theorem would imply that $\mathbb{R}^n$ is compact (which it clearly is not), and we have our contraction. \qed
+\end{example}
 
 %===============================================================================
 
