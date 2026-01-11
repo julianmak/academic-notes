@@ -227,6 +227,7 @@
 
 \newcommand{\As}{{\mathsf{A}}}
 \newcommand{\Bs}{{\mathsf{B}}}
+\newcommand{\Cs}{{\mathsf{C}}}
 \newcommand{\Ds}{{\mathsf{D}}}
 \newcommand{\Is}{{\mathsf{I}}}
 \newcommand{\Ps}{{\mathsf{P}}}
@@ -234,6 +235,7 @@
 \newcommand{\Ys}{{\mathsf{Y}}}
 \newcommand{\Ob}{{\boldsymbol{0}}}
 \newcommand{\eb}{{\boldsymbol{e}}}
+\newcommand{\fb}{{\boldsymbol{f}}}
 \newcommand{\ub}{{\boldsymbol{u}}}
 \newcommand{\vb}{{\boldsymbol{v}}}
 \newcommand{\wb}{{\boldsymbol{w}}}
@@ -308,23 +310,13 @@
 \begin{itemize}
   \item \textit{Last compiled: \monthyear}
   \item Blended from notes of C. Keaton and J. R. Parker, Durham
-  \item This was part of the Durham core second year modules. Involves
-  introduction to vector spaces, linear maps, and matrices as linear maps
-  \item I have personally changed the ordering quite a bit, since the ordering
-  in my original I have from the original notes is obscenely jumpy and makes no
-  logical sense to me...(if I were teaching this I would probably have matrices
-  before linear maps)
+  \item This was part of the Durham core second year modules. Involves introduction to vector spaces, linear maps, and matrices as linear maps
+  \item I have personally changed the ordering quite a bit, since the ordering in my original I have from the original notes is obscenely jumpy and makes no logical sense to me...(if I were teaching this I would probably have matrices before linear maps)
 \end{itemize}
 
 \par
 
-\par Licensed under the Apache License, Version 2.0 (the ``License''); you may
-not use this file except in compliance with the License. You may obtain a copy
-of the License at \url{http://www.apache.org/licenses/LICENSE-2.0}. Unless
-required by applicable law or agreed to in writing, software distributed under
-the License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT WARRANTIES
-OR CONDITIONS OF ANY KIND}, either express or implied. See the License for the
-specific language governing permissions and limitations under the License.
+\par Licensed under the Apache License, Version 2.0 (the ``License''); you may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://www.apache.org/licenses/LICENSE-2.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 \end{fullwidth}
 
 
@@ -332,8 +324,7 @@ specific language governing permissions and limitations under the License.
 
 \chapter{Vector spaces}
 
-Recall that a \textbf{field} $\mathbb{F}$ equipped with an addition $+$ and a
-multiplication $\times$ operation satisfies the following axioms:
+Recall that a \textbf{field} $\mathbb{F}$ equipped with an addition $+$ and a multiplication $\times$ operation satisfies the following axioms:
 \begin{itemize}
   \item operations are associative
   \item operations are commutative
@@ -343,8 +334,7 @@ multiplication $\times$ operation satisfies the following axioms:
   \item multiplication is distributive over addition
 \end{itemize}
 
-The usual rationals $\mathbb{Q}$, reals $\mathbb{R}$ and complex numbers
-$\mathbb{C}$ are common fields.
+The usual rationals $\mathbb{Q}$, reals $\mathbb{R}$ and complex numbers $\mathbb{C}$ are common fields.
 
 A set $V$ is a \textbf{vector space} over a field $\mathbb{F}$ if, for $\vb, \ub \in V$ and $\lambda, \mu \in \mathbb{F}$,
 \begin{itemize}
@@ -359,27 +349,22 @@ Some examples are
 \begin{itemize}
   \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{C}$
   \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{R}^n$ is the Eucliean $n$-space
-  \item $\mathbb{F} = \mathbb{R}$ and $V = C[0, 1]$ the set of continuous
-  functions defined over the interval $[0, 1]$
+  \item $\mathbb{F} = \mathbb{R}$ and $V = C[0, 1]$ the set of continuous functions defined over the interval $[0, 1]$
   \item $\mathbb{F} = \mathbb{R}$ and $V$ the solutions to the ODE $y'' - y' + y
   = 0$
-  \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{R}[t]$, the set of
-  polynomials in $t$ with coefficients in $\mathbb{R}$
+  \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{R}[t]$, the set of polynomials in $t$ with coefficients in $\mathbb{R}$
 \end{itemize}
 
 \begin{lemma}
-  If $V$ is a vector space over $\mathbb{F}$, then for all $\vb \in V$, we have
-  $0\vb = \boldsymbol{0}$.
+  If $V$ is a vector space over $\mathbb{F}$, then for all $\vb \in V$, we have $0\vb = \Ob$.
 \end{lemma}
 
 \begin{proof}
-  We have $0\vb = (0 + 0)\vb = 0\vb + 0\vb$, so subtracting accordingly leads to
-  the above result. \qed
+  We have $0\vb = (0 + 0)\vb = 0\vb + 0\vb$, so subtracting accordingly leads to the above result. \qed
 \end{proof}
 
 \begin{lemma}
-  As above, but for all $\lambda \in \mathbb{F}$, we have $\lambda
-  \boldsymbol{0} = \boldsymbol{0}$. \qedwhite
+  As above, but for all $\lambda \in \mathbb{F}$, we have $\lambda \Ob = \Ob$. \qedwhite
 \end{lemma}
 
 \begin{lemma}
@@ -387,27 +372,20 @@ Some examples are
 \end{lemma}
 
 \begin{proof}
-  $\boldsymbol{0} = 0\vb = (1 + (-1))\vb = \vb + (-1)\vb$, so that $(-1)\vb =
+  $\Ob = 0\vb = (1 + (-1))\vb = \vb + (-1)\vb$, so that $(-1)\vb =
   -\vb$. \qed
 \end{proof}
 
 Let $U \subseteq V$, then $U$ is a \textbf{subspace} of $V$ over $\mathbb{F}$ if $U$ forms a vector space under the same addition and scalar multiplication as $V$.
 
-Instead of checking that a given subspace $U$ really satisfies all the vector
-space axioms, the follow theorem reduces the amount of work required.
+Instead of checking that a given subspace $U$ really satisfies all the vector space axioms, the follow theorem reduces the amount of work required.
 
 \begin{theorem}
-  $U$ is a subspace of $V$ if and only if $U \neq \emptyset$, and for all $\ub,
-  \vb \in U$ and $\lambda \in \mathbb{F}$, we have $\ub + \vb \in U$ and
-  $\lambda \vb \in U$.
+  $U$ is a subspace of $V$ if and only if $U \neq \emptyset$, and for all $\ub, \vb \in U$ and $\lambda \in \mathbb{F}$, we have $\ub + \vb \in U$ and $\lambda \vb \in U$.
 \end{theorem}
 
 \begin{proof}
-  These conditions are obviously necessary for $U$ to be a vector space.
-  Conversely, if $\ub, \vb \in U$, then $\ub$, $-\vb = (-1)\vb \in U$ by above
-  lemma.s Since $\ub - \vb \in U$, $U \neq \emptyset$, and $U$ is a group under
-  addition. The condition $\lambda \vb in U$ ensures that $U$ is closed. Since
-  the relevant axioms hold in $V$, they also hold in $U$. \qed
+  These conditions are obviously necessary for $U$ to be a vector space. Conversely, if $\ub, \vb \in U$, then $\ub$, $-\vb = (-1)\vb \in U$ by above lemma.s Since $\ub - \vb \in U$, $U \neq \emptyset$, and $U$ is a group under addition. The condition $\lambda \vb in U$ ensures that $U$ is closed. Since the relevant axioms hold in $V$, they also hold in $U$. \qed
 \end{proof}
 
 \begin{corollary}
@@ -422,8 +400,7 @@ We say the vectors $\{\vb_i\}$ are \textbf{linearly independent} if
 \begin{equation}
   \lambda_1 \vb_1 + \ldots + \lambda_n \vb_n = 0
 \end{equation}
-only has trivial solutions $\lambda_i = 0$ for all $i$, if $\vb_i \neq \vb_j$
-for $i\neq j$.
+only has trivial solutions $\lambda_i = 0$ for all $i$, if $\vb_i \neq \vb_j$ for $i\neq j$.
 
 \begin{example}
   \begin{enumerate}
@@ -433,8 +410,7 @@ for $i\neq j$.
     \end{equation*}
     are linearly independent.
     
-    We have $a+2c = 0$, $b=0$, and $a+b+c=0$. This ends up reducing down
-    accordingly to $a=b=c=0$, so $S$ is linearly independent.
+    We have $a+2c = 0$, $b=0$, and $a+b+c=0$. This ends up reducing down accordingly to $a=b=c=0$, so $S$ is linearly independent.
     
     \item Shown
     \begin{equation*}
@@ -444,165 +420,109 @@ for $i\neq j$.
     
     Note that the third vector is the sum of the first and second vector.
     
-    \item Show that $S=\{\sin nx\ |\ n\in\mathbb{N}\}$ is linearly
-    independent.
+    \item Show that $S=\{\sin nx\ |\ n\in\mathbb{N}\}$ is linearly independent.
     
-    Note that we have the following orthogonality rule:\marginnote{Essentially
-    from compound angle formula.}
+    Note that we have the following orthogonality rule:\marginnote{Essentially from compound angle formula.}
     \begin{equation*}
       \int_{-\pi}^{\pi} \sin px \sin qx\, \mathrm{d}x = \begin{cases}\pi, & p = q,\\0, & p\neq q.\end{cases}
     \end{equation*}
-    Suppose there exists some $\{b_i\}$ where $\sum_{k=1}^N b_k\sin kx = 0$ then
-    we have, for some $p\in \{1, \ldots N\}$,
+    Suppose there exists some $\{b_i\}$ where $\sum_{k=1}^N b_k\sin kx = 0$ then we have, for some $p\in \{1, \ldots N\}$,
     \begin{equation*}
       \sum_{k=1}^N b_k \int_{-\pi}^\pi \sin px \sin kx\, \mathrm{d}x = 0,
     \end{equation*}
-    so by the orthogonality condition, then $b_p \pi = 0$, and hence $b_p=0$ for
-    arbitrary $p$, and so we have linear independence.\marginnote{This is one
-    step towards saying sines and cosines forms the Fourier basis, which is
-    important for the theorem of \emph{Fourier transforms}.}
+    so by the orthogonality condition, then $b_p \pi = 0$, and hence $b_p=0$ for arbitrary $p$, and so we have linear independence.\marginnote{This is one step towards saying sines and cosines forms the Fourier basis, which is important for the theorem of \emph{Fourier transforms}.}
   \end{enumerate}
 \end{example}
 
-The \textbf{span} of $\{\vb_i\}$ is defines as the set containing all linear
-combinations of the \textbf{spanning set} $\{\vb_i\}$, i.e.
+The \textbf{span} of $\{\vb_i\}$ is defines as the set containing all linear combinations of the \textbf{spanning set} $\{\vb_i\}$, i.e.
 \begin{equation}
   \mbox{Span}(\{\vb_i\}) = \left\{ \sum_{i=1}^n \lambda_i \vb_i \ |\ \lambda_i \in \mathbb{F} \right\}.
 \end{equation}
 
 \begin{example}
   \begin{enumerate}
-    \item $S = \{\eb_1, \eb_2, (2, 3, 0)\}$ spans only the $xy$ plane, because
-    the third vector is not linearly independent of the other two.
+    \item $S = \{\eb_1, \eb_2, (2, 3, 0)\}$ spans only the $xy$ plane, because the third vector is not linearly independent of the other two.
     
     \item Does $S=\{\sin nx\ |\ n\in\mathbb{N}\}$ span $C^\infty(\mathbb{R})$?
     
-    Suppose a function $f\in \mbox{Span}(S)$, then if $S$ spans
-    $C^\infty(\mathbb{R})$, we should have, for all $x\in \mathbb{R}$,
+    Suppose a function $f\in \mbox{Span}(S)$, then if $S$ spans $C^\infty(\mathbb{R})$, we should have, for all $x\in \mathbb{R}$,
     \begin{equation*}
       f(x) = \sum_{k=1}^n b_k \sin kx.
     \end{equation*}
-    Here $f(0)=0$, but note that $\cos(x)\in C^\infty(\mathbb{R})$, but $\cos 0
-    =1$, so $g\not\in \mbox{Span}(S)$, so the answer is no by a counter-example.
+    Here $f(0)=0$, but note that $\cos(x)\in C^\infty(\mathbb{R})$, but $\cos 0 =1$, so $g\not\in \mbox{Span}(S)$, so the answer is no by a counter-example.
   \end{enumerate}
 \end{example}
 
-The set $\{\vb_i\}$ is a \textbf{basis} of some vector space $U$ if the spanning
-set is linearly independent, and spans $U$. For
+The set $\{\vb_i\}$ is a \textbf{basis} of some vector space $U$ if the spanning set is linearly independent, and spans $U$. For
 \begin{equation}
   \vb = \sum_{i=1}^n v_i \vb_i,
 \end{equation}
-we say $\vb$ has \textbf{co-ordinates} $(v_1, \ldots, v_n)$ with respect to the
-basis $\{\vb_i\}$.
+we say $\vb$ has \textbf{co-ordinates} $(v_1, \ldots, v_n)$ with respect to the basis $\{\vb_i\}$.
 
 \begin{lemma}
-  Let $S = \{\vb_1, \ldots \vb_n\}$ be a basis for a non-trivial $V$ over
-  $\mathbb{F}$. Then every non-zero element of $V$ can be expressed
-  \emph{uniquely} by a linear combination of elements of $S$.
+  Let $S = \{\vb_1, \ldots \vb_n\}$ be a basis for a non-trivial $V$ over $\mathbb{F}$. Then every non-zero element of $V$ can be expressed \emph{uniquely} by a linear combination of elements of $S$.
 \end{lemma}
 
 \begin{proof}
-  Let $\vb \neq \boldsymbol{0} \in V$. Since $S$ is a spanning set, we have $\vb
-  = \sum_{k=1}^n \lambda_k \vb_k$ for some constants $\lambda_i \in \mathbb{F}$.
-  Suppose $\vb$ has a different representation, i.e. $\vb = \sum_{k=1}^n \mu_k
-  \vb_k$ for $\mu_k \in \mathbb{F}$, then we must have
+  Let $\vb \neq \Ob \in V$. Since $S$ is a spanning set, we have $\vb = \sum_{k=1}^n \lambda_k \vb_k$ for some constants $\lambda_i \in \mathbb{F}$. Suppose $\vb$ has a different representation, i.e. $\vb = \sum_{k=1}^n \mu_k \vb_k$ for $\mu_k \in \mathbb{F}$, then we must have
   \begin{equation*}
     \sum_{k=1}^n (\lambda_k - \mu_k)\vb_k = 0,
   \end{equation*}
-  but since $S$ is linearly independent, we must have $\lambda_k = \mu_k$, and
-  so we have a unique representation. \qed
+  but since $S$ is linearly independent, we must have $\lambda_k = \mu_k$, and so we have a unique representation. \qed
 \end{proof}
 
 \begin{theorem}
-  Let $A = \{\ub_1, \ldots \ub_m\}$ and $B = \{\vb_1, \ldots \vb_n\}$ be bases of
-  $V$. Then $n=m$.
+  Let $A = \{\ub_1, \ldots \ub_m\}$ and $B = \{\vb_1, \ldots \vb_n\}$ be bases of $V$. Then $n=m$.
 \end{theorem}
 
 \begin{proof}
-  The $n$ or $m=0$ case is trivial. Without loss of generality, assume $0 < m
-  \leq n$. Since $B$ is a basis for $V$, the first element of $A$ could be
-  represented as $\ub_1 = \sum_{k=1}^n \lambda_k \vb_k$. Since $\ub_1 \neq
-  \boldsymbol{0}$, the $\lambda$ are not all zero. Without loss of generality,
-  suppose $\lambda_1 \neq 0$, then
+  The $n$ or $m=0$ case is trivial. Without loss of generality, assume $0 < m \leq n$. Since $B$ is a basis for $V$, the first element of $A$ could be represented as $\ub_1 = \sum_{k=1}^n \lambda_k \vb_k$. Since $\ub_1 \neq \Ob$, the $\lambda$ are not all zero. Without loss of generality, suppose $\lambda_1 \neq 0$, then
   \begin{equation*}
     \vb_1 = \frac{1}{\lambda_1}(\ub_1 - \lambda_2\vb_2 \ldots - \lambda_n \vb_n),
   \end{equation*}
-  so $\vb_1 \in \mbox{Span}(\{\ub_1, \vb_2, \ldots \vb_n\})$. The spanning set
-  here is linearly independent, since if it wasn't, then there exists some
-  $\mu_i$ where
+  so $\vb_1 \in \mbox{Span}(\{\ub_1, \vb_2, \ldots \vb_n\})$. The spanning set here is linearly independent, since if it wasn't, then there exists some $\mu_i$ where
   \begin{equation*}
     \mu_1 \ub_1 + \mu_2 \vb_2 + \ldots \mu_n \vb_n = 0,
   \end{equation*}
-  and following the argument above, we can assume $\mu_1 \neq 0$ without loss of
-  generality since $B$ is linearly independent, so $\ub_1 \in
-  \mbox{Span}(\{\vb_2, \ldots \vb_n \}$, but by lemma, the representation of
-  $\ub_1$ is unique, and since we assumed $\lambda_1 \neq 0$, we get a
-  contradiction. 
+  and following the argument above, we can assume $\mu_1 \neq 0$ without loss of generality since $B$ is linearly independent, so $\ub_1 \in \mbox{Span}(\{\vb_2, \ldots \vb_n \}$, but by lemma, the representation of $\ub_1$ is unique, and since we assumed $\lambda_1 \neq 0$, we get a contradiction. 
   
   Note also that
   \begin{equation*}
     \mbox{Span}(\{\ub_1, \vb_1, \ldots \vb_n\}) = \mbox{Span}(\{\ub_1, \vb_2, \ldots \vb_n\}) = V,
   \end{equation*}
-  so $\{\ub_1, \vb_2, \ldots \vb_n\}$ serves as a basis for $V$. We can then
-  continue the argument above for $\vb_2, \ldots \vb_n$, and if $m<n$, we reach
-  the conclusion that
+  so $\{\ub_1, \vb_2, \ldots \vb_n\}$ serves as a basis for $V$. We can then continue the argument above for $\vb_2, \ldots \vb_n$, and if $m<n$, we reach the conclusion that
   \begin{equation*}
     C = \{\ub_1, \ldots \ub_m, \vb_{m+1} \ldots \vb_n\}
   \end{equation*}
-  is a basis for $V$. However, since $A$ is also a basis of $V$, is $\vb_n \in
-  \mbox{Span}(A)$, then $C$ would not be linearly independent, and we have a
-  contradiction. So $m<n$ is false, and $m=n$ is the only possibility. \qed
+  is a basis for $V$. However, since $A$ is also a basis of $V$, is $\vb_n \in \mbox{Span}(A)$, then $C$ would not be linearly independent, and we have a contradiction. So $m<n$ is false, and $m=n$ is the only possibility. \qed
 \end{proof}
 
-If a basis for a vector space $V$ has $n$ elements, then the vector space
-\textbf{dimension} $\mbox{dim}(V) = n$.
+If a basis for a vector space $V$ has $n$ elements, then the vector space \textbf{dimension} $\mbox{dim}(V) = n$.
 
 \begin{corollary}\label{cor:extend}
-  Let $V$ be a $n$-dimensional vector space over $\mathbb{F}$, and $A = \{\eb_1,
-  \ldots \eb_r\}$ be a subset of $V$ which is linearly independent. Then $A$ can
-  be extended to a basis $\{\eb_1, \ldots \eb_n\}$ of $V$, where $r \leq n$.
+  Let $V$ be a $n$-dimensional vector space over $\mathbb{F}$, and $A = \{\eb_1, \ldots \eb_r\}$ be a subset of $V$ which is linearly independent. Then $A$ can be extended to a basis $\{\eb_1, \ldots \eb_n\}$ of $V$, where $r \leq n$.
 \end{corollary}
 
 \begin{proof}
-  Let $B = \{\vb_1, \ldots \vb_n \}$ be a basis of $V$. If $\mbox{Span}(A) = V$
-  then we are done, otherwise there exists $\eb_{r+1} \in B$ such that
-  $\eb_{r+1} \not\in \mbox{Span}(A)$.
+  Let $B = \{\vb_1, \ldots \vb_n \}$ be a basis of $V$. If $\mbox{Span}(A) = V$ then we are done, otherwise there exists $\eb_{r+1} \in B$ such that $\eb_{r+1} \not\in \mbox{Span}(A)$.
   
-  Suppose $\lambda_1\eb_1 + \ldots + \lambda_{r+1}\eb_{r+1} = \boldsymbol{0}$
-  for some $\lambda_i \in \mathbb{F}$. If $\lambda_{r+1} \neq 0$ then $\eb_{r+1}
-  \in \mbox{Span}(A)$, which is a contradiction, so $\lambda_{r+1} = 0$, hence
-  $A \cup \{\eb_{r+1}\}$ is a linearly independent set. We continue as necessary
-  until we get $\{\eb_1, \ldots \eb_n\}$. \qed
+  Suppose $\lambda_1\eb_1 + \ldots + \lambda_{r+1}\eb_{r+1} = \Ob$ for some $\lambda_i \in \mathbb{F}$. If $\lambda_{r+1} \neq 0$ then $\eb_{r+1} \in \mbox{Span}(A)$, which is a contradiction, so $\lambda_{r+1} = 0$, hence $A \cup \{\eb_{r+1}\}$ is a linearly independent set. We continue as necessary until we get $\{\eb_1, \ldots \eb_n\}$. \qed
 \end{proof}
 
 \begin{corollary}
-  Let $V$ be a vector space over $\mathbb{F}$ with finite dimensions, and $U$ a
-  subspace of $V$. Then $\mbox{dim}(U) \leq \mbox{dim}(V)$, and if
-  $\mbox{dim}(U) = \mbox{dim}(V)$, then $U = V$.
+  Let $V$ be a vector space over $\mathbb{F}$ with finite dimensions, and $U$ a subspace of $V$. Then $\mbox{dim}(U) \leq \mbox{dim}(V)$, and if $\mbox{dim}(U) = \mbox{dim}(V)$, then $U = V$.
 \end{corollary}
 
 \begin{proof}
-  Assume $U$ is non-trivial, so there exists non-zero $\eb_1 \in U$. If
-  $\mbox{Span}(\eb_1) = U$ then we are done, but otherwise there exists $\eb_2
-  \in U - \mbox{Span}(\eb_1)$, and by previous theorem, $\{\eb_1, \eb_2\}$ is a
-  linearly independent set. We can continue as necessary for $r \leq n$, and by
-  previous corollary we can continue until a basis of $U$ is obtained. If
-  $\mbox{dim}(U) = \mbox{dim}(V)$ then $r=n$, so $U=V$. qed
+  Assume $U$ is non-trivial, so there exists non-zero $\eb_1 \in U$. If $\mbox{Span}(\eb_1) = U$ then we are done, but otherwise there exists $\eb_2 \in U - \mbox{Span}(\eb_1)$, and by previous theorem, $\{\eb_1, \eb_2\}$ is a linearly independent set. We can continue as necessary for $r \leq n$, and by previous corollary we can continue until a basis of $U$ is obtained. If $\mbox{dim}(U) = \mbox{dim}(V)$ then $r=n$, so $U=V$. \qed
 \end{proof}
 
 \begin{corollary}
-  Let $A = \{\eb_1, \ldots \eb_r\}$ be a subset of vector space $V$ over
-  $\mathbb{F}$. There exists a subset which is a basis of $\mbox{Span}(A)$, and
-  hence $\mbox{dim}(\mbox{Span}(A)) \leq r$.
+  Let $A = \{\eb_1, \ldots \eb_r\}$ be a subset of vector space $V$ over $\mathbb{F}$. There exists a subset which is a basis of $\mbox{Span}(A)$, and hence $\mbox{dim}(\mbox{Span}(A)) \leq r$.
 \end{corollary}
 
 \begin{proof}
-  If $A$ is linearly independent it is a basis, so $\mbox{dim}(\mbox{Span}(A)) =
-  r$. Otherwise, there exists non-trivial $\lambda_i \in \mathbb{F}$ such that
-  $\sum_{i=1}^n \lambda_i \eb_i = \boldsymbol{0}$. Assume $\lambda_r \neq 0$,
-  then $\eb_r \in \mbox{Span}(A - \{\eb_r\})$. If $\mbox{Span}(A - \{\eb_r\})$
-  is linearly independent then it is a basis and $\mbox{dim}(\mbox{Span}(A -
-  \{\eb_r\}) = r-1 < r$ as. Otherwise continue as necessary. \qed
+  If $A$ is linearly independent it is a basis, so $\mbox{dim}(\mbox{Span}(A)) = r$. Otherwise, there exists non-trivial $\lambda_i \in \mathbb{F}$ such that $\sum_{i=1}^n \lambda_i \eb_i = \Ob$. Assume $\lambda_r \neq 0$, then $\eb_r \in \mbox{Span}(A - \{\eb_r\})$. If $\mbox{Span}(A - \{\eb_r\})$ is linearly independent then it is a basis and $\mbox{dim}(\mbox{Span}(A - \{\eb_r\}) = r-1 < r$ as. Otherwise continue as necessary. \qed
 \end{proof}
 
 \begin{example}
@@ -613,14 +533,11 @@ If a basis for a vector space $V$ has $n$ elements, then the vector space
     \end{equation*}
     which is a basis of $\mbox{Span}(S)$.
     
-    Notice that the second vector is a linear combination of the other two, so
-    we could discard that to get $S'$ which serves as a basis for
-    $\mbox{Span}(S)$.
+    Notice that the second vector is a linear combination of the other two, so we could discard that to get $S'$ which serves as a basis for $\mbox{Span}(S)$.
     
     \item Extend $S'$ to make it a basis for $\mathbb{R}^3$.
     
-    Note that for $\eb_i$, only $\eb_1$ is not in $\mbox{Span}(S')$, so we can
-    augment $S'$ with $\eb_1$.
+    Note that for $\eb_i$, only $\eb_1$ is not in $\mbox{Span}(S')$, so we can augment $S'$ with $\eb_1$.
   \end{enumerate}
 \end{example}
 
@@ -628,8 +545,7 @@ If a basis for a vector space $V$ has $n$ elements, then the vector space
 
 \section{Sums and direct sums}
 
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and
-$V$ is
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and $V$ is
 \begin{equation}
   \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
 \end{equation}
@@ -639,8 +555,7 @@ $V$ is
 \end{lemma}
 
 \begin{proof}
-  $U+V$ is non-empty since $\boldsymbol{0} + \boldsymbol{0} = \boldsymbol{0} \in
-  U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
+  $U+V$ is non-empty since $\Ob + \Ob = \Ob \in U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
   \begin{equation*}
     \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
   \end{equation*}
@@ -661,90 +576,59 @@ The following theorem is useful for determining dimensions of spaces.
 \end{theorem}
 
 \begin{proof}
-  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots
-  \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1,
-  \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and
-  $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
+  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
   
-  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s,
-  \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists
-  non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
+  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
   \begin{equation*}
-    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \boldsymbol{0}.
+    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \Ob.
   \end{equation*}
-  Then not all of $\nu_i$ is zero, since $\{\eb_1,
-  \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of
-  $U$ and hence linearly independent (and similarly for the other case). Then
-  $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and
-  hence in $U$, so much be in $U \cap V$. Then
+  Then not all of $\nu_i$ is zero, since $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of $U$ and hence linearly independent (and similarly for the other case). Then $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and hence in $U$, so much be in $U \cap V$. Then
   \begin{equation*}
     \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
   \end{equation*}
-  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots
-  \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r,
-  \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots
-  \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads
-  to the result. \qed
+  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads to the result. \qed
 \end{proof}
 
 \begin{example}
-  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$,
-  $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
+  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$, $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
   \begin{equation*}
     U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
   \end{equation*}
     
-  We see the spanning sets of $U$ and $V$ are linearly independent, hence
-  $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be
-  expressed as
+  We see the spanning sets of $U$ and $V$ are linearly independent, hence $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be expressed as
   \begin{equation*}
     \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
   \end{equation*}
-  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads
-  to
+  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads to
   \begin{equation*}
     U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
   \end{equation*}
-  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we
-  should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked
-  directly.
+  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked directly.
 \end{example}
 
-The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\boldsymbol{0}\}$.
+The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\Ob\}$.
 
 \begin{theorem}
-  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct
-  sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all
-  $\wb = \ub + \vb \in W$.
+  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all $\wb = \ub + \vb \in W$.
 \end{theorem}
 
 \begin{proof}
-  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to
-  shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
+  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
   \begin{equation*}
     \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
   \end{equation*}
-  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are
-  just the zero vector, and we have uniqueness.
+  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are just the zero vector, and we have uniqueness.
   
-  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb =
-  \wb + \boldsymbol{0}_V = \boldsymbol{0}_U + \wb$ for the respective zero
-  vectors, but the above is only true if $\wb = \boldsymbol{0}$, and hence $U
-  \cap V = \{\boldsymbol{0}\}$ and we have a direct sum. \qed
+  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb = \wb + \Ob_V = \Ob_U + \wb$ for the respective zero vectors, but the above is only true if $\wb = \Ob$, and hence $U \cap V = \{\Ob\}$ and we have a direct sum. \qed
 \end{proof}
 
 \begin{example}
-  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U
-  \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
+  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
   
-  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V =
-  \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V
-  = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
+  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V = \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
 \end{example}
 
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times
-V}$ is the \textbf{external direct sum}, which is a vector space with the
-definition that the ordered pairs satisfy
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}$ is the \textbf{external direct sum}, which is a vector space with the definition that the ordered pairs satisfy
 \begin{equation*}
   (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
 \end{equation*}
@@ -765,8 +649,7 @@ definition that the ordered pairs satisfy
 
 \chapter{Linear maps}
 
-A \textbf{linear map} $\theta : U \to V$ for vector spaces over $\mathbb{F}$ is
-a function that satisfies
+A \textbf{linear map} $\theta : U \to V$ for vector spaces over $\mathbb{F}$ is a function that satisfies
 \begin{enumerate}
   \item $\theta(\ub + \vb) = \theta(\ub) + \theta(\vb)$ for all $\ub, \vb \in U$,
   \item $\theta(\lambda \ub) = \lambda \theta(\ub)$ for all $\ub \in U$,
@@ -793,13 +676,11 @@ Note that $\theta$ is a \emph{homomorphism}, respecting scalar multiplication.
   \qed
 \end{proof}
 
-Suppose $\theta : U \to V$ is a linear map, then we define\marginnote{Kernel is
-the set things that get sent to zero, while the image is the set of things that
-gets mapped by $\theta$.}
+Suppose $\theta : U \to V$ is a linear map, then we define\marginnote{Kernel is the set things that get sent to zero, while the image is the set of things that gets mapped by $\theta$.}
 \begin{itemize}
   \item \textbf{kernel} of $\theta$ as
   \begin{equation}
-    \highlight{\mbox{Ker}(\theta) = \{\ub \in U\ |\ \theta(\ub) = \boldsymbol{0}\}},
+    \highlight{\mbox{Ker}(\theta) = \{\ub \in U\ |\ \theta(\ub) = \Ob\}},
   \end{equation}
   \item \textbf{image} of $\theta$ as
   \begin{equation}
@@ -814,25 +695,100 @@ gets mapped by $\theta$.}
 \begin{proof}
   Suppose $\ub, \vb \in \mbox{Ker}(\theta)$, then note that
   \begin{equation*}
-    \boldsymbol{0} = \theta(\ub) - \theta(\vb) = \theta(\ub - \vb)
+    \Ob = \theta(\ub) - \theta(\vb) = \theta(\ub - \vb)
   \end{equation*}
-  since $\theta$ is a homomorphism, so that $\ub - \vb \in \mbox{Ker}(\theta)$,
-  while
+  since $\theta$ is a homomorphism, so that $\ub - \vb \in \mbox{Ker}(\theta)$, while
   \begin{equation*}
-    \boldsymbol{0} = \lambda \boldsymbol{0} = \lambda \theta(\ub) = \theta(\lambda\ub)
+    \Ob = \lambda \Ob = \lambda \theta(\ub) = \theta(\lambda\ub)
   \end{equation*}
-  by property of a linear map, so $\lambda\ub \in \mbox{Ker}(\theta)$. So we
-  have closure and therefore the kernel is a subspace of $U$.
+  by property of a linear map, so $\lambda\ub \in \mbox{Ker}(\theta)$. So we have closure and therefore the kernel is a subspace of $U$.
   
-  Suppose $\boldsymbol{a}, \boldsymbol{b} \in \mbox{Im}(\theta)$, then there
-  exists $\boldsymbol{p}, \boldsymbol{q} \in U$ where $\theta(\boldsymbol{p}) =
-  \boldsymbol{a}$ and $\theta(\boldsymbol{q}) = \boldsymbol{b}$. Then similar
-  manipulations shows the image is closed, and is therefore a subspace of $V$. \qed
+  Suppose $\boldsymbol{a}, \boldsymbol{b} \in \mbox{Im}(\theta)$, then there exists $\boldsymbol{p}, \boldsymbol{q} \in U$ where $\theta(\boldsymbol{p}) = \boldsymbol{a}$ and $\theta(\boldsymbol{q}) = \boldsymbol{b}$. Then similar manipulations shows the image is closed, and is therefore a subspace of $V$. \qed
 \end{proof}
+
+Let $\theta : U \to V$ be a linear map.
+\begin{itemize}
+  \item $\theta$ is a \textbf{monomorphism} if $\theta$ is injective, i.e. $\theta(\ub) = \theta(\boldsymbol{v})$ implies that $\ub = \boldsymbol{v}$.
+  \item $\theta$ is an \textbf{epimorphism} if $\theta$ is surjective, i.e. $\mbox{Im}(\theta) = V$.
+  \item $\theta$ is an \textbf{isomorphism} if $\theta$ is a bijection.
+  \item $\theta$ is an \textbf{endomorphism} if $U = V$.
+  \item $\theta$ is an \textbf{automorphism} if $U=V$ and $\theta$ is an isomorphism, i.e. it maps onto itself in a bijective way.
+\end{itemize}
+
+\begin{lemma}
+  Let $\theta : U \to V$ be a linear map, then $\theta$ is a monomorphism if $\mbox{ker}\theta = \{\Ob\}$. $\theta$ is an isomorphism if $\mbox{Im}(\theta) = V$ and $\mbox{Ker}(\theta) = \{\Ob\}$.
+\end{lemma}
+
+\begin{proof}
+  For the first part, if $\ub \in \mbox{Ker}(\theta)$, then $\theta(\ub) = \theta(\Ob)$, and since $\theta$ is injective, we have $\ub = \Ob$. For the converse, if $\mbox{Ker}(\theta)=\{\Ob\}$, then $\theta(\ub) = \theta(\boldsymbol{v})$ implies that $\theta(\ub - \boldsymbol{v}) = 0$, so $\ub - \boldsymbol{v} \in \mbox{Ker}(\theta)$. But the kernel is just the zero element, so this implies $\ub = \boldsymbol{v}$, so we have a monomorphism. The isomorphism part follows directly from the first part by definition. \qed
+\end{proof}
+
+Let $\theta: U \to V$ be a linear map and $U$ is finite dimensional. The \textbf{nullity} and \textbf{rank} of $\theta$ is the dimension of the kernel and image, i.e.
+\begin{equation}
+  \highlight{n(\theta) = \mbox{dim}(\mbox{Ker}(\theta))}, \qquad \highlight{r(\theta) = \mbox{dim}(\mbox{Im}(\theta))}.
+\end{equation}
+
+\begin{corollary}
+  $\theta$ is a monomorphism if $n(\theta) = 0$, and $\theta$ is an epimorphism iff $r(\theta) = \mbox{dim}(V)$. \qedwhite
+\end{corollary}
+
+\begin{theorem}\label{thm:rank_dim}
+  Let $\theta: U \to V$ be a linear map, and $U$ is finite dimensional. Then $\mbox{dim}(U) = r(\theta) + n(\theta)$.
+\end{theorem}
+
+\begin{proof}
+  Let $\{\eb_1, \ldots \eb_n\}$ be a basis for $\mbox{Ker}(\theta)$ where $n = n(\theta)$. This can be extended to another basis $\{\eb_1, \ldots \eb_n, \wb_1, \ldots \wb_r\}$ of $U$, and we aim to show that $\{\wb_i\}$ is a basis and $r = r(\theta)$. 
+  
+  The image of this basis under $\theta$ is then $\{\Ob, \theta(\wb_1), \ldots \theta(\wb_r)\}$, so $\{\theta(\wb_1), \ldots \theta(\wb_r)\}$ spans $\theta(U)$. Suppose then $\lambda_1 \theta(\wb_1) + \ldots \lambda_r \theta(\wb_r) = \Ob$. Since $\theta$ is linear, $\theta(\lambda_1 \wb_1 + \ldots \lambda_r \wb_r) = \Ob$ and is in the kernel, and thus a change of basis implies that we should have some $\mu_i \in \mathbb{F}$ where
+  \begin{equation*}
+    \lambda_1 \wb_1 + \ldots \lambda_r \wb_r = \mu_1 \eb_1 + \ldots \mu_n \eb_n,
+  \end{equation*}
+  and their difference is zero. The collection of $\wb_i$ and $\eb_i$ is a basis, and thus $\lambda_i$ and $\mu_i$ are zero. Thus $\{\wb_i\}$ is linearly independent and thus a basis with $r = r(\theta)$, and we have $r + n = \mbox{dim}(U)$. \qed
+\end{proof}
+
+\begin{lemma}\label{lem:unique_basis}
+  Let $\{\eb_1, \ldots \eb_n\}$ be a basis of $U$ and $\{\fb_1, \ldots \fb_n\}$ be a basis of $V$. Then there exists a unique linear map $\theta : U \to V$ such that $\theta(\eb_i) = \fb_i$ for each index.
+\end{lemma}
+
+\begin{proof}
+  For all $\ub \in U$, we have by definition $\ub = \lambda_i \eb_i$. Suppose $\theta(\ub) = \lambda_i \fb_i$, and if $\vb = \mu_i \eb_i$, then
+  \begin{align*}
+    \theta(\ub + \vb) = \theta( (\lambda_i + \mu_i) \eb_i ) = (\lambda_i + \mu_i) \fb_i = \lambda_i \fb_i + \mu_i \fb_i = \theta(\ub) + \theta(\vb),
+  \end{align*}
+  and that
+  \begin{align*}
+    \theta(\nu\ub) = \theta(\nu (\lambda_i \eb_i) ) = \nu \theta(\ub),
+  \end{align*}
+  hence $\theta$ is a linear map.
+  
+  Suppose there exists from other linear map $\phi$ satisfying the conditions. Then
+  \begin{align*}
+    \theta(\ub) = \lambda_i \theta(\eb_i) = \lambda_i \phi(\eb_i) = \phi(\lambda_i \eb_i) = \phi(\ub),
+  \end{align*}
+  so we have uniqueness as required. \qed
+\end{proof}
+
+\begin{example}
+  For $f: \mathbb{R}^3 \to \mathbb{R}^3$, let
+  \begin{align*}
+    f(\eb_1) = \begin{pmatrix}-1 \\ 1\\ 0\end{pmatrix}, \quad
+    f(\eb_2) = \begin{pmatrix}3 \\ -1\\ 1\end{pmatrix}, \quad
+    f(\eb_3) = \begin{pmatrix}2 \\ 1\\ 1\end{pmatrix}.
+  \end{align*}
+  Compute the nullity and rank of $f$.
+  
+  Note that $f(x,y,z) = x f(\eb_1) + y f(\eb_2) + z f(\eb_3)$ be definition, so the set of simultaneous equations we have are
+  \begin{align*}
+    -x + 3y + 2z = v_1, \quad x - y + z = v_2, \quad y + z = v_3.
+  \end{align*}
+  If $\vb = \Ob$, then $y=-z$, which implies $x = -2z$, which implies $z=y=x=0$, so the map here has a trivial kernel and is full rank by Thm.~\ref{thm:rank_dim}, i.e. $n(f) = 0$ and $r(f) = 3$.
+\end{example} 
 
 %-------------------------------------------------------------------------------
 
 \section{Spaces of linear maps}
+
+{\color{red}Jan 11: p.13 of notes start here}
 
 %-------------------------------------------------------------------------------
 
@@ -840,14 +796,130 @@ gets mapped by $\theta$.}
 
 %===============================================================================
 
-\section{Matrices}
+\chapter{Matrices}
 
 Mostly going to assume we are working with matrices defined over the reals,
 unless stated otherwise.
 
-%-------------------------------------------------------------------------------
+Let $\theta: U \to V$ be a linear map, and let $\{\eb_i\}$ and $\{\fb_i\}$ be a basis of $U$ and $V$ respectively. Then by Lemma~\ref{lem:unique_basis}, $\theta$ can be expressed in terms of a matrix
+\begin{equation}
+  \highlight{ \theta(\eb_j) = a_{ij} \fb_i }
+\end{equation}
+where $\highlight{\As = (a_{ij})}$.\marginnote{Note that the fundamental object is the \emph{linear map}, which upon choosing a basis happens to have a representation in terms of a matrix.}
 
-\section{Elementary matrices}
+\begin{theorem}
+  If $\theta : U \to V$ and $\phi: V\to W$ are linear maps represented by $\As$ and $\Bs$ respectively, with respect to the basis $\{\eb_i\}$, $\{\fb_i\}$ and $\{\boldsymbol{g}_i\}$ of $U$, $V$ and $W$, then $\phi \circ \theta$ is represented by $\Bs\As$ with respect to the same bases. \marginnote{This is just a fancy way of saying composition of linear maps is represented by matrix multiplication. Note the order of operation matters.}
+\end{theorem}
+
+\begin{proof}
+  Let $\Cs$ represent $\phi \circ \theta: U \to W$, so that $(\phi\circ\theta)(\eb_k) = c_{ik}\boldsymbol{g}_i$. But we also have
+  \begin{align*}
+    (\phi\circ\theta)(\eb_k) = \phi(\theta(\eb_k)) = \phi(a_{jk} \fb_j) = a_{jk} \phi(\fb_j) = a_{jk} b_{ij} \boldsymbol{g}_i,
+  \end{align*}
+  and equating the coefficients leads to $c_{ik} = a_{jk} b_{ij}$ with $\Cs = \Bs \As$. \qed
+\end{proof}
+
+A linear map can be represented in different bases.
+
+\begin{theorem}
+  Let $\theta: U \to V$ be represented by $\As$ with bases $\{\eb_1, \ldots \eb_n\}$ and $\{\fb_1,\ldots \fb_m\}$ respectively. If $\{\eb_1',\ldots \eb_n'\}$ and $\{\fb_1',\ldots \fb_m'\}$ are also bases of $U$ and $V$, then $\theta$ is represented by $\Xs \As \Ys$ where
+  \begin{equation*}
+    \Xs:\eb_i' = y_{ki}\eb_k, \qquad Y: \fb_i = x_{ki}\fb_k'.
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    \theta(\eb_i) = \theta(y_{ki}\eb_i) = y_{ki}\theta(\eb_i) = y_{ki} a_{jk} \fb_j = y_{ki} a_{jk} x_{lj} \fb_l' = x_{lj} a_{jk} y_{ki} \fb_l',
+  \end{equation*}
+  which is $(\Xs \As \Ys)_{li}$. \qed
+\end{proof}
+
+\begin{example}
+  Take
+  \begin{equation*}
+    \As = \begin{pmatrix}1 & 2 & -1 \\ 0 & 1 & 3\end{pmatrix}
+  \end{equation*}
+  to represent $\theta:\mathbb{R}^3 \to \mathbb{R}^2$ with respect to the standard basis. Find $\As'$ that represents $\theta$ with respect to
+  \begin{equation*}
+    \left\{\begin{pmatrix}1 \\ 0 \\ -1 \end{pmatrix}, \begin{pmatrix}0 \\ 1 \\ 1 \end{pmatrix}, \begin{pmatrix}2 \\ 1 \\ 0 \end{pmatrix} \right\} \qquad \& \qquad
+    \left\{\begin{pmatrix}0 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \end{pmatrix} \right\}.
+  \end{equation*}
+  
+  Since we are just transforming from the standard basis, we have
+  \begin{equation*}
+    \Ys = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \\ -1 & 1 & 0 \end{pmatrix} \qquad \& \qquad \Xs = \begin{pmatrix} -1 & 1 \\ 1 & 0 \end{pmatrix},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \As' = \Xs \As \Ys = \begin{pmatrix} -5 & 3 & -3 \\ 2 & 1 & 4 \end{pmatrix}.
+  \end{equation*}
+\end{example}
+
+The following are \textbf{elementary matrices} (those starting from the identity matrix essentially)
+\begin{itemize}
+  \item multiply row by a constant $c$, e.g.
+  \begin{equation*}
+    \begin{pmatrix} 1 & 0 & 0 \\ 0 & c & 0 \\ 0 & 0 & 1\end{pmatrix}
+  \end{equation*}
+  
+  \item interchange a row, e.g.
+  \begin{equation*}
+    \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0\end{pmatrix}
+  \end{equation*}
+  
+  \item linear addition of one row to another, e.g.
+  \begin{equation*}
+    \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & c \\ 0 & 0 & 1\end{pmatrix}
+  \end{equation*}
+\end{itemize}
+
+For a matrix $\As = (a_{ij})$, its \textbf{transpose} is $\highlight{\As^T = (a_{ji})}$.
+
+A matrix $\As$ is said to be \textbf{invertible} with \textbf{inverse} $\As^{-1}$ if
+\begin{equation}
+  \highlight{\As^{-1} \As = \As \As^{-1} = \Is}.
+\end{equation}
+
+\begin{theorem}
+  If a matrix $\As$ is invertible then there is a product of elementary matrices $\mathsf{E}_i$ where $\mathsf{E}_1 \cdots \mathsf{E}_k \As = \Is$.\marginnote{So then $\As^{-1} = \mathsf{E}_1 \cdots \mathsf{E}_k$.}
+\end{theorem}
+
+\begin{proof}
+  Since $\As$ is invertible $\As$ does not contain a row of zeroes. By arranging rows accordingly and that there are no rows that are linear combinations of another exactly (otherwise there is a row of zeroes), we can do the elementary operations to get to $\Is$, and since each elementary operation corresponds to an elementary matrix multiplication, we have the above result. \qed
+\end{proof}
+
+\begin{example}
+  Starting from 
+  \begin{equation*}
+    \As = \begin{pmatrix} 3 & -3 & 1 \\ -4 & 5 & 2 \\ 2 & -2 & 1 \end{pmatrix},
+  \end{equation*}
+  we have\marginnote{Trying to make as many 1s as possible at the desired spots, which then makes killing the entries above and below easier.}
+  \begin{align*}
+    & \left(\begin{array}{rrr|rrr}
+      \ 3 & -3 & \ 1 & \ 1 & \ 0 & \ 0 \\
+      -4 &  5 & -2 &  0 &  1 &  0 \\
+       2 & -2 &  1 &  0 &  0 &  1 \\
+      \end{array} \right)\\
+    \to & \left(\begin{array}{rrr|rrr}
+      \ 1 & -1 & \ 0 & \ 1 & \ 0 & -1 \\
+       0 &  1 &  0 &  0 &  1 &  2 \\
+       2 & -2 &  1 &  0 &  0 &  1 \\
+      \end{array} \right)\\
+    \to & \left(\begin{array}{rrr|rrr}
+      \ 1 & -1 & \ 0 & \ 1 & \ 0 & -1 \\
+       0 &  1 &  0 &  0 &  1 &  2 \\
+       0 &  0 &  1 & -2 &  0 &  3 \\
+      \end{array} \right)\\
+    \to & \left(\begin{array}{rrr|rrr}
+      \ 1 & \ 0 & \ 0 & \ 1 & \ 1 & \ 1 \\
+       0 &  1 &  0 &  0 &  1 &  2 \\
+       0 &  0 &  1 & -2 &  0 &  3 \\
+      \end{array} \right),
+  \end{align*}
+  where we can read off the inverse $\As^{-1}$.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
@@ -886,17 +958,196 @@ the dimension of the solution set $\As\xb = \Ob$.
 
 \begin{proof}
   If $\As$ is invertible then the corresponding linear map $\theta$ is an
-  isomorphism, and we have the result by a previous corollary.
-  {\color{red}reference back} \qed
+  isomorphism, and we have the result by Thm.~\ref{thm:rank_dim}. \qed
 \end{proof}
+
+\begin{example}
+  Note that by elementary operations we have
+  \begin{equation*}
+    \As = \begin{pmatrix} 
+      1 & 1 & 1 & 0 \\
+      2 & 2 & 3 & 2 \\
+      3 & 3 & 5 & 4
+    \end{pmatrix} 
+    \to \begin{pmatrix} 
+      1 & 1 & 1 & 0 \\
+      0 & 0 & 1 & 2 \\
+      0 & 0 & 2 & 4
+    \end{pmatrix} 
+    \to \begin{pmatrix} 
+      1 & 1 & 1 & 0 \\
+      0 & 0 & 1 & 2 \\
+      0 & 0 & 0 & 0
+    \end{pmatrix}
+  \end{equation*}
+  so $r(\As) = 2$.
+\end{example}
 
 %-------------------------------------------------------------------------------
 
 \section{Trace and determinant}
 
-%-------------------------------------------------------------------------------
+Let $\As = (a_{ij})$ be a $n \times n$ matrix. The \textbf{determinant} of $\As$ si defined as
+\begin{equation}
+  \highlight{|\As| = \sum_{\sigma\in Sn} \mbox{sgn}(\sigma) a_{1\sigma(1)} a_{2\sigma(2)}\cdots a_{n\sigma(n)}},
+\end{equation}
+where $S_n$ is the permutation group of size $n$, and $\mbox{sgn}$ is the \textbf{signature} of the permutation of $\sigma$ where $\mbox{sgn}(\sigma)=\pm 1$ if $\sigma$ is even or odd.
 
-\section{Adjugate}
+\begin{lemma}
+  \begin{equation}
+    \highlight{|\As| = |\As^T|}.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  We see that since $(a_{ij})^T = (a_{ji})$, for any $\sigma \in S_n$ and that $\mbox{sgn}(\sigma) = \mbox{sgn}(\sigma^{-1})$ and is just a number,
+  \begin{align*}
+    |\As| &= \sum_{\sigma\in S_n} a_{\sigma^{-1}(1)1}\cdots a_{\sigma^{-1}(n)n} \mbox{sgn}(\sigma) \\
+    &= \sum_{\sigma\in S_n} a_{\sigma^{-1}(1)1}\cdots a_{\sigma^{-1}(n)n} \mbox{sgn}(\sigma^{-1}) \\
+    &= \sum_{\sigma\in S_n} \mbox{sgn}(\sigma^{-1}) a^T_{1\sigma^{-1}(1)}\cdots a^T_{\sigma^{-1}(n)n},
+  \end{align*}
+  then we can just call $\tau = \sigma^{-1}$, and then we have the definition of $|\As^T|$. \qed
+\end{proof}
+
+\begin{lemma}
+  \begin{itemize}
+    \item Multiplying a single row/column $\As$ by $c$ multiplies $|\As|$ by $c$.
+    \item Permuting a signle row/column of $\As$ with another multiplies $|\As|$ by $-1$.
+    \item If two columns/rows are the same then $|\As| = 0$.
+    \item Adding multiples of a row/column to another does not change $|\As|$.
+    \item We have
+    \begin{equation*}
+      \left|
+      \begin{matrix} 
+        b_{11} + c_{11} & a_{12} & \cdots & a_{1n}\\
+        \vdots          & \vdots & \ddots & \vdots\\
+        b_{n1} + c_{n1} & a_{n2} & \cdots & a_{nn}\\
+      \end{matrix}
+      \right|
+      =
+      \left|
+      \begin{matrix} 
+        b_{11} & a_{12} & \cdots & a_{1n}\\
+        \vdots          & \vdots & \ddots & \vdots\\
+        b_{n1} & a_{n2} & \cdots & a_{nn}\\
+      \end{matrix}
+      \right| + 
+      \left|
+      \begin{matrix} 
+        c_{11} & a_{12} & \cdots & a_{1n}\\
+        \vdots          & \vdots & \ddots & \vdots\\
+        c_{n1} & a_{n2} & \cdots & a_{nn}\\
+      \end{matrix}
+      \right|
+    \end{equation*}
+    and similarly for rows. \qedwhite
+  \end{itemize}
+\end{lemma}
+
+\begin{corollary}
+  If the rows of $\As$ are linearly dependent on row vectors then $|\As| = 0$, and similarly for columns.
+\end{corollary}
+
+\begin{theorem}\label{thm:det_product}
+  \begin{equation}
+    \highlight{|\As \Bs| = |\As| |\Bs|}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  If $\As$ is singular then $r(\As) < n$, so that $r(\As \Bs) < n$ and so $\As \Bs$ is also not invertible, so we have $0=0$, and analogously for the case where $\Bs$ is singular.
+  
+  Otherwise $\As$, $\Bs$ and $\As \Bs$ are invertible, and they are combinations of elementary matrices, and by the above corollary we have what we need given $|\mathsf{E}\As| = |\mathsf{E}| |\As|$. \qed
+\end{proof}
+
+Let $\As$ be a matrix, and let $M_{ij}$ be the determinant obtained by deleting the $i^{\tiny\textnormal{th}}$ row and $j^{\tiny\textnormal{th}}$ column of $\As$. $M_{ij}$ are called the \textbf{minors} of $\As$, and $A_{ij} = (-1)^{i+j}M_{ij}$ are the \textbf{cofactors} of $\As$.
+
+\begin{lemma}
+  For fixed $i$ or fixed $j$, we have
+  \begin{equation*}
+    |\As| = \sum_{j=1}^n a_{ij} A_{ij} = \sum_{i=1}^n a_{ij}A_{ij},
+  \end{equation*}
+  i.e. the determinant of $\As$ can be expanded using a convenient row or column from the matrix of cofactors.
+\end{lemma}
+
+\begin{example}
+  For
+  \begin{equation*}
+    \As = \begin{pmatrix}
+      1 & 0 & 2 \\
+      3 & 4 & 5 \\
+      0 & 1 & 0
+    \end{pmatrix},
+  \end{equation*}
+  expanding on the third row gives (neglecting the two terms multiplied by zero)
+  \begin{equation*}
+    |\As| = -1\left|\begin{matrix}1 & 2 \\ 3 & 5 \end{matrix}\right| = -(5-6) = 1,
+  \end{equation*}
+  while expanding on the second column gives (neglecting the first term multiplied by zero)
+  \begin{equation*}
+    |\As| = +4\left|\begin{matrix}1 & 2 \\ 0 & 0 \end{matrix}\right| - 1\left|\begin{matrix}1 & 2 \\ 3 & 5 \end{matrix}\right| = 0 - (5-6) = 1.
+  \end{equation*}
+\end{example}
+
+The \textbf{adjugate matrix} of $\As$ or the \textbf{adjoint} of $\As$ is the transpose of the matrix of cofactors of $\As$, i.e.\marginnote{The adjoint is \emph{almost} an inverse (see below), although an adjoint can be defined even when the inverse isn't.}
+\begin{equation}
+  \highlight{(\mbox{adj} \As)_{ij} = A_{ji}}.
+\end{equation}
+
+\begin{lemma}
+  Let $\As$ be a $n\times n$ matrix, then $\As (\mbox{adj}\As) = |\As| \Is = (\mbox{adj}\As) \As$.
+\end{lemma}
+
+\begin{proof}
+  For fixed $i$, we have
+  \begin{equation*}
+    |\As| = \sum_{j=1}^n a_{ij} A_{ij} = \sum_{j=1}^n a_{ij} \mbox{adj} A_{ji} = (\As \mbox{adj} \As)_{ii},
+  \end{equation*}
+  where there is no sum implied on the last entry. For $i\neq k$, we have
+  \begin{equation*}
+    (\As \mbox{adj} \As)_{ik} = \sum_{j=1}^n a_{ij} \mbox{adj} A_{jk} = \sum_{j=1}^n a_{ij} A_{kj}.
+  \end{equation*}
+  Let $\Bs$ be obtained by replacing the $k^{\tiny\textnormal{th}}$ row of $\As$ by the $i^{\tiny\textnormal{th}}$ row of $\As$, so clearly we have
+  \begin{equation*}
+    0 = |\Bs| = \sum_{j=1}^n b_{kj} B_{kj} = \sum_{j=1}^n a_{ij} A_{kj},
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \As \mbox{adj} \As = |\As| \Is
+  \end{equation*}
+  if $|\As| \neq 0$. A similar manipulation for $\As^T$ leads to
+  \begin{equation*}
+    |\As^T| \Is = \As^T \mbox{adj}\As^T = \As^T (\mbox{adj}\As)^T = \left[(\mbox{adj}\As) \As\right]^T,
+  \end{equation*}
+  which gives our desired result. \qed.
+\end{proof}
+
+Then clearly we have
+\begin{equation}
+  \highlight{\As^{-1} = \frac{1}{|\As|} \mbox{adj}\As}
+\end{equation}
+if $|\As| \neq 0$.
+
+\begin{theorem}
+  A matrix $\As$ has an inverse iff $|\As| \neq 0$.
+\end{theorem}
+
+\begin{proof}
+  By previously lemma we have $|\As| \neq 0$ implying existence of inverse. If there exists and inverse, then there is a sequence of elementary operations acting on $\As$ that results in $\Is$. By Thm.~\ref{thm:det_product},
+  \begin{equation*}
+    1 = |\Is| = |\mathsf{E}_1\cdots\mathsf{E}_k \As| = |\mathsf{E}_1|\cdots|\mathsf{E}_k|\cdot|\As|,
+  \end{equation*}
+  and since $|\mathsf{E}_i|\neq 0$, then $|\As|\neq 0$. \qed
+\end{proof}
+
+\begin{corollary}
+  Let $\As$ be a square matrix. $|\As| \neq 0$ iff row/column vectors form a basis of $\mathbb{R}^n$.  
+\end{corollary}
+
+\begin{proof}
+  $|\As| \neq 0$ iff $\As$ invertible iff $r(\As) = n$ iff row vectors form a basis. Since column and row rank are equal, the same is true for columns. \qed
+\end{proof}
+
 
 %-------------------------------------------------------------------------------
 
@@ -982,20 +1233,14 @@ which is just the \textbf{diagonal} matrix with the eigenvalues on the main
 diagonal. This is called \textbf{diagonalisation}.
 
 \begin{theorem}
-  Let $\As$ be a $n\times n$ matrix. The matrix $\As$ is \textbf{diagonalisable}
-  if there exists a non-singular $\Ys$ such that $\As$ is similar to a diagonal
-  matrix $\Ds$, i.e. $\highlight{\Ds = \Ys^{-1} \As \Ys}$ or $\highlight{\As =
-  \Ys \Ds\Ys^{-1}}$. This is equivalent to the condition that the eigenvectors
-  of $\As$ has full span.
+  Let $\As$ be a $n\times n$ matrix. The matrix $\As$ is \textbf{diagonalisable} if there exists a non-singular $\Ys$ such that $\As$ is similar to a diagonal matrix $\Ds$, i.e. $\highlight{\Ds = \Ys^{-1} \As \Ys}$ or $\highlight{\As = \Ys \Ds\Ys^{-1}}$. This is equivalent to the condition that the eigenvectors of $\As$ has full span.
 \end{theorem}
 
-Notice we do not require $\As$ to be non-singular, nor that the eigenvalues have
-to be distinct. For example,
+Notice we do not require $\As$ to be non-singular, nor that the eigenvalues have to be distinct. For example,
 \begin{equation*}
   \begin{pmatrix}1 & 0 \\ 0 & 0\end{pmatrix}, \quad \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}
 \end{equation*}
-are respectively singular and have repeated eigenvalues, but are both trivially
-diagonal (so diagonalisable by $\Is$). On the other hand,
+are respectively singular and have repeated eigenvalues, but are both trivially diagonal (so diagonalisable by $\Is$). On the other hand,
 \begin{equation*}
   \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}
 \end{equation*}
@@ -1046,46 +1291,27 @@ There are at least two notable uses for this:
     \begin{equation*}
       \frac{\mathrm{d}}{\mathrm{d}t}\xb = \As\xb
     \end{equation*}
-    where $\As$ is constant and diagonalisable with $\As = \Ys \Ds \Ys^{-1}$,
-    then the solutions are
+    where $\As$ is constant and diagonalisable with $\As = \Ys \Ds \Ys^{-1}$, then the solutions are
     \begin{equation*}
       \xb = \Ys\begin{pmatrix}\ex^{\lambda_1 t} \\ \vdots \\ \ex^{\lambda_n t}\end{pmatrix}
     \end{equation*}
-    up to multiplicative constants (which are specified by the initial
-    conditions). This is because
+    up to multiplicative constants (which are specified by the initial conditions). This is because
     \begin{equation*}
       \frac{\mathrm{d}}{\mathrm{d}t}\xb = \Ys \Ds \Ys^{-1}\xb \quad \Rightarrow \frac{\mathrm{d}}{\mathrm{d}t} \Ys^{-1}\xb = \Ds\Ys^{-1}\xb,
     \end{equation*}
-    because $\Ys$ is constant in time so commutes with the derivative. Then
-    calling $\yb = \Ys^{-1}\xb$, we just have a set of trivial constant ODEs to
-    solve, then we invert to get $\xb = \Ys\yb$ which is known. 
+    because $\Ys$ is constant in time so commutes with the derivative. Then calling $\yb = \Ys^{-1}\xb$, we just have a set of trivial constant ODEs to solve, then we invert to get $\xb = \Ys\yb$ which is known. 
     
-    In other words, we choose a convenient basis where our problem is diagonal,
-    solve the problem there (which is easy), and then transform it back into the
-    original basis. This kind of problem occurs occasionally in quantum
-    mechanics, where you might want to solve the \textbf{time-independent
-    Schr\"odinger equation}
+    In other words, we choose a convenient basis where our problem is diagonal, solve the problem there (which is easy), and then transform it back into the original basis. This kind of problem occurs occasionally in quantum mechanics, where you might want to solve the \textbf{time-independent Schr\"odinger equation}
     \begin{equation*}
       \zi\hbar\frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle = \mathsf{H}|\psi(t)\rangle
     \end{equation*}
-    where $\mathsf{H}$ would be matrix representation of the relevant
-    Hamiltonian of the system\marginnote{The Hamiltonian normally has additional
-    properties that make the eigenvalues and eigenvectors have certain
-    properties; more later when we talk about
-    \emph{Hermitian}/\emph{self-adjoint} matrices.}, and $|\psi(t)\rangle$ would
-    be the vector representation of the \textbf{state}. The eigenvalues
-    correspond usually to an energy, and the eigenvectors the energy states.
+    where $\mathsf{H}$ would be matrix representation of the relevant Hamiltonian of the system\marginnote{The Hamiltonian normally has additional properties that make the eigenvalues and eigenvectors have certain properties; more later when we talk about \emph{Hermitian}/\emph{self-adjoint} matrices.}, and $|\psi(t)\rangle$ would be the vector representation of the \textbf{state}. The eigenvalues correspond usually to an energy, and the eigenvectors the energy states.
     
     \item Suppose we have some system that is governed by
     \begin{equation*}
       \xb_{n+1} = \As\xb_n,
     \end{equation*}
-    such as a \textbf{Markov chain} with discrete states, and so $\As$ is
-    a matrix detailing the transition probabilities between states (with all
-    positive entries that are strictly less than 1, since these are supposed to
-    describe probabilities). If $\As$ is diagonalisable, then the
-    numerics becomes `easy', in that to find $\xb_{n+1}$ from initial
-    data $\xb_0$, we do
+    such as a \textbf{Markov chain} with discrete states, and so $\As$ is a matrix detailing the transition probabilities between states (with all positive entries that are strictly less than 1, since these are supposed to describe probabilities). If $\As$ is diagonalisable, then the numerics becomes `easy', in that to find $\xb_{n+1}$ from initial data $\xb_0$, we do
     \begin{align*}
       \xb_n &= \As^n\xb_0 \\ 
         &= (\Ys \Ds \Ys^{-1})^n \xb_0 \\
