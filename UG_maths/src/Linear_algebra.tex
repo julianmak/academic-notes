@@ -311,7 +311,7 @@
   \item \textit{Last compiled: \monthyear}
   \item Blended from notes of C. Keaton and J. R. Parker, Durham
   \item This was part of the Durham core second year modules. Involves introduction to vector spaces, linear maps, and matrices as linear maps
-  \item I have personally changed the ordering quite a bit, since the ordering in my original I have from the original notes is obscenely jumpy and makes no logical sense to me...(if I were teaching this I would probably have matrices before linear maps)
+  \item I have personally changed the ordering quite a bit, since the ordering in my original I have from the original notes is obscenely jumpy and makes no logical sense to me...(if I were teaching this I would probably have matrices before linear maps) {\color{red}ordering to change, currently matrices go last, but probably want to go forward}
 \end{itemize}
 
 \par
@@ -788,11 +788,112 @@ Let $\theta: U \to V$ be a linear map and $U$ is finite dimensional. The \textbf
 
 \section{Spaces of linear maps}
 
-{\color{red}Jan 11: p.13 of notes start here}
+The \textbf{module homomorphisms} $\mbox{Hom}(U, V)$ of two vector spaces $U$ and $V$ consists of all linear maps from $U$ to $V$ such that
+\begin{equation*}
+  (f+g)(\ub) = f(\ub) + g(\ub), \qquad (\lambda f)(\ub) = \lambda f(\ub)
+\end{equation*}
+for all $\ub \in U$, $\lambda \in \mathbb{F}$.
+
+\begin{theorem}
+  $\mbox{Hom}(U,V)$ is a vector space over $\mathbb{F}$ and essentially follows from definition. \qed
+\end{theorem}
+
+\begin{theorem}\label{thm:kronecker_delta_basis}
+  Let $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$, and the respective basis are $\{\eb_1, \ldots \eb_m\}$ and $\{\fb_1, \ldots \fb_n\}$. Let
+  \begin{equation*}
+    \theta_{ij}(\eb_k) = \delta_{ik} \fb_j
+  \end{equation*}
+  where $\delta_{ik}$ is the Kronecker delta. Then $\{\theta_{ij}\ \in \mbox{Hom}(U, V)\ |\ 1\leq i\leq m,\ 1\leq j \leq n\}$ is a basis of $\mbox{Hom}(U, V)$, and so $\mbox{dim}(\mbox{Hom}(U, V)) = mn$.
+\end{theorem}
+
+\begin{proof}
+  By Lemma~\ref{lem:unique_basis} $\theta_{ij}(\eb_k) = \delta_{ik}\fb_j$ defines a unique map $\theta_{ij}: U\to V$. Suppose $\lambda_{ij}\theta_{ij} = 0$, then for all $k$ where $1\leq k \leq m$, $\lambda_{ij}\theta_{ij}(\eb_k) = \lambda_{ij}\delta_{ik}\fb_j = \Ob$. Since $\fb_j$ is a basis of $V$, so for all $j$ where $1\leq j \leq n$ we have $\lambda_{ij}\delta_{ik} = 0$ implies that $\lambda_{kj} = 0$, so we have a set that is linearly independent.
+  
+  Suppose $\phi \in \mbox{Hom}(U, V)$, then $\phi(\eb_k) = a_{kj}\fb_{j}$ for $a_{kj}\in\mathbb{F}$. But we also have $a_{ij}\theta_{ij}(\eb_k) = a_{ij}\delta_{ik}\fb_j = a_{kj}\fb_j$, so $\phi = a_{ij}\theta_{ij}$, and so $\theta_{ij}$ is a basis and $\mbox{Hom}(U, V)$ has dimension $mn$. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
 \section{Dual space}
+
+Let $V$ be a vector space over $\mathbb{F}$. The space $\highlight{V^* = \mbox{Hom}(V, \mathbb{F})}$ is called \textbf{dual} of $V$.\marginnote{The elements of the dual here are maps from vectors to a field element (e.g. scalars).}
+
+\begin{theorem}
+  Let $V$ be a vector space of dimension $n$ over $\mathbb{F}$ and $\{\eb_1,\ldots \eb_n\}$ be a basis of $V$. Then there is a \textbf{dual basis} $\{\eb_1^*, \ldots \eb_n^*\}$ of $V^*$ where
+    \begin{equation}
+      \highlight{\eb_i^* (\eb_j) = \delta_{ij}}.
+    \end{equation}
+ This is just a special case of Thm.~\ref{thm:kronecker_delta_basis}. \qed
+\end{theorem}
+
+Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ and $\vb \in V$ and satisfies\marginnote{This might be a little confusing: $f$ is a function that is also an element of a vector space and is not bolded.\\
+
+\noindent A concrete example is that a gradient of a function $\nabla g$ is really a dual vector (a \textbf{1-form}), although we normally view it as a vector (which we can when we deal with flat Euclidean space). Contraction with a vector as $\inner{\nabla g}{\vb}$ gives the \emph{magnitude} (a scalar) of the derivative of $g$ in the direction of $\vb$.} 
+\begin{equation*}
+  \inner{f+g}{\vb} = f(\vb) + g(\vb), \qquad \inner{\lambda f, \vb} = \lambda f(\vb).
+\end{equation*}
+
+\begin{theorem}
+  There exists a canonical isomorphism between $V$ and $V^{**}$ if $V$ is finite dimensional.
+\end{theorem}
+
+\begin{proof}
+  Suppose $\theta : V \to V^{**}$ with $\inner{\theta(\vb)}{f} = \inner{f}{v}$ for all $\vb \in V$, $f \in V^*$. Then
+  \begin{align*}
+    \inner{\theta(\ub+\vb), f}{f}
+      &= \inner{f}{\ub+\vb}\\
+      &= \inner{f}{\ub} + \inner{f}{\vb}\\
+      &= \inner{\theta(\ub)}{f} + \inner{\theta(\vb)}{f}\\
+      &= \inner{\theta(\ub) + \theta(\vb)}{f}.
+  \end{align*}
+  Similarly,
+  \begin{align*}
+    \inner{\theta(\lambda\vb), f}{f}
+      &= \inner{f}{\lambda\vb}\\
+      &= \lambda\inner{f}{\vb}\\
+      &= \lambda\inner{\theta(\vb)}{f}\\
+      &= \inner{\lambda\theta(\vb)}{f},
+  \end{align*}
+  so $\theta$ is a linear map.
+  
+  If $\vb \in \mbox{Ker}(\theta)$ then $\inner{f}{\vb} = \inner{\theta(\vb)}{f} = \inner{\theta}{f} = \Ob$ for all $f \in V^*$, but this implies $\vb = \Ob$, so $\theta$ is injective. Since $\mbox{dim}(V) = \mbox{dim}(V^*) = \mbox{dim}(V^{**})$ is finite and $\theta$ is injective, $\theta$ is bijective, and we thus have an isomorphism. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $\theta : U \to V$ be a linear map of vector spaces. Then $\highlight{\inner{\theta^*(\vb^*)}{\ub} = \inner{\vb^*}{\theta(\ub)}}$ defines a linear map $\theta^* : V^* \to U^*$.\marginnote{Essentially the dual map is defined by how the original moves from one side of the inner product to the other (cf. the adjoint).}
+\end{theorem}
+
+\begin{proof}
+  Note we have
+  \begin{align*}
+    \inner{\theta^*(\lambda\vb^* + \mu\wb^*)}{\ub}
+      &= \inner{\lambda\vb^* + \mu\wb^*}{\theta(\ub)}\\
+      &= \lambda\inner{\vb^*}{\theta(\ub)} + \mu\inner{\wb^*}{\theta(\ub)}\\
+      &= \lambda\inner{\theta^*(\vb^*)}{\ub} + \mu\inner{\theta^*(\wb^*)}{\ub}\\
+      &= \inner{\lambda\theta^*(\vb^*) + \mu\theta^*(\wb^*)}{\ub},
+  \end{align*}
+  so $\theta^*$ is a linear map as required. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $\theta : U \to V$ be a linear map, and $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$ are finite. If we have a matrix $\As$ that represents $\theta$ with respect to basis $\{\eb_1, \ldots \eb_m\}$ of $U$ and $\{\fb_1, \ldots \fb_n\}$ of $V$, then $\As^T$ represents $\theta^*$ with respect to basis $\{\eb^*_1, \ldots \eb^*_m\}$ of $U^*$ and $\{\fb^*_1, \ldots \fb^*_n\}$ of $V^*$.
+\end{theorem}
+
+\marginnote{\color{red}This ordering will be fine when matrices chapter go first.}
+
+\begin{proof}
+  By convention, $\theta(\eb_j) = a_{ij}\fb_i$, and we have
+  \begin{equation*}
+    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{\fb^*_k}{\theta(\eb_j)} = \inner{\fb^*_k}{a_{ij}\fb_i} = a_{ij}\inner{\fb^*_k}{\fb_i} = a_{ij}\delta_{ki}.
+  \end{equation*}
+  If $\theta^*$ is represented by $\Bs$, then
+  \begin{equation*}
+    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{b_{ik}\eb^*_i}{\theta(\eb_j)} = b_{ik}\inner{\eb^*_i}{\eb_j} = b_{ik}\delta_{ij},
+  \end{equation*}
+  which implies $a_{kj} = b_{jk}$, so $\As^T = \Bs$. \qed
+\end{proof}
+
+{\color{red}Jan 12: p.15 of notes start here}
 
 %===============================================================================
 
