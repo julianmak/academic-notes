@@ -637,6 +637,8 @@ Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}
 
 \section{Inner products}
 
+{\color{red}Jan 13: p.20 of notes probably to start here}
+
 %-------------------------------------------------------------------------------
 
 \section{Gram--Schmidt orthonomalisation}
@@ -893,7 +895,28 @@ Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ a
   which implies $a_{kj} = b_{jk}$, so $\As^T = \Bs$. \qed
 \end{proof}
 
-{\color{red}Jan 12: p.15 of notes start here}
+\begin{example}
+  Let $V = \mathbb{R}^3$ and $\xb = (x,y,z) \in V$. Show that all $f\in V^*$ has the form $f(\xb) = ax + by + cz$ for $a,b,c\in\mathbb{R}$.
+  
+  If we let $a = f(\eb_1)$, $b = f(\eb_2)$ and $c = f(\eb_3)$ (i.e. basically the standard dual basis), then by linearity
+  \begin{equation*}
+    f(\xb) = x f(\eb_1) + y f(\eb_2) + z f(\eb_3) = ax + by + cz.
+  \end{equation*}
+  
+  If instead of the standard basis we take
+  \begin{equation*}
+    \fb_1 = \begin{pmatrix}0 \\ 0 \\ 1 \end{pmatrix}, \quad 
+    \fb_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \quad 
+    \fb_3 = \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix},
+  \end{equation*}
+  then the dual basis are maps to $\mathbb{R}$. Let $\fb_1^*(\xb) = ax + by + cz$, then since $\fb_i^*(\fb_j) = \delta_{ij}$ by definition, we have the system
+  \begin{align*}
+    1 = \fb_1^* (\fb_1) = c & \Rightarrow c = 1\\
+    0 = \fb_1^* (\fb_2) = a + c & \Rightarrow a = -1\\
+    0 = \fb_1^* (\fb_3) = a - b & \Rightarrow b = -1
+  \end{align*}
+  so that $\fb_1^*(\xb) = -x + y + z$. Continuing on, it can be shown that $\fb_2^*(\xb) = x + y)$ and $\fb_3^* = -y$, and these can be checked to be linearly independent and spanning $\mathbb{R}$, and we have the dual basis of $V^*$ given the choice of a basis in $V$.
+\end{example}
 
 %===============================================================================
 
@@ -1254,8 +1277,7 @@ if $|\As| \neq 0$.
 
 \section{Eigenvalues and eigenvectors}
 
-Let $V$ be a vector space, and $\theta:V \to V$ be a linear map. Then $\vb\in
-V-\{\Ob\}$ is an \textbf{eigenvector} of $\theta$ if
+Let $V$ be a vector space, and $\theta:V \to V$ be a linear map. Then $\vb\in V-\{\Ob\}$ is an \textbf{eigenvector} of $\theta$ if
 \begin{equation}
   \highlight{\theta(\vb) = \lambda \vb},
 \end{equation}
@@ -1263,30 +1285,22 @@ where $\lambda$ is the corresponding \textbf{eigenvalue}. The subset
 \begin{equation}
   V_{\lambda} = \{\vb\in V \ |\ \theta(\vb) = \lambda \vb\}
 \end{equation}
-is a vector space called the \textbf{eigenspace} corresponding to the eigenvalue
-$\lambda$.
+is a vector space called the \textbf{eigenspace} corresponding to the eigenvalue $\lambda$.
 
-Clearly if $\As$ is the corresponding matrix to $\theta$ then the eigenvalues
-and eigenvectors would correspond accordingly.
+Clearly if $\As$ is the corresponding matrix to $\theta$ then the eigenvalues and eigenvectors would correspond accordingly.
 
-Two $n\times n$ matrices $\As$ and $\Bs$ are called \textbf{similar} if there
-exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
+Two $n\times n$ matrices $\As$ and $\Bs$ are called \textbf{similar} if there exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
 
 \begin{theorem}
-  If $\As$ corresponds to the linear map $\theta:V\to V$, then the roots of the
-  \textbf{characteristic polynomial} $\highlight{|\lambda\Is - \As| = 0}$ are
-  the eigenvalues of $\theta$. This is independent of the basis of $V$.
+  If $\As$ corresponds to the linear map $\theta:V\to V$, then the roots of the \textbf{characteristic polynomial} $\highlight{|\lambda\Is - \As| = 0}$ are the eigenvalues of $\theta$. This is independent of the basis of $V$.
 \end{theorem}
 
 \begin{proof}
-  Let $\vb$ be an eigenvector, so that $\vb=\sum_i v_i\eb_i$. If $\lambda$ is
-  the corresponding eigenvalue, and $\textsf{A}$ is the representation of
-  $\theta$ in the basis $\{\eb_i\}$, then
+  Let $\vb$ be an eigenvector, so that $\vb=\sum_i v_i\eb_i$. If $\lambda$ is the corresponding eigenvalue, and $\textsf{A}$ is the representation of $\theta$ in the basis $\{\eb_i\}$, then
   \begin{equation*}
     \As\vb = \lambda\vb \quad \Leftrightarrow \quad (\lambda\Is - \As)\vb = \Ob.
   \end{equation*}
-  Since $\vb$ is non-trivial by definition of it being an eigenvector, then
-  $\lambda\Is - \As$ is singular, so $|\lambda\Is - \As| = 0$.
+  Since $\vb$ is non-trivial by definition of it being an eigenvector, then $\lambda\Is - \As$ is singular, so $|\lambda\Is - \As| = 0$.
   
   For basis independence, we know that
   \begin{align*}
@@ -1294,8 +1308,7 @@ exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
       & = |\Ys^{-1}(\lambda\Is- \As)\Ys|\\
       & = |\Ys^{-1}| \cdot |\lambda\Is- \As| \cdot |\Ys|,
   \end{align*}
-  but by the property that $|\Ys^{-1}| \cdot |\Ys| = 1$, we have $|\lambda\Is -
-  \Ys^{-1}\As\Ys| = |\lambda\Is- \As| = 0$. \qed
+  but by the property that $|\Ys^{-1}| \cdot |\Ys| = 1$, we have $|\lambda\Is - \Ys^{-1}\As\Ys| = |\lambda\Is- \As| = 0$. \qed
 \end{proof}
 
 \begin{example}
@@ -1303,26 +1316,21 @@ exists some non-singular $\Ys$ where $\Bs = \Ys^{-1} \As \Ys$.
   \begin{equation*}
     \As = \begin{pmatrix}2 & 2 \\ 0 & 4\end{pmatrix}, \quad \lambda\Is - \As = \begin{pmatrix}\lambda - 2 & -2 \\ 0 & \lambda - 4\end{pmatrix}
   \end{equation*}
-  and the eigenvalues satisfy\marginnote{Could have done this with the trace and
-  determinant also for a $2\times2$ matrix.} the quadratic
-  $(\lambda-2)(\lambda-4) = 0$, so $\lambda=2, 4$. For $\lambda=2$, the
-  eigenvector satisfies
+  and the eigenvalues satisfy\marginnote{Could have done this with the trace and determinant also for a $2\times2$ matrix.} the quadratic $(\lambda-2)(\lambda-4) = 0$, so $\lambda=2, 4$. For $\lambda=2$, the eigenvector satisfies
   \begin{equation*}
     \begin{pmatrix}0 & -2 \\ 0 & -2\end{pmatrix}\begin{pmatrix}v_1 \\ v_2 \end{pmatrix} = \Ob,
   \end{equation*}
-  which implies $v_2 = 0$ but $v_1$ is undetermined; we could choose for
-  simplicity for the eigenvector to be
+  which implies $v_2 = 0$ but $v_1$ is undetermined; we could choose for simplicity for the eigenvector to be
   \begin{equation*}
-   \vb_{\lambda=2} = \begin{pmatrix}1 \\ 0 \end{pmatrix}.
+    \vb_{\lambda=2} = \begin{pmatrix}1 \\ 0 \end{pmatrix}.
   \end{equation*}
   For $\lambda = 4$, we result in $v_1 = v_2$, so we could choose
   \begin{equation*}
-   \vb_{\lambda=4} = \begin{pmatrix}1 \\ 1 \end{pmatrix}.
+    \vb_{\lambda=4} = \begin{pmatrix}1 \\ 1 \end{pmatrix}.
   \end{equation*}
 \end{example}
 
-Notice for the above that if we take $\Ys$ to be the matrix whose column vectors
-are the eigenvectors, i.e.
+Notice for the above that if we take $\Ys$ to be the matrix whose column vectors are the eigenvectors, i.e.
 \begin{equation*}
   \Ys = \begin{pmatrix}1 & 0 \\ 1 & 1\end{pmatrix} \quad \Rightarrow \quad \Ys^{-1} = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix},
 \end{equation*}
@@ -1330,8 +1338,7 @@ then notice that
 \begin{equation*}
   \Ys^{-1} \As \Ys = \begin{pmatrix}1 & 0 \\ 1 & 1\end{pmatrix}\begin{pmatrix}2 & 2 \\ 0 & 4\end{pmatrix}\begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix} = \begin{pmatrix}2 & 0 \\ 0 & 4\end{pmatrix},
 \end{equation*}
-which is just the \textbf{diagonal} matrix with the eigenvalues on the main
-diagonal. This is called \textbf{diagonalisation}.
+which is just the \textbf{diagonal} matrix with the eigenvalues on the main diagonal. This is called \textbf{diagonalisation}.
 
 \begin{theorem}
   Let $\As$ be a $n\times n$ matrix. The matrix $\As$ is \textbf{diagonalisable} if there exists a non-singular $\Ys$ such that $\As$ is similar to a diagonal matrix $\Ds$, i.e. $\highlight{\Ds = \Ys^{-1} \As \Ys}$ or $\highlight{\As = \Ys \Ds\Ys^{-1}}$. This is equivalent to the condition that the eigenvectors of $\As$ has full span.
@@ -1345,8 +1352,7 @@ are respectively singular and have repeated eigenvalues, but are both trivially 
 \begin{equation*}
   \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}
 \end{equation*}
-has eigenvalues $\lambda = \pm \zi$, so it is definitely not diagonalisable
-\emph{over the reals}.
+has eigenvalues $\lambda = \pm \zi$, so it is definitely not diagonalisable \emph{over the reals}.
 
 \begin{example}
   For
@@ -1420,18 +1426,47 @@ There are at least two notable uses for this:
         &= \Ys \Ds (\Ys^{-1}\Ys)\Ds\cdots(\Ys^{-1}\Ys)\Ds\Ys^{-1} \xb_0 \\
         &= \Ys \Ds^n \Ys^{-1} \xb_0,
     \end{align*}
-    by associativity, and noting that $D^n$ is essentially trivial to
-    compute.\marginnote{In the context of a Markov chain, the transition matrix
-    have eigenvalues with magnitude less than or equal to 1 by the
-    \emph{Perron--Frobenius theorem}, so we have no blow up. This is not
-    necessarily true for population models such as the \emph{Leslie model},
-    since the entries are positive but do not have to be strictly less than 1.}
+    by associativity, and noting that $D^n$ is essentially trivial to compute.\marginnote{In the context of a Markov chain, the transition matrix have eigenvalues with magnitude less than or equal to 1 by the \emph{Perron--Frobenius theorem}, so we have no blow up. This is not necessarily true for population models such as the \emph{Leslie model}, since the entries are positive but do not have to be strictly less than 1.}
   \end{enumerate}
 \end{example}
 
 %-------------------------------------------------------------------------------
 
 \section{Cayley--Hamilton theorem}
+
+In the above we very loosely and briefly touched on the \textbf{matrix exponential}\marginnote{Which relates also to the \textbf{exponential map} between a Lie group and its Lie algebra.}, which is
+\begin{equation}
+  \highlight{\mathrm{e}^{\As t} = \Is + \frac{1}{1!}\As + \frac{1}{2!}\As^n + \ldots = \sum_{k=0}\frac{1}{k!}\As^k}.
+\end{equation}
+These crop up quite often with differential equations, and there is a link between the higher and lower powers of the matrix.
+
+\begin{theorem}\label{thm:cayley_hamilton}
+  Every $n\times n$ matrix $\As$ satisfies its own characteristic polynomial, i.e.
+  \begin{equation}
+    \highlight{0 = \As^n + a_{n-1}\As^{n-1} + \ldots a_1 \As + a_0 \Is}.
+  \end{equation}
+  \marginnote{So solving the eigenvalue problem associated with $\As$ gives the $a_k$s, and then you can get the higher powers from lower powers recursively with matrix addition rather than matrix multiplication, where the latter has higher computational complexity.}
+\end{theorem}
+
+\begin{proof}
+  Let $|t\Is - \As| = t^n + a_{n-1}t^{n-1} + \ldots + a_0$. Let $\Bs(t) = \mbox{adj}(t\Is - \As)$, whose entries are by definition the cofactors of $t\Is - \As$, so
+  \begin{equation*}
+    \Bs(t) = \Bs_{n-1}t^{n-1} + \ldots \Bs_1 t + \Bs_0.
+  \end{equation*}
+  By definition we have
+  \begin{equation*}
+    \Is = (t\Is - \As)\left[\frac{1}{|t\Is - \As|}\mbox{adj}(t\Is - \As)\right] \quad \Rightarrow \quad \Is |t\Is - \As| = (t\Is - \As) \Bs,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    (t\Is - \As)(\Bs_{n-1}t^{n-1} + \ldots \Bs_1 t + \Bs_0) = (t^n + a_{n-1}t^{n-1} + \ldots + a_0)\Is.
+  \end{equation*}
+  Comparing coefficients we have $\Bs_{i-1} - \As \Bs_i = a_{i-1}\Is$ accounting for edge cases appropriately. Multiplying both sides by $\As^i$ we have $\As^i \Bs_{i-1} - \As^{i+1} \Bs_i = a_{i-1}\As^i$, and summing both sides accounting for edge cases appropriately gives
+  \begin{equation*}
+    \As^n \Bs_{n-1} + \left( \sum_{i=1}^{n-1} \As^i \Bs_{i-1} - \As^{i+1} \Bs_i \right) - \As \Bs_0  = \As^n + \sum_{i=0}^{n-1} a_i\As^i.
+  \end{equation*}
+  The left hand side is cancels out exactly, and we have the result. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
