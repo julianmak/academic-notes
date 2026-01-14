@@ -299,7 +299,7 @@
 
 \begin{fullwidth}
 
-\par \begin{center}{\Huge Linera Algebra 2H}\end{center}
+\par \begin{center}{\Huge Linear Algebra 2H}\end{center}
 
 \vspace*{5mm}
 
@@ -311,7 +311,7 @@
   \item \textit{Last compiled: \monthyear}
   \item Blended from notes of C. Keaton and J. R. Parker, Durham
   \item This was part of the Durham core second year modules. Involves introduction to vector spaces, linear maps, and matrices as linear maps
-  \item I have personally changed the ordering quite a bit, since the ordering in my original I have from the original notes is obscenely jumpy and makes no logical sense to me...(if I were teaching this I would probably have matrices before linear maps) {\color{red}ordering to change, currently matrices go last, but probably want to go forward}
+  \item I have personally changed the ordering quite a bit, since the ordering in my original notes is quite jumpy in hindsight, and is not how I would personally introduce the subject (I would some concrete things before I do abstract general things). {\color{red}ordering to be tidied up}
 \end{itemize}
 
 \par
@@ -319,22 +319,15 @@
 \par Licensed under the Apache License, Version 2.0 (the ``License''); you may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://www.apache.org/licenses/LICENSE-2.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 \end{fullwidth}
 
-
 %===============================================================================
 
-\chapter{Vector spaces}
+\chapter{Vector spaces and linear maps}
 
-Recall that a \textbf{field} $\mathbb{F}$ equipped with an addition $+$ and a multiplication $\times$ operation satisfies the following axioms:
-\begin{itemize}
-  \item operations are associative
-  \item operations are commutative
-  \item there exists additive and multiplicative identity
-  \item there exists additive and multiplicative inverse (except for the
-  additive identity)
-  \item multiplication is distributive over addition
-\end{itemize}
+Need a few definitions first; these are elaborated on and revisited later.
 
-The usual rationals $\mathbb{Q}$, reals $\mathbb{R}$ and complex numbers $\mathbb{C}$ are common fields.
+%-------------------------------------------------------------------------------
+
+\section{Vector spaces}
 
 A set $V$ is a \textbf{vector space} over a field $\mathbb{F}$ if, for $\vb, \ub \in V$ and $\lambda, \mu \in \mathbb{F}$,
 \begin{itemize}
@@ -345,6 +338,7 @@ A set $V$ is a \textbf{vector space} over a field $\mathbb{F}$ if, for $\vb, \ub
   \item $\lambda (\mu \vb) = (\lambda \mu) \vb$
   \item there exists an identity element $1$ where $1\vb = \vb$.
 \end{itemize}
+
 Some examples are
 \begin{itemize}
   \item $\mathbb{F} = \mathbb{R}$ and $V = \mathbb{C}$
@@ -543,113 +537,7 @@ If a basis for a vector space $V$ has $n$ elements, then the vector space \textb
 
 %-------------------------------------------------------------------------------
 
-\section{Sums and direct sums}
-
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and $V$ is
-\begin{equation}
-  \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
-\end{equation}
-
-\begin{lemma}
-  If $U$ and $V$ are subspaces of $W$, then $U+V$ is also a subspace of $W$.
-\end{lemma}
-
-\begin{proof}
-  $U+V$ is non-empty since $\Ob + \Ob = \Ob \in U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
-  \begin{equation*}
-    \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
-  \end{equation*}
-  for all $\lambda \in \mathbb{F}$. Also,
-  \begin{equation*}
-    (\ub+\vb) + (\ub'+\vb') = (\ub + \ub') + (\vb + \vb') \in U+V,
-  \end{equation*}
-  so $U+V$ is also closed, and thus a subspace.
-\end{proof}
-
-The following theorem is useful for determining dimensions of spaces.
-
-\begin{theorem}\label{thm:subspace_dim}
-  Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
-  \begin{equation}
-    \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
-  \end{equation}
-\end{theorem}
-
-\begin{proof}
-  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
-  
-  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
-  \begin{equation*}
-    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \Ob.
-  \end{equation*}
-  Then not all of $\nu_i$ is zero, since $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of $U$ and hence linearly independent (and similarly for the other case). Then $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and hence in $U$, so much be in $U \cap V$. Then
-  \begin{equation*}
-    \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
-  \end{equation*}
-  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads to the result. \qed
-\end{proof}
-
-\begin{example}
-  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$, $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
-  \begin{equation*}
-    U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
-  \end{equation*}
-    
-  We see the spanning sets of $U$ and $V$ are linearly independent, hence $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be expressed as
-  \begin{equation*}
-    \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
-  \end{equation*}
-  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads to
-  \begin{equation*}
-    U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
-  \end{equation*}
-  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked directly.
-\end{example}
-
-The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\Ob\}$.
-
-\begin{theorem}
-  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all $\wb = \ub + \vb \in W$.
-\end{theorem}
-
-\begin{proof}
-  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
-  \begin{equation*}
-    \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
-  \end{equation*}
-  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are just the zero vector, and we have uniqueness.
-  
-  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb = \wb + \Ob_V = \Ob_U + \wb$ for the respective zero vectors, but the above is only true if $\wb = \Ob$, and hence $U \cap V = \{\Ob\}$ and we have a direct sum. \qed
-\end{proof}
-
-\begin{example}
-  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
-  
-  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V = \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
-\end{example}
-
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}$ is the \textbf{external direct sum}, which is a vector space with the definition that the ordered pairs satisfy
-\begin{equation*}
-  (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
-\end{equation*}
-
-%-------------------------------------------------------------------------------
-
-\section{Inner products}
-
-{\color{red}Jan 13: p.20 of notes probably to start here}
-
-%-------------------------------------------------------------------------------
-
-\section{Gram--Schmidt orthonomalisation}
-
-%-------------------------------------------------------------------------------
-
-\section{Orthogonal projection}
-
-%===============================================================================
-
-\chapter{Linear maps}
+\section{Linear maps}
 
 A \textbf{linear map} $\theta : U \to V$ for vector spaces over $\mathbb{F}$ is a function that satisfies
 \begin{enumerate}
@@ -784,138 +672,6 @@ Let $\theta: U \to V$ be a linear map and $U$ is finite dimensional. The \textbf
     -x + 3y + 2z = v_1, \quad x - y + z = v_2, \quad y + z = v_3.
   \end{align*}
   If $\vb = \Ob$, then $y=-z$, which implies $x = -2z$, which implies $z=y=x=0$, so the map here has a trivial kernel and is full rank by Thm.~\ref{thm:rank_dim}, i.e. $n(f) = 0$ and $r(f) = 3$.
-\end{example} 
-
-%-------------------------------------------------------------------------------
-
-\section{Spaces of linear maps}
-
-The \textbf{module homomorphisms} $\mbox{Hom}(U, V)$ of two vector spaces $U$ and $V$ consists of all linear maps from $U$ to $V$ such that
-\begin{equation*}
-  (f+g)(\ub) = f(\ub) + g(\ub), \qquad (\lambda f)(\ub) = \lambda f(\ub)
-\end{equation*}
-for all $\ub \in U$, $\lambda \in \mathbb{F}$.
-
-\begin{theorem}
-  $\mbox{Hom}(U,V)$ is a vector space over $\mathbb{F}$ and essentially follows from definition. \qed
-\end{theorem}
-
-\begin{theorem}\label{thm:kronecker_delta_basis}
-  Let $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$, and the respective basis are $\{\eb_1, \ldots \eb_m\}$ and $\{\fb_1, \ldots \fb_n\}$. Let
-  \begin{equation*}
-    \theta_{ij}(\eb_k) = \delta_{ik} \fb_j
-  \end{equation*}
-  where $\delta_{ik}$ is the Kronecker delta. Then $\{\theta_{ij}\ \in \mbox{Hom}(U, V)\ |\ 1\leq i\leq m,\ 1\leq j \leq n\}$ is a basis of $\mbox{Hom}(U, V)$, and so $\mbox{dim}(\mbox{Hom}(U, V)) = mn$.
-\end{theorem}
-
-\begin{proof}
-  By Lemma~\ref{lem:unique_basis} $\theta_{ij}(\eb_k) = \delta_{ik}\fb_j$ defines a unique map $\theta_{ij}: U\to V$. Suppose $\lambda_{ij}\theta_{ij} = 0$, then for all $k$ where $1\leq k \leq m$, $\lambda_{ij}\theta_{ij}(\eb_k) = \lambda_{ij}\delta_{ik}\fb_j = \Ob$. Since $\fb_j$ is a basis of $V$, so for all $j$ where $1\leq j \leq n$ we have $\lambda_{ij}\delta_{ik} = 0$ implies that $\lambda_{kj} = 0$, so we have a set that is linearly independent.
-  
-  Suppose $\phi \in \mbox{Hom}(U, V)$, then $\phi(\eb_k) = a_{kj}\fb_{j}$ for $a_{kj}\in\mathbb{F}$. But we also have $a_{ij}\theta_{ij}(\eb_k) = a_{ij}\delta_{ik}\fb_j = a_{kj}\fb_j$, so $\phi = a_{ij}\theta_{ij}$, and so $\theta_{ij}$ is a basis and $\mbox{Hom}(U, V)$ has dimension $mn$. \qed
-\end{proof}
-
-%-------------------------------------------------------------------------------
-
-\section{Dual space}
-
-Let $V$ be a vector space over $\mathbb{F}$. The space $\highlight{V^* = \mbox{Hom}(V, \mathbb{F})}$ is called \textbf{dual} of $V$.\marginnote{The elements of the dual here are maps from vectors to a field element (e.g. scalars).}
-
-\begin{theorem}
-  Let $V$ be a vector space of dimension $n$ over $\mathbb{F}$ and $\{\eb_1,\ldots \eb_n\}$ be a basis of $V$. Then there is a \textbf{dual basis} $\{\eb_1^*, \ldots \eb_n^*\}$ of $V^*$ where
-    \begin{equation}
-      \highlight{\eb_i^* (\eb_j) = \delta_{ij}}.
-    \end{equation}
- This is just a special case of Thm.~\ref{thm:kronecker_delta_basis}. \qed
-\end{theorem}
-
-Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ and $\vb \in V$ and satisfies\marginnote{This might be a little confusing: $f$ is a function that is also an element of a vector space and is not bolded.\\
-
-\noindent A concrete example is that a gradient of a function $\nabla g$ is really a dual vector (a \textbf{1-form}), although we normally view it as a vector (which we can when we deal with flat Euclidean space). Contraction with a vector as $\inner{\nabla g}{\vb}$ gives the \emph{magnitude} (a scalar) of the derivative of $g$ in the direction of $\vb$.} 
-\begin{equation*}
-  \inner{f+g}{\vb} = f(\vb) + g(\vb), \qquad \inner{\lambda f, \vb} = \lambda f(\vb).
-\end{equation*}
-
-\begin{theorem}
-  There exists a canonical isomorphism between $V$ and $V^{**}$ if $V$ is finite dimensional.
-\end{theorem}
-
-\begin{proof}
-  Suppose $\theta : V \to V^{**}$ with $\inner{\theta(\vb)}{f} = \inner{f}{v}$ for all $\vb \in V$, $f \in V^*$. Then
-  \begin{align*}
-    \inner{\theta(\ub+\vb), f}{f}
-      &= \inner{f}{\ub+\vb}\\
-      &= \inner{f}{\ub} + \inner{f}{\vb}\\
-      &= \inner{\theta(\ub)}{f} + \inner{\theta(\vb)}{f}\\
-      &= \inner{\theta(\ub) + \theta(\vb)}{f}.
-  \end{align*}
-  Similarly,
-  \begin{align*}
-    \inner{\theta(\lambda\vb), f}{f}
-      &= \inner{f}{\lambda\vb}\\
-      &= \lambda\inner{f}{\vb}\\
-      &= \lambda\inner{\theta(\vb)}{f}\\
-      &= \inner{\lambda\theta(\vb)}{f},
-  \end{align*}
-  so $\theta$ is a linear map.
-  
-  If $\vb \in \mbox{Ker}(\theta)$ then $\inner{f}{\vb} = \inner{\theta(\vb)}{f} = \inner{\theta}{f} = \Ob$ for all $f \in V^*$, but this implies $\vb = \Ob$, so $\theta$ is injective. Since $\mbox{dim}(V) = \mbox{dim}(V^*) = \mbox{dim}(V^{**})$ is finite and $\theta$ is injective, $\theta$ is bijective, and we thus have an isomorphism. \qed
-\end{proof}
-
-\begin{theorem}
-  Let $\theta : U \to V$ be a linear map of vector spaces. Then $\highlight{\inner{\theta^*(\vb^*)}{\ub} = \inner{\vb^*}{\theta(\ub)}}$ defines a linear map $\theta^* : V^* \to U^*$.\marginnote{Essentially the dual map is defined by how the original moves from one side of the inner product to the other (cf. the adjoint).}
-\end{theorem}
-
-\begin{proof}
-  Note we have
-  \begin{align*}
-    \inner{\theta^*(\lambda\vb^* + \mu\wb^*)}{\ub}
-      &= \inner{\lambda\vb^* + \mu\wb^*}{\theta(\ub)}\\
-      &= \lambda\inner{\vb^*}{\theta(\ub)} + \mu\inner{\wb^*}{\theta(\ub)}\\
-      &= \lambda\inner{\theta^*(\vb^*)}{\ub} + \mu\inner{\theta^*(\wb^*)}{\ub}\\
-      &= \inner{\lambda\theta^*(\vb^*) + \mu\theta^*(\wb^*)}{\ub},
-  \end{align*}
-  so $\theta^*$ is a linear map as required. \qed
-\end{proof}
-
-\begin{theorem}
-  Let $\theta : U \to V$ be a linear map, and $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$ are finite. If we have a matrix $\As$ that represents $\theta$ with respect to basis $\{\eb_1, \ldots \eb_m\}$ of $U$ and $\{\fb_1, \ldots \fb_n\}$ of $V$, then $\As^T$ represents $\theta^*$ with respect to basis $\{\eb^*_1, \ldots \eb^*_m\}$ of $U^*$ and $\{\fb^*_1, \ldots \fb^*_n\}$ of $V^*$.
-\end{theorem}
-
-\marginnote{\color{red}This ordering will be fine when matrices chapter go first.}
-
-\begin{proof}
-  By convention, $\theta(\eb_j) = a_{ij}\fb_i$, and we have
-  \begin{equation*}
-    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{\fb^*_k}{\theta(\eb_j)} = \inner{\fb^*_k}{a_{ij}\fb_i} = a_{ij}\inner{\fb^*_k}{\fb_i} = a_{ij}\delta_{ki}.
-  \end{equation*}
-  If $\theta^*$ is represented by $\Bs$, then
-  \begin{equation*}
-    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{b_{ik}\eb^*_i}{\theta(\eb_j)} = b_{ik}\inner{\eb^*_i}{\eb_j} = b_{ik}\delta_{ij},
-  \end{equation*}
-  which implies $a_{kj} = b_{jk}$, so $\As^T = \Bs$. \qed
-\end{proof}
-
-\begin{example}
-  Let $V = \mathbb{R}^3$ and $\xb = (x,y,z) \in V$. Show that all $f\in V^*$ has the form $f(\xb) = ax + by + cz$ for $a,b,c\in\mathbb{R}$.
-  
-  If we let $a = f(\eb_1)$, $b = f(\eb_2)$ and $c = f(\eb_3)$ (i.e. basically the standard dual basis), then by linearity
-  \begin{equation*}
-    f(\xb) = x f(\eb_1) + y f(\eb_2) + z f(\eb_3) = ax + by + cz.
-  \end{equation*}
-  
-  If instead of the standard basis we take
-  \begin{equation*}
-    \fb_1 = \begin{pmatrix}0 \\ 0 \\ 1 \end{pmatrix}, \quad 
-    \fb_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \quad 
-    \fb_3 = \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix},
-  \end{equation*}
-  then the dual basis are maps to $\mathbb{R}$. Let $\fb_1^*(\xb) = ax + by + cz$, then since $\fb_i^*(\fb_j) = \delta_{ij}$ by definition, we have the system
-  \begin{align*}
-    1 = \fb_1^* (\fb_1) = c & \Rightarrow c = 1\\
-    0 = \fb_1^* (\fb_2) = a + c & \Rightarrow a = -1\\
-    0 = \fb_1^* (\fb_3) = a - b & \Rightarrow b = -1
-  \end{align*}
-  so that $\fb_1^*(\xb) = -x + y + z$. Continuing on, it can be shown that $\fb_2^*(\xb) = x + y)$ and $\fb_3^* = -y$, and these can be checked to be linearly independent and spanning $\mathbb{R}$, and we have the dual basis of $V^*$ given the choice of a basis in $V$.
 \end{example}
 
 %===============================================================================
@@ -1595,14 +1351,12 @@ important role in mathematical physics.}
 
 \section{Hermitian matrices}\label{sec:hermitian}
 
-{\color{red}remember to introduce somewhere star being the Hermitian transpose}
-
-A matrix over $\mathbb{C}$ is \textbf{Hermitian} if $\highlight{\As = \As^* =
+A matrix over $\mathbb{C}$ is \textbf{Hermitian} if $\highlight{\As = \As^\dagger =
 \overline{\As}^T}$. Note that if $\As$ is actually real, then this reduces to
 the definition of a symmetric matrix.
 
-A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^* =
-\As^{-1}}$.\marginnote{Unitary matrixes are used a lot in quantum mechanics.}
+A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^\dagger =
+\As^{-1}}$.\marginnote{Unitary matrices are used a lot in quantum mechanics.}
 Again, if $\As$ is actually real, then this reduces to the definition of an
 orthogonal matrix.
 
@@ -1618,7 +1372,7 @@ orthogonal matrix.
   Let $\lambda$ be an eigenvalue of $\As$, so $\As\vb=\lambda\vb$ with
   $\vb\neq\Ob$. Now,
   \begin{equation*}
-    \lambda\|\vb\|^2 = \lambda\vb^*\vb = \vb^* (\lambda\vb) = \vb^* \As\vb = \vb^* \As^*\vb = (\As\vb)^* \vb = \overline{\lambda}\vb^*\vb = \overline{\lambda}\|\vb\|^2,
+    \lambda\|\vb\|^2 = \lambda\vb^\dagger\vb = \vb^\dagger (\lambda\vb) = \vb^\dagger \As\vb = \vb^\dagger \As^\dagger\vb = (\As\vb)^\dagger \vb = \overline{\lambda}\vb^\dagger\vb = \overline{\lambda}\|\vb\|^2,
   \end{equation*}
   so $\lambda$ is real for non-zero $\vb$.
   
@@ -1626,15 +1380,15 @@ orthogonal matrix.
   associated eigenvectors $\vb$ and $\wb$ respectively. Then doing similar
   manipulations to above,
   \begin{equation*}
-    \lambda\wb^*\vb = \wb^* \As\vb = (\As\wb)^* \vb = \mu\wb^*\vb.
+    \lambda\wb^\dagger\vb = \wb^\dagger \As\vb = (\As\wb)^\dagger \vb = \mu\wb^\dagger\vb.
   \end{equation*}
-  Since $\lambda\neq\mu$, then $\wb^*\vb = \inner{\vb}{\wb} = 0$, and so
+  Since $\lambda\neq\mu$, then $\wb^\dagger\vb = \inner{\vb}{\wb} = 0$, and so
   the eigenvectors are orthogonal. \qed
 \end{proof}
 
 \begin{theorem}
   Let $\As$ be a Hermitian matrix. If it is diagonalisable, then the similarity
-  matrix is unitary, i.e. $\As = \Ps \Ds \Ps^{-1} = \Ps \Ds \Ps^*$.
+  matrix is unitary, i.e. $\As = \Ps \Ds \Ps^{-1} = \Ps \Ds \Ps^\dagger$.
 \end{theorem}
 
 \begin{proof}
@@ -1648,14 +1402,14 @@ orthogonal matrix.
   \ldots \ub_n\}$ is an orthonormal basis for $\mathbb{C}^n$. 
   
   Let $\Ps_1$ be the matrix whose columns are those vectors, which by
-  construction means $\Ps^* \Ps = \Is$ by orthogonality. Let $\{\eb_i\}$ be the
+  construction means $\Ps^\dagger \Ps = \Is$ by orthogonality. Let $\{\eb_i\}$ be the
   standard basis of $\mathbb{C}^n$, then
   \begin{equation*}
-    \Ps_1^* \As \Ps_1 \eb_1 = \Ps_1^* \As \vb = \Ps_1^* \lambda_1 \vb = \lambda_1 \Ps_1^* \vb = \lambda_1 \eb_1 \quad \Rightarrow \quad \Ps_1^* \As \Ps_1 = \begin{pmatrix}\lambda_1 & 0 \\ 0 & \As_1\end{pmatrix}.
+    \Ps_1^\dagger \As \Ps_1 \eb_1 = \Ps_1^\dagger \As \vb = \Ps_1^\dagger \lambda_1 \vb = \lambda_1 \Ps_1^\dagger \vb = \lambda_1 \eb_1 \quad \Rightarrow \quad \Ps_1^\dagger \As \Ps_1 = \begin{pmatrix}\lambda_1 & 0 \\ 0 & \As_1\end{pmatrix}.
   \end{equation*}
   The procedure can be continued for the next one, so that
   \begin{equation*}
-    \Ps_2^* \Ps_1^* \As \Ps_1 \Ps_2 = \begin{pmatrix}\lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \As_2\end{pmatrix},
+    \Ps_2^\dagger \Ps_1^\dagger \As \Ps_1 \Ps_2 = \begin{pmatrix}\lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \As_2\end{pmatrix},
   \end{equation*}
   and so we can define $\mathsf{P} = \prod_{i=1}^n \Ps_i$ as the transformation
   matrix. Since each $\Ps_i$ is unitary, its product is unitary. \qed
@@ -1680,6 +1434,341 @@ orthogonal matrix.
 %-------------------------------------------------------------------------------
 
 \section{Jordan normal form}
+
+%===============================================================================
+
+\chapter{More on vector spaces and linear maps}
+
+In the above the linear maps are mostly linked with some geometric transformations via explicit representation as matrices. Vector spaces and linear maps are however more general (e.g. maps on functions in function spaces), and here we look at other properties of vector spaces and linear maps in the more abstract setting.
+
+%-------------------------------------------------------------------------------
+
+\section{Sums and direct sums}
+
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and $V$ is
+\begin{equation}
+  \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
+\end{equation}
+
+\begin{lemma}
+  If $U$ and $V$ are subspaces of $W$, then $U+V$ is also a subspace of $W$.
+\end{lemma}
+
+\begin{proof}
+  $U+V$ is non-empty since $\Ob + \Ob = \Ob \in U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
+  \begin{equation*}
+    \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
+  \end{equation*}
+  for all $\lambda \in \mathbb{F}$. Also,
+  \begin{equation*}
+    (\ub+\vb) + (\ub'+\vb') = (\ub + \ub') + (\vb + \vb') \in U+V,
+  \end{equation*}
+  so $U+V$ is also closed, and thus a subspace.
+\end{proof}
+
+The following theorem is useful for determining dimensions of spaces.
+
+\begin{theorem}\label{thm:subspace_dim}
+  Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
+  \begin{equation}
+    \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
+  
+  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
+  \begin{equation*}
+    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \Ob.
+  \end{equation*}
+  Then not all of $\nu_i$ is zero, since $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of $U$ and hence linearly independent (and similarly for the other case). Then $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and hence in $U$, so much be in $U \cap V$. Then
+  \begin{equation*}
+    \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
+  \end{equation*}
+  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads to the result. \qed
+\end{proof}
+
+\begin{example}
+  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$, $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
+  \begin{equation*}
+    U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
+  \end{equation*}
+    
+  We see the spanning sets of $U$ and $V$ are linearly independent, hence $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be expressed as
+  \begin{equation*}
+    \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
+  \end{equation*}
+  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads to
+  \begin{equation*}
+    U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
+  \end{equation*}
+  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked directly.
+\end{example}
+
+The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\Ob\}$.
+
+\begin{theorem}
+  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all $\wb = \ub + \vb \in W$.
+\end{theorem}
+
+\begin{proof}
+  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
+  \begin{equation*}
+    \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
+  \end{equation*}
+  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are just the zero vector, and we have uniqueness.
+  
+  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb = \wb + \Ob_V = \Ob_U + \wb$ for the respective zero vectors, but the above is only true if $\wb = \Ob$, and hence $U \cap V = \{\Ob\}$ and we have a direct sum. \qed
+\end{proof}
+
+\begin{example}
+  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
+  
+  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V = \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
+\end{example}
+
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}$ is the \textbf{external direct sum}, which is a vector space with the definition that the ordered pairs satisfy
+\begin{equation*}
+  (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
+\end{equation*}
+
+%-------------------------------------------------------------------------------
+
+\section{Inner products}
+
+An \textbf{inner product} on a real vector space $V$ is a function
+\begin{equation}
+  \highlight{\inner{\cdot}{\cdot} : V\times V \to \mathbb{R}}
+\end{equation}
+such that we have the following properties:
+\begin{itemize}
+  \item symmetry, $\inner{\ub}{\vb} = \inner{\vb}{\ub}$,
+  \item linearity in the first factor, $\inner{\lambda\ub + \mu\wb}{\vb} = \lambda\inner{\ub}{\vb} + \mu\inner{\wb}{\vb}$,
+  \item positivity, $\inner{\vb}{\vb} \geq 0$ and $\inner{\vb}{\vb} = 0$ iff $\vb = \Ob$.
+\end{itemize}
+
+The inner product provides a notion of distance and angles between vector in vector spaces.
+
+For the above, if we are instead dealing with a complex vector space then the first condition becomes
+\begin{equation*}
+  \inner{\ub}{\vb} = \overline{\inner{\vb}{\ub}}
+\end{equation*}
+where the overbar denotes a complex conjugate. Note then we also have
+\begin{equation*}
+  \inner{\ub}{\lambda\vb} = \overline{\lambda}\inner{\ub}{\ub}.
+\end{equation*}
+A function that is linear in the first factor and anti-linear like above in the second factor is called \textbf{sesquilinear}.
+
+\begin{example}
+  The standard scalar (dot) product in $\mathbb{R}^n$ is also known as the \textbf{Euclidean inner product}.
+\end{example}
+
+\begin{example}
+  If we take $V=\mathbb{R}^n$ and $a_k \in \mathbb{R}^+$, then we can check that $\inner{\ub}{\vb} = \sum_{i=1}^n a_i u_i v_i$ is an inner product.
+\end{example}
+
+\begin{example}
+  For $V=\mathbb{R}^2$ and $a,b,c\in \mathbb{R}$, we consider symmetric matrices of the form
+  \begin{equation*}
+    \As = \begin{pmatrix}a & b \\ b & c \end{pmatrix}.
+  \end{equation*}
+  Find the conditions on $a,b,c$ such that
+  \begin{equation*}
+    \inner{\ub}{\vb} = \vb^T \As \ub = a u_1 v_1 + b (u_1 v_2 + u_2 v_1) + c u_2 v_2
+  \end{equation*}
+  is an inner product.
+  
+  Picking some useful vectors, if $\ub = \vb = \eb_1$ then $\inner{\ub}{\ub} = a$, so $a \geq 0$. Similarly, $\ub = \vb = \eb_2$ implies $c \geq 0$. Now
+  
+  \begin{align*}
+    \inner{\vb}{\vb}
+      &= a \left[v_1^2 + \frac{2b}{a} v_1 v_2 + \frac{c}{a} v_2^2\right]\\
+      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 - \frac{b^2}{a^2} v_2^2 + \frac{c}{a}v_2^2\right]\\
+      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 + \frac{ac - b^2}{a^2} v_2^2\right] \geq 0
+  \end{align*}
+  if $\vb \neq \Ob$, so we additionally want $ac - b^2 = |\As| > 0$.
+\end{example}
+
+\begin{example}
+  If we take $V = C([a,b])$, show that
+  \begin{equation*}
+    \inner{f}{g} = \int_a^b f(t) g(t)\; \mathrm{d}t
+  \end{equation*}
+  defines an inner product.
+  
+  The linearity and symmetry properties clearly hold. $\inner{f}{f} \geq 0$ is also true since the integrand $f^2(t)$ is a positive real valued function, and the integral is zero only if $f \equiv 0$ for all $t \in [a,b]$.
+\end{example}
+
+\begin{example}
+  For $V=\mathbb{C}^n$, the \textbf{standard Hermitian inner product} is defined to be (with an implied sum)
+  \begin{equation}
+    \highlight{\inner{\zb}{\wb} = \wb^\dagger \zb = z_i\overline{w}_i}
+  \end{equation}
+  where the dagger denotes the Hermitian transpose.
+\end{example}
+
+\begin{example}
+  Show that
+  \begin{equation*}
+    \inner{\zb}{\wb} = \wb^\dagger \begin{pmatrix} 3 & \zi \\ -\zi & 2 \end{pmatrix} \zb
+  \end{equation*}
+  is a Hermitian inner product on $\mathbb{C}^2$.
+  
+  Since we are dealing with a single matrix the symmetry and linearity is satisfied, so we need positivity. We have\marginnote{There are presumably other ways to cook up some squares via factorisation and multiply by 1 tricks.}
+  \begin{align*}
+    \inner{\zb}{\zb} 
+      &= 3 z_1 \overline{z}_1 + \zi z_1 \overline{z}_2 - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
+      &=z_1 (3\overline{z}_1 + \zi \overline{z}_2) - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
+      &= \frac{1}{3}(3\overline{z}_1 + \zi \overline{z}_2)(3 z_1 - \zi z_2) - \frac{1}{3} z_2 \overline{z}_2 + 2 z_2 \overline{z}_2 \\
+      &= \frac{1}{3}|3 z_1 - \zi z_2|^2 + \frac{5}{3}|z_2|^2 \geq 0
+  \end{align*}
+  and is only zero when $\zb = \Ob$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Length, distance and angles}
+
+{\color{red}Jan 14: p.21 of notes probably to start here}
+
+%-------------------------------------------------------------------------------
+
+\section{Gram--Schmidt orthonormalisation}
+
+%-------------------------------------------------------------------------------
+
+\section{Orthogonal projection}
+
+%-------------------------------------------------------------------------------
+
+\section{Spaces of linear maps}
+
+The \textbf{module homomorphisms} $\mbox{Hom}(U, V)$ of two vector spaces $U$ and $V$ consists of all linear maps from $U$ to $V$ such that
+\begin{equation*}
+  (f+g)(\ub) = f(\ub) + g(\ub), \qquad (\lambda f)(\ub) = \lambda f(\ub)
+\end{equation*}
+for all $\ub \in U$, $\lambda \in \mathbb{F}$.
+
+\begin{theorem}
+  $\mbox{Hom}(U,V)$ is a vector space over $\mathbb{F}$ and essentially follows from definition. \qed
+\end{theorem}
+
+\begin{theorem}\label{thm:kronecker_delta_basis}
+  Let $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$, and the respective basis are $\{\eb_1, \ldots \eb_m\}$ and $\{\fb_1, \ldots \fb_n\}$. Let
+  \begin{equation*}
+    \theta_{ij}(\eb_k) = \delta_{ik} \fb_j
+  \end{equation*}
+  where $\delta_{ik}$ is the Kronecker delta. Then $\{\theta_{ij}\ \in \mbox{Hom}(U, V)\ |\ 1\leq i\leq m,\ 1\leq j \leq n\}$ is a basis of $\mbox{Hom}(U, V)$, and so $\mbox{dim}(\mbox{Hom}(U, V)) = mn$.
+\end{theorem}
+
+\begin{proof}
+  By Lemma~\ref{lem:unique_basis} $\theta_{ij}(\eb_k) = \delta_{ik}\fb_j$ defines a unique map $\theta_{ij}: U\to V$. Suppose $\lambda_{ij}\theta_{ij} = 0$, then for all $k$ where $1\leq k \leq m$, $\lambda_{ij}\theta_{ij}(\eb_k) = \lambda_{ij}\delta_{ik}\fb_j = \Ob$. Since $\fb_j$ is a basis of $V$, so for all $j$ where $1\leq j \leq n$ we have $\lambda_{ij}\delta_{ik} = 0$ implies that $\lambda_{kj} = 0$, so we have a set that is linearly independent.
+  
+  Suppose $\phi \in \mbox{Hom}(U, V)$, then $\phi(\eb_k) = a_{kj}\fb_{j}$ for $a_{kj}\in\mathbb{F}$. But we also have $a_{ij}\theta_{ij}(\eb_k) = a_{ij}\delta_{ik}\fb_j = a_{kj}\fb_j$, so $\phi = a_{ij}\theta_{ij}$, and so $\theta_{ij}$ is a basis and $\mbox{Hom}(U, V)$ has dimension $mn$. \qed
+\end{proof}
+
+%-------------------------------------------------------------------------------
+
+\section{Dual space}
+
+Let $V$ be a vector space over $\mathbb{F}$. The space $\highlight{V^* = \mbox{Hom}(V, \mathbb{F})}$ is called \textbf{dual} of $V$.\marginnote{The elements of the dual here are maps from vectors to a field element (e.g. scalars).}
+
+\begin{theorem}
+  Let $V$ be a vector space of dimension $n$ over $\mathbb{F}$ and $\{\eb_1,\ldots \eb_n\}$ be a basis of $V$. Then there is a \textbf{dual basis} $\{\eb_1^*, \ldots \eb_n^*\}$ of $V^*$ where
+    \begin{equation}
+      \highlight{\eb_i^* (\eb_j) = \delta_{ij}}.
+    \end{equation}
+ This is just a special case of Thm.~\ref{thm:kronecker_delta_basis}. \qed
+\end{theorem}
+
+Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ and $\vb \in V$ and satisfies\marginnote{This might be a little confusing: $f$ is a function that is also an element of a vector space and is not bolded.\\
+
+\noindent A concrete example is that a gradient of a function $\nabla g$ is really a dual vector (a \textbf{1-form}), although we normally view it as a vector (which we can when we deal with flat Euclidean space). Contraction with a vector as $\inner{\nabla g}{\vb}$ gives the \emph{magnitude} (a scalar) of the derivative of $g$ in the direction of $\vb$.} 
+\begin{equation*}
+  \inner{f+g}{\vb} = f(\vb) + g(\vb), \qquad \inner{\lambda f, \vb} = \lambda f(\vb).
+\end{equation*}
+
+\begin{theorem}
+  There exists a canonical isomorphism between $V$ and $V^{**}$ if $V$ is finite dimensional.
+\end{theorem}
+
+\begin{proof}
+  Suppose $\theta : V \to V^{**}$ with $\inner{\theta(\vb)}{f} = \inner{f}{v}$ for all $\vb \in V$, $f \in V^*$. Then
+  \begin{align*}
+    \inner{\theta(\ub+\vb), f}{f}
+      &= \inner{f}{\ub+\vb}\\
+      &= \inner{f}{\ub} + \inner{f}{\vb}\\
+      &= \inner{\theta(\ub)}{f} + \inner{\theta(\vb)}{f}\\
+      &= \inner{\theta(\ub) + \theta(\vb)}{f}.
+  \end{align*}
+  Similarly,
+  \begin{align*}
+    \inner{\theta(\lambda\vb), f}{f}
+      &= \inner{f}{\lambda\vb}\\
+      &= \lambda\inner{f}{\vb}\\
+      &= \lambda\inner{\theta(\vb)}{f}\\
+      &= \inner{\lambda\theta(\vb)}{f},
+  \end{align*}
+  so $\theta$ is a linear map.
+  
+  If $\vb \in \mbox{Ker}(\theta)$ then $\inner{f}{\vb} = \inner{\theta(\vb)}{f} = \inner{\theta}{f} = \Ob$ for all $f \in V^*$, but this implies $\vb = \Ob$, so $\theta$ is injective. Since $\mbox{dim}(V) = \mbox{dim}(V^*) = \mbox{dim}(V^{**})$ is finite and $\theta$ is injective, $\theta$ is bijective, and we thus have an isomorphism. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $\theta : U \to V$ be a linear map of vector spaces. Then $\highlight{\inner{\theta^*(\vb^*)}{\ub} = \inner{\vb^*}{\theta(\ub)}}$ defines a linear map $\theta^* : V^* \to U^*$.\marginnote{Essentially the dual map is defined by how the original moves from one side of the inner product to the other (cf. the adjoint).}
+\end{theorem}
+
+\begin{proof}
+  Note we have
+  \begin{align*}
+    \inner{\theta^*(\lambda\vb^* + \mu\wb^*)}{\ub}
+      &= \inner{\lambda\vb^* + \mu\wb^*}{\theta(\ub)}\\
+      &= \lambda\inner{\vb^*}{\theta(\ub)} + \mu\inner{\wb^*}{\theta(\ub)}\\
+      &= \lambda\inner{\theta^*(\vb^*)}{\ub} + \mu\inner{\theta^*(\wb^*)}{\ub}\\
+      &= \inner{\lambda\theta^*(\vb^*) + \mu\theta^*(\wb^*)}{\ub},
+  \end{align*}
+  so $\theta^*$ is a linear map as required. \qed
+\end{proof}
+
+\begin{theorem}
+  Let $\theta : U \to V$ be a linear map, and $\mbox{dim}(U) = m$ and $\mbox{dim}(V) = n$ are finite. If we have a matrix $\As$ that represents $\theta$ with respect to basis $\{\eb_1, \ldots \eb_m\}$ of $U$ and $\{\fb_1, \ldots \fb_n\}$ of $V$, then $\As^T$ represents $\theta^*$ with respect to basis $\{\eb^*_1, \ldots \eb^*_m\}$ of $U^*$ and $\{\fb^*_1, \ldots \fb^*_n\}$ of $V^*$.
+\end{theorem}
+
+\begin{proof}
+  By convention, $\theta(\eb_j) = a_{ij}\fb_i$, and we have
+  \begin{equation*}
+    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{\fb^*_k}{\theta(\eb_j)} = \inner{\fb^*_k}{a_{ij}\fb_i} = a_{ij}\inner{\fb^*_k}{\fb_i} = a_{ij}\delta_{ki}.
+  \end{equation*}
+  If $\theta^*$ is represented by $\Bs$, then
+  \begin{equation*}
+    \inner{\theta^*(\fb^*_k)}{\eb_j} = \inner{b_{ik}\eb^*_i}{\theta(\eb_j)} = b_{ik}\inner{\eb^*_i}{\eb_j} = b_{ik}\delta_{ij},
+  \end{equation*}
+  which implies $a_{kj} = b_{jk}$, so $\As^T = \Bs$. \qed
+\end{proof}
+
+\begin{example}
+  Let $V = \mathbb{R}^3$ and $\xb = (x,y,z) \in V$. Show that all $f\in V^*$ has the form $f(\xb) = ax + by + cz$ for $a,b,c\in\mathbb{R}$.
+  
+  If we let $a = f(\eb_1)$, $b = f(\eb_2)$ and $c = f(\eb_3)$ (i.e. basically the standard dual basis), then by linearity
+  \begin{equation*}
+    f(\xb) = x f(\eb_1) + y f(\eb_2) + z f(\eb_3) = ax + by + cz.
+  \end{equation*}
+  
+  If instead of the standard basis we take
+  \begin{equation*}
+    \fb_1 = \begin{pmatrix}0 \\ 0 \\ 1 \end{pmatrix}, \quad 
+    \fb_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \quad 
+    \fb_3 = \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix},
+  \end{equation*}
+  then the dual basis are maps to $\mathbb{R}$. Let $\fb_1^*(\xb) = ax + by + cz$, then since $\fb_i^*(\fb_j) = \delta_{ij}$ by definition, we have the system
+  \begin{align*}
+    1 = \fb_1^* (\fb_1) = c & \Rightarrow c = 1\\
+    0 = \fb_1^* (\fb_2) = a + c & \Rightarrow a = -1\\
+    0 = \fb_1^* (\fb_3) = a - b & \Rightarrow b = -1
+  \end{align*}
+  so that $\fb_1^*(\xb) = -x + y + z$. Continuing on, it can be shown that $\fb_2^*(\xb) = x + y)$ and $\fb_3^* = -y$, and these can be checked to be linearly independent and spanning $\mathbb{R}$, and we have the dual basis of $V^*$ given the choice of a basis in $V$.
+\end{example}
 
 %===============================================================================
 
