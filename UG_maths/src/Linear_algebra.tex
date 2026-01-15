@@ -1784,7 +1784,42 @@ Then $\{\ub_1, \ldots \ub_n\}$ is an orthonormal basis.\marginnote{Gram-Schmidt 
 
 \section{Orthogonal projection}
 
-{\color{red}Jan 15: p.23 of notes probably to start here}
+Let $U$ be a subspace of an inner product space $V$. The \textbf{orthogonal complement} is defined as
+\begin{align}
+  \highlight{U^\perp = \{\vb \in V\ |\ \inner{\ub}{\vb}=0\ \forall\ \ub\in U\}}.
+\end{align}
+
+\begin{lemma}
+  Suppose we can write $\vb = \ub + \tilde{\ub}$ for $\ub\in U$ and $\tilde{\ub} \in U^\perp$. Then the decomposition is unique.
+\end{lemma}
+
+\begin{proof}
+  Suppose $\vb = \ub + \tilde{\ub} = \ub' + \tilde{\ub}'$, then
+  \begin{align*}
+    \Ob = \ub - \ub' + \tilde{\ub} - \tilde{\ub}'
+  \end{align*}
+  so that $\ub' - \ub = \tilde{\ub} - \tilde{\ub}' \in U^\perp$, but $\ub' - \ub \in U$, so $\ub' - \ub = \Ob$ and $\ub'=\ub$, which also implies $\tilde{\ub} = \tilde{\ub}'$. \qed
+\end{proof}
+
+\begin{lemma}
+  If $U$ is finite dimensional then $\ub$ and $\tilde{\ub}$ are guaranteed to exist.
+\end{lemma}
+
+\begin{proof}
+  Let $\{\ub_1, \ldots \ub_k\}$ be an orthonormal basis of $U$. If we set $\ub = \inner{\ub}{\ub_i}\ub_i$ (sum implied) and define $\tilde{\ub} = \vb - \ub$. Then $\ub \in U$ by construction, and $\vb = \ub + \tilde{\ub}$. We aim to show $\tilde{u} \in U^\perp$; it is enough to show $\inner{\tilde{\ub}}{\ub_i} = 0$ for all $i$ since we have a basis of $U$.
+  \begin{align*}
+    \inner{\tilde{\ub}}{\ub_i}
+      &= \inner{\vb - \ub}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\inner{\vb}{\ub_j}\ub_j}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\inner{\ub_j}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\delta_{ij}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_i}\\
+      &=0,
+  \end{align*}
+  hence $\tilde{\ub}\in U^\perp$ \qed
+\end{proof}
+
+{\color{red}Jan 15: p.24 of notes probably to start here}
 
 %-------------------------------------------------------------------------------
 
