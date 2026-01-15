@@ -674,6 +674,493 @@ Let $\theta: U \to V$ be a linear map and $U$ is finite dimensional. The \textbf
   If $\vb = \Ob$, then $y=-z$, which implies $x = -2z$, which implies $z=y=x=0$, so the map here has a trivial kernel and is full rank by Thm.~\ref{thm:rank_dim}, i.e. $n(f) = 0$ and $r(f) = 3$.
 \end{example}
 
+%-------------------------------------------------------------------------------
+
+\section{Sums and direct sums}
+
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and $V$ is
+\begin{equation}
+  \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
+\end{equation}
+
+\begin{lemma}
+  If $U$ and $V$ are subspaces of $W$, then $U+V$ is also a subspace of $W$.
+\end{lemma}
+
+\begin{proof}
+  $U+V$ is non-empty since $\Ob + \Ob = \Ob \in U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
+  \begin{equation*}
+    \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
+  \end{equation*}
+  for all $\lambda \in \mathbb{F}$. Also,
+  \begin{equation*}
+    (\ub+\vb) + (\ub'+\vb') = (\ub + \ub') + (\vb + \vb') \in U+V,
+  \end{equation*}
+  so $U+V$ is also closed, and thus a subspace.
+\end{proof}
+
+The following theorem is useful for determining dimensions of spaces.
+
+\begin{theorem}\label{thm:subspace_dim}
+  Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
+  \begin{equation}
+    \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
+  
+  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
+  \begin{equation*}
+    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \Ob.
+  \end{equation*}
+  Then not all of $\nu_i$ is zero, since $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of $U$ and hence linearly independent (and similarly for the other case). Then $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and hence in $U$, so much be in $U \cap V$. Then
+  \begin{equation*}
+    \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
+  \end{equation*}
+  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads to the result. \qed
+\end{proof}
+
+\begin{example}
+  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$, $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
+  \begin{equation*}
+    U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
+  \end{equation*}
+    
+  We see the spanning sets of $U$ and $V$ are linearly independent, hence $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be expressed as
+  \begin{equation*}
+    \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
+  \end{equation*}
+  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads to
+  \begin{equation*}
+    U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
+  \end{equation*}
+  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked directly.
+\end{example}
+
+The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\Ob\}$.
+
+\begin{theorem}
+  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all $\wb = \ub + \vb \in W$.
+\end{theorem}
+
+\begin{proof}
+  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
+  \begin{equation*}
+    \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
+  \end{equation*}
+  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are just the zero vector, and we have uniqueness.
+  
+  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb = \wb + \Ob_V = \Ob_U + \wb$ for the respective zero vectors, but the above is only true if $\wb = \Ob$, and hence $U \cap V = \{\Ob\}$ and we have a direct sum. \qed
+\end{proof}
+
+\begin{example}
+  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
+  
+  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V = \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
+\end{example}
+
+Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}$ is the \textbf{external direct sum}, which is a vector space with the definition that the ordered pairs satisfy
+\begin{equation*}
+  (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
+\end{equation*}
+
+%-------------------------------------------------------------------------------
+
+\section{Inner products}
+
+An \textbf{inner product} on a real vector space $V$ is a function
+\begin{equation}
+  \highlight{\inner{\cdot}{\cdot} : V\times V \to \mathbb{R}}
+\end{equation}
+such that we have the following properties:
+\begin{itemize}
+  \item symmetry, $\inner{\ub}{\vb} = \inner{\vb}{\ub}$,
+  \item linearity in the first factor, $\inner{\lambda\ub + \mu\wb}{\vb} = \lambda\inner{\ub}{\vb} + \mu\inner{\wb}{\vb}$,
+  \item positivity, $\inner{\vb}{\vb} \geq 0$ and $\inner{\vb}{\vb} = 0$ iff $\vb = \Ob$.
+\end{itemize}
+
+The inner product provides a notion of distance and angles between vector in vector spaces.
+
+For the above, if we are instead dealing with a complex vector space then the first condition becomes
+\begin{equation*}
+  \inner{\ub}{\vb} = \overline{\inner{\vb}{\ub}}
+\end{equation*}
+where the overbar denotes a complex conjugate. Note then we also have
+\begin{equation*}
+  \inner{\ub}{\lambda\vb} = \overline{\lambda}\inner{\ub}{\ub}.
+\end{equation*}
+A function that is linear in the first factor and anti-linear like above in the second factor is called \textbf{sesquilinear}.
+
+\begin{example}
+  The standard scalar (dot) product in $\mathbb{R}^n$ is also known as the \textbf{Euclidean inner product}.
+\end{example}
+
+\begin{example}
+  If we take $V=\mathbb{R}^n$ and $a_k \in \mathbb{R}^+$, then we can check that $\inner{\ub}{\vb} = \sum_{i=1}^n a_i u_i v_i$ is an inner product.
+\end{example}
+
+\begin{example}
+  For $V=\mathbb{R}^2$ and $a,b,c\in \mathbb{R}$, we consider symmetric matrices of the form
+  \begin{equation*}
+    \As = \begin{pmatrix}a & b \\ b & c \end{pmatrix}.
+  \end{equation*}
+  Find the conditions on $a,b,c$ such that
+  \begin{equation*}
+    \inner{\ub}{\vb} = \vb^T \As \ub = a u_1 v_1 + b (u_1 v_2 + u_2 v_1) + c u_2 v_2
+  \end{equation*}
+  is an inner product.
+  
+  Picking some useful vectors, if $\ub = \vb = \eb_1$ then $\inner{\ub}{\ub} = a$, so $a \geq 0$. Similarly, $\ub = \vb = \eb_2$ implies $c \geq 0$. Now
+  
+  \begin{align*}
+    \inner{\vb}{\vb}
+      &= a \left[v_1^2 + \frac{2b}{a} v_1 v_2 + \frac{c}{a} v_2^2\right]\\
+      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 - \frac{b^2}{a^2} v_2^2 + \frac{c}{a}v_2^2\right]\\
+      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 + \frac{ac - b^2}{a^2} v_2^2\right] \geq 0
+  \end{align*}
+  if $\vb \neq \Ob$, so we additionally want $ac - b^2 = |\As| > 0$.
+\end{example}
+
+\begin{example}
+  If we take $V = C([a,b])$, show that
+  \begin{equation*}
+    \inner{f}{g} = \int_a^b f(t) g(t)\; \mathrm{d}t
+  \end{equation*}
+  defines an inner product.
+  
+  The linearity and symmetry properties clearly hold. $\inner{f}{f} \geq 0$ is also true since the integrand $f^2(t)$ is a positive real valued function, and the integral is zero only if $f \equiv 0$ for all $t \in [a,b]$.
+\end{example}
+
+\begin{example}
+  For $V=\mathbb{C}^n$, the \textbf{standard Hermitian inner product} is defined to be (with an implied sum)
+  \begin{equation}
+    \highlight{\inner{\zb}{\wb} = \wb^\dagger \zb = z_i\overline{w}_i}
+  \end{equation}
+  where the dagger denotes the Hermitian transpose.
+\end{example}
+
+\begin{example}
+  Show that
+  \begin{equation*}
+    \inner{\zb}{\wb} = \wb^\dagger \begin{pmatrix} 3 & \zi \\ -\zi & 2 \end{pmatrix} \zb
+  \end{equation*}
+  is a Hermitian inner product on $\mathbb{C}^2$.
+  
+  Since we are dealing with a single matrix the symmetry and linearity is satisfied, so we need positivity. We have\marginnote{There are presumably other ways to cook up some squares via factorisation and multiply by 1 tricks.}
+  \begin{align*}
+    \inner{\zb}{\zb} 
+      &= 3 z_1 \overline{z}_1 + \zi z_1 \overline{z}_2 - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
+      &=z_1 (3\overline{z}_1 + \zi \overline{z}_2) - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
+      &= \frac{1}{3}(3\overline{z}_1 + \zi \overline{z}_2)(3 z_1 - \zi z_2) - \frac{1}{3} z_2 \overline{z}_2 + 2 z_2 \overline{z}_2 \\
+      &= \frac{1}{3}|3 z_1 - \zi z_2|^2 + \frac{5}{3}|z_2|^2 \geq 0
+  \end{align*}
+  and is only zero when $\zb = \Ob$.
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Length, distance and angles}
+
+The \textbf{norm} of a vector is defined to be
+\begin{equation}
+  \highlight{\|\vb\| = \sqrt{\inner{\vb}{\vb}}}.
+\end{equation}
+The \textbf{distance} between two vectors is
+\begin{equation}
+  \highlight{d(\ub, \vb) = \|\ub - \vb\|}.
+\end{equation}
+A \textbf{unit vector} $\hat{\vb} = \vb / \|\vb\|$ has unit norm.
+
+\begin{lemma}\label{lemma:real_part}
+  \begin{equation*}
+    \mbox{Re}\inner{\ub}{\vb} = \frac{1}{2}\left(\|\ub+\vb\|^2 - \|\ub\|^2 - \|\vb\|^2\right).
+  \end{equation*}
+  The proof is straight-forward algebraic manipulations. \qedwhite
+\end{lemma}
+
+\begin{lemma}[Cauchy-Schwarz inequality]
+  We have
+  \begin{equation}
+    \highlight{\inner{\ub}{\vb}^2 \leq \|\ub\|^2 \|\vb\|^2},
+  \end{equation}
+  with inequality iff one of the entries is zero or they are parallel to each other.
+\end{lemma}
+
+\begin{proof}
+  The zero case is trivial. Otherwise, for $\lambda\in\mathbb{R}$,
+  \begin{align*}
+    0 \leq \|\lambda \ub + \vb\|^2 = \lambda^2 \|\ub^2\| + 2\lambda\inner{\ub}{\vb} + \|\vb\|^2.
+  \end{align*}
+  Let $\lambda = -\inner{\ub}{\vb}/\|\ub\|^2$, then
+  \begin{align*}
+    0 
+      &\geq \frac{\inner{\ub}{\vb}^2}{\|\ub\|^2} - \frac{2\inner{\ub}{\vb}^2}{\|\ub\|^2} + \|\vb\|^2 \\
+      &= -\frac{\inner{\ub}{\vb}^2}{\|\ub\|^2} + \|\vb\|^2
+  \end{align*}
+  and the inequality follows. With have equality iff
+  \begin{align*}
+    \vb = -\lambda\ub = \frac{\inner{\ub}{\vb}}{\|\ub\|^2}\ub,
+  \end{align*}
+  i.e. $\vb$ is a scalar multiple of $\ub$ and therefore are parallel to each other. \qed
+\end{proof}
+
+\begin{corollary}[Triangle inequality]
+  If a real inner product space we have $\highlight{\|\ub + \vb\| \leq \|\ub\| + \|\vb\|}$, and if neither entries are zero, then we have quality iff $\vb = \lambda\ub$ for some scalar $\lambda$.
+\end{corollary}
+
+\begin{proof}
+  Note that
+  \begin{align*}
+    (\|\ub\| + \|\vb\|)^2 - \|\ub + \vb\|^2 = 2\|\ub\|\|\vb\| - 2\inner{\ub}{\vb} \geq 0
+  \end{align*}
+  by Cauchy-Schwarz, and so the LHS gives the result. \qed
+\end{proof}
+
+Let $\ub$ and $\vb$ be two non-zero vectors in an inner product space. The \textbf{angle} between $\ub$ and $\vb$ is the solution to
+\begin{align}
+  \highlight{\cos\theta = \frac{\inner{\ub}{\vb}}{\|\ub\|\|\vb\|}}, \qquad \theta\in[0, \pi].
+\end{align}
+Two vectors are \textbf{orthogonal} if $\theta=\pi/2$, i.e. $\inner{\ub}{\vb}=0$.
+
+\begin{lemma}
+  If $\ub$ and $\vb$ are two orthogonal vectors then $\|\ub + \vb\|^2 = \|\ub\|^2 + \|\vb\|^2$.\marginnote{This is basically Pythagoras' theorem but in a more general sense.} Follows from Lemma~\ref{lemma:real_part}. \qed
+\end{lemma}
+
+\begin{example}
+  For $V=C([-1, 1])$, we have
+  \begin{align*}
+    \inner{1}{x} = \int_{-1}^1 1\cdot x\; \mathrm{d}x = 0
+  \end{align*}
+  since the integrand is odd, so the identity function (which is non-zero) and $x$ are orthogonal.
+  
+  If we instead take $V=C([-1, 1])$, then we note that $\|1\| = 1$, $\|x\| = 1/\sqrt{3}$, and $\inner{1}{x} = 1/2$, and instead $\theta = \arccos(\sqrt{3}/2) = \pi/6$. 
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Gram--Schmidt orthonormalisation}
+
+Let $V$ be an inner product space with a basis $\{\vb_1, \ldots \vb_n\}$. This basis is \textbf{orthonormal} if $\inner{\vb_i}{\vb_j} = \delta_{ij}$.
+
+Note that every such set of basis has an isomorphism to the standard basis in $\mathbb{R}^n$ or $\mathbb{C}^n$.
+
+The \textbf{Gram-Schmidt orthonormalisation} is a systematic way of turning a basis into an orthonormal basis. The idea is to normalise one of these basis vector first to give the first entry, then project that component out of the second vector and normalise and get the second entry, and continue a finite number of times. It is not necessarily fast, but it will give what is needed. In symbols, what we do is the following:
+\begin{align*}
+  \ub_1 &= \frac{\vb_1}{\|\vb_1\|}\\
+  \ub_2 &= \frac{\tilde{\vb}_2}{\|\tilde{\vb}_2\|}, \qquad \tilde{v}_2 = \vb_2 - \inner{\vb_2}{\ub_1}\ub_1\\
+  \ub_k &= \frac{\tilde{\vb}_k}{\|\tilde{\vb}_k\|}, \qquad \tilde{v}_k = \vb_k - \inner{\vb_k}{\ub_{k-1}}\ub_{k-1} - \ldots - \inner{\vb_k}{\ub_1}\ub_1.
+\end{align*}
+Then $\{\ub_1, \ldots \ub_n\}$ is an orthonormal basis.\marginnote{Gram-Schmidt is related to the \textbf{QR decomposition}, which is an important way to compute eigenvalues for example. In deployment however Gram-Schmidt is not numerically stable, and other variations are used instead.}
+
+\begin{example}
+  Taking the standard Euclidean inner product in $\mathbb{R}^3$ and
+  \begin{align*}
+    \vb_1 = \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}, \quad
+    \vb_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \quad
+    \vb_3 = \begin{pmatrix}0 \\ 1 \\ 1 \end{pmatrix},
+  \end{align*}
+  we have
+  \begin{align*}
+    \ub_1 = \frac{\vb_1}{\|\vb_1\|} = \frac{1}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}.
+  \end{align*}
+  Then the projection step gives
+  \begin{align*}
+    \tilde{\vb}_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{2}}\inner{\begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}}{\begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}}\frac{1}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix}1 \\ -1 \\ 2 \end{pmatrix},
+  \end{align*}
+  and normalising gives
+  \begin{align*}
+    \ub_2 = \frac{1}{\sqrt{6}}\begin{pmatrix}1 \\ -1 \\ 2 \end{pmatrix}.
+  \end{align*}
+  The third one can be shown to be
+  \begin{align*}
+    \ub_3 = \frac{1}{\sqrt{3}}\begin{pmatrix}-1 \\ 1 \\ 1 \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+\begin{example}
+  For the norm defined by the symmetric matrix
+  \begin{align*}
+    \As = \begin{pmatrix}4 & 1 \\ 1 & 1\end{pmatrix},
+  \end{align*}
+  note that $\vb_1 = \eb_1$ and $\vb_2 = \eb_2$ we would have $\|\vb_1\|^2 = 4 + 0 + 0 + 0$, so
+  \begin{align*}
+    \ub_1 = \frac{1}{2}\begin{pmatrix}1 \\ 0 \end{pmatrix}.
+  \end{align*}
+  The projection step then gives
+  \begin{align*}
+    \tilde{\vb}_2 = \begin{pmatrix}0 \\ 1 \end{pmatrix} - \left[\frac{1}{2}\begin{pmatrix}0 & 1\end{pmatrix} \begin{pmatrix}4 & 1 \\ 1 & 1\end{pmatrix} \begin{pmatrix}1 \\ 0 \end{pmatrix}\right] \frac{1}{2}\begin{pmatrix}1 \\ 0 \end{pmatrix} = \begin{pmatrix} -1/4 \\ 1 \end{pmatrix},
+  \end{align*}
+  so that
+  \begin{align*}
+    \ub_2 = \frac{1}{\sqrt{1/4 - 1/4 - 1/4 + 1}}\begin{pmatrix} -1/4 \\ 1 \end{pmatrix} = \frac{2}{\sqrt{3}}\begin{pmatrix} -1/4 \\ 1 \end{pmatrix}.
+  \end{align*}
+  
+  Note that we know that there is a linear isomorphism $T : \mathbb{R}^2 \to \mathbb{R}^2$ where $T(\eb_i) = \ub_i$. For the above example $T$ can be represented by
+  \begin{align*}
+    \Bs = \begin{pmatrix} 1/2 & -1/(2\sqrt{3}) \\ 0 & 2/\sqrt{3}\end{pmatrix}, \qquad \Bs^{-1} = \begin{pmatrix} 2 & 1/2 \\ 0 & \sqrt{3}/2\end{pmatrix},
+  \end{align*}
+  where $\Bs$ is formed by the orthonormal basis $\{\ub_1, \ub_2\}$. Then notice that
+  \begin{align*}
+    T^{-1}(\vb_1) = \Bs^{-1}\vb_1 = \begin{pmatrix} 2 \\ 0 \end{pmatrix}, \qquad
+    T^{-1}(\vb_2) = \Bs^{-1}\vb_2 = \begin{pmatrix} 1/2 \\ \sqrt{3}/2 \end{pmatrix},
+  \end{align*}
+  so that in the \textbf{standard} Euclidean norm (because we are in the original space where the standard basis live)
+  \begin{align*}
+    \cos\phi = \frac{\inner{T^{-1}(\vb_1)}{T^{-1}(\vb_2)}}{\|T^{-1}(\vb_1)\|\|T^{-1}(\vb_2)\|} = \frac{2\cdot 1/2 + 0}{2 \cdot (1/4 + 3/4)} = \frac{1}{2},
+  \end{align*}
+  which implies $\phi = \pi / 3$. Also note that, in transformed space defined by the norm $\As$,
+  \begin{align*}
+    \cos\theta = \frac{\inner{\vb_1}{\vb_2}_\As}{\|\vb_1\|\|\vb_2\|} = \frac{4\cdot 1\cdot 0 + 1\cdot 1\cdot 1 + 1\cdot 1 \cdot 0 + 1\cdot 0 \cdot 1}{\sqrt{4} \cdot \sqrt{1}} = \frac{1}{2},
+  \end{align*}
+  and so $\theta = \pi/3 = \phi$ also. This is perhaps not a surprise if $T$ is suppose to be an isomorphism (since it should then preserve angles\marginnote{Or is \textbf{conformal}. Note that isometry $\Rightarrow$ conformal but not vice-versa.}), and is saying the result of Gram-Schmidt implies transformation; the resulting matrix would be \emph{upper}-triangular, since the projection step removes the components so some entries (in this case below the diagonal) are zero.\marginnote{This also relates to the QR algorithm mentioned above.}
+\end{example}
+
+\begin{example}
+  We can do this for functions too. For $V=C([-1, 1])$, if we take the usual inner product and $\vb_1 = 1$, $\vb_2 = t$ and $\vb_3 = t^2$, then
+  \begin{align*}
+    \ub_1 = \frac{1}{\sqrt{2}},
+  \end{align*}
+  \begin{align*}
+    \tilde{\vb}_2 = t - 0 \quad \Rightarrow \quad \ub_2 = \frac{2}{3}t
+  \end{align*}
+  since $1$ and $t$ are orthogonal, and
+  \begin{align*}
+    \tilde{\vb}_3 = t^2 - 0 - \frac{\sqrt{2}}{3}\frac{1}{\sqrt{2}} \quad \Rightarrow \quad \ub_3 = \frac{5}{2\sqrt{2}}(3t^2 - 1)
+  \end{align*}
+  since $t^2$ and $t$ are orthogonal but $t^2$ and $1$ are not.\marginnote{These are basically the first three \textbf{Legendre polynomials} upto normalisation factors.} 
+\end{example}
+
+\begin{example}
+  Suppose we have
+  \begin{align*}
+    \inner{\zb}{\wb} = 3 z_1 \overline{w}_1 + \zi z_1 \overline{w}_2 - \zi z_2 \overline{w}_1 + 2 z_2 \overline{w}_2,
+  \end{align*}
+  then $\vb_1 = \eb_1$ and $\vb_2 = \eb_2$ get orthonormalised to
+  \begin{align*}
+    \ub_1 = \frac{1}{\sqrt{3}}\begin{pmatrix} 1 \\ 0 \end{pmatrix},
+  \end{align*}
+  \begin{align*}
+    \tilde{\vb}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{3}}\left(3\cdot 1\cdot 0 + \zi \cdot 0 \cdot 0 - \zi \cdot 1 \cdot 1 + 2 \cdot 0  \cdot 1\right)\frac{1}{\sqrt{3}}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \zi / 3 \\ 1 \end{pmatrix},
+  \end{align*}
+  so
+  \begin{align*}
+    \ub_2 = \frac{1}{3/9 + 2 - 1/3 -1/3}\begin{pmatrix} \zi / 3 \\ 1 \end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix} \zi \\ 3 \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Orthogonal projection}
+
+Let $U$ be a subspace of an inner product space $V$. The \textbf{orthogonal complement} is defined as
+\begin{align}
+  \highlight{U^\perp = \{\vb \in V\ |\ \inner{\ub}{\vb}=0\ \forall\ \ub\in U\}}.
+\end{align}
+
+\begin{lemma}
+  Suppose we can write $\vb = \ub + \tilde{\ub}$ for $\ub\in U$ and $\tilde{\ub} \in U^\perp$. Then the decomposition is unique.
+\end{lemma}
+
+\begin{proof}
+  Suppose $\vb = \ub + \tilde{\ub} = \ub' + \tilde{\ub}'$, then
+  \begin{align*}
+    \Ob = \ub - \ub' + \tilde{\ub} - \tilde{\ub}'
+  \end{align*}
+  so that $\ub' - \ub = \tilde{\ub} - \tilde{\ub}' \in U^\perp$, but $\ub' - \ub \in U$, so $\ub' - \ub = \Ob$ and $\ub'=\ub$, which also implies $\tilde{\ub} = \tilde{\ub}'$. \qed
+\end{proof}
+
+\begin{lemma}
+  If $U$ is finite dimensional then $\ub$ and $\tilde{\ub}$ are guaranteed to exist.
+\end{lemma}
+
+\begin{proof}
+  Let $\{\ub_1, \ldots \ub_k\}$ be an orthonormal basis of $U$. If we set $\ub = \inner{\ub}{\ub_i}\ub_i$ (sum implied) and define $\tilde{\ub} = \vb - \ub$. Then $\ub \in U$ by construction, and $\vb = \ub + \tilde{\ub}$. We aim to show $\tilde{u} \in U^\perp$; it is enough to show $\inner{\tilde{\ub}}{\ub_i} = 0$ for all $i$ since we have a basis of $U$.
+  \begin{align*}
+    \inner{\tilde{\ub}}{\ub_i}
+      &= \inner{\vb - \ub}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\inner{\vb}{\ub_j}\ub_j}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\inner{\ub_j}{\ub_i}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\delta_{ij}\\
+      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_i}\\
+      &=0,
+  \end{align*}
+  hence $\tilde{\ub}\in U^\perp$ \qed
+\end{proof}
+
+\begin{proposition}
+  Let $U$ be a finite dimensional subspace of an inner product space $V$. Let $\vb_0 \in V$, then if $\vb_0 = \ub_0 + \tilde{\ub}_0$ for all $\ub\in U$, then $\|\vb_0 - \ub_0\| \leq \|\vb_0 - \ub\|$ with equality iff $\ub_0 = \ub$.
+\end{proposition}
+
+\begin{proof}
+  \begin{align*}
+    \|\vb_0 - \ub_0\|^2
+      &= \|\vb_0 - \ub_0 + \ub_0 - \ub\|^2\\
+      &= \|\vb_0 - \ub_0\|^2 + \|\ub_0 - \ub\|^2\\
+      &\geq \|\vb_0 - \ub_0\|
+  \end{align*}
+  with equality iff $\ub_0 - \ub = \Ob$, where the second line follows by Pythagoras' theorem since $\ub_0 - \ub \in U$ and $\vb_0 - \ub_0 \in U^\perp$. \qed
+\end{proof}
+
+$\ub_0$ is called the \textbf{orthogonal projection} of $\vb_0$ onto $U$.
+
+\begin{example}
+  Find the point in
+  \begin{align*}
+    \mbox{span}\left\{\vb_1 = \begin{pmatrix} 0 \\ 2 \\ -1 \\ 2 \end{pmatrix}, \ \vb_2 = \begin{pmatrix} 2 \\ 3 \\ 1 \\ 2 \end{pmatrix}\right\}
+  \end{align*}
+  closest to
+  \begin{align*}
+    \vb_0 = \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix}
+  \end{align*}
+  with repsect to the usual inner product in $\mathbb{R}^4$.
+  
+  By Gram-Schmidt, we have
+  \begin{align*}
+    \ub_1 = \frac{1}{3}\begin{pmatrix} 0 \\ 2 \\ -1 \\ 2 \end{pmatrix}, \quad
+    \ub_2 = \frac{1}{3}\begin{pmatrix} 2 \\ 1 \\  2 \\ 0 \end{pmatrix}.
+  \end{align*}
+  The orthogonal projection onto the above space is
+  \begin{align*}
+    \ub_0 = \inner{\vb_0}{\ub_i}\ub_i = \frac{1}{3}3\frac{1}{3}\begin{pmatrix} 0 \\ 2 \\ -1 \\ 2 \end{pmatrix} + \frac{1}{3}5\frac{1}{3}\begin{pmatrix} 2 \\ 1 \\  2 \\ 0 \end{pmatrix} = \frac{1}{9}\begin{pmatrix} 10 \\ 11 \\ 7 \\ 6 \end{pmatrix}.
+  \end{align*}
+  
+  The distance of $\vb_0$ from $\ub_0$ is $\|\vb_0 - \ub_0\|$, but since they are orthogonal then by Pythagoras we have
+  \begin{align*}
+    \|\vb_0 - \ub_0\|^2 = \|\vb_0\|^2 - \|\ub_0\|^2 = \|\vb_0\|^2 - \inner{\vb_0}{\ub_1}^2 - \inner{\vb_0}{\ub_2}^2
+  \end{align*}
+  as $\ub_1$ and $\ub_2$ are basis vectors of $U$, so
+  \begin{align*}
+    \|\vb_0 - \ub_0\|^2 = 4 - 1 \frac{25}{9} = \frac{2}{9}.
+  \end{align*}
+\end{example}
+
+\begin{example}
+  For $V=C([-1, 1])$ with the usual integral as a inner product. Find the linear polynomial closest to $g(t) = t^2 + t$.
+  
+  Let $U = \mbox{span}(\{1, t\})$. We know from a previous example that $\{1/\sqrt{2}, \sqrt{3/2} t\}$ is an orthonormal basis, so
+  \begin{align*}
+    \inner{g}{1/\sqrt{2}} = \frac{\sqrt{2}}{3}, \qquad \inner{g}{\sqrt{3/2} t} = \sqrt{\frac{2}{3}},
+  \end{align*}
+  so the orthogonal project of $g$ onto $U$ is
+  \begin{align*}
+    f(t) = \frac{\sqrt{2}}{3}\frac{1}{\sqrt{2}} + \sqrt{\frac{2}{3}}\sqrt{\frac{3}{2}}t = \frac{1}{3} + t.
+  \end{align*}
+\end{example}
+
+\begin{lemma}[Bessel's inequality]
+  Let $V$ be a finite dimensional inner product space. If $\vb \in V$ and $\ub \in U$ where $U$ is the orthogonal projection of $\vb$ onto $\ub$, then $\|\ub\|^2 \leq \|\vb\|^2$. Furthermore, if $\{\ub_1, \ldots \ub_k\}$ is an orthonormal basis of $U$ with $\ub = \lambda_i \ub_i$, then $\sum_i^k \lambda_i \leq \|\vb\|^2$.
+\end{lemma}
+
+\begin{proof}
+  Let $\vb = \ub + \tilde{\ub}$, $\ub\in U$ and $\tilde{\ub}\in U^\perp$. By Pythagoras' theorem, $\|\vb\|^2 = \|\ub|^2 + \|\tilde{\ub}\}^2 \geq \|\ub\|^2$. If $\ub = \lambda_i \ub_i$, then again by Pythagoras
+  \begin{align*}
+    \|\vb\|^2 = \|\lambda_i \ub_i\|^2 + \|\tilde{\ub}\|^2 \geq \lambda_i^2 \|\ub_i\|^2 = \sum_i^k \lambda_i
+  \end{align*}
+  since $\|\ub_i\|=1$.
+\end{proof}
+
 %===============================================================================
 
 \chapter{Matrices}
@@ -1382,6 +1869,86 @@ A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^\dagger = \As^
 
 \section{Diagonalising quadratic forms}
 
+A \textbf{quadratic form} $Q$ on a real inner product space $V$ is a function $Q : V \to \mathbb{R}$ of the form $Q(\vb) = \inner{\As\vb}{\vb}$, where $\As$ is some symmetric matrix.
+
+If $\{\eb_1, \ldots \eb_n\}$ is a basis of $B$ with $\vb = x_i \eb_i$, then
+\begin{align*}
+  Q(\xb) = \xb^T \As \xb = \sum_{i=1}^nb a_ii x_i^2 + 2 \sum_{1\leq i < j \leq n} a_{ij}x_i x_j.
+\end{align*}
+
+A \textbf{symmetric bilinear form} $B$ on a vector space $V$ is a function $B: V\times V \to \mathbb{R}$ such that $B(\vb, \wb) = B(\wb, \vb)$, and $B$ is linear in the first factor.
+
+A \textbf{Hermitian form} $H$ on a complex inner product space $V$ is a function $H: V\to \mathbb{R}$ of the form $H(\vb) = \inner{\As\vb}{\vb}$ where $\As$ is Hermitian ($\As = \As^\dagger$).
+
+If $\{\eb_1, \ldots \eb_n\}$ is a basis of $V$ and $\vb = z_i \eb_i$, then
+\begin{align*}
+  H(\vb) = \vb^\dagger \As \vb = \sum_{i=1}^n a_ii |v_i|^2 + \sum_{i<j} (a_{ij}\overline{z}_i z_j + a_{ji}\overline{z}_j z_i).
+\end{align*}
+
+A \textbf{symmetric sesquilinear form} $S$ on a complex vector space $V$ is $S: V\times V\to \mathbb{C}$ where $S(\wb,\vb) = \overline{S(\vb,\wb)}$, and $S$ is linear in the first factor.
+
+A symmetric bilinear form defines a quadratic form via $Q(\vb) = B(\vb,\vb)$. Conversely, $Q$ determines $B$ via $B(\vb,\wb) = (1/2)(Q(\vb+\wb) - Q(\vb) - Q(\wb))$, and that
+\begin{align*}
+  B(\xb,\yb) = \yb^T \As \xb \quad \Leftrightarrow \quad Q(\xb) = \xb^T \As \xb.
+\end{align*}
+
+A bilinear form $B$ is called \textbf{positive definite} if $B(\vb,\vb) = Q(\vb) > 0$ and $(\vb,\vb) = H(\vb) > 0$ for all $\vb\neq\Ob$.
+
+\begin{lemma}
+  A symmetric bilinear/sesquilinear form is an inner product iff it is positive. \qedwhite
+\end{lemma}
+
+A symmetric or Hermitian matrix is \textbf{positive definite} iff the bilinear form $B(\xb,\yb) = \yb^T \As \xb$ is positive definite.
+
+\begin{theorem}
+  A symmetric/Hermitian matrix $\As$ is positive definite iff all eigenvalue are positive.
+\end{theorem}
+
+\begin{proof}
+  Let $H(\zb) = \zb^\dagger \As \zb$. There is an orthonormal basis $\{\ub_1, \ldots \ub_n\}$ so that $H(z_i \ub_i) = \lambda_i |z_i|^2$ where $\lambda_k$ are the eigenvalues.
+  
+  If $\As$ is positive definite then acting on the orthonormal basis $H(\ub_i) = \lambda_i > 0$ for all $i$, so all eigenvalues are positive.
+  
+  If all eigenvalues are positive, then $\lambda_i |z_i|^2 > 0$ for all $i$ and so $H(\zb) > 0$, so it is positive definite. \qed
+\end{proof}
+
+\begin{theorem}
+  An square symmetric matrix $\As$ is positive definite iff its principal minors all have positive determinant. \qedwhite
+\end{theorem}
+
+\begin{example}
+  For
+  \begin{align*}
+    \As = \begin{pmatrix}2 & @ & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5 \end{pmatrix},
+  \end{align*}
+  it can be shown that $\As$ is positive definite. The principal minors are
+  \begin{align*}
+    |2| = 2, \quad 
+    \left|\begin{matrix} 2 & 2 \\ 2 & 5 \end{matrix}\right| = 6, \quad
+    \left|\begin{matrix} 2 & 2 & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5\end{matrix}\right| = 10.
+  \end{align*}
+\end{example}
+
+\begin{lemma}
+  Let $\As$ be a complex Hermitian matrix, then all eigenvalues of $\As$ are real, and all eigenvectors of $\As$ are mutually orthogonal. \marginnote{This is partly why in quantum mechanics normally deals with Hermitian matrices.}
+\end{lemma}
+
+\begin{proof}
+  Let $\lambda$ be an eigenvalue of $\As$, so $\As\xb = \lambda \xb$ for $\xb \neq \Ob$. Then
+  \begin{align*}
+    \lambda\|\xb\|^2 = \xb^\dagger (\lambda\xb) = \xb^\dagger \As \xb = \xb^\dagger \As^\dagger \xb = (\As\xb)^\dagger \xb = \overline{\lambda}\xb^\dagger \xb = \overline{\lambda}\|\xb\|^2,
+  \end{align*}
+  and since $\xb\neq\Ob$, $\lambda\in\mathbb{R}$.
+  
+  Let $\lambda$ and $\mu$ be distinct eigenvalues of $\As$, so there exists non-zero $\xb$ and $\yb$ that $\As\xb = \lambda\xb$ and $\As\yb = \mu\yb$. Then
+  \begin{align*}
+    \lambda\yb^\dagger\xb = \yb^\dagger \As\xb = (\As\yb)^\dagger \xb = \mu \yb^\dagger\xb,
+  \end{align*}
+  but $\yb^\dagger\xb = \inner{\yb}{\xb}$, and since $\lambda\neq \mu$, we have $\inner{\yb}{\xb} = 0$, and we have orthogonal eigenvectors. \qed
+\end{proof}
+
+{\color{red}Jan 15: p.26 of notes probably to start here}
+
 %-------------------------------------------------------------------------------
 
 \section{Symmetric and self-adjoint maps}
@@ -1404,422 +1971,7 @@ A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^\dagger = \As^
 
 In the above the linear maps are mostly linked with some geometric transformations via explicit representation as matrices. Vector spaces and linear maps are however more general (e.g. maps on functions in function spaces), and here we look at other properties of vector spaces and linear maps in the more abstract setting.
 
-%-------------------------------------------------------------------------------
 
-\section{Sums and direct sums}
-
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then \textbf{sum} of $U$ and $V$ is
-\begin{equation}
-  \highlight{U + V = \{\ub, \vb\ |\ \ub \in U, \vb \in V \}}.
-\end{equation}
-
-\begin{lemma}
-  If $U$ and $V$ are subspaces of $W$, then $U+V$ is also a subspace of $W$.
-\end{lemma}
-
-\begin{proof}
-  $U+V$ is non-empty since $\Ob + \Ob = \Ob \in U+V$. Let $\ub$, $\ub' \in U$ and $\vb$, $\vb' \in V$, then
-  \begin{equation*}
-    \lambda(\ub + \vb) = \lambda\ub + \lambda\vb \in U+V
-  \end{equation*}
-  for all $\lambda \in \mathbb{F}$. Also,
-  \begin{equation*}
-    (\ub+\vb) + (\ub'+\vb') = (\ub + \ub') + (\vb + \vb') \in U+V,
-  \end{equation*}
-  so $U+V$ is also closed, and thus a subspace.
-\end{proof}
-
-The following theorem is useful for determining dimensions of spaces.
-
-\begin{theorem}\label{thm:subspace_dim}
-  Let $U$ and $V$ be finite subspaces of $W$ over $\mathbb{F}$. Then
-  \begin{equation}
-    \highlight{\mbox{dim}(U) + \mbox{dim}(V) = \mbox{dim}(U \cap V) + \mbox{dim}(U+V)}.
-  \end{equation}
-\end{theorem}
-
-\begin{proof}
-  By Corollary~\ref{cor:extend}, there exists a basis $B=\{\eb_1, \ldots \eb_r\}$ which is a basis of $U \cap V$ that may be extended to $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ of $U$, and $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ of $V$.
-  
-  Clearly $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ spans $U+V$. Suppose there exists non-trivial scalars $\lambda_i$, $\mu_i$ and $\nu_i$ such that
-  \begin{equation*}
-    \sum_{i=1}^r \lambda_i\eb_i + \sum_{i=1}^s \mu_i\boldsymbol{f}_i + \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \Ob.
-  \end{equation*}
-  Then not all of $\nu_i$ is zero, since $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s\}$ is a basis of of $U$ and hence linearly independent (and similarly for the other case). Then $\{\boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is linearly independent and hence in $U$, so much be in $U \cap V$. Then
-  \begin{equation*}
-    \sum_{i=1}^t \nu_i\boldsymbol{g}_i = \sum_{i=1}^r \lambda_i\eb_i,
-  \end{equation*}
-  but this cannot be since $\{\eb_1, \ldots \eb_r, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $V$. So then $\{\eb_1, \ldots \eb_r, \boldsymbol{f}_1, \ldots \boldsymbol{f}_s, \boldsymbol{g}_1, \ldots \boldsymbol{g}_t\}$ is a basis of $U+V$. Counting dimensions accordingly leads to the result. \qed
-\end{proof}
-
-\begin{example}
-  Find a basis of $U \cap V$, and hence determine $\mbox{dim}(U)$, $\mbox{dim}(V)$, $\mbox{dim}(U \cap V)$, and $\mbox{dim}(U+V)$, where
-  \begin{equation*}
-    U = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ 0\\ 1\end{pmatrix}, \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix}\right\}\right), \quad V = \mbox{Span}\left(\left\{\begin{pmatrix}1 \\ -1\\ -1\end{pmatrix}, \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix}\right\}\right).
-  \end{equation*}
-    
-  We see the spanning sets of $U$ and $V$ are linearly independent, hence $\mbox{dim}(U) = \mbox{dim}(V) =2$. We note that $\wb \in U \cap V$ can be expressed as
-  \begin{equation*}
-    \wb = a \begin{pmatrix}1 \\ 0\\ 1\end{pmatrix} + b \begin{pmatrix}2 \\ 2\\ 0\end{pmatrix} = c \begin{pmatrix}1 \\ -1\\ -1\end{pmatrix} + d \begin{pmatrix}2 \\ 1\\ -2\end{pmatrix},
-  \end{equation*}
-  and the resulting system implies that $a=c$ and $b=d=-c$. Taking $c=1$ leads to
-  \begin{equation*}
-    U \cap V = \mbox{span}\left(\begin{pmatrix}-1 \\ -2\\ 1\end{pmatrix}\right),
-  \end{equation*}
-  and hence $\mbox{dim}(U \cap V) = 1$. By Theorem~\ref{thm:subspace_dim}, we should have $\mbox{dim}(U + V) = 2+2-1 = 3$, which can also be checked directly.
-\end{example}
-
-The \textbf{direct sum} of $U$ and $V$ is denoted $\highlight{U \bigoplus V}$, which is $U + V$ but where $U \cap V = \{\Ob\}$.
-
-\begin{theorem}
-  Let $U$ and $V$ be subspaces of a vector space. Then the $U + V$ is a direct sum if and only if there exists unique $\ub \in U$, $\vb \in V$ where for all $\wb = \ub + \vb \in W$.
-\end{theorem}
-
-\begin{proof}
-  If $W = U \bigoplus V$ then $\wb = \ub + \vb$ by definition, so we need to shown uniqueness. Suppose $\wb = \ub' + \vb'$, then
-  \begin{equation*}
-    \ub' + \vb' = \ub + \vb \quad \Leftrightarrow \quad \vb' - \vb = \ub - \ub'.
-  \end{equation*}
-  We note that $\vb' - \vb, \ub - \ub' \in U \cap V$, so by definition they are just the zero vector, and we have uniqueness.
-  
-  Let $\wb \in U \cap V$ and assume we have uniqueness. So we must have $\wb = \wb + \Ob_V = \Ob_U + \wb$ for the respective zero vectors, but the above is only true if $\wb = \Ob$, and hence $U \cap V = \{\Ob\}$ and we have a direct sum. \qed
-\end{proof}
-
-\begin{example}
-  If $U = \mbox{Span}(\{\eb_1\})$ and $V = \mbox{Span}(\{\eb_3\})$ then $W = U \bigoplus V = \mbox{Span}(\{\eb_1, \eb_3\})$.
-  
-  On the other hand, $U = \mbox{Span}(\{\eb_1 + \eb_2\})$ and $V = \mbox{Span}(\{\eb_2 + \eb_3\})$, the sum is not direct, and we have $W = U + V = \mbox{Span}(\{\eb_1, \eb_2, \eb_3\})$.
-\end{example}
-
-Let $U$ and $V$ be vector spaces over $\mathbb{F}$. Then $\highlight{U \times V}$ is the \textbf{external direct sum}, which is a vector space with the definition that the ordered pairs satisfy
-\begin{equation*}
-  (u, v) + (u', v') = (u + u', v + v'), \quad \lambda(u, v) = (\lambda u, \lambda v).
-\end{equation*}
-
-%-------------------------------------------------------------------------------
-
-\section{Inner products}
-
-An \textbf{inner product} on a real vector space $V$ is a function
-\begin{equation}
-  \highlight{\inner{\cdot}{\cdot} : V\times V \to \mathbb{R}}
-\end{equation}
-such that we have the following properties:
-\begin{itemize}
-  \item symmetry, $\inner{\ub}{\vb} = \inner{\vb}{\ub}$,
-  \item linearity in the first factor, $\inner{\lambda\ub + \mu\wb}{\vb} = \lambda\inner{\ub}{\vb} + \mu\inner{\wb}{\vb}$,
-  \item positivity, $\inner{\vb}{\vb} \geq 0$ and $\inner{\vb}{\vb} = 0$ iff $\vb = \Ob$.
-\end{itemize}
-
-The inner product provides a notion of distance and angles between vector in vector spaces.
-
-For the above, if we are instead dealing with a complex vector space then the first condition becomes
-\begin{equation*}
-  \inner{\ub}{\vb} = \overline{\inner{\vb}{\ub}}
-\end{equation*}
-where the overbar denotes a complex conjugate. Note then we also have
-\begin{equation*}
-  \inner{\ub}{\lambda\vb} = \overline{\lambda}\inner{\ub}{\ub}.
-\end{equation*}
-A function that is linear in the first factor and anti-linear like above in the second factor is called \textbf{sesquilinear}.
-
-\begin{example}
-  The standard scalar (dot) product in $\mathbb{R}^n$ is also known as the \textbf{Euclidean inner product}.
-\end{example}
-
-\begin{example}
-  If we take $V=\mathbb{R}^n$ and $a_k \in \mathbb{R}^+$, then we can check that $\inner{\ub}{\vb} = \sum_{i=1}^n a_i u_i v_i$ is an inner product.
-\end{example}
-
-\begin{example}
-  For $V=\mathbb{R}^2$ and $a,b,c\in \mathbb{R}$, we consider symmetric matrices of the form
-  \begin{equation*}
-    \As = \begin{pmatrix}a & b \\ b & c \end{pmatrix}.
-  \end{equation*}
-  Find the conditions on $a,b,c$ such that
-  \begin{equation*}
-    \inner{\ub}{\vb} = \vb^T \As \ub = a u_1 v_1 + b (u_1 v_2 + u_2 v_1) + c u_2 v_2
-  \end{equation*}
-  is an inner product.
-  
-  Picking some useful vectors, if $\ub = \vb = \eb_1$ then $\inner{\ub}{\ub} = a$, so $a \geq 0$. Similarly, $\ub = \vb = \eb_2$ implies $c \geq 0$. Now
-  
-  \begin{align*}
-    \inner{\vb}{\vb}
-      &= a \left[v_1^2 + \frac{2b}{a} v_1 v_2 + \frac{c}{a} v_2^2\right]\\
-      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 - \frac{b^2}{a^2} v_2^2 + \frac{c}{a}v_2^2\right]\\
-      &= a \left[\left(v_1 + \frac{b}{a}v_2\right)^2 + \frac{ac - b^2}{a^2} v_2^2\right] \geq 0
-  \end{align*}
-  if $\vb \neq \Ob$, so we additionally want $ac - b^2 = |\As| > 0$.
-\end{example}
-
-\begin{example}
-  If we take $V = C([a,b])$, show that
-  \begin{equation*}
-    \inner{f}{g} = \int_a^b f(t) g(t)\; \mathrm{d}t
-  \end{equation*}
-  defines an inner product.
-  
-  The linearity and symmetry properties clearly hold. $\inner{f}{f} \geq 0$ is also true since the integrand $f^2(t)$ is a positive real valued function, and the integral is zero only if $f \equiv 0$ for all $t \in [a,b]$.
-\end{example}
-
-\begin{example}
-  For $V=\mathbb{C}^n$, the \textbf{standard Hermitian inner product} is defined to be (with an implied sum)
-  \begin{equation}
-    \highlight{\inner{\zb}{\wb} = \wb^\dagger \zb = z_i\overline{w}_i}
-  \end{equation}
-  where the dagger denotes the Hermitian transpose.
-\end{example}
-
-\begin{example}
-  Show that
-  \begin{equation*}
-    \inner{\zb}{\wb} = \wb^\dagger \begin{pmatrix} 3 & \zi \\ -\zi & 2 \end{pmatrix} \zb
-  \end{equation*}
-  is a Hermitian inner product on $\mathbb{C}^2$.
-  
-  Since we are dealing with a single matrix the symmetry and linearity is satisfied, so we need positivity. We have\marginnote{There are presumably other ways to cook up some squares via factorisation and multiply by 1 tricks.}
-  \begin{align*}
-    \inner{\zb}{\zb} 
-      &= 3 z_1 \overline{z}_1 + \zi z_1 \overline{z}_2 - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
-      &=z_1 (3\overline{z}_1 + \zi \overline{z}_2) - \zi z_2 \overline{z}_1 + 2 z_2 \overline{z}_2 \\
-      &= \frac{1}{3}(3\overline{z}_1 + \zi \overline{z}_2)(3 z_1 - \zi z_2) - \frac{1}{3} z_2 \overline{z}_2 + 2 z_2 \overline{z}_2 \\
-      &= \frac{1}{3}|3 z_1 - \zi z_2|^2 + \frac{5}{3}|z_2|^2 \geq 0
-  \end{align*}
-  and is only zero when $\zb = \Ob$.
-\end{example}
-
-%-------------------------------------------------------------------------------
-
-\section{Length, distance and angles}
-
-The \textbf{norm} of a vector is defined to be
-\begin{equation}
-  \highlight{\|\vb\| = \sqrt{\inner{\vb}{\vb}}}.
-\end{equation}
-The \textbf{distance} between two vectors is
-\begin{equation}
-  \highlight{d(\ub, \vb) = \|\ub - \vb\|}.
-\end{equation}
-A \textbf{unit vector} $\hat{\vb} = \vb / \|\vb\|$ has unit norm.
-
-\begin{lemma}\label{lemma:real_part}
-  \begin{equation*}
-    \mbox{Re}\inner{\ub}{\vb} = \frac{1}{2}\left(\|\ub+\vb\|^2 - \|\ub\|^2 - \|\vb\|^2\right).
-  \end{equation*}
-  The proof is straight-forward algebraic manipulations. \qedwhite
-\end{lemma}
-
-\begin{lemma}[Cauchy-Schwarz inequality]
-  We have
-  \begin{equation}
-    \highlight{\inner{\ub}{\vb}^2 \leq \|\ub\|^2 \|\vb\|^2},
-  \end{equation}
-  with inequality iff one of the entries is zero or they are parallel to each other.
-\end{lemma}
-
-\begin{proof}
-  The zero case is trivial. Otherwise, for $\lambda\in\mathbb{R}$,
-  \begin{align*}
-    0 \leq \|\lambda \ub + \vb\|^2 = \lambda^2 \|\ub^2\| + 2\lambda\inner{\ub}{\vb} + \|\vb\|^2.
-  \end{align*}
-  Let $\lambda = -\inner{\ub}{\vb}/\|\ub\|^2$, then
-  \begin{align*}
-    0 
-      &\geq \frac{\inner{\ub}{\vb}^2}{\|\ub\|^2} - \frac{2\inner{\ub}{\vb}^2}{\|\ub\|^2} + \|\vb\|^2 \\
-      &= -\frac{\inner{\ub}{\vb}^2}{\|\ub\|^2} + \|\vb\|^2
-  \end{align*}
-  and the inequality follows. With have equality iff
-  \begin{align*}
-    \vb = -\lambda\ub = \frac{\inner{\ub}{\vb}}{\|\ub\|^2}\ub,
-  \end{align*}
-  i.e. $\vb$ is a scalar multiple of $\ub$ and therefore are parallel to each other. \qed
-\end{proof}
-
-\begin{corollary}[Triangle inequality]
-  If a real inner product space we have $\highlight{\|\ub + \vb\| \leq \|\ub\| + \|\vb\|}$, and if neither entries are zero, then we have quality iff $\vb = \lambda\ub$ for some scalar $\lambda$.
-\end{corollary}
-
-\begin{proof}
-  Note that
-  \begin{align*}
-    (\|\ub\| + \|\vb\|)^2 - \|\ub + \vb\|^2 = 2\|\ub\|\|\vb\| - 2\inner{\ub}{\vb} \geq 0
-  \end{align*}
-  by Cauchy-Schwarz, and so the LHS gives the result. \qed
-\end{proof}
-
-Let $\ub$ and $\vb$ be two non-zero vectors in an inner product space. The \textbf{angle} between $\ub$ and $\vb$ is the solution to
-\begin{align}
-  \highlight{\cos\theta = \frac{\inner{\ub}{\vb}}{\|\ub\|\|\vb\|}}, \qquad \theta\in[0, \pi].
-\end{align}
-Two vectors are \textbf{orthogonal} if $\theta=\pi/2$, i.e. $\inner{\ub}{\vb}=0$.
-
-\begin{lemma}
-  If $\ub$ and $\vb$ are two orthogonal vectors then $\|\ub + \vb\|^2 = \|\ub\|^2 + \|\vb\|^2$.\marginnote{This is basically Pythagoras' theorem but in a more general sense.} Follows from Lemma~\ref{lemma:real_part}. \qed
-\end{lemma}
-
-\begin{example}
-  For $V=C([-1, 1])$, we have
-  \begin{align*}
-    \inner{1}{x} = \int_{-1}^1 1\cdot x\; \mathrm{d}x = 0
-  \end{align*}
-  since the integrand is odd, so the identity function (which is non-zero) and $x$ are orthogonal.
-  
-  If we instead take $V=C([-1, 1])$, then we note that $\|1\| = 1$, $\|x\| = 1/\sqrt{3}$, and $\inner{1}{x} = 1/2$, and instead $\theta = \arccos(\sqrt{3}/2) = \pi/6$. 
-\end{example}
-
-%-------------------------------------------------------------------------------
-
-\section{Gram--Schmidt orthonormalisation}
-
-Let $V$ be an inner product space with a basis $\{\vb_1, \ldots \vb_n\}$. This basis is \textbf{orthonormal} if $\inner{\vb_i}{\vb_j} = \delta_{ij}$.
-
-Note that every such set of basis has an isomorphism to the standard basis in $\mathbb{R}^n$ or $\mathbb{C}^n$.
-
-The \textbf{Gram-Schmidt orthonormalisation} is a systematic way of turning a basis into an orthonormal basis. The idea is to normalise one of these basis vector first to give the first entry, then project that component out of the second vector and normalise and get the second entry, and continue a finite number of times. It is not necessarily fast, but it will give what is needed. In symbols, what we do is the following:
-\begin{align*}
-  \ub_1 &= \frac{\vb_1}{\|\vb_1\|}\\
-  \ub_2 &= \frac{\tilde{\vb}_2}{\|\tilde{\vb}_2\|}, \qquad \tilde{v}_2 = \vb_2 - \inner{\vb_2}{\ub_1}\ub_1\\
-  \ub_k &= \frac{\tilde{\vb}_k}{\|\tilde{\vb}_k\|}, \qquad \tilde{v}_k = \vb_k - \inner{\vb_k}{\ub_{k-1}}\ub_{k-1} - \ldots - \inner{\vb_k}{\ub_1}\ub_1.
-\end{align*}
-Then $\{\ub_1, \ldots \ub_n\}$ is an orthonormal basis.\marginnote{Gram-Schmidt is related to the \textbf{QR decomposition}, which is an important way to compute eigenvalues for example. In deployment however Gram-Schmidt is not numerically stable, and other variations are used instead.}
-
-\begin{example}
-  Taking the standard Euclidean inner product in $\mathbb{R}^3$ and
-  \begin{align*}
-    \vb_1 = \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}, \quad
-    \vb_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \quad
-    \vb_3 = \begin{pmatrix}0 \\ 1 \\ 1 \end{pmatrix},
-  \end{align*}
-  we have
-  \begin{align*}
-    \ub_1 = \frac{\vb_1}{\|\vb_1\|} = \frac{1}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}.
-  \end{align*}
-  Then the projection step gives
-  \begin{align*}
-    \tilde{\vb}_2 = \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{2}}\inner{\begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}}{\begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}}\frac{1}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix}1 \\ -1 \\ 2 \end{pmatrix},
-  \end{align*}
-  and normalising gives
-  \begin{align*}
-    \ub_2 = \frac{1}{\sqrt{6}}\begin{pmatrix}1 \\ -1 \\ 2 \end{pmatrix}.
-  \end{align*}
-  The third one can be shown to be
-  \begin{align*}
-    \ub_3 = \frac{1}{\sqrt{3}}\begin{pmatrix}-1 \\ 1 \\ 1 \end{pmatrix}.
-  \end{align*}
-\end{example}
-
-\begin{example}
-  For the norm defined by the symmetric matrix
-  \begin{align*}
-    \As = \begin{pmatrix}4 & 1 \\ 1 & 1\end{pmatrix},
-  \end{align*}
-  note that $\vb_1 = \eb_1$ and $\vb_2 = \eb_2$ we would have $\|\vb_1\|^2 = 4 + 0 + 0 + 0$, so
-  \begin{align*}
-    \ub_1 = \frac{1}{2}\begin{pmatrix}1 \\ 0 \end{pmatrix}.
-  \end{align*}
-  The projection step then gives
-  \begin{align*}
-    \tilde{\vb}_2 = \begin{pmatrix}0 \\ 1 \end{pmatrix} - \left[\frac{1}{2}\begin{pmatrix}0 & 1\end{pmatrix} \begin{pmatrix}4 & 1 \\ 1 & 1\end{pmatrix} \begin{pmatrix}1 \\ 0 \end{pmatrix}\right] \frac{1}{2}\begin{pmatrix}1 \\ 0 \end{pmatrix} = \begin{pmatrix} -1/4 \\ 1 \end{pmatrix},
-  \end{align*}
-  so that
-  \begin{align*}
-    \ub_2 = \frac{1}{\sqrt{1/4 - 1/4 - 1/4 + 1}}\begin{pmatrix} -1/4 \\ 1 \end{pmatrix} = \frac{2}{\sqrt{3}}\begin{pmatrix} -1/4 \\ 1 \end{pmatrix}.
-  \end{align*}
-  
-  Note that we know that there is a linear isomorphism $T : \mathbb{R}^2 \to \mathbb{R}^2$ where $T(\eb_i) = \ub_i$. For the above example $T$ can be represented by
-  \begin{align*}
-    \Bs = \begin{pmatrix} 1/2 & -1/(2\sqrt{3}) \\ 0 & 2/\sqrt{3}\end{pmatrix}, \qquad \Bs^{-1} = \begin{pmatrix} 2 & 1/2 \\ 0 & \sqrt{3}/2\end{pmatrix},
-  \end{align*}
-  where $\Bs$ is formed by the orthonormal basis $\{\ub_1, \ub_2\}$. Then notice that
-  \begin{align*}
-    T^{-1}(\vb_1) = \Bs^{-1}\vb_1 = \begin{pmatrix} 2 \\ 0 \end{pmatrix}, \qquad
-    T^{-1}(\vb_2) = \Bs^{-1}\vb_2 = \begin{pmatrix} 1/2 \\ \sqrt{3}/2 \end{pmatrix},
-  \end{align*}
-  so that in the \textbf{standard} Euclidean norm (because we are in the original space where the standard basis live)
-  \begin{align*}
-    \cos\phi = \frac{\inner{T^{-1}(\vb_1)}{T^{-1}(\vb_2)}}{\|T^{-1}(\vb_1)\|\|T^{-1}(\vb_2)\|} = \frac{2\cdot 1/2 + 0}{2 \cdot (1/4 + 3/4)} = \frac{1}{2},
-  \end{align*}
-  which implies $\phi = \pi / 3$. Also note that, in transformed space defined by the norm $\As$,
-  \begin{align*}
-    \cos\theta = \frac{\inner{\vb_1}{\vb_2}_\As}{\|\vb_1\|\|\vb_2\|} = \frac{4\cdot 1\cdot 0 + 1\cdot 1\cdot 1 + 1\cdot 1 \cdot 0 + 1\cdot 0 \cdot 1}{\sqrt{4} \cdot \sqrt{1}} = \frac{1}{2},
-  \end{align*}
-  and so $\theta = \pi/3 = \phi$ also. This is perhaps not a surprise if $T$ is suppose to be an isomorphism (since it should then preserve angles\marginnote{Or is \textbf{conformal}. Note that isometry $\Rightarrow$ conformal but not vice-versa.}), and is saying the result of Gram-Schmidt implies transformation; the resulting matrix would be \emph{upper}-triangular, since the projection step removes the components so some entries (in this case below the diagonal) are zero.\marginnote{This also relates to the QR algorithm mentioned above.}
-\end{example}
-
-\begin{example}
-  We can do this for functions too. For $V=C([-1, 1])$, if we take the usual inner product and $\vb_1 = 1$, $\vb_2 = t$ and $\vb_3 = t^2$, then
-  \begin{align*}
-    \ub_1 = \frac{1}{\sqrt{2}},
-  \end{align*}
-  \begin{align*}
-    \tilde{\vb}_2 = t - 0 \quad \Rightarrow \quad \ub_2 = \frac{2}{3}t
-  \end{align*}
-  since $1$ and $t$ are orthogonal, and
-  \begin{align*}
-    \tilde{\vb}_3 = t^2 - 0 - \frac{\sqrt{2}}{3}\frac{1}{\sqrt{2}} \quad \Rightarrow \quad \ub_3 = \frac{5}{2\sqrt{2}}(3t^2 - 1)
-  \end{align*}
-  since $t^2$ and $t$ are orthogonal but $t^2$ and $1$ are not.\marginnote{These are basically the first three \textbf{Legendre polynomials} upto normalisation factors.} 
-\end{example}
-
-\begin{example}
-  Suppose we have
-  \begin{align*}
-    \inner{\zb}{\wb} = 3 z_1 \overline{w}_1 + \zi z_1 \overline{w}_2 - \zi z_2 \overline{w}_1 + 2 z_2 \overline{w}_2,
-  \end{align*}
-  then $\vb_1 = \eb_1$ and $\vb_2 = \eb_2$ get orthonormalised to
-  \begin{align*}
-    \ub_1 = \frac{1}{\sqrt{3}}\begin{pmatrix} 1 \\ 0 \end{pmatrix},
-  \end{align*}
-  \begin{align*}
-    \tilde{\vb}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{3}}\left(3\cdot 1\cdot 0 + \zi \cdot 0 \cdot 0 - \zi \cdot 1 \cdot 1 + 2 \cdot 0  \cdot 1\right)\frac{1}{\sqrt{3}}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \zi / 3 \\ 1 \end{pmatrix},
-  \end{align*}
-  so
-  \begin{align*}
-    \ub_2 = \frac{1}{3/9 + 2 - 1/3 -1/3}\begin{pmatrix} \zi / 3 \\ 1 \end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix} \zi \\ 3 \end{pmatrix}.
-  \end{align*}
-\end{example}
-
-%-------------------------------------------------------------------------------
-
-\section{Orthogonal projection}
-
-Let $U$ be a subspace of an inner product space $V$. The \textbf{orthogonal complement} is defined as
-\begin{align}
-  \highlight{U^\perp = \{\vb \in V\ |\ \inner{\ub}{\vb}=0\ \forall\ \ub\in U\}}.
-\end{align}
-
-\begin{lemma}
-  Suppose we can write $\vb = \ub + \tilde{\ub}$ for $\ub\in U$ and $\tilde{\ub} \in U^\perp$. Then the decomposition is unique.
-\end{lemma}
-
-\begin{proof}
-  Suppose $\vb = \ub + \tilde{\ub} = \ub' + \tilde{\ub}'$, then
-  \begin{align*}
-    \Ob = \ub - \ub' + \tilde{\ub} - \tilde{\ub}'
-  \end{align*}
-  so that $\ub' - \ub = \tilde{\ub} - \tilde{\ub}' \in U^\perp$, but $\ub' - \ub \in U$, so $\ub' - \ub = \Ob$ and $\ub'=\ub$, which also implies $\tilde{\ub} = \tilde{\ub}'$. \qed
-\end{proof}
-
-\begin{lemma}
-  If $U$ is finite dimensional then $\ub$ and $\tilde{\ub}$ are guaranteed to exist.
-\end{lemma}
-
-\begin{proof}
-  Let $\{\ub_1, \ldots \ub_k\}$ be an orthonormal basis of $U$. If we set $\ub = \inner{\ub}{\ub_i}\ub_i$ (sum implied) and define $\tilde{\ub} = \vb - \ub$. Then $\ub \in U$ by construction, and $\vb = \ub + \tilde{\ub}$. We aim to show $\tilde{u} \in U^\perp$; it is enough to show $\inner{\tilde{\ub}}{\ub_i} = 0$ for all $i$ since we have a basis of $U$.
-  \begin{align*}
-    \inner{\tilde{\ub}}{\ub_i}
-      &= \inner{\vb - \ub}{\ub_i}\\
-      &= \inner{\vb}{\ub_i} - \inner{\inner{\vb}{\ub_j}\ub_j}{\ub_i}\\
-      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\inner{\ub_j}{\ub_i}\\
-      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_j}\delta_{ij}\\
-      &= \inner{\vb}{\ub_i} - \inner{\vb}{\ub_i}\\
-      &=0,
-  \end{align*}
-  hence $\tilde{\ub}\in U^\perp$ \qed
-\end{proof}
-
-{\color{red}Jan 15: p.24 of notes probably to start here}
 
 %-------------------------------------------------------------------------------
 
