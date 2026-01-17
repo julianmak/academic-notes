@@ -236,6 +236,7 @@
 \newcommand{\Ob}{{\boldsymbol{0}}}
 \newcommand{\eb}{{\boldsymbol{e}}}
 \newcommand{\fb}{{\boldsymbol{f}}}
+\newcommand{\nb}{{\boldsymbol{n}}}
 \newcommand{\ub}{{\boldsymbol{u}}}
 \newcommand{\vb}{{\boldsymbol{v}}}
 \newcommand{\wb}{{\boldsymbol{w}}}
@@ -2236,15 +2237,235 @@ Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ a
 
 \section{Symmetric and self-adjoint maps}
 
-{\color{red}Jan 15: p.30 of notes probably to start here}
+Let $V$ be an inner product space, and $T: V \to V$ a linear map. Then $T$ is \textbf{symmetric} or \textbf{self-adjoint} if\marginnote{Sometimes we use the dagger to denote the adjoint, so in the self-adjoint case $T^\dagger = T$. The fact that Hermitian transposes also use the dagger symbol is not a coincidence, as we shall see shortly.}
+\begin{align*}
+  \highlight{\inner{T(\vb)}{\wb} = \inner{\vb}{T(\wb)}}.
+\end{align*}
+The linear map $T$ is an \textbf{isometry} if
+\begin{align*}
+  \highlight{\inner{T(\vb)}{T(\wb)} = \inner{\vb}{\wb}},
+\end{align*}
+i.e. inner products are invariant.
+
+Note that if $\{\eb_1, \ldots \eb_n\}$ is a basis of $V$, then $T$ can be represented by $\As = T(\eb_1|\cdots|T(\eb_n))$. Further, if the basis is orthonormal, then $\inner{\vb}{\wb} = \wb^\dagger\Is \vb = \wb^\dagger \vb$.
+
+\begin{lemma}
+  Symmetric/self-adjoint and isometric linear maps can be represented by symmetric/Hermitian and orthogonal/unitary matrices respectively.
+\end{lemma}
+
+\begin{proof}
+  Let $\As$ represent a self-adjoint $T$, then
+  \begin{align}
+    \wb^\dagger (\As\vb) = \wb^\dagger (T\vb) = \inner{T(\vb)}{\wb} = \inner{\vb}{T(\wb)} = (T(\wb))^\dagger \vb = (\As \wb)^\dagger \vb = \wb^\dagger \As^\dagger \vb
+  \end{align}
+  so that $\As = \As^\dagger$, i.e. a Hermitian matrix. Similarly, let $\As$ represent a isometry $T$, then
+  \begin{align}
+    \wb^T \vb = \inner{\vb}{\wb} = \inner{T(\vb)}{T(\wb)} = \inner{\As\vb)}{\As\wb)} = (\As\wb)^T (\As\vb) = \wb^T \As^T \As \vb,
+  \end{align}
+  which implies $\As^T \As = \Is$, so $\As$ is unitary. The real case follows from the complex case. \qed
+\end{proof}
+
+Self-adjoint or Hermitian operators plays quite a prominent role in quantum mechanics, since the eigenvalues (related to observables) are guaranteed to be real.
 
 %-------------------------------------------------------------------------------
 
 \section{Reflections}
 
+This part utilises orthogonal projections from earlier. Let $V$ be an inner produce and $U$ a subspace of $V$. Suppose $\vb = \ub + \tilde{\ub}$ where $\vb\in V$ and $\tilde{\ub} \in U^\perp$. Then a \textbf{reflection} of $V$ in $U$ is a linear map
+\begin{align}
+  \highlight{R:V \to V^\perp, \qquad R(\vb) = \ub - \tilde{\ub}}.
+\end{align}
+In particular, if $U$ or $U^\perp$ are finite dimensional, then we can write
+\begin{align*}
+  R(\vb) = 2 \inner{\vb}{\ub_i}\ub_i - \vb = \vb - 2\inner{\vb}{\nb_j}\nb_j,
+\end{align*}
+where $\{\ub_1, \ldots \ub_k\}$ is a basis of $U$ and $\{\nb_1, \ldots \nb_l\}$ is a basis of $U^\perp$.
+
+\begin{example}
+  Find the image of $(1,2,3)$ under the reflection in the plane $2x_1 + 2x_2 - x_3 = 0$.
+  
+  The plane can be written in terms of the normal $\hat{\nb}$ as $\xb\cdot\hat{\nb} = \inner{\xb}{\nb} = 0$, with
+  \begin{align*}
+    \hat{\nb} = \frac{1}{3}\begin{pmatrix} 2 \\ 2 \\ -1 \end{pmatrix}.
+  \end{align*}
+  Then
+  \begin{align*}
+    R(\vb) = \vb - 2\inner{\vb}{\hat{\nb}}\hat{\nb} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} - 2 \left[\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 \\ 2 \\ -1 \end{pmatrix}\right] \frac{1}{3}\begin{pmatrix} 2 \\ 2 \\ -1 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} -1 \\ 2 \\ 11 \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+\begin{example}
+  Find the reflection of $(1, 0, 2, 1)$ in $U = \{ \xb\ |\ x_1 + x_2 = 0,\ x_3 + x_4 = 0 \}$.
+  
+  We see that $U$ is spanned by
+  \begin{align*}
+    \ub_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \\ 0 \\ 0 \end{pmatrix}, \qquad
+    \ub_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 0 \\ 0 \\ 1 \\ -1 \end{pmatrix}.
+  \end{align*}
+  We can write
+  \begin{align*}
+    \vb = \ub + \tilde{\ub} \quad \Rightarrow \quad = \tilde{\ub} = \vb - \ub = \vb - \inner{\vb}{\ub_i}\ub_i,
+  \end{align*}
+  then since
+  \begin{align*}
+    \inner{\vb}{\ub_1} = \frac{1}{\sqrt{2}}(v_1 - v_2), \qquad \inner{\vb}{\ub_2} = \frac{1}{\sqrt{2}}(v_3 - v_4),
+  \end{align*}
+  which provides $\tilde{\ub}$, from which
+  \begin{align*}
+    \ub = \frac{1}{2}\begin{pmatrix} v_1 - v_2 \\ v_2 - v_1 \\ v_3 - v_4 \\ v_4 - v_3 \end{pmatrix}.
+  \end{align*}
+  Then
+  \begin{align*}
+    R(\vb) = \ub - \tilde{\ub} = 2\ub - \vb = -\begin{pmatrix} v_2 \\ v_1 \\ v_4 \\ v_3 \end{pmatrix} \quad \Rightarrow \quad R\left(\begin{pmatrix} 1 \\ 0 \\ 2 \\ 1 \end{pmatrix}\right) = \begin{pmatrix} 0 \\ -1 \\ -1 \\ -2 \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+\begin{example}
+  Let $V = C([-1,1])$ with the usual inner product. Let $U = \{ f(t)\ |\ f(-t) = f(t)\ \forall t\in[-1, 1]\}$, i.e. the set of even functions on $[-1, 1]$. Then the $U^\perp$ is the set of odd functions on $[-1, 1]$. Then since
+  \begin{align*}
+    f(t) = \frac{1}{2}(f(t) + f(-t)) + \frac{1}{2}(f(t) - f(-t)) = f_e(t) + f_o(t)
+  \end{align*}
+  where the bracketed terms area respectively even and odd. The reflection is thus
+  \begin{align*}
+    f(t) = f_e(t) - f_o(t) = f(-t),
+  \end{align*}
+  which is what might have been expected.
+\end{example}
+
+If $\mbox{dim}(V)=n$ and $\mbox{dim}(U)=k$ with $U$ a subspace of $V$, then we can find a basis $\{\ub_1, \ldots \ub_k, \vb_{k+1}, \ldots \vb_n\}$ of $V$ so that
+\begin{align*}
+  R(\lambda_1 \ub_1 + \ldots \lambda_k \ub_k + \lambda_{k+1}\vb_{k+1} + \ldots \lambda_n \vb_n) \\
+  = \lambda_1 \ub_1 + \ldots \lambda_k \ub_k - \lambda_{k+1}\vb_{k+1} - \ldots \lambda_n \vb_n.
+\end{align*}
+Then $R$ is represented by
+\begin{align*}
+  \As = \begin{pmatrix} \Is & 0 \\ 0 & -\Is \end{pmatrix}
+\end{align*}
+where $\mbox{rank}(\As) = n$ and $\mbox{signature}(\As) = 2k - n$. Since $\As$ is symmetric and orthogonal, we see reflections are symmetric linear maps and an isometry. Note that $\As^2 = \Is$ by the Cayley-Hamilton theorem since the eigenvalues of $\As$ are $\pm 1$.
+
+In contrast, projections $P$ are given by
+\begin{align*}
+  P(\lambda_1 \ub_1 + \ldots \lambda_k \ub_k + \lambda_{k+1}\vb_{k+1} + \ldots \lambda_n \vb_n) \\
+  = \lambda_1 \ub_1 + \ldots \lambda_k \ub_k,
+\end{align*}
+and the corresponding matrix $\Bs$ say has rank $k$ and signature $2k - k = k$. Here $\Bs^2 = \Bs$ and $|\Bs| = 0$, so they are symmetric linear maps but not more (and is clearly not invertible since projection ``loses'' information).
+
 %-------------------------------------------------------------------------------
 
-\section{The operator $\mathrm{d}/\mathrm{d}x^2$}
+\section{Orthogonal functions and polynomials}
+
+A linear map of an infinite dimensional space to itself is called an \textbf{operator}.
+
+Consider the space $F[2\pi] = \{ f\ |\ f:[-\pi, \pi] \to \mathbb{R},\ f(-\pi) = f(\pi)\}$, i.e. the periodic functions over the interval $[-\pi, \pi]$, with the inner product
+\begin{align*}
+  \inner{f}{g} = \frac{1}{\pi} \int_{-\pi}^\pi f(x)g(x)\; \mathrm{d}x.
+\end{align*}
+We want to investigate the differential operator
+\begin{align*}
+  \frac{\mathrm{d}^2}{\mathrm{d}x^2} : F[2\pi] \to \mathbb{R};\ f(x) \mapsto f''(x).
+\end{align*}
+
+\begin{proposition}
+  $\mathrm{d}^2 / \mathrm{d}^2$ is a symmetric operator.
+\end{proposition}
+
+\begin{proof}
+  Assuming the second derivatives exist, then we basically just do integration by parts twice, noting that the boundary terms vanish by periodicity. \qed
+\end{proof}
+
+This then implies all eigenvalues of the second derivative operator are real when acting on $F$.
+
+\begin{proposition}
+  \begin{enumerate}
+    \item All eigenvalues of $\mathrm{d}^2 / \mathrm{d}^2$ are of the form $-n^2$, $n\in\mathbb{Z}$ (i.e. it is a negative semi-definite operator).\marginnote{Usually we talk about $-\mathrm{d}^2 / \mathrm{d}^2$ so we talk about positive definite-ness.}
+    \item Any eigenfunction with eigenvalue $\lambda=0$ is a constant.
+    \item All eigenfunctions with eigenvalue $\lambda\neq 0$ is a linear combination of $\sin n\pi x$ and $\cos n\pi x$ \marginnote{Link with Fourier analysis coming up!}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Fist and third item can be shown together, with the second item as a special case. Suppose $\lambda_0 > 0$, then $\lambda_i = \mu_0^2$ where $\mu_0 \in \mathbb{R} \setminus \{0\}$, which implies the eigenfunctions are
+  \begin{align*}
+    y_0(x) = A\ex^{\mu_0 x} + B\ex^{-\mu_0 x}.
+  \end{align*}
+  Periodicity boundary conditions imply $A=B=0$ so there are no solutions and $\lambda_0 < 0$. The same manipulations give
+  \begin{align*}
+    y_0(x) = C\ex^{\zi\mu_0 x} + D\ex^{-\zi\mu_0 x} = A\cos\mu_0 x + B\sin\mu_0 x,
+  \end{align*}
+  and periodicity boundary conditions imply that $B=0$ or $\mu_0 \in \mathbb{Z}$. The first one is incompatible, so eigenvalues are of the form $-\mu_0^2$ with $\mu_0\in\mathbb{Z}$.
+  
+  The special case $\lambda_0 = 0$ gives the eigenfunction $y_0(x) = Ax + B$, but periodicity implies $A=0$, so we have constant functions. \qed
+\end{proof}
+
+\begin{corollary}
+  For integers $n$ and $m$, $\cos nx$ (to include the non-zero constants being the special case of $n=0$) and $\sin nx$ (to include zero for $m=0$) in $F$ are mutually orthogonal in the inner product above.\marginnote{If additionally we can show the eigenfunctions form a basis then it basically says all periodic functions can be expanded as sines and cosines, which is the basis of Fourier analysis. This requires a little more subtlety since we are dealing with infinite dimension spaces and will not be done here (we need to restrict to $L^2$ functions).}
+\end{corollary}
+
+\begin{proof}
+  For $m\neq n$ they above are eigenfunctions of a symmetric operator corresponding to different eigenvalues. For $m=n\neq 0$, the resulting function is an odd function over the interval. \qed
+\end{proof}
+
+Let $F_\mu([a,b])$ be the space of continuous functions from $[a,b]$ to $\mathbb{R}$ with a \emph{weighted} inner product
+\begin{align}
+  \inner{f}{g} = \int_a^b f(x) g(x) \mu(x)\; \mathrm{d}x,
+\end{align}
+with $\mu(x) > 0$ for all $x\in(a,b)$.
+
+Consider the space of all polynomial from $[a,b] \to \mathbb{R}$. Then $\{1, x\ldots x^n, \ldots\}$ is a basis of $F_\mu$. Applying Gram-Schmidt on this set we can find an orthogonal system of polynomials $\{P_0(x), \ldots P_n(x), \ldots\}$ with $\mbox{deg}(P_n(x)) = n$. For any $f \in F_\mu([a,b])$ we can write $f(x) = c_k P_k(x)$ where $c_i = \inner{f}{P_i}/\|P_i\|$ for any $i\geq 0$. We can then see that
+\begin{align*}
+  f_n(x) = \sum_{k=1}^n c_k P_k(x)
+\end{align*}
+forms the `best' approximation of $f(x)$ with respect to the defined inner product.
+
+The first commonly used systems are summarised in the table below.\marginnote{These show up in numerical analysis and quantum mechanics quite a bit. These show up in \textbf{Sturm-Liouville problems} relating to self-adjoint operators.}
+
+\begin{center}
+\begin{tabular}{c|c|c}
+  polynomial & interval & weight $\mu(x)$\\
+  \hline
+  Legendre & $(-1, 1)$ & $1$\\
+  Chebyshev-I & $(-1, 1)$ & $1/\sqrt{1-x^2}$\\
+  Chebyshev-II & $(-1, 1)$ & $\sqrt{1-x^2}$\\
+  Hermite & $(-\infty, \infty)$ & $\ex^{-x^2}$\\
+  Laguerre & $(0, \infty)$ & $\ex^{-x}$\\
+\end{tabular}
+\end{center}
+
+Suppose $\mathcal{L}$ denotes a second order linear differential operator so that for $u \in F[(a,b)]$,
+\begin{align*}
+  \mathcal{L}u = p_0 u'' + p_1 u' + p_2 u,
+\end{align*}
+where $p_i$ are real polynomial coefficients and the problem is non-singular (i.e. $p_0(x)$ is non-vanishing on $(a,b)$. We aim to find a weight function $\mu(x)$ so that $\mathcal{L}$ is symmetric with respect to $\inner{\cdot}{\cdot}_\mu$. Let $\mu(x)$ be such that, for all $x\in(a,b)$,
+\begin{align*}
+  \mu(x) p_1(x) = [\mu(x) p_0(x)]' = \mu(x) p_0'(x) + \mu'(x) p_0(x),
+\end{align*}
+i.e. $\mu(x)$ the the integrating factor of the linear differential equation
+\begin{align*}
+  \mu(x) = \mbox{exp}\left[\int \frac{p_1 - p_0'}{p_0}\; \mathrm{d}\tilde{x}\right] > 0,
+\end{align*}
+which is also well-defined because $p_0$ is non-vanishing on the interval.
+
+\begin{theorem}
+  If $\mu(x) p_0(x)$ vanishes at $x=a$ and $x=b$, then $\mathcal{L}$ is symmetric with respect to $\inner{\cdot}{\cdot}_\mu$. \marginnote{Again, boundary conditions are central to the problem...}
+\end{theorem}
+
+\begin{proof}
+  Let $p(x) = \mu(x) p_0(x)$, then $p(a) = p(b) = 0$ by assumption. Then
+  \begin{align*}
+    \mu(x) p_1(x) = [\mu(x) p_0(x)]' = p'(x),
+  \end{align*}
+  which implies
+  \begin{align*}
+    \mu\mathcal{L}u = p(x) u''(x) + p'(x) u''(x) + \mu(x) p_2(x) u(x) = [pu']' + \mu p_2 u.
+  \end{align*}
+  Contracting with another function $v \in F$ and integrating over the domain gives
+  \begin{align*}
+    \inner{\mathcal{L}u}{v}_\mu
+      &= \int_a^b \left(v[pu']' + v\mu p_2 u\right)\; \mathrm{d}x\\
+      &= \int_a^b \left(-v'pu' + v\mu p_2 u\right)\; \mathrm{d}x
+  \end{align*}
+  since the boundary terms vanish. The above expression is symmetric in $u$ and $v$ (or could do integration by parts one more time), demonstrating that $\inner{\mathcal{L}u}{v}_\mu = \inner{u}{\mathcal{L}v}_\mu$. \qed
+\end{proof}
 
 %-------------------------------------------------------------------------------
 
