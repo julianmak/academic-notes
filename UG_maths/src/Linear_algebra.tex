@@ -1843,37 +1843,15 @@ A matrix over $\mathbb{C}$ is \textbf{unitary} if $\highlight{\As^\dagger = \As^
   Since $\lambda\neq\mu$, then $\wb^\dagger\vb = \inner{\vb}{\wb} = 0$, and so the eigenvectors are orthogonal. \qed
 \end{proof}
 
-\begin{theorem}
-  Let $\As$ be a Hermitian matrix. If it is diagonalisable, then the similarity matrix is unitary, i.e. $\As = \Ps \Ds \Ps^{-1} = \Ps \Ds \Ps^\dagger$.
-\end{theorem}
+%===============================================================================
 
-\begin{proof}
-  Let $\lambda_1$ be an eigenvalue of $\As$ with eigenvector $\vb$. Let $U = \mbox{span}\{\vb\}$. For $\wb \in U^\perp$, then
-  \begin{equation*}
-    \inner{\vb}{\As \wb} = \inner{\As \vb}{\wb} = \inner{\lambda_1\vb}{\wb} = \lambda_1\inner{\vb}{\wb} = 0,
-  \end{equation*}
-  hence $\As \wb \in U^\perp$. Supposing $\|\vb\|=1$, we choose an orthonormal basis $\ub_2, \ldots \ub_n$ for $U^\perp$, which implies that $\{\vb, \ub_2, \ldots \ub_n\}$ is an orthonormal basis for $\mathbb{C}^n$. 
-  
-  Let $\Ps_1$ be the matrix whose columns are those vectors, which by construction means $\Ps^\dagger \Ps = \Is$ by orthogonality. Let $\{\eb_i\}$ be the standard basis of $\mathbb{C}^n$, then
-  \begin{equation*}
-    \Ps_1^\dagger \As \Ps_1 \eb_1 = \Ps_1^\dagger \As \vb = \Ps_1^\dagger \lambda_1 \vb = \lambda_1 \Ps_1^\dagger \vb = \lambda_1 \eb_1 \quad \Rightarrow \quad \Ps_1^\dagger \As \Ps_1 = \begin{pmatrix}\lambda_1 & 0 \\ 0 & \As_1\end{pmatrix}.
-  \end{equation*}
-  The procedure can be continued for the next one, so that
-  \begin{equation*}
-    \Ps_2^\dagger \Ps_1^\dagger \As \Ps_1 \Ps_2 = \begin{pmatrix}\lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \As_2\end{pmatrix},
-  \end{equation*}
-  and so we can define $\mathsf{P} = \prod_{i=1}^n \Ps_i$ as the transformation matrix. Since each $\Ps_i$ is unitary, its product is unitary. \qed
-\end{proof}
+\chapter{Quadratic forms}
 
-%-------------------------------------------------------------------------------
+Quadratic forms show up areas like number theory, physics and differential geometry (the Riemannian metric, the second fundamental form, Killing form) and statistics. 
 
-\section{Diagonalising quadratic forms}
-
-A \textbf{quadratic form} $Q$ on a real inner product space $V$ is a function $Q : V \to \mathbb{R}$ of the form $Q(\vb) = \inner{\As\vb}{\vb}$, where $\As$ is some symmetric matrix.
-
-If $\{\eb_1, \ldots \eb_n\}$ is a basis of $B$ with $\vb = x_i \eb_i$, then
+A \textbf{quadratic form} $Q$ on a real inner product space $V$ is a function $Q : V \to \mathbb{R}$ of the form $Q(\vb) = \inner{\As\vb}{\vb}$, where $\As$ is some symmetric matrix. Note that this is a polynomial of degree two. If $\{\eb_1, \ldots \eb_n\}$ is a basis of $B$ with $\vb = x_i \eb_i$, then
 \begin{align*}
-  Q(\xb) = \xb^T \As \xb = \sum_{i=1}^nb a_ii x_i^2 + 2 \sum_{1\leq i < j \leq n} a_{ij}x_i x_j.
+  Q(\xb) = \xb^T \As \xb = \sum_{i=1}^n a_{ii} x_i^2 + 2 \sum_{1\leq i < j \leq n} a_{ij}x_i x_j.
 \end{align*}
 
 A \textbf{symmetric bilinear form} $B$ on a vector space $V$ is a function $B: V\times V \to \mathbb{R}$ such that $B(\vb, \wb) = B(\wb, \vb)$, and $B$ is linear in the first factor.
@@ -1919,7 +1897,7 @@ A symmetric or Hermitian matrix is \textbf{positive definite} iff the bilinear f
 \begin{example}
   For
   \begin{align*}
-    \As = \begin{pmatrix}2 & @ & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5 \end{pmatrix},
+    \As = \begin{pmatrix}2 & 2 & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5 \end{pmatrix},
   \end{align*}
   it can be shown that $\As$ is positive definite. The principal minors are
   \begin{align*}
@@ -1947,31 +1925,182 @@ A symmetric or Hermitian matrix is \textbf{positive definite} iff the bilinear f
   but $\yb^\dagger\xb = \inner{\yb}{\xb}$, and since $\lambda\neq \mu$, we have $\inner{\yb}{\xb} = 0$, and we have orthogonal eigenvectors. \qed
 \end{proof}
 
-{\color{red}Jan 15: p.26 of notes probably to start here}
+\begin{theorem}
+  Let $\As$ be a Hermitian matrix. If it is diagonalisable, then the similarity matrix is unitary, i.e. $\As = \Ps \Ds \Ps^{-1} = \Ps \Ds \Ps^\dagger$.
+\end{theorem}
 
-%-------------------------------------------------------------------------------
+\begin{proof}
+  Let $\lambda_1$ be an eigenvalue of $\As$ with eigenvector $\vb$. Let $U = \mbox{span}\{\vb\}$. For $\wb \in U^\perp$, then
+  \begin{equation*}
+    \inner{\vb}{\As \wb} = \inner{\As \vb}{\wb} = \inner{\lambda_1\vb}{\wb} = \lambda_1\inner{\vb}{\wb} = 0,
+  \end{equation*}
+  hence $\As \wb \in U^\perp$. Supposing $\|\vb\|=1$, we choose an orthonormal basis $\ub_2, \ldots \ub_n$ for $U^\perp$, which implies that $\{\vb, \ub_2, \ldots \ub_n\}$ is an orthonormal basis for $\mathbb{C}^n$. 
+  
+  Let $\Ps_1$ be the matrix whose columns are those vectors, which by construction means $\Ps^\dagger \Ps = \Is$ by orthogonality. Let $\{\eb_i\}$ be the standard basis of $\mathbb{C}^n$, then
+  \begin{equation*}
+    \Ps_1^\dagger \As \Ps_1 \eb_1 = \Ps_1^\dagger \As \vb = \Ps_1^\dagger \lambda_1 \vb = \lambda_1 \Ps_1^\dagger \vb = \lambda_1 \eb_1 \quad \Rightarrow \quad \Ps_1^\dagger \As \Ps_1 = \begin{pmatrix}\lambda_1 & 0 \\ 0 & \As_1\end{pmatrix}.
+  \end{equation*}
+  The procedure can be continued for the next one, so that
+  \begin{equation*}
+    \Ps_2^\dagger \Ps_1^\dagger \As \Ps_1 \Ps_2 = \begin{pmatrix}\lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \As_2\end{pmatrix},
+  \end{equation*}
+  and so we can define $\mathsf{P} = \prod_{i=1}^n \Ps_i$ as the transformation matrix. Since each $\Ps_i$ is unitary, its product is unitary. \qed
+\end{proof}
 
-\section{Symmetric and self-adjoint maps}
+\begin{example}
+  Diagonalise the real symmetric matrix (and therefore Hermitian)
+  \begin{align*}
+    \As = \begin{pmatrix} 2 & -2 & 0 \\ -2 & 1 & -2 \\ 0 & -2 & 0 \end{pmatrix}.
+  \end{align*}
+  The characteristic polynomial is $|\lambda\Is - \As| = (\lambda-1)(\lambda-4)(\lambda+2) = 0$ so the eigenvalues are $\lambda=1, 4, -2$, with associated unit eigenvectors
+  \begin{align*}
+    \frac{1}{3}\begin{pmatrix}2 \\ -2 \\ 1 \end{pmatrix}, \quad \frac{1}{3}\begin{pmatrix}2 \\ 1 \\ -2 \end{pmatrix}, \quad \frac{1}{3}\begin{pmatrix}1 \\ 2 \\ 2 \end{pmatrix},
+  \end{align*}
+  so
+  \begin{align*}
+    \Ps = \frac{1}{3}\begin{pmatrix} 2 & 2 & 1 \\ -2 & 1 & 2 \\ 1 & -2 & 2 \end{pmatrix}, \qquad \Ps^T \As \Ps = \begin{pmatrix} 4 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -2 \end{pmatrix}.
+  \end{align*}
+\end{example}
 
-%-------------------------------------------------------------------------------
+\begin{example}
+  Diagonalise the Hermitian matrix
+  \begin{align*}
+    \As = \begin{pmatrix} 4 & 1-\zi  \\ 1+\zi & 5 \end{pmatrix}.
+  \end{align*}
+  The characteristic polynomial is $|\lambda\Is - \As| = (\lambda-3)(\lambda-6) = 0$ so the eigenvalues are $\lambda=3, 6$ and real (as they should be). The associated unit eigenvectors are
+  \begin{align*}
+    \frac{1}{\sqrt{3}}\begin{pmatrix}-1+\zi \\ 1 \end{pmatrix}, \quad \frac{1}{\sqrt{6}}\begin{pmatrix}1-\zi \\ 2 \end{pmatrix},
+  \end{align*}
+  so
+  \begin{align*}
+    \Ps = \begin{pmatrix} (-1+\zi)/\sqrt{3} & (1-\zi)/\sqrt{6} \\ 1/\sqrt{3} & 2/\sqrt{6} \end{pmatrix}, \qquad \Ps^T \As \Ps = \begin{pmatrix} 3 & 0 \\ 0 & 6 \end{pmatrix}.
+  \end{align*}
+\end{example}
 
-\section{Reflections}
+\begin{theorem}[Simultaneous diagonalisation]
+  Let $\As$ and $\Bs$ be symmetric matrices and $\Bs$ be positive definite. There exists some $|\Ps|$ where $|\Ps|\neq 0$ and $\Ps^T \Bs \Ps = \Is$ and $\Ps^T \As \Ps = \Ds$ where $\Ds$ is a real diagonal matrix. Moreover, entries of $\Ds$ are the roots of $|\lambda \Bs - \As| = 0$ and the columns of $\Ps$ form an orthonormal basis with respect to the inner product defined by $\Bs$.
+\end{theorem}
 
-%-------------------------------------------------------------------------------
+\begin{proof}
+  As $\Bs$ is symmetric and positive definite (so Hermitian), there exists some orthogonal (a real unitary) matrix $\Ps_0$ so that
+  \begin{equation*}
+    \Ps_0 \Bs \Ps_0 = \Ds_0 = \mbox{diag}(\lambda_1, \ldots \lambda_n).
+  \end{equation*}
+  
+  \begin{enumerate}
+    \item Let $\Ds_1 = \mbox{diag}(1/\sqrt{\lambda_1}, \ldots 1/\sqrt{\lambda_n})$, so that $\Ds_1^T \Ps_0^T \Bs \Ps_0 \Ds_1 = \Is$ by construction, so we can define $\Ps_1 = \Ps_0 \Ds_1$ and we have $\Ps_1^T \Bs \Ps_1 = \Is$. Note here that $\Ps_1$ is nor orthogonal, and this only makes sense if $\Bs$ is positive definite (otherwise $1/\sqrt{\lambda_k}$ doesn't make sense).
+    
+    Let $\Cs = \Ps_1^T \As \Ps_1$, and note that $\Cs$ is symmetric, so there exists $\Ps_2$ where $\Ps_2^T \Cs \Ps_2 = \Ds$ where $\Ps_2$ is orthogonal and $\Ds$ is a real diagonal matrix. Then we let $\Ps = \Ps_1 \Ps_2$ and we would have $\Ps^T \As \Ps = \Ps_2^T \Ds \Ps_2 = \Ds \Ps_2^T \Ps_2 = \Ds$ since $\Ps_2$ is orthogonal. We also have $\Ps^T \Bs \Ps = \Ps_2^T \Is \Ps_T = \Is$ for the same reason.
+    
+    \item The columns of $\Ps_2$ are unit eigenvectors of $\Cs$. Let $\vb_i$ be one of these columns, and $\lambda_i$ the corresponding eigenvalue that is also an entry of $\Ds$. Then $\Ps\eb_i = \Ps_1 \Ps_2 \eb_i = \Ps_1 \vb_i$ since multiplying by the standard basis just picks out the relevant column. 
+    
+    Now, $\Ps_1^T \As \Ps_1 \vb_i = \Cs \vb_i = \lambda_i \vb_i$ by definition of $\Cs$ and that $\vb_i$ is an associated eigenvector. Since $\Ps_1^T \Bs \Ps_1 = \Is$, we have
+    \begin{align*}
+      \Ps_1^T \As \Ps_1 \vb_i = \lambda_i (\Ps_1^T \Bs \Ps_1) \vb_i,
+    \end{align*}
+    but then this factorises to
+    \begin{align*}
+      \Ps_1^T (\lambda_i \Bs - \As) \Ps_1 \vb_i = 0,
+    \end{align*}
+    and since $\vb_i \neq \Ob$ and $|\Ps_1|\neq 0$, we have $|\lambda_i \Bs - \As| = 0$ as stated.
+    
+    \item If $\yb_i$ and $\yb_j$ are columns of $\Ps$ then $\yb_j^T \Bs \yb_i = \delta_{ij}$ since this is the $(ij)^{\tiny \textnormal{th}}$ of $\Ps^T \Bs \Ps = \Is$. So columns form an orthonormal basis as they are also unit vectors. \qed
+  \end{enumerate}
+\end{proof}
 
-\section{The operator $\mathrm{d}/\mathrm{d}x^2$}
+\begin{example}
+  Find a non-singular $\Ps$ that simultaneously diagnoalises
+  \begin{align*}
+    \As = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}, \qquad \Bs = \begin{pmatrix} 5 & 2 \\ 2 & 1 \end{pmatrix}.
+  \end{align*}
+  Note that $|\As| = -3$ but $|\Bs| = 1$, so $\Bs$ is a positive definite matrix. Then $|\lambda \Bs - \As| = (\lambda+3)(\lambda-1) = 0$ so $\lambda=-3, 1$. We can check that the eigenvectors are
+  \begin{align*}
+    \vb_{\lambda=1} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad \vb_{\lambda=-3} = \begin{pmatrix} 1 \\ -2 \end{pmatrix},
+  \end{align*}
+  and that $\|\vb_{\lambda=1}\|^2_{\Bs} = \vb_{\lambda=1}^T \Bs \vb_{\lambda=1} = 1$ and similarly for $\vb_{\lambda=-3}$, so they are unit vectors with respect to the inner product defined by $\Bs$. Then
+  \begin{align*}
+    \Ps = \begin{pmatrix} 0 & 1 \\ 1 & -2 \end{pmatrix}
+  \end{align*}
+  and that
+  \begin{align*}
+    \Ps^T \As \Ps = \begin{pmatrix} 1 & 0 \\ 0 & -3 \end{pmatrix}, \qquad 
+    \Ps^T \Bs \Ps = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}.
+  \end{align*}
+\end{example}
 
-%-------------------------------------------------------------------------------
+\begin{theorem}
+ Any quadratic form on $\mathbb{R}^n$ may be written as
+ \begin{align*}
+  Q(\xb) = x_1^2 + \ldots + x_p^2 - x_{p+1}^2 - \ldots - x_r^2
+ \end{align*}
+ for $0 \leq o \leq r \leq n$ after a suitable linear change.
+\end{theorem}
 
-\section{Jordan normal form}
+\begin{proof}
+  If with respect to the standard co-ordinates we have $Q(\xb) = \xb^T \As \xb$ with $\As = \As^T$ (since this is a quadratic form so $\As$ is symmetric), then there exists some orthogonal $\Ps$ that diagonalises $\As$. We then define $\yb = \Ps^T \xb$ so that
+  \begin{align*}
+    Q(\xb) = \xb^T \As \xb = (\Ps\yb)^T \As (\Ps \yb) = \yb^T \Ds \yb = \lambda_k y_k^2
+  \end{align*}
+  where $\lambda_k$ are the eigenvalues of $\As$. Suppose we rearrange accordingly so that $\lambda_i > 0$ for $1\leq i \leq p$, $\lambda_i < 0$ for $p+1 \leq i \leq r$ and $\lambda_i = 0$ for $r+1 \leq i \leq n$. Then we can set $z_i = \sqrt{\lambda_i}y_i$, $z_i = \sqrt{-\lambda_i}y_i$ and $z_i = y_i$ for the respective cases so obtain $Q(\zb)$ in the desired form. \qed.
+\end{proof}
+
+In the above $r$ and $s = p - (r-p) = 2p - r$ is called the \textbf{rank} and \textbf{signature} of $Q$. Note that the parity of the rank and signature would be the same by construction. The rank is clearly related to the matrix representing the quadratic form, while the signature relates to the trace of the matrix after it has been transformed.
+
+\begin{example}
+  For $Q(\xb) = 3x_1^2 - x_2^2 + 4x_3^2 - 6x_1 x_2 + 16 x_2 x_3$, note that
+  \begin{align*}
+    Q(\xb)
+      &= 3(x_1 - x_2)^2 - 4x_2^2 + 4x_3^2 + 16x_2 x_3\\
+      &= 3(x_1 - x_2)^2 - 4(x_2 - 2x_3)^2 + 20 x_3^2,
+  \end{align*}
+  then we can read off t$r=3$ and $s = 2 - (3 - 2) = 1$.\marginnote{Or there are two pluses and one minus, so signature is $1+1-1 = 2$. Compare this with for example when we say the Minkowski metric in special relativity having a signature of $(-, +, +, +)$ or $+2$ (or having the signs flipped depending on convention).}
+\end{example}
+
+Let $Q$ be a quadratic form on $\mathbb{R}^n$. A choice of co-ordinates $y_1, \ldots y_n$ on $\mathbb{R}^n$ is said to \textbf{diagonalise} $Q$ if, with respect to these co-ordinates,
+\begin{align*}
+  Q(\yb) = d_k y_k^2 = \yb^T \mbox{diag}(d_1, \ldots d_n)\yb.
+\end{align*}
+
+A pair of quadratic forms $Q_1$ and $Q_2$ are \textbf{simultaneously diagonalisable} if there is a choice of co-ordinates $y_1, \ldots y_n$ on $\mathbb{R}^n$ where $Q_1 = d_k y_k^2$ and $Q_2 = d'_k y_k^2$. Equivalently, $\As$ and $\Bs$ representing $Q_1$ and $Q_2$ with respect to the standard basis are simultaneously diagonalisable. Note that this is not always possibly.
+
+\begin{theorem}[Sylvester's principle of inertia]
+  The rank and signature of a quadratic form is independent of how it is diagonalised provided it is done in the most efficient way.
+\end{theorem}
+
+\begin{proof}
+  The rank is clearly invariant by construction. Suppose we have two representations of $Q$
+  \begin{align*}
+    Q(\xb) &= x_1^2 + \ldots x_p^2 - x_{p+1}^2 - \ldots - x_r^2,\\
+    Q(\yb) &= y_1^2 + \ldots y_q^2 - x_{q+1}^2 - \ldots - y_r^2
+  \end{align*}
+  where without loss of generality we assume $q<p$, and we aim to get a contradiction.
+  
+  Let $V_1$ be the subspace of $\mathbb{R}^n$ spanned by $\{x_1, \ldots x_p\}$ (the positive parts), and it has dimensions $p + (n-r)$, with $Q(\xb) \geq 0$ for $\xb \in V_1$. However, let $V_2$ be the subspace spanned by $\{y_{q+1}, \ldots y_r\}$ (the negative parts), so that has dimensions $r-q$ with $Q(\yb) \leq 0$ for $\yb\in V_2$. Now, by construction, $\xb\neq \Ob$ but also $\xb\in V_1 \cap V_2$ because we assumed $q<r$, but then this implies $Q(\xb)\geq 0$ and $Q(\xb)\leq 0$, so $V_1 \cap V_2 = \{\Ob\}$ implying $\mbox{dim}(V_1) + \mbox{dim}(V_2) = n$. But above construction implies also $\mbox{dim}(V_1) + \mbox{dim}(V_2) = p + (n-r) + (r-q) = n + p -q > n$ since $p>q$, so we have a contradiction, implying $p=q$, so the signature should also be the same. \qed
+\end{proof}
+
+\begin{theorem}
+  If $Q_1$ and $Q_2$ are quadratic forms represented by $\As_1$ and $\As_2$, then there $\As_1$ and $\As_2$ are \textbf{congurent}\marginnote{Recall two matrices are \emph{similar} if $\As_2 = \Ps^{-1}\As_1\Ps$. Congurence is an equivalence relation.} (i.e. $\As_2 = \Ps^T \As_1 \Ps$ for some orthogonal $\Ps$) iff $Q_1$ and $Q_2$ have the same rank and signature.
+\end{theorem}
+
+\begin{proof}
+  $\Ps$ above is just a co-ordinate transformation on $\mathbb{R}^n$ so $Q_1$ and $Q_2$ are the same quadratic forms in different co-ordinates, so by Sylverter's principle they have the same rank and signature.
+  
+  For the converse, $\As_1$ and $\As_2$ are symmetric so there exists orthogonal $\Ps_1$ and $\Ps_2$ where
+  \begin{align*}
+    \Ps_1^T \As_1 \Ps_1 = \mbox{diag}(1, 1, \ldots, -1, -1, \ldots, 0, \ldots) = \Ps_2^T \As_2 \Ps_2
+  \end{align*}
+  since $Q_1$ and $Q_2$ have the same rank and signature. Then
+  \begin{align*}
+    \As_2 = (\Ps_2^T)^{-1} \Ps_1^T \As_1 \Ps_1 \Ps_2^{-1} = (\Ps_1 \Ps_2^{-1})^T \As_1 (\Ps_1 \Ps_2^{-1}) = \Ps^T \As_1 \Ps
+  \end{align*}
+  as required (product of two orthogonal matrices is also orthogonal). \qed
+\end{proof}
 
 %===============================================================================
 
 \chapter{More on vector spaces and linear maps}
 
-In the above the linear maps are mostly linked with some geometric transformations via explicit representation as matrices. Vector spaces and linear maps are however more general (e.g. maps on functions in function spaces), and here we look at other properties of vector spaces and linear maps in the more abstract setting.
-
-
+Vector spaces and linear maps are however more general (e.g. maps on functions in function spaces), and here we look at other properties of vector spaces and linear maps in the more abstract setting.
 
 %-------------------------------------------------------------------------------
 
@@ -2102,6 +2231,24 @@ Given an inner product we denote $\inner{f}{\vb} = f(\vb)$, where $f^*\in V^*$ a
   \end{align*}
   so that $\fb_1^*(\xb) = -x + y + z$. Continuing on, it can be shown that $\fb_2^*(\xb) = x + y)$ and $\fb_3^* = -y$, and these can be checked to be linearly independent and spanning $\mathbb{R}$, and we have the dual basis of $V^*$ given the choice of a basis in $V$.
 \end{example}
+
+%-------------------------------------------------------------------------------
+
+\section{Symmetric and self-adjoint maps}
+
+{\color{red}Jan 15: p.30 of notes probably to start here}
+
+%-------------------------------------------------------------------------------
+
+\section{Reflections}
+
+%-------------------------------------------------------------------------------
+
+\section{The operator $\mathrm{d}/\mathrm{d}x^2$}
+
+%-------------------------------------------------------------------------------
+
+\section{Jordan normal form}
 
 %===============================================================================
 
