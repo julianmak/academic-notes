@@ -2467,9 +2467,142 @@ which is also well-defined because $p_0$ is non-vanishing on the interval.
   since the boundary terms vanish. The above expression is symmetric in $u$ and $v$ (or could do integration by parts one more time), demonstrating that $\inner{\mathcal{L}u}{v}_\mu = \inner{u}{\mathcal{L}v}_\mu$. \qed
 \end{proof}
 
+\begin{theorem}
+  Let $P_0(x) = 1$, $P_1(x),\ldots P_n(x), \ldots$ be the non-normalised system fo polynomials orthogonal to each other with respect to $\mathcal{L}$. If $u(x) \in \mathbb{R}[x]$, and suppose $\mathcal{L}u$ is a polynomial of degree at most $\mbox{deg}(u)$, then the polynomials $P_0, P_1,\ldots$ above are eigenfunctions of $\mathcal{L}$.
+\end{theorem}
+
+\begin{proof}
+  Note that $\{P_0, \ldots P_n\}$ is a basis of $\mathbb{R}[x]$. By hypothesis, $\mathcal{L}P_n = c_n P_n$ (no sum implied) where $P_n$ is an eigenfunction, so for some $i$,
+  \begin{align*}
+    c_i \inner{P_i}{P_k} = \inner{\mathcal{L}P_n}{P_k} = \inner{P_n}{\mathcal{L}P_k} = 0
+  \end{align*}
+  if $k < n$. Since $\mathcal{L}P_k \in \mathbb{R}[x]$ and is a linear combination of $P_0, \ldots P_k$, and $P_n$ is orthogonal to each of these, then $c_i=0$, and since $n$ was arbitrary, $P_0, P_1,\ldots$ are eigenfunction of $\mathcal{L}$. \qed
+\end{proof}
+
+Special cases of these are as follows:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+  case & interval & operator $\mathcal{L}$\\
+  \hline
+  Legendre & $(-1, 1)$ & $(1-x^2)\cfrac{\mathrm{d}^2}{\mathrm{d}x^2} - 2x\cfrac{\mathrm{d}}{\mathrm{d}x}$\\
+  Chebyshev-I & $(-1, 1)$ & $(1-x^2)\cfrac{\mathrm{d}^2}{\mathrm{d}x^2} - x\cfrac{\mathrm{d}}{\mathrm{d}x}$\\
+  Chebyshev-II & $(-1, 1)$ & $(1-x^2)\cfrac{\mathrm{d}^2}{\mathrm{d}x^2} - 3x\cfrac{\mathrm{d}}{\mathrm{d}x}$\\
+  Hermite & $(-\infty, \infty)$ & $x\cfrac{\mathrm{d}^2}{\mathrm{d}x^2} - 2x\cfrac{\mathrm{d}}{\mathrm{d}x}$\\
+  Laguerre & $(0, \infty)$ & $x\cfrac{\mathrm{d}^2}{\mathrm{d}x^2} + (1-x)\cfrac{\mathrm{d}}{\mathrm{d}x}$\\
+\end{tabular}
+\end{center}
+
 %-------------------------------------------------------------------------------
 
 \section{Jordan normal form}
+
+Let $V$ be a vector space and $T: V\to V$ be a linear map. Given a basis of $V$, we can write $T$ as a matrix with respect to such a basis. We get a different matrix depending on choice of matrix, however.
+
+\begin{example}
+  If $\mbox{dim}(V) = n$ and $T$ has $n$ linearly independent eigenvectors, then with respect to the eigenvector basis $\As = \mbox{diag}(\lambda_1, \ldots \lambda_n)$ represents $T$.
+\end{example}
+
+Let $W$ be a subspace of $V$. If $T(W) \subset W$, then $W$ is called an \textbf{invariant subspace} of $T$.
+
+If $V$ is a direct sum of subspaces, i.e. $V = W_1 \bigoplus W_2$ and $W_{1,2}$ are invariant subspaces of $T$, then $T$ may be represented by a \textbf{block diagonal matrix}
+\begin{align*}
+  \As = \begin{pmatrix}\As_1 & 0 \\ 0 & \As_2 \end{pmatrix}
+\end{align*}
+if we use a basis for $V$ made up of a union of basis vectors of $W_1$ and $W_2$.
+
+\begin{example}
+  If $U$ is a subspace of $V$ then $V = U \bigoplus U^\perp$, and a reflection $T$ can be represented as (in a suitable basis)
+  \begin{align*}
+    \begin{pmatrix} \Is & 0 \\ 0 & -\Is \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+If $V = W_1 \bigoplus \ldots W_k$ under some basis of $V$, then we have the block diagonal matrix
+\begin{align*}
+  \As = \begin{pmatrix}\As_1 &  &  & 0 \\  & \As_2 & & \\ & & \ddots & \\ 0 & & & \As_k \end{pmatrix}.
+\end{align*}
+Suppose the characteristic polynomial of $T$ is
+\begin{align*}
+  \prod_{i=1}^k (t - \lambda_i)^{s_i}, \quad s_i \in \mathbb{Z},\ \lambda_i \in \mathbb{C}.
+\end{align*}
+We can write $V = W_1 \bigoplus \ldots W_k$ where each $W_j$ is given by $W_j = \{\vb \in V\ |\ (\As - \lambda_j \Is)^{s_j}(\vb) = \Ob\}$. If $s_j=1$ then this is equivalent to saying $W_k$ is the eigenspace spanned by eigenvector with eigenvalue $\lambda_j$.
+
+\begin{example}
+  If $T:\mathbb{R}^2 \to \mathbb{R}^2$ is represented by
+  \begin{align*}
+    \As = \begin{pmatrix} 3 & -2 \\ 2 & -1 \end{pmatrix}
+  \end{align*}
+  with respect to the standard basis, then $|t\Is - \As| = (t-1)^2$, and the eigenvector is of the form
+  \begin{align*}
+    \xb = \begin{pmatrix}x \\ x \end{pmatrix}, \quad x\in\mathbb{R}.
+  \end{align*}
+  We also see that $(\Is - \As)^2 = \mathsf{O}$, so we can find another vector solving the equation, and together with $(1,1)$ forms a basis. We see
+  \begin{align*}
+    \As \xb_1 = \xb_1, \quad \As \xb_2 = a_1 \xb_1 + a_2 \xb_2,
+  \end{align*}
+  and
+  \begin{align*}
+    \Ob = (\As - \Is)^2 \xb_2 = (\As - \Is)[(\As - \Is)\xb_2] - (\As - \Is)\yb,
+  \end{align*}
+  so
+  \begin{align*}
+    \yb = t \xb_1 = (\As - \Is) \xb_2 = \As \xb_2 - \xb_2
+  \end{align*}
+  implying
+  \begin{align*}
+    t\xb_1 + \xb_2 = \As \xb_2.
+  \end{align*}
+  It is always possible to scale, giving $t=1$, so with respect to $\xb_1$ and $\xb_2$ we have
+  \begin{align*}
+    \As = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}.
+  \end{align*}
+\end{example}
+
+\begin{theorem}
+  Let $T: V \to V$ be a linear map with characteristic polynomial
+  \begin{align*}
+    \prod_{i=1}^k (t - \lambda_i)^{s_i}, \quad s_i \in \mathbb{Z},\ \lambda_i \in \mathbb{C}.
+  \end{align*}
+  Then there is a basis of $V$ for which $T$ is given by the block diagonal matrix
+  \begin{align*}
+    \As = \begin{pmatrix}\As_1 &  &  & 0 \\  & \As_2 & & \\ & & \ddots & \\ 0 & & & \As_k \end{pmatrix},
+  \end{align*}
+  where each $\As_i$ corresponds to eigenvalue $\lambda_j$, and they are all of \textbf{Jordan block form}, i.e.
+  \begin{align*}
+    (\lambda_j), \quad \begin{pmatrix} \lambda_j & 1 \\ 0 & \lambda_j \end{pmatrix}, \quad \begin{pmatrix} \lambda_j & 1 & 0 \\ 0 & \lambda_j & 1 \\ 0 & 0 & \lambda_j \end{pmatrix}, \ldots
+  \end{align*}
+  \qedwhite
+\end{theorem}
+
+\begin{example}
+  Find the Jordan normal form of
+  \begin{align*}
+    \begin{pmatrix} 2 & 2 & -2 \\ 1 & -1 & 1 \\ 2 & 0 & 0 \end{pmatrix}.
+  \end{align*}
+  
+  The characteristic polynomial is $\lambda^2(\lambda-1) = 0$, so there is a degenerate case. The two eigenvectors are
+  \begin{align*}
+    \ub_1 = \begin{pmatrix} 2 \\ 3 \\ 4 \end{pmatrix}, \quad
+    \ub_2 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix},
+  \end{align*}
+  but we need a third vector $\ub_3$ for the 0-eigenspace with $\As \ub_3 = 0 \ub_3 + \ub_2 = \ub_2$, which implies $\As^2 \ub_3 = 0 = x_1 + x_2 - x_3$. We see that gives
+  \begin{align*}
+    \xb_3 = \begin{pmatrix} x_1 \\ x_2 \\ x_1 + x_2 \end{pmatrix},
+  \end{align*}
+  and
+  \begin{align*}
+    \ub_2 = \As \xb = \begin{pmatrix} 0 \\ 2x_1 \\ 2x_1 \end{pmatrix},
+  \end{align*}
+  so $x_1 = 1/2$, and letting $x_2 = 1/2$ gives
+  \begin{align*}
+    \ub_3 = \begin{pmatrix} 1/2 \\ -1/2 \\ 0 \end{pmatrix}.
+  \end{align*}
+  This gives
+  \begin{align*}
+    \Ps = \begin{pmatrix} 2 & 0 & 1/2 \\ 3 & 1 & -1/2 \\ 4 & 1 & 0 \end{pmatrix}, \quad \Ps^{-1}\As\Ps = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}.
+  \end{align*}
+\end{example}
 
 %===============================================================================
 
