@@ -2,6 +2,10 @@
 
 NEW: If you are looking for material from courses I teach, see the links below:
 
+[OCES 5303 ML in Ocean Science (mostly neural networks)](https://github.com/julianmak/OCES5303_ML_ocean)
+
+[OCES 4303 ML in Marine Science (more on non-neural networks)](https://github.com/julianmak/OCES4303_ML_ocean)
+
 [OCES 3301 Data Analysis](https://github.com/julianmak/OCES3301_data_analysis)
 
 [OCES 2003 Descriptive Physical Oceanography](https://github.com/julianmak/OCES2003_descriptive_po)
